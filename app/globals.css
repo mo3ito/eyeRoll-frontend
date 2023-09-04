@@ -2,3 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: aladin;
+    src: url("../public/fonts/aladin/Aladin-Regular.ttf");
+}
+
+html , body{
+    font-family: aladin , sans-serif ;
+}

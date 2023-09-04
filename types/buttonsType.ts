@@ -1,6 +1,6 @@
 export interface ButtonProps {
     text : string,
     title?: string | undefined,
-    loading:boolean,
+    loading?:boolean,
     onClick:()=> void
   }

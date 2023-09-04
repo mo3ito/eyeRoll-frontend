@@ -29,7 +29,7 @@ export default function Home() {
     <Input value={email} onChange={(event)=>setEmial(event?.target.value)} label="email"  />
     <Input value={password} onChange={(event)=>setPassword(event?.target.value)} label="password"  />
     <Input value={repeatPassword} onChange={(event)=>setRepeatPassword(event?.target.value)} label="repeat password"  />
-    <Button text="Register"/>
+    <Button onClick={()=>'f'} text="Register"/>
     </div>
     
    

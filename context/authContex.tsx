@@ -60,7 +60,7 @@ export const AuthContext = createContext<AuthContextProps>({
         }
       }, [login]);
   
-    <AuthContext.Provider value={{isLoggedIn ,token , BusinessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn}}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , BusinessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn}}>
         {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider>)
  }

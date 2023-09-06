@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "@/components/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
+import { AuthContextProvider } from "@/context/authContex";
 
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
+        <AuthContextProvider>
         {children}
         <ToastContainer
           position="top-center"
@@ -31,6 +33,7 @@ export default function RootLayout({
           pauseOnHover
           theme="light"
         />
+        </AuthContextProvider>
       </body>
     </html>
   );

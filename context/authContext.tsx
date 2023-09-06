@@ -13,7 +13,8 @@ export const AuthContext = createContext<AuthContextProps>({
     login : ()=>{},
     logout : ()=>{},
     setBusinessOwnersInfos: () => {},
-    setIsLoggedIn:()=>{}
+    setIsLoggedIn:()=>{},
+    isVerifyedHandler:()=>{}
 })
 
  export const AuthContextProvider = ({children}: ChildrenType)=>{
@@ -25,7 +26,6 @@ export const AuthContext = createContext<AuthContextProps>({
 
     const login = useCallback(async(newBusinessOwnerInfos: object, newToken: string) => {
        await setToken(newToken);
-      await  setIsLoggedIn(true);
         await Cookies.set("businessOwnerToken", newToken);
         setBusinessOwnersInfos(newBusinessOwnerInfos);
       }, []);
@@ -36,6 +36,13 @@ export const AuthContext = createContext<AuthContextProps>({
        await setBusinessOwnersInfos([]);
        await Cookies.remove("businessOwnerToken");
     }, []);
+
+    const isVerifyedHandler = useCallback(async(businessOwnerInfos: object, token: string) => {
+      await setToken(token);
+     await  setIsLoggedIn(true);
+       await Cookies.set("businessOwnerToken", token);
+       setBusinessOwnersInfos(businessOwnerInfos);
+     }, []);
     
     // useEffect(() => {
     //     const getToken = Cookies.get("businessOwnerToken");
@@ -60,7 +67,7 @@ export const AuthContext = createContext<AuthContextProps>({
     //     }
     //   }, [login]);
   
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , BusinessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn}}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , BusinessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler}}>
         {children}
     </AuthContext.Provider>)
  }

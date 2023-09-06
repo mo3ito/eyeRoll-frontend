@@ -38,7 +38,7 @@ const RegisterBusinessOwner = () => {
             const response = await sender("http://localhost:5000/register", body)
             if(response){
            await login(response?.data.infos , response?.data.token)
-           router.push("/verifyEmail")
+           router.push("/verify-email")
 
 
             }

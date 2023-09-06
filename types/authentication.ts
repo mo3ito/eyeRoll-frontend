@@ -7,7 +7,8 @@ export interface AuthContextProps {
     login: (businessOwnerInfos: object, token: string) => void;
     logout: ()=> void,
     setBusinessOwnersInfos: (BusinessOwnerInfos: object) => void;
-    setIsLoggedIn:Dispatch<SetStateAction<boolean>>
+    setIsLoggedIn:Dispatch<SetStateAction<boolean>>,
+    isVerifyedHandler:(businessOwnerInfos: object, token: string) => void;
 }
 
 export type ChildrenType = {

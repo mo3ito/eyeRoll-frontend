@@ -1,9 +1,11 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ToastContainer } from "@/components/nextToast/toastContainer";
+import { ToastContainer } from "@/components/clients/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
-import { AuthContextProvider } from "@/context/authContex";
+import { AuthContextProvider } from "@/context/authContext";
+import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
+
 
 
 export const metadata: Metadata = {
@@ -16,10 +18,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  
   return (
     <html lang="en">
       <body className="">
         <AuthContextProvider>
+          <ReactQueryProvider >
         {children}
         <ToastContainer
           position="top-center"
@@ -33,6 +37,7 @@ export default function RootLayout({
           pauseOnHover
           theme="light"
         />
+        </ReactQueryProvider>
         </AuthContextProvider>
       </body>
     </html>

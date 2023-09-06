@@ -3,10 +3,10 @@ import React,{ ReactNode , Dispatch, SetStateAction } from "react"
 export interface AuthContextProps {
     isLoggedIn : boolean,
     token: string | null,
-    BusinessOwnerInfos: [] | null,
-    login: (businessOwnerInfos: [], token: string) => void;
+    BusinessOwnerInfos: object | null,
+    login: (businessOwnerInfos: object, token: string) => void;
     logout: ()=> void,
-    setBusinessOwnersInfos: (BusinessOwnerInfos: []) => void;
+    setBusinessOwnersInfos: (BusinessOwnerInfos: object) => void;
     setIsLoggedIn:Dispatch<SetStateAction<boolean>>
 }
 

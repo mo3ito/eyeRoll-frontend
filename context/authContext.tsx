@@ -3,13 +3,14 @@ import { useEffect , createContext , useCallback , useState , ReactElement , Rea
 import { AuthContextProps , ChildrenType } from "@/types/authentication";
 import Cookies from "js-cookie"
 import axios from "axios";
+import getterWithAuth from "@/services/getterWithAuth";
 
 
 
 export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
     token : null, 
-    BusinessOwnerInfos : null,
+    businessOwnerInfos : null,
     login : ()=>{},
     logout : ()=>{},
     setBusinessOwnersInfos: () => {},
@@ -21,7 +22,7 @@ export const AuthContext = createContext<AuthContextProps>({
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(null);
-    const [BusinessOwnerInfos, setBusinessOwnersInfos] = useState<object | null>(null);
+    const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object | null>(null);
 
 
     const login = useCallback(async(newBusinessOwnerInfos: object, newToken: string) => {
@@ -43,31 +44,33 @@ export const AuthContext = createContext<AuthContextProps>({
        await Cookies.set("businessOwnerToken", token);
        setBusinessOwnersInfos(businessOwnerInfos);
      }, []);
-    
-    // useEffect(() => {
-    //     const getToken = Cookies.get("businessOwnerToken");
-    //     if (getToken) {
-    //       axios
-    //         .get("http://localhost:5000/auth/me", {
-    //           headers: {
-    //             Authorization: getToken,
-    //           },
-    //         })
-    //         .then((res) => res.data)
-    //         .then((data) => {
-    //           console.log(data);
-    //           setBusinessOwnersInfos(data);
-    //           setIsLoggedIn(true);
-    //         })
-    //         .catch((error) => {
-    //           console.log("Error fetching user data:", error);
-    //           setBusinessOwnersInfos(null);
-    //           setIsLoggedIn(false);
-    //         });
-    //     }
-    //   }, [login]);
+
+
+    useEffect(() => {
+      const checkTokenAndFetchData = async () => {
+        try {
+          const getToken = Cookies.get("businessOwnerToken");
+          if (getToken) {
+            const response = await getterWithAuth("http://localhost:5000/get-me");
+            setBusinessOwnersInfos(response?.data);
+            setIsLoggedIn(true);
+          } else {
+            setBusinessOwnersInfos(null);
+            setIsLoggedIn(false);
+          }
+        } catch (error) {
+          console.log("Error fetching user data:", error);
+          setBusinessOwnersInfos(null);
+          setIsLoggedIn(false);
+        }
+      };
   
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , BusinessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler}}>
+      checkTokenAndFetchData();
+    }, [isVerifyedHandler]);
+    
+
+  
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler}}>
         {children}
     </AuthContext.Provider>)
  }

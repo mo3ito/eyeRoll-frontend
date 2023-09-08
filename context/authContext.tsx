@@ -9,18 +9,21 @@ import getterWithAuth from "@/services/getterWithAuth";
 
 export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
+    isVerified : false,
     token : null, 
     businessOwnerInfos : null,
     login : ()=>{},
     logout : ()=>{},
     setBusinessOwnersInfos: () => {},
     setIsLoggedIn:()=>{},
+    setIsVerified:()=>{},
     isVerifyedHandler:()=>{}
 })
 
  export const AuthContextProvider = ({children}: ChildrenType)=>{
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isVerified, setIsVerified] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(null);
     const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object | null>(null);
 
@@ -34,7 +37,7 @@ export const AuthContext = createContext<AuthContextProps>({
      
       const logout = useCallback(async () => {
        await setToken(null);
-       await setBusinessOwnersInfos([]);
+       await setBusinessOwnersInfos({});
        await Cookies.remove("businessOwnerToken");
     }, []);
 
@@ -47,30 +50,33 @@ export const AuthContext = createContext<AuthContextProps>({
 
 
     useEffect(() => {
-      const checkTokenAndFetchData = async () => {
-        try {
-          const getToken = Cookies.get("businessOwnerToken");
-          if (getToken) {
-            const response = await getterWithAuth("http://localhost:5000/get-me");
-            setBusinessOwnersInfos(response?.data);
-            setIsLoggedIn(true);
-          } else {
+      if(isVerified){
+        const checkTokenAndFetchData = async () => {
+          try {
+            const getToken = Cookies.get("businessOwnerToken");
+            if (getToken) {
+              const response = await getterWithAuth("http://localhost:5000/get-me");
+              setBusinessOwnersInfos(response?.data);
+              setIsLoggedIn(true);
+            } else {
+              setBusinessOwnersInfos(null);
+              setIsLoggedIn(false);
+            }
+          } catch (error) {
+            console.log("Error fetching user data:", error);
             setBusinessOwnersInfos(null);
             setIsLoggedIn(false);
           }
-        } catch (error) {
-          console.log("Error fetching user data:", error);
-          setBusinessOwnersInfos(null);
-          setIsLoggedIn(false);
-        }
-      };
-  
-      checkTokenAndFetchData();
-    }, [isVerifyedHandler]);
+        };
+    
+        checkTokenAndFetchData();
+      }
+
+    }, [isVerified]);
     
 
   
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler}}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified}}>
         {children}
     </AuthContext.Provider>)
  }

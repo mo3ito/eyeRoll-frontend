@@ -10,19 +10,19 @@ export default function Page() {
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
   const {isVerifyedHandler , businessOwnerInfos} = useContext(AuthContext)
-  const [token , setToken] = useState<string>("")
+  const [emailTokenGot , setEmailTokenGot] = useState<string>("")
   const [isLoading , setIsLoading]=useState<boolean>(false)
   const [error , setError]=useState<boolean>(false)
  
 
   useEffect(() => {
-    if (emailToken) {
-      setToken(emailToken);
+    if (emailToken ) {
+      setEmailTokenGot(emailToken);
     }
     async function fetchData() {
-      if (token) {
+      if (emailTokenGot) {
         const body = {
-          token_email: token
+          token_email: emailTokenGot
         };
         const response = await sender("http://localhost:5000/verify-email", body);
         
@@ -31,12 +31,13 @@ export default function Page() {
       }
     }
     fetchData();
-  }, [emailToken, token]);
+  }, [emailToken, emailTokenGot]);
 
   useEffect(()=>{
     console.log(businessOwnerInfos);
     
   })
+  
 
  
 

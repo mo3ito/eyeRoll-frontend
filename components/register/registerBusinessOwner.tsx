@@ -37,7 +37,7 @@ const RegisterBusinessOwner = () => {
         try {
             const response = await sender("http://localhost:5000/register", body)
             if(response){
-           await login(response?.data.infos , response?.data.token)
+           await login(response?.data.userInfos , response?.data.token)
            router.push("/verify-email")
 
 
@@ -51,7 +51,7 @@ const RegisterBusinessOwner = () => {
 
   return (
     <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-zinc-500">Register</h2>
+    <h2 className="underline underline-offset-4 text-xl text-blue-600">Registeration</h2>
     <Input value={name} onChange={(event)=>setName(event?.target.value)} label="name"  />
     <Input value={lastName} onChange={(event)=>setLastName(event?.target.value)} label="last name"  />
     <Input value={username} onChange={(event)=>setUsername(event?.target.value)} label="username"  />

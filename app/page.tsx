@@ -10,9 +10,9 @@ import { AuthContext } from "@/context/authContext"
 
 export default function Home() {
 
-  const{businessOwnerInfos} = useContext(AuthContext)
+  const infos = useContext(AuthContext)
 
-  console.log(businessOwnerInfos);
+  console.log(infos);
 
 
   return (

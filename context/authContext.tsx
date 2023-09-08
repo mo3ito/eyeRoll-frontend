@@ -49,30 +49,30 @@ export const AuthContext = createContext<AuthContextProps>({
      }, []);
 
 
-    useEffect(() => {
-      if(isVerified){
-        const checkTokenAndFetchData = async () => {
-          try {
-            const getToken = Cookies.get("businessOwnerToken");
-            if (getToken) {
-              const response = await getterWithAuth("http://localhost:5000/get-me");
-              setBusinessOwnersInfos(response?.data);
-              setIsLoggedIn(true);
-            } else {
-              setBusinessOwnersInfos(null);
-              setIsLoggedIn(false);
-            }
-          } catch (error) {
-            console.log("Error fetching user data:", error);
-            setBusinessOwnersInfos(null);
-            setIsLoggedIn(false);
-          }
-        };
+    // useEffect(() => {
+    //   if(isVerified){
+    //     const checkTokenAndFetchData = async () => {
+    //       try {
+    //         const getToken = Cookies.get("businessOwnerToken");
+    //         if (getToken) {
+    //           const response = await getterWithAuth("http://localhost:5000/get-me");
+    //           setBusinessOwnersInfos(response?.data);
+    //           setIsLoggedIn(true);
+    //         } else {
+    //           setBusinessOwnersInfos(null);
+    //           setIsLoggedIn(false);
+    //         }
+    //       } catch (error) {
+    //         console.log("Error fetching user data:", error);
+    //         setBusinessOwnersInfos(null);
+    //         setIsLoggedIn(false);
+    //       }
+    //     };
     
-        checkTokenAndFetchData();
-      }
+    //     checkTokenAndFetchData();
+    //   }
 
-    }, [isVerified]);
+    // }, [isVerified]);
     
 
   

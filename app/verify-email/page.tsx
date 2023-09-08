@@ -1,12 +1,12 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { useSearchParams , useRouter } from 'next/navigation'
+import { useSearchParams , useRouter , ReadonlyURLSearchParams } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
 import sender from '@/services/sender'
 
 
 export default function Page() {
-  const searchParams = useSearchParams()
+  const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
   const {isVerifyedHandler , businessOwnerInfos} = useContext(AuthContext)
@@ -28,6 +28,14 @@ export default function Page() {
         
      
         isVerifyedHandler(response?.data.userInfos , response?.data.token)
+        setTimeout(()=>{
+          router.push("/")
+        },3000)
+        
+      } else if (!emailTokenGot){
+        <p>loading</p>
+      } else {
+        <p>err</p>
       }
     }
     fetchData();

@@ -10,9 +10,10 @@ import { AuthContext } from "@/context/authContext"
 
 export default function Home() {
 
-  const infos = useContext(AuthContext)
+  
+  const {isVerified} = useContext(AuthContext)
 
-  console.log(infos);
+  console.log(isVerified);
 
 
   return (

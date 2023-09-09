@@ -9,7 +9,7 @@ export default function Page() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
-  const {isVerifyedHandler , businessOwnerInfos} = useContext(AuthContext)
+  const {isVerifyedHandler , businessOwnerInfos , setIsVerified , isVerified} = useContext(AuthContext)
   const [emailTokenGot , setEmailTokenGot] = useState<string>("")
   const [isLoading , setIsLoading]=useState<boolean>(false)
   const [error , setError]=useState<boolean>(false)
@@ -25,9 +25,8 @@ export default function Page() {
           token_email: emailTokenGot
         };
         const response = await sender("http://localhost:5000/verify-email", body);
-        
-     
         isVerifyedHandler(response?.data.userInfos , response?.data.token)
+        setIsVerified(true)
         setTimeout(()=>{
           router.push("/")
         },3000)
@@ -43,7 +42,8 @@ export default function Page() {
 
   useEffect(()=>{
     console.log(businessOwnerInfos);
-    
+    console.log(isVerified);
+     
   })
   
 

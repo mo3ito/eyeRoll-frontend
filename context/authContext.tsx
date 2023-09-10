@@ -11,7 +11,7 @@ export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
     isVerified : false,
     token : null, 
-    businessOwnerInfos : null,
+    businessOwnerInfos : {},
     login : ()=>{},
     logout : ()=>{},
     setBusinessOwnersInfos: () => {},
@@ -26,7 +26,7 @@ export const AuthContext = createContext<AuthContextProps>({
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(null);
-    const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object | null>(null);
+    const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object>({});
 
 
     const login = useCallback(async(newBusinessOwnerInfos: object, newToken: string) => {
@@ -50,78 +50,45 @@ export const AuthContext = createContext<AuthContextProps>({
        setBusinessOwnersInfos(businessOwnerInfos);
      }, []);
 
+     useEffect(()=>{
+      const token = localStorage.getItem("isVerified")
+      setIsVerified(JSON.parse(token))
+    })
 
-    // useEffect(() => {
-    //   if(isVerified){
-    //     const checkTokenAndFetchData = async () => {
-    //       try {
-    //         const getToken = Cookies.get("businessOwnerToken");
-    //         if (getToken) {
-    //           const response = await getterWithAuth("http://localhost:5000/get-me");
-    //           setBusinessOwnersInfos(response?.data);
-    //           setIsLoggedIn(true);
-    //         } else {
-    //           setBusinessOwnersInfos(null);
-    //           setIsLoggedIn(false);
-    //         }
-    //       } catch (error) {
-    //         console.log("Error fetching user data:", error);
-    //         setBusinessOwnersInfos(null);
-    //         setIsLoggedIn(false);
-    //       }
-    //     };
+    useEffect(() => {
+      if(isVerified){
+        const checkTokenAndFetchData = async () => {
+          try {
+            const getToken = Cookies.get("businessOwnerToken");
+            if (getToken) {
+              const response = await getterWithAuth("http://localhost:5000/get-me");
+              setBusinessOwnersInfos(response?.data);
+              setIsLoggedIn(true);
+            } else {
+              setBusinessOwnersInfos({});
+              setIsLoggedIn(false);
+            }
+          } catch (error) {
+            console.log("Error fetching user data:", error);
+            setBusinessOwnersInfos({});
+            setIsLoggedIn(false);
+          }
+        };
     
-    //     checkTokenAndFetchData();
-    //   }
+        checkTokenAndFetchData();
+      }
 
-    // }, [isVerified]);
+    }, [isVerified]);
 
-    // useEffect(() => {
-    //   // ابتدا تلاش کنید توکن را از کوکی‌ها دریافت کنید
-    //   const getToken = Cookies.get("businessOwnerToken");
-    
-    //   if (getToken) {
-    //     // اگر توکن وجود داشته باشد، آن را در state تنظیم کنید
-    //     setToken(getToken);
-    
-    //     // اکنون می‌توانید API را فراخوانی کنید تا اطلاعات کاربر را بگیرید
-    //     const checkTokenAndFetchData = async () => {
-    //       try {
-    //         const response = await getterWithAuth("http://localhost:5000/get-me");
-    //         setBusinessOwnersInfos(response?.data);
-    //         setIsLoggedIn(true);
-    //       } catch (error) {
-    //         console.log("Error fetching user data:", error);
-    //         setBusinessOwnersInfos(null);
-    //         setIsLoggedIn(false);
-    //       }
-    //     };
-    
-    //     checkTokenAndFetchData();
-    //   }
-    // }, []);
-    // const getMe =async ()=>{
-      
-    //   try {
-    //             const getToken = Cookies.get("businessOwnerToken");
-    //             if (getToken) {
-    //               const response = await getterWithAuth("http://localhost:5000/get-me");
-    //               setBusinessOwnersInfos(response?.data);
-    //               setIsLoggedIn(true);
-    //             } else {
-    //               setBusinessOwnersInfos(null);
-    //               setIsLoggedIn(false);
-    //             }
-    //           } catch (error) {
-    //             console.log("Error fetching user data:", error);
-    //             setBusinessOwnersInfos(null);
-    //             setIsLoggedIn(false);
-    //           }
-    // }
-    
+   
 
-  
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified , getMe}}>
+    console.log(isVerified);
+
+    console.log(businessOwnerInfos);
+    console.log(isLoggedIn);
+    
+    
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified }}>
         {children}
     </AuthContext.Provider>)
  }

@@ -1,7 +1,8 @@
 'use client'
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import RegisterBusinessOwner from "@/components/register/registerBusinessOwner"
 import { AuthContext } from "@/context/authContext"
+import Cookies from "js-cookie"
 
 
 
@@ -11,7 +12,7 @@ import { AuthContext } from "@/context/authContext"
 export default function Home() {
 
   
-  const {isVerified} = useContext(AuthContext)
+  const{isVerified} = useContext(AuthContext)
 
   console.log(isVerified);
 

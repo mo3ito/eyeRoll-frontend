@@ -4,6 +4,7 @@ import { AuthContextProps , ChildrenType } from "@/types/authentication";
 import Cookies from "js-cookie"
 import axios from "axios";
 import getterWithAuth from "@/services/getterWithAuth";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -27,6 +28,9 @@ export const AuthContext = createContext<AuthContextProps>({
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(null);
     const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object>({});
+    
+  
+    
 
 
     const login = useCallback(async(newBusinessOwnerInfos: object, newToken: string) => {
@@ -42,47 +46,78 @@ export const AuthContext = createContext<AuthContextProps>({
        await Cookies.remove("businessOwnerToken");
     }, []);
 
+    const getMe =async ()=>{
+      if(token){
+        const decodedToken : object =await jwt_decode(token)
+        setBusinessOwnersInfos(decodedToken)
+      } else{
+        setBusinessOwnersInfos({})
+      }
+    
+     }
+      
+
     const isVerifyedHandler = useCallback(async(businessOwnerInfos: object, token: string) => {
       await setToken(token);
-     await  setIsLoggedIn(true);
-     setIsLoggedIn(true)
        await Cookies.set("businessOwnerToken", token);
-       setBusinessOwnersInfos(businessOwnerInfos);
+      //  setBusinessOwnersInfos(businessOwnerInfos);
+    
      }, []);
 
-     useEffect(()=>{
-      const token = localStorage.getItem("isVerified")
-      setIsVerified(JSON.parse(token))
-    })
-
-    useEffect(() => {
-      if(isVerified){
-        const checkTokenAndFetchData = async () => {
-          try {
-            const getToken = Cookies.get("businessOwnerToken");
-            if (getToken) {
-              const response = await getterWithAuth("http://localhost:5000/get-me");
-              setBusinessOwnersInfos(response?.data);
-              setIsLoggedIn(true);
-            } else {
-              setBusinessOwnersInfos({});
-              setIsLoggedIn(false);
-            }
-          } catch (error) {
-            console.log("Error fetching user data:", error);
-            setBusinessOwnersInfos({});
-            setIsLoggedIn(false);
-          }
-        };
     
-        checkTokenAndFetchData();
+    useEffect(()=>{
+    setTimeout(()=>{
+      const token = Cookies.get("businessOwnerToken")
+      if(token?.length){
+        const decodedToken : object = jwt_decode(token)
+        setBusinessOwnersInfos(decodedToken)
+      } else{
+        setBusinessOwnersInfos({})
       }
+    },400)
+   
+    },[])
 
-    }, [isVerified]);
+
+
+    useEffect(()=>{
+      if(businessOwnerInfos?.is_verified){
+        setIsLoggedIn(true)
+      }else{
+        setIsLoggedIn(false)
+      }
+    },[businessOwnerInfos])
+    
+
+    
+    
+
+    // useEffect(() => {
+     
+    //     const checkTokenAndFetchData = async () => {
+    //       try {
+    //         const getToken = Cookies.get("businessOwnerToken");
+    //         if (getToken) {
+    //           const response = await getterWithAuth("http://localhost:5000/get-me");
+    //           setBusinessOwnersInfos(response?.data);
+    //           setIsLoggedIn(true);
+    //         } else {
+    //           setBusinessOwnersInfos({});
+    //           setIsLoggedIn(false);
+    //         }
+    //       } catch (error) {
+    //         console.log("Error fetching user data:", error);
+    //         setBusinessOwnersInfos({});
+    //         setIsLoggedIn(false);
+    //       }
+    //     checkTokenAndFetchData();
+    //   }
+
+    // },[]);
 
    
 
-    console.log(isVerified);
+   
 
     console.log(businessOwnerInfos);
     console.log(isLoggedIn);

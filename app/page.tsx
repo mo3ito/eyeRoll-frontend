@@ -12,9 +12,8 @@ import Cookies from "js-cookie"
 export default function Home() {
 
   
-  const{isVerified} = useContext(AuthContext)
+  const{isVerified , getMe} = useContext(AuthContext)
 
-  console.log(isVerified);
 
 
   return (

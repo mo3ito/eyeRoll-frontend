@@ -1,5 +1,8 @@
 import React,{ ReactNode , Dispatch, SetStateAction } from "react"
 
+
+  
+
 export interface AuthContextProps {
     [index : string] : string | object | null | boolean
     isVerified: boolean,

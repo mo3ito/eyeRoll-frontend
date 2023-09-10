@@ -28,7 +28,7 @@ export default function Page() {
         };
         const response = await sender("http://localhost:5000/verify-email", body);
         isVerifyedHandler(response?.data.userInfos , response?.data.token)
-        localStorage.setItem('isVerified', 'true');
+        
         setTimeout(()=>{
           router.push("/")
         },3000)

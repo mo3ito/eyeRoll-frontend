@@ -15,6 +15,7 @@ export interface AuthContextProps {
     setIsLoggedIn:Dispatch<SetStateAction<boolean>>,
     setIsVerified:Dispatch<SetStateAction<boolean>>,
     isVerifyedHandler:(businessOwnerInfos: object, token: string) => void,
+    getMe:()=> void
    
 }
 

@@ -46,15 +46,15 @@ export const AuthContext = createContext<AuthContextProps>({
        await Cookies.remove("businessOwnerToken");
     }, []);
 
-    const getMe =async ()=>{
-      if(token){
-        const decodedToken : object =await jwt_decode(token)
-        setBusinessOwnersInfos(decodedToken)
-      } else{
-        setBusinessOwnersInfos({})
-      }
+    // const getMe =async ()=>{
+    //   if(token){
+    //     const decodedToken : object =await jwt_decode(token)
+    //     setBusinessOwnersInfos(decodedToken)
+    //   } else{
+    //     setBusinessOwnersInfos({})
+    //   }
     
-     }
+    //  }
       
 
     const isVerifyedHandler = useCallback(async(businessOwnerInfos: object, token: string) => {
@@ -64,19 +64,28 @@ export const AuthContext = createContext<AuthContextProps>({
     
      }, []);
 
-    
-    useEffect(()=>{
-    setTimeout(()=>{
-      const token = Cookies.get("businessOwnerToken")
+     const getMe = async ()=>{
+      const token =await Cookies.get("businessOwnerToken")
       if(token?.length){
         const decodedToken : object = jwt_decode(token)
         setBusinessOwnersInfos(decodedToken)
       } else{
         setBusinessOwnersInfos({})
       }
-    },400)
+     }
+    
+    // useEffect(()=>{
+    // setTimeout(()=>{
+    //   const token = Cookies.get("businessOwnerToken")
+    //   if(token?.length){
+    //     const decodedToken : object = jwt_decode(token)
+    //     setBusinessOwnersInfos(decodedToken)
+    //   } else{
+    //     setBusinessOwnersInfos({})
+    //   }
+    // },400)
    
-    },[])
+    // },[])
 
 
 
@@ -123,7 +132,7 @@ export const AuthContext = createContext<AuthContextProps>({
     console.log(isLoggedIn);
     
     
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified }}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified , getMe }}>
         {children}
     </AuthContext.Provider>)
  }

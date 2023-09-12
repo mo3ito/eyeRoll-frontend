@@ -3,19 +3,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useSearchParams , useRouter , ReadonlyURLSearchParams } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
 import sender from '@/services/sender'
-import getterWithAuth from '@/services/getterWithAuth'
-import Cookies from 'js-cookie'
+import  Loading  from '@/components/loading/loading'
+import { toast } from 'react-toastify'
 
 
 export default function Page() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
-  const {isVerifyedHandler , businessOwnerInfos , setIsVerified , isVerified , setBusinessOwnersInfos , setIsLoggedIn} = useContext(AuthContext)
+  const {isVerifyedHandler , businessOwnerInfos , isVerified } = useContext(AuthContext)
   const [emailTokenGot , setEmailTokenGot] = useState<string>("")
-  const [isLoading , setIsLoading]=useState<boolean>(false)
-  const [error , setError]=useState<boolean>(false)
+  const [email , setEmail]=useState("")
  
+
+  useEffect(()=>{
+   businessOwnerInfos && setEmail(businessOwnerInfos.email)
+  },[businessOwnerInfos])
 
   useEffect(() => {
     if (emailToken ) {
@@ -30,57 +33,41 @@ export default function Page() {
         isVerifyedHandler(response?.data.userInfos , response?.data.token)
         
         setTimeout(()=>{
-          router.push("/")
+          router.push("/house")
         },3000)
         
       } else if (!emailTokenGot){
-        <p>loading</p>
+        <Loading/>
       } else {
-        <p>err</p>
+        toast.error("An error occurred. Please try again later")
        
       }
     }
     fetchData();
   }, [emailToken, emailTokenGot , isVerified]);
 
-  // useEffect(()=>{
-    
-  //   if(isVerified){
-
-  //   }
-     
-  // },[isVerified])
-
-  // useEffect(() => {
-  //   if(isVerified){
-  //     const checkTokenAndFetchData = async () => {
-  //       try {
-  //         const getToken = Cookies.get("businessOwnerToken");
-  //         if (getToken) {
-  //           const response = await getterWithAuth("http://localhost:5000/get-me");
-  //           setBusinessOwnersInfos(response?.data);
-  //           setIsLoggedIn(true);
-  //         } else {
-  //           setBusinessOwnersInfos({});
-  //           setIsLoggedIn(false);
-  //         }
-  //       } catch (error) {
-  //         console.log("Error fetching user data:", error);
-  //         setBusinessOwnersInfos({});
-  //         setIsLoggedIn(false);
-  //       }
-  //     };
-  
-  //     checkTokenAndFetchData();
-  //   }
-
-  // }, [isVerified]);
-  
+ 
 
  
 
    
   return (
-    <div>we sent an email please verify it</div>
+    <div className='container px-4 mx-auto'>
+      {!emailTokenGot.length ? 
+      <div>
+      <p  className='w-full  text-center mt-44 h-20 pt-7 text-4xl text-zinc-700 font-semibold'>Verify Your Email</p>
+      <p className='text-center text-2xl'>please check your email: <span className='text-blue-600 underline'>{email}</span> for your account verification  </p>
+      </div>
+      :
+      <div>
+      <div className='flex items-center justify-center flex-col mt-44'>
+      <div className='flex'>
+      <p  className='w-full  text-center   text-4xl text-zinc-700 font-semibold inline-block'>Your registration was successful</p>
+      </div>
+      <p className='text-center text-2xl inline-block'>Please wait a moment...</p>
+      </div>
+      </div>}
+    </div>
+    
   )
 }

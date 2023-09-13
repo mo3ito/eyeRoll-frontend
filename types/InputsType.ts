@@ -1,8 +1,9 @@
 import { ChangeEvent  } from "react";
 
-export type InputRegister = {
+export type InputRegisterType = {
   value: string;
   placeholder?: string;
   label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  type:string
 }

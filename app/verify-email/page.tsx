@@ -56,7 +56,7 @@ export default function Page() {
       {!emailTokenGot.length ? 
       <div>
       <p  className='w-full  text-center mt-44 h-20 pt-7 text-4xl text-zinc-700 font-semibold'>Verify Your Email</p>
-      <p className='text-center text-2xl'>please check your email: <span className='text-blue-600 underline'>{email}</span> for your account verification  </p>
+      <p className='text-center text-2xl'>please check your email: <span className='text-purple-600 underline'>{email}</span> for your account verification  </p>
       </div>
       :
       <div>

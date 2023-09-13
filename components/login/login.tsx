@@ -28,7 +28,7 @@ const Login = ({onClick} : LoginPropsType ) => {
             const response = await sender("http://localhost:5000/login", body)
             if(response){
            await login(response?.data.userInfos , response?.data.token)
-           router.push("/house")
+        //    router.push("/house")
             }
               } catch (error) {
             console.error(error)

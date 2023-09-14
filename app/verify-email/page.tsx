@@ -30,12 +30,12 @@ export default function Page() {
           token_email: emailTokenGot
         };
         const response = await sender("http://localhost:5000/verify-email", body);
-        isVerifyedHandler(response?.data.userInfos , response?.data.token)
-        
-        setTimeout(()=>{
-          router.push("/house")
-        },3000)
-        
+        if(response?.status===200){
+          isVerifyedHandler(response?.data.userInfos , response?.data.token)
+          setTimeout(()=>{
+            router.push("/house")
+          },3000)
+        }
       } else if (!emailTokenGot){
         <Loading/>
       } else {

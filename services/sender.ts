@@ -11,11 +11,9 @@ const sender = async (path: string, body: object): Promise<AxiosResponse | undef
 
     console.log(response);
 
-    if (response.status === 200) {
+      
       return response; 
-    } else {
-      throw new Error("Server returned an error"); 
-    }
+    
   } catch (error) {
     if (error instanceof AxiosError) {
       console.error("Request failed with status:", error.response?.status);

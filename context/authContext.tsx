@@ -2,8 +2,6 @@
 import { useEffect , createContext , useCallback , useState , ReactElement , ReactNode } from "react";
 import { AuthContextProps , ChildrenType } from "@/types/authentication";
 import Cookies from "js-cookie"
-import axios from "axios";
-import getterWithAuth from "@/services/getterWithAuth";
 import jwt_decode from "jwt-decode";
 
 
@@ -19,7 +17,7 @@ export const AuthContext = createContext<AuthContextProps>({
     setIsLoggedIn:()=>{},
     setIsVerified:()=>{},
     isVerifyedHandler:()=>{},
-    getMe:()=>{}
+    
 })
 
  export const AuthContextProvider = ({children}: ChildrenType)=>{
@@ -46,49 +44,33 @@ export const AuthContext = createContext<AuthContextProps>({
        await Cookies.remove("businessOwnerToken");
     }, []);
 
-    // const getMe =async ()=>{
-    //   if(token){
-    //     const decodedToken : object =await jwt_decode(token)
-    //     setBusinessOwnersInfos(decodedToken)
-    //   } else{
-    //     setBusinessOwnersInfos({})
-    //   }
-    
-    //  }
+   
       
 
     const isVerifyedHandler = useCallback(async(businessOwnerInfos: object, token: string) => {
       await setToken(token);
        await Cookies.set("businessOwnerToken", token);
-      //  setBusinessOwnersInfos(businessOwnerInfos);
+       setBusinessOwnersInfos(businessOwnerInfos);
     
      }, []);
 
-     const getMe = async ()=>{
-      const token =await Cookies.get("businessOwnerToken")
-      if(token?.length){
-        const decodedToken : object = jwt_decode(token)
-        setBusinessOwnersInfos(decodedToken)
-      } else{
-        setBusinessOwnersInfos({})
-      }
-     }
-    
-    // useEffect(()=>{
-    // setTimeout(()=>{
-    //   const token = Cookies.get("businessOwnerToken")
-    //   if(token?.length){
-    //     const decodedToken : object = jwt_decode(token)
-    //     setBusinessOwnersInfos(decodedToken)
-    //   } else{
-    //     setBusinessOwnersInfos({})
-    //   }
-    // },400)
    
-    // },[])
 
-
-
+     useEffect(()=>{
+       if(!!login || !!isVerifyedHandler){
+        const getMe = async ()=>{
+          const token =await Cookies.get("businessOwnerToken")
+          if(token?.length){
+            const decodedToken : object = jwt_decode(token)
+            setBusinessOwnersInfos(decodedToken)
+          } else{
+            setBusinessOwnersInfos({})
+          }
+         }
+         getMe()
+       } 
+     },[login , isVerifyedHandler])
+    
     useEffect(()=>{
       if(businessOwnerInfos?.is_verified){
         setIsLoggedIn(true)
@@ -97,42 +79,11 @@ export const AuthContext = createContext<AuthContextProps>({
       }
     },[businessOwnerInfos])
     
-
-    
-    
-
-    // useEffect(() => {
-     
-    //     const checkTokenAndFetchData = async () => {
-    //       try {
-    //         const getToken = Cookies.get("businessOwnerToken");
-    //         if (getToken) {
-    //           const response = await getterWithAuth("http://localhost:5000/get-me");
-    //           setBusinessOwnersInfos(response?.data);
-    //           setIsLoggedIn(true);
-    //         } else {
-    //           setBusinessOwnersInfos({});
-    //           setIsLoggedIn(false);
-    //         }
-    //       } catch (error) {
-    //         console.log("Error fetching user data:", error);
-    //         setBusinessOwnersInfos({});
-    //         setIsLoggedIn(false);
-    //       }
-    //     checkTokenAndFetchData();
-    //   }
-
-    // },[]);
-
-   
-
-   
-
     console.log(businessOwnerInfos);
     console.log(isLoggedIn);
     
     
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified , getMe }}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified  }}>
         {children}
     </AuthContext.Provider>)
  }

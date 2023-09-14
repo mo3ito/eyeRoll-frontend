@@ -1,5 +1,5 @@
 'use client'
-import { useState , useEffect , FormEvent , useContext, useCallback } from "react"
+import { useState , useEffect , FormEvent , useContext, useCallback , useRef } from "react"
 import Input from "@/components/shared/input"
 import Button from "@/components/shared/button"
 import { toast } from "react-toastify"
@@ -9,6 +9,7 @@ import sender from "@/services/sender"
 import { AuthContext } from "@/context/authContext"
 import { useRouter } from "next/navigation"
 import Login from "@/components/login/login"
+
 const RegisterBusinessOwner = () => {
 
     const[name , setName]=useState<string>("")
@@ -20,8 +21,9 @@ const RegisterBusinessOwner = () => {
     const[repeatPassword , setRepeatPassword]= useState<string>("")
     const {login} = useContext(AuthContext)
     const router = useRouter()
-  
-  
+    const [isLogin, setIsLogin] = useState(true);
+
+
     const submitHandler = async (event : FormEvent<HTMLFormElement>)=>{
         event.preventDefault()
         console.log("submit");
@@ -36,7 +38,7 @@ const RegisterBusinessOwner = () => {
         }
         try {
             const response = await sender("http://localhost:5000/register", body)
-            if(response){
+            if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
            router.push("/verify-email")
             }
@@ -48,7 +50,7 @@ const RegisterBusinessOwner = () => {
 
   return (
     <>
-    <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
+    { isLogin ? <Login onClick={()=>setIsLogin(false)}/> : <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
     <h2 className="underline underline-offset-4 text-xl text-purple-600">Registeration</h2>
     <Input type="text" value={name} onChange={(event)=>setName(event?.target.value)} label="name"  />
     <Input type="text" value={lastName} onChange={(event)=>setLastName(event?.target.value)} label="last name"  />
@@ -60,9 +62,11 @@ const RegisterBusinessOwner = () => {
     <Button text="Register"/>
     <div className="flex items-center justify-center text-purple-600 space-x-1">
     <small className="">Do you have an account? </small>
-    <button onClick={()=>router.push("/")} className="text-purple-900 underline">login</button>
+    <button onClick={()=>setIsLogin(true)} className="text-purple-900 underline">login</button>
     </div>
     </form> 
+    
+    }
     </>
 
   )

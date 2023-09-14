@@ -13,13 +13,13 @@ import Cookies from "js-cookie"
 export default function Home() {
 
   
-  const{isVerified , getMe} = useContext(AuthContext)
+ 
 
 
 
   return (
    <main className=''>
-  <Login/>
+  <RegisterBusinessOwner/>
    </main>
   )
 }

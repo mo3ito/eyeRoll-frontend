@@ -8,7 +8,7 @@ const Page = ()=>{
   const {getMe} = useContext(AuthContext)
 
   useEffect(()=>{
-    getMe()
+  
   },[])
 
   return(

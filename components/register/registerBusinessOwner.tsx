@@ -1,5 +1,5 @@
 'use client'
-import { useState , useEffect , FormEvent , useContext, useCallback , useRef } from "react"
+import { useState , FormEvent , useContext,  } from "react"
 import Input from "@/components/shared/input"
 import Button from "@/components/shared/button"
 import { toast } from "react-toastify"
@@ -34,16 +34,34 @@ const RegisterBusinessOwner = () => {
             username,
             password,
             repeat_password:repeatPassword,
-            email
+            email: email.toLowerCase()
         }
         try {
+          if(!name.length || !lastName.length || !phoneNumber.length || !username.length || !password.length || !repeatPassword.length){
+            toast.warn("Please Fill in the empty inputs")
+            return
+            }else if(password !== repeatPassword){
+              toast.warn("Repeating the password is not the same as the password")
+              return
+            }else if (isNaN(+phoneNumber)){
+              toast.warn("the phoneNumber must be number")
+              return
+            }else if(password.length < 8){
+              toast.warn("the password must be at least 8 characters long")
+              return
+            }
             const response = await sender("http://localhost:5000/register", body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
            router.push("/verify-email")
-            }
-              } catch (error) {
-            console.error(error)
+            } 
+              } catch (error : any) {
+                if (error.response.status === 400) {
+                  const errorMessage = error.response.data.message;
+                  toast.error(errorMessage);
+                } else {
+                toast.error("An error occurred while processing your request");
+                }
         }
       }
       

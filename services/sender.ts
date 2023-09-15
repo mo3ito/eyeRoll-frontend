@@ -19,7 +19,6 @@ const sender = async (path: string, body: object): Promise<AxiosResponse | undef
       console.error("Request failed with status:", error.response?.status);
       console.error("Response data:", error.response?.data);
     }
-    toast.error("An error occurred. Please try again later...");
     throw error; 
   }
 };

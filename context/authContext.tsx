@@ -10,10 +10,10 @@ export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
     isVerified : false,
     token : null, 
-    businessOwnerInfos : {},
+    infos : {},
     login : ()=>{},
     logout : ()=>{},
-    setBusinessOwnersInfos: () => {},
+    setInfos: () => {},
     setIsLoggedIn:()=>{},
     setIsVerified:()=>{},
     isVerifyedHandler:()=>{},
@@ -25,32 +25,32 @@ export const AuthContext = createContext<AuthContextProps>({
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isVerified, setIsVerified] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(null);
-    const [businessOwnerInfos, setBusinessOwnersInfos] = useState<object>({});
+    const [infos, setInfos] = useState<object>({});
     
   
     
 
 
-    const login = useCallback(async(newBusinessOwnerInfos: object, newToken: string) => {
+    const login = useCallback(async(infos: object, newToken: string) => {
        await setToken(newToken);
         await Cookies.set("businessOwnerToken", newToken);
-        setBusinessOwnersInfos(newBusinessOwnerInfos);
+        setInfos(infos);
       }, []);
 
      
       const logout = useCallback(async () => {
        await setToken(null);
-       await setBusinessOwnersInfos({});
+       await setInfos({});
        await Cookies.remove("businessOwnerToken");
     }, []);
 
    
       
 
-    const isVerifyedHandler = useCallback(async(businessOwnerInfos: object, token: string) => {
+    const isVerifyedHandler = useCallback(async(infos: object, token: string) => {
       await setToken(token);
        await Cookies.set("businessOwnerToken", token);
-       setBusinessOwnersInfos(businessOwnerInfos);
+       setInfos(infos);
     
      }, []);
 
@@ -62,9 +62,9 @@ export const AuthContext = createContext<AuthContextProps>({
           const token =await Cookies.get("businessOwnerToken")
           if(token?.length){
             const decodedToken : object = jwt_decode(token)
-            setBusinessOwnersInfos(decodedToken)
+            setInfos(decodedToken)
           } else{
-            setBusinessOwnersInfos({})
+            setInfos({})
           }
          }
          getMe()
@@ -72,18 +72,18 @@ export const AuthContext = createContext<AuthContextProps>({
      },[login , isVerifyedHandler])
     
     useEffect(()=>{
-      if(businessOwnerInfos?.is_verified){
+      if(infos?.is_verified){
         setIsLoggedIn(true)
       }else{
         setIsLoggedIn(false)
       }
-    },[businessOwnerInfos])
+    },[infos])
     
-    console.log(businessOwnerInfos);
+    console.log(infos);
     console.log(isLoggedIn);
     
     
-   return ( <AuthContext.Provider value={{isLoggedIn ,token , businessOwnerInfos, login , logout, setBusinessOwnersInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified  }}>
+   return ( <AuthContext.Provider value={{isLoggedIn ,token , infos, login , logout, setInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified  }}>
         {children}
     </AuthContext.Provider>)
  }

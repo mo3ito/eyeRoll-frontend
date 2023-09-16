@@ -11,14 +11,14 @@ export default function Page() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
-  const {isVerifyedHandler , businessOwnerInfos , isVerified } = useContext(AuthContext)
+  const {isVerifyedHandler , infos , isVerified } = useContext(AuthContext)
   const [emailTokenGot , setEmailTokenGot] = useState<string>("")
   const [email , setEmail]=useState("")
  
 
   useEffect(()=>{
-   businessOwnerInfos && setEmail(businessOwnerInfos.email)
-  },[businessOwnerInfos])
+   infos && setEmail(infos.email)
+  },[infos])
 
   useEffect(() => {
     if (emailToken ) {

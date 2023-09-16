@@ -8,14 +8,15 @@ export interface AuthContextProps {
     isVerified: boolean,
     isLoggedIn : boolean,
     token: string | null,
-    businessOwnerInfos: object | null,
-    login: (businessOwnerInfos: object, token: string) => void;
+    infos: object | null,
+    login: (infos: object, token: string) => void;
     logout: ()=> void,
-    setBusinessOwnersInfos: (BusinessOwnerInfos: object) => void;
+    setInfos: (infos: object) => void;
     setIsLoggedIn:Dispatch<SetStateAction<boolean>>,
     setIsVerified:Dispatch<SetStateAction<boolean>>,
-    isVerifyedHandler:(businessOwnerInfos: object, token: string) => void,
+    isVerifyedHandler:(infos: object, token: string) => void,
 }
+
 
 export type ChildrenType = {
     children? : ReactNode 

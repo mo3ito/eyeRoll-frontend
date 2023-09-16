@@ -10,6 +10,7 @@ import ButtonDefault from '../shared/buttonDefault'
 
 
 
+
 interface LoginPropsType {
     onClick : MouseEventHandler<HTMLButtonElement> | undefined
 }
@@ -56,9 +57,15 @@ const Login = ({onClick} : LoginPropsType ) => {
       if (response?.status === 200){
         router.push("/verify-email")
       }
-    } catch (error) {
-      console.error(error)
-    }
+    } catch (error : any) {
+      
+      if(error.response.status === 400){
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+      }else {
+        toast.error("An error occurred while processing your request");
+        }
+}
 
      }
       

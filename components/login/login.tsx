@@ -76,8 +76,8 @@ const Login = ({onClick} : LoginPropsType ) => {
     {!isResendEmail ? <Button text="login"/> :
     <Button text='resend email'  onClick={resendEmailHandler}/>}
     <div className="flex items-center justify-center text-purple-600 space-x-1">
-    <small className="">Don't you have an account? </small>
-    <button onClick={onClick} className="text-purple-900 underline">register</button>
+    <p className="text-xl text-purple-500">Don't you have an account? </p>
+    <button onClick={onClick} className="text-purple-700 underline text-xl">register</button>
     
     
     </div>

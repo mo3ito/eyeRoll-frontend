@@ -22,7 +22,7 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body className="">
+      <body className="overflow-x-hidden inset-0">
         <AuthContextProvider>
           <ReactQueryProvider >
             <HeaderBusinessOwner/>

@@ -69,7 +69,7 @@ const RegisterBusinessOwner = () => {
   return (
     <>
     { isLogin ? <Login onClick={()=>setIsLogin(false)}/> : <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-purple-600">Registeration</h2>
+    <h2 className="underline underline-offset-4 text-xl text-purple-500">Registeration</h2>
     <Input type="text" value={name} onChange={(event)=>setName(event?.target.value)} label="name"  />
     <Input type="text" value={lastName} onChange={(event)=>setLastName(event?.target.value)} label="last name"  />
     <Input type="text" value={username} onChange={(event)=>setUsername(event?.target.value)} label="username"  />
@@ -79,8 +79,8 @@ const RegisterBusinessOwner = () => {
     <Input type="password" value={repeatPassword} onChange={(event)=>setRepeatPassword(event?.target.value)} label="repeat password"  />
     <Button text="Register"/>
     <div className="flex items-center justify-center text-purple-600 space-x-1">
-    <small className="">Do you have an account? </small>
-    <button onClick={()=>setIsLogin(true)} className="text-purple-900 underline">login</button>
+    <p className="text-xl text-purple-500">Do you have an account? </p>
+    <button onClick={()=>setIsLogin(true)} className="text-purple-700 underline text-xl">login</button>
     </div>
     </form> 
     

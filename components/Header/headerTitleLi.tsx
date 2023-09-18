@@ -1,9 +1,8 @@
-'use client'
 import React from 'react'
-
+import Link from 'next/link'
 interface HeaderTitleLiProps {
   title : string,
-  options : object[]
+  options : object[],
 }
 
 const HeaderTitleLi = ({title , options } : HeaderTitleLiProps) => {
@@ -15,11 +14,12 @@ const HeaderTitleLi = ({title , options } : HeaderTitleLiProps) => {
           </div>
           <ul className='hidden group-hover:block text-xl absolute bg-purple-400 top-20 left-0 h-max  min-w-[176px] w-max  '>
             {options.map(option=>
-            <li key={option.id} className='p-1 hover:bg-purple-600 '>{option.name}</li>
+            <li key={option.id} className='p-1 hover:bg-purple-600 '>
+              <Link href={option.path}>{option.name}</Link>
+              </li>
               )}
             
-            {/* <li className='p-1 hover:bg-purple-600'>group 2</li>
-            <li className='p-1 hover:bg-purple-600'>group 3</li> */}
+          
           </ul>
           
         </li>

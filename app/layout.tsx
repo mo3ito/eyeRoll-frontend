@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+
 import { ToastContainer } from "@/components/clients/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";

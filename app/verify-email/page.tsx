@@ -7,7 +7,7 @@ import  Loading  from '@/components/loading/loading'
 import { toast } from 'react-toastify'
 
 
-export default function Page() {
+export default function BusinessOwnerDashboard() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
@@ -33,7 +33,7 @@ export default function Page() {
         if(response?.status===200){
           isVerifyedHandler(response?.data.userInfos , response?.data.token)
           setTimeout(()=>{
-            router.push("/house")
+            router.push("/business-owner-dashboard")
           },3000)
         }
       } else if (!emailTokenGot){

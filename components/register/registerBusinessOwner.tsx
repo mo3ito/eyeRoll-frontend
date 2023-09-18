@@ -1,14 +1,14 @@
 'use client'
 import { useState , FormEvent , useContext,  } from "react"
-import Input from "@/components/shared/input"
-import Button from "@/components/shared/button"
+import Input from "../../components/shared/input"
+import Button from "../../components/shared/button"
 import { toast } from "react-toastify"
-import Loading from "@/components/loading/loading"
+import Loading from "../../components/loading/loading"
 import { useQuery } from "react-query"
 import sender from "@/services/sender"
 import { AuthContext } from "@/context/authContext"
 import { useRouter } from "next/navigation"
-import Login from "@/components/login/login"
+import Login from "../../components/login/login"
 
 const RegisterBusinessOwner = () => {
 

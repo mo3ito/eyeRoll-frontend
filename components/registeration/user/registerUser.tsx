@@ -1,16 +1,17 @@
 'use client'
 import { useState , FormEvent , useContext,  } from "react"
-import Input from "../../components/shared/input"
-import Button from "../../components/shared/button"
+import Input from "../../shared/input"
+import Button from "../../shared/button"
 import { toast } from "react-toastify"
-import Loading from "../../components/loading/loading"
+import Loading from "../../loading/loading"
 import { useQuery } from "react-query"
-import sender from "@/services/sender"
-import { AuthContext } from "@/context/authContext"
+import sender from "../../../services/sender"
+import { AuthContext } from "../../../context/authContext"
 import { useRouter } from "next/navigation"
-import Login from "../../components/login/login"
 
-const RegisterBusinessOwner = () => {
+import Link from "next/link"
+
+const RegisterUser = () => {
 
     const[name , setName]=useState<string>("")
     const[lastName , setLastName]=useState<string>("")
@@ -68,8 +69,8 @@ const RegisterBusinessOwner = () => {
 
   return (
     <>
-    { isLogin ? <Login onClick={()=>setIsLogin(false)}/> : <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-purple-500">Registeration</h2>
+    <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
+    <h2 className="underline underline-offset-4 text-xl text-purple-500">Register Customer</h2>
     <Input type="text" value={name} onChange={(event)=>setName(event?.target.value)} label="name"  />
     <Input type="text" value={lastName} onChange={(event)=>setLastName(event?.target.value)} label="last name"  />
     <Input type="text" value={username} onChange={(event)=>setUsername(event?.target.value)} label="username"  />
@@ -80,14 +81,14 @@ const RegisterBusinessOwner = () => {
     <Button text="Register"/>
     <div className="flex items-center justify-center text-purple-600 space-x-1">
     <p className="text-xl text-purple-500">Do you have an account? </p>
-    <button onClick={()=>setIsLogin(true)} className="text-purple-700 underline text-xl">login</button>
+    <Link href="/register-business-owner/login" className="text-purple-700 underline text-xl">login</Link>
     </div>
     </form> 
     
-    }
+    
     </>
 
   )
 }
 
-export default RegisterBusinessOwner;
+export default RegisterUser

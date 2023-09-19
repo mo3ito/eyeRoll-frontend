@@ -12,7 +12,7 @@ const Page = ()=>{
   },[])
 
   return(
-    <div>this is house</div>
+    <div>this is dashboard</div>
     
   )
 

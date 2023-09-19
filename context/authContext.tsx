@@ -1,6 +1,7 @@
 'use client'
 import { useEffect , createContext , useCallback , useState , ReactElement , ReactNode } from "react";
-import { AuthContextProps , ChildrenType } from "@/types/authentication";
+import { AuthContextProps } from "@/types/authentication";
+import {ChildrenType} from "@/types/childrenType"
 import Cookies from "js-cookie"
 import jwt_decode from "jwt-decode";
 

@@ -18,7 +18,5 @@ export interface AuthContextProps {
 }
 
 
-export type ChildrenType = {
-    children? : ReactNode 
-}
+
 

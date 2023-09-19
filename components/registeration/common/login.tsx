@@ -1,20 +1,22 @@
 'use client'
-import Input from '../shared/input'
-import Button from '../shared/button'
+import Input from '../../shared/input'
+import Button from '../../shared/button'
 import { useState , FormEvent , useContext , MouseEventHandler } from 'react'
 import sender from '@/services/sender'
 import { useRouter } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
 import { toast } from 'react-toastify'
-import ButtonDefault from '../shared/buttonDefault'
+import ButtonDefault from '../../shared/buttonDefault'
+import Link from 'next/link'
 
 
 
 interface LoginPropsType {
-    onClick : MouseEventHandler<HTMLButtonElement> | undefined
+    onClick? : MouseEventHandler<HTMLButtonElement> | undefined,
+    text: string
 }
 
-const Login = ({onClick} : LoginPropsType ) => {
+const Login = ({onClick , text = "login"} : LoginPropsType ) => {
     const [email , setEmail]=useState<string>("")
     const [password , setPassword]=useState<string>("")
     const [isResendEmail , setIsResendEmail]=useState<boolean>(false)
@@ -70,14 +72,14 @@ const Login = ({onClick} : LoginPropsType ) => {
       
   return (
     <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-purple-600">Login</h2>
+    <h2 className="underline underline-offset-4 text-xl text-purple-600">{text}</h2>
     <Input type="email" value={email} onChange={(event)=>setEmail(event?.target.value)} label="email"  />
     <Input type="password" value={password} onChange={(event)=>setPassword(event?.target.value)} label="password"  />
     {!isResendEmail ? <Button text="login"/> :
     <Button text='resend email'  onClick={resendEmailHandler}/>}
     <div className="flex items-center justify-center text-purple-600 space-x-1">
     <p className="text-xl text-purple-500">Don't you have an account? </p>
-    <button onClick={onClick} className="text-purple-700 underline text-xl">register</button>
+    <Link href="/register-business-owner" className="text-purple-700 underline text-xl">register</Link>
     
     
     </div>

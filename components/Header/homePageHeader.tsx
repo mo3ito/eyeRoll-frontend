@@ -12,7 +12,8 @@ const HomePageHeader = () => {
       
         <HeaderTitleLi title="groups" options={[{id:"1" , name:"group" , path:"/"  } , {id:"2" , name:"group2" , path:"/"  } ]} />
         <HeaderTitleLi title="Nearest stores" options={[{id:"3" , name:"Ali cafe" , path:"/" } , {id:"4" , name:"joe black" , path:"/"  } ]} />
-        <HeaderTitleLi title="Register/Login" options={[{id:"5" , name:"register/login as customer",path:"/"  } , {id:"4" , name:"register/login as business owner" , path:"/register-login"  } ]} />
+        <HeaderTitleLi title="Register/Login" options={[{id:"5" , name:"register as customer",path:"/register-user"  }, {id:"6" , name:"login as customer" , path:"/register-user/login"  } , {id:"4" , name:"register as business owner" , path:"/register-business-owner"  } ,
+         {id:"5" , name:"login as business owner" , path:"/register-business-owner/login"  }]} />
 
       </ul>
       </div>

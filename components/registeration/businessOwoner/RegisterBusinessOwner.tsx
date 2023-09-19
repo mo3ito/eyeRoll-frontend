@@ -8,7 +8,6 @@ import { useQuery } from "react-query"
 import sender from "@/services/sender"
 import { AuthContext } from "@/context/authContext"
 import { useRouter } from "next/navigation"
-import Login from "./login"
 import Link from "next/link"
 
 const RegisterBusinessOwner = () => {

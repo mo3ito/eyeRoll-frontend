@@ -7,21 +7,49 @@ import  Loading  from '@/components/loading/loading'
 import { toast } from 'react-toastify'
 
 
-export default function BusinessOwnerDashboard() {
+export default function VerifyEmail() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
   const emailToken= searchParams.get("token_email")
   const {isVerifyedHandler , infos , isVerified } = useContext(AuthContext)
   const [emailTokenGot , setEmailTokenGot] = useState<string>("")
   const [email , setEmail]=useState("")
+  const [isBusinessOwner , setIsBusinessOwner]=useState<boolean>(false)
+  const [path , setPath]=useState<string>("")
+ 
  
 
   useEffect(()=>{
-   infos && setEmail(infos.email)
+   if(!!infos){
+    setEmail(infos.email)
+    if(infos.is_businessOwner){
+      setIsBusinessOwner(true)
+    }
+  }
   },[infos])
 
+  useEffect(()=>{
+    if(isBusinessOwner && path.length>0){
+      setPath("/business-owner-dashboard")
+    }else{
+      setPath("/")
+    }
+  },[isBusinessOwner , path])
+  console.log(path);
+  console.log(isBusinessOwner);
+  
   useEffect(() => {
-    if (emailToken ) {
+    if (path.length > 0) {
+      setTimeout(()=>{
+        router.push(path);
+    },3000)
+    }
+  }, [path]);
+  
+  
+
+  useEffect(() => {
+    if (emailToken && path.length>0 ) {
       setEmailTokenGot(emailToken);
     }
     async function fetchData() {
@@ -32,9 +60,6 @@ export default function BusinessOwnerDashboard() {
         const response = await sender("http://localhost:5000/verify-email", body);
         if(response?.status===200){
           isVerifyedHandler(response?.data.userInfos , response?.data.token)
-          setTimeout(()=>{
-            router.push("/business-owner-dashboard")
-          },3000)
         }
       } else if (!emailTokenGot){
         <Loading/>
@@ -44,7 +69,7 @@ export default function BusinessOwnerDashboard() {
       }
     }
     fetchData();
-  }, [emailToken, emailTokenGot , isVerified]);
+  }, [emailToken, emailTokenGot , isVerified , path]);
 
  
 

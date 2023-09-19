@@ -6,7 +6,6 @@ import sender from '@/services/sender'
 import  Loading  from '@/components/loading/loading'
 import { toast } from 'react-toastify'
 
-
 export default function VerifyEmail() {
   const searchParams : ReadonlyURLSearchParams = useSearchParams()
   const router = useRouter()
@@ -14,42 +13,19 @@ export default function VerifyEmail() {
   const {isVerifyedHandler , infos , isVerified } = useContext(AuthContext)
   const [emailTokenGot , setEmailTokenGot] = useState<string>("")
   const [email , setEmail]=useState("")
-  const [isBusinessOwner , setIsBusinessOwner]=useState<boolean>(false)
-  const [path , setPath]=useState<string>("")
- 
+  const [path , setPath] = useState("/")
+  const [isVerifyedHandlerDone , setIsVerifyHandlerDone]=useState(false)
  
 
   useEffect(()=>{
-   if(!!infos){
+   if(infos){
     setEmail(infos.email)
-    if(infos.is_businessOwner){
-      setIsBusinessOwner(true)
-    }
-  }
+    infos.is_businessOwner ? setPath("/business-owner-dashboard") : setPath("/")
+   }
   },[infos])
 
-  useEffect(()=>{
-    if(isBusinessOwner && path.length>0){
-      setPath("/business-owner-dashboard")
-    }else{
-      setPath("/")
-    }
-  },[isBusinessOwner , path])
-  console.log(path);
-  console.log(isBusinessOwner);
-  
   useEffect(() => {
-    if (path.length > 0) {
-      setTimeout(()=>{
-        router.push(path);
-    },3000)
-    }
-  }, [path]);
-  
-  
-
-  useEffect(() => {
-    if (emailToken && path.length>0 ) {
+    if (emailToken ) {
       setEmailTokenGot(emailToken);
     }
     async function fetchData() {
@@ -59,7 +35,8 @@ export default function VerifyEmail() {
         };
         const response = await sender("http://localhost:5000/verify-email", body);
         if(response?.status===200){
-          isVerifyedHandler(response?.data.userInfos , response?.data.token)
+         await isVerifyedHandler(response?.data.userInfos , response?.data.token)
+         setIsVerifyHandlerDone(true)
         }
       } else if (!emailTokenGot){
         <Loading/>
@@ -69,13 +46,18 @@ export default function VerifyEmail() {
       }
     }
     fetchData();
-  }, [emailToken, emailTokenGot , isVerified , path]);
+  }, [emailToken, emailTokenGot , isVerified]);
+
+  useEffect(()=>{
+    if(path.length>0 && isVerifyedHandlerDone){
+      setTimeout(()=>{
+        router.push(path)
+      },3000)
+     
+    }
+  },[path , isVerifyedHandlerDone])
 
  
-
- 
-
-   
   return (
     <div className='container px-4 mx-auto'>
       {!emailTokenGot.length ? 

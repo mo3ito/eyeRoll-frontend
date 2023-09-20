@@ -34,7 +34,7 @@ const Login = ({onClick , text = "login"} : LoginPropsType ) => {
             const response = await sender("http://localhost:5000/login", body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
-           router.push("/business-owner-dashboards")
+           router.push("/business-owner-dashboard")
             } else if (response?.status === 201){
               if(!isResendEmail){
                 toast.warn("You have not confirmed your email, please click the resend email button")

@@ -3,7 +3,8 @@ import RegisterUser from '@/components/registeration/user/registerUser'
 
 const page = () => {
   return (
-   <RegisterUser/>
+  //  <RegisterUser/>
+  <p>home</p>
   )
 }
 

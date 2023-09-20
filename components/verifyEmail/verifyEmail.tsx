@@ -1,63 +1,16 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
-import { useSearchParams , useRouter , ReadonlyURLSearchParams } from 'next/navigation'
-import { AuthContext } from '@/context/authContext'
-import sender from '@/services/sender'
-import  Loading  from '@/components/loading/loading'
-import { toast } from 'react-toastify'
+import useVerifyEmail from '@/hooks/useVerifyEmail'
 
-export default function VerifyEmail() {
-  const searchParams : ReadonlyURLSearchParams = useSearchParams()
-  const router = useRouter()
-  const emailToken= searchParams.get("token_email")
-  const {isVerifyedHandler , infos , isVerified } = useContext(AuthContext)
-  const [emailTokenGot , setEmailTokenGot] = useState<string>("")
-  const [email , setEmail]=useState("")
-  const [path , setPath] = useState("/")
-  const [isVerifyedHandlerDone , setIsVerifyHandlerDone]=useState(false)
- 
+interface VerifyEmailProps {
+  path:string,
+  pathApi: string
+}
 
-  useEffect(()=>{
-   if(infos){
-    setEmail(infos.email)
-    infos.is_businessOwner ? setPath("/business-owner-dashboard") : setPath("/")
-   }
-  },[infos])
+export default function VerifyEmail({path , pathApi}:VerifyEmailProps) {
 
-  useEffect(() => {
-    if (emailToken ) {
-      setEmailTokenGot(emailToken);
-    }
-    async function fetchData() {
-      if (emailTokenGot) {
-        const body = {
-          token_email: emailTokenGot
-        };
-        const response = await sender("http://localhost:5000/verify-email", body);
-        if(response?.status===200){
-         await isVerifyedHandler(response?.data.userInfos , response?.data.token)
-         setIsVerifyHandlerDone(true)
-        }
-      } else if (!emailTokenGot){
-        <Loading/>
-      } else {
-        toast.error("An error occurred. Please try again later")
-       
-      }
-    }
-    fetchData();
-  }, [emailToken, emailTokenGot , isVerified]);
 
-  useEffect(()=>{
-    if(path.length>0 && isVerifyedHandlerDone){
-      setTimeout(()=>{
-        router.push(path)
-      },3000)
-     
-    }
-  },[path , isVerifyedHandlerDone])
+  const {emailTokenGot , email}=useVerifyEmail(path , pathApi)
 
- 
   return (
     <div className='container px-4 mx-auto'>
       {!emailTokenGot.length ? 

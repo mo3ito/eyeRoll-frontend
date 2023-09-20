@@ -6,6 +6,6 @@ import { AuthContext } from '@/context/authContext'
 export default function page() {
   
   return (
-    <VerifyEmail/>
+    <VerifyEmail path='/business-owner-dashboard' pathApi='http://localhost:5000/verify-email' />
   )
 }

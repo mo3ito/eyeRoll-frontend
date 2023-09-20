@@ -37,7 +37,7 @@ const RegisterBusinessOwner = () => {
             email: email.toLowerCase()
         }
         try {
-          if(!name.length || !lastName.length || !phoneNumber.length || !username.length || !password.length || !repeatPassword.length){
+          if( !email || !name.length || !lastName.length || !phoneNumber.length || !username.length || !password.length || !repeatPassword.length){
             toast.warn("Please Fill in the empty inputs")
             return
             }else if(password !== repeatPassword){

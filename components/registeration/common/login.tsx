@@ -13,10 +13,11 @@ import Link from 'next/link'
 
 interface LoginPropsType {
     onClick? : MouseEventHandler<HTMLButtonElement> | undefined,
-    text: string
+    text: string,
+    path:string
 }
 
-const Login = ({onClick , text = "login"} : LoginPropsType ) => {
+const Login = ({onClick , text = "login" , path} : LoginPropsType ) => {
     const [email , setEmail]=useState<string>("")
     const [password , setPassword]=useState<string>("")
     const [isResendEmail , setIsResendEmail]=useState<boolean>(false)
@@ -31,10 +32,10 @@ const Login = ({onClick , text = "login"} : LoginPropsType ) => {
             email
         }
         try {
-            const response = await sender("http://localhost:5000/login", body)
+            const response = await sender("http://localhost:5000/users/login", body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
-           router.push("/business-owner-dashboard")
+           router.push(path)
             } else if (response?.status === 201){
               if(!isResendEmail){
                 toast.warn("You have not confirmed your email, please click the resend email button")

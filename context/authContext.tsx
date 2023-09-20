@@ -34,7 +34,7 @@ export const AuthContext = createContext<AuthContextProps>({
 
     const login = useCallback(async(infos: object, newToken: string) => {
        await setToken(newToken);
-        await Cookies.set("businessOwnerToken", newToken);
+        await Cookies.set("eyeRollToken", newToken);
         setInfos(infos);
       }, []);
 
@@ -42,7 +42,7 @@ export const AuthContext = createContext<AuthContextProps>({
       const logout = useCallback(async () => {
        await setToken(null);
        await setInfos({});
-       await Cookies.remove("businessOwnerToken");
+       await Cookies.remove("eyeRollToken");
     }, []);
 
    
@@ -50,7 +50,7 @@ export const AuthContext = createContext<AuthContextProps>({
 
     const isVerifyedHandler = useCallback(async(infos: object, token: string) => {
       await setToken(token);
-       await Cookies.set("businessOwnerToken", token);
+       await Cookies.set("eyeRollToken", token);
        setInfos(infos);
     
      }, []);
@@ -60,7 +60,7 @@ export const AuthContext = createContext<AuthContextProps>({
      useEffect(()=>{
        if(!!login || !!isVerifyedHandler){
         const getMe = async ()=>{
-          const token =await Cookies.get("businessOwnerToken")
+          const token =await Cookies.get("eyeRollToken")
           if(token?.length){
             const decodedToken : object = jwt_decode(token)
             setInfos(decodedToken)

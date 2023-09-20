@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 const getterWithAuth = async (path: string): Promise<AxiosResponse | undefined> => {
-    const token = Cookies.get("businessOwnerToken");
+    const token = Cookies.get("eyeRollToken");
 
     try {
         if (token) {

@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: aladin;
-    src: url("../public/fonts/aladin/Aladin-Regular.ttf");
+    font-family: nunito;
+    src: url("../public/fonts/nunuito/Nunito-Medium.ttf");
 }
 
 html , body{
-    font-family: aladin , sans-serif ;
+    font-family:  nunito , sans-serif ;
 }

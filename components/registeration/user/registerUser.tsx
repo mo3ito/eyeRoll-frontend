@@ -61,15 +61,15 @@ const RegisterUser = () => {
   return (
     <>
     <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-purple-500">Register Customer</h2>
+    <h2 className="underline underline-offset-4 text-xl text-sky-700">Register Customer</h2>
     <Input type="text" value={username} onChange={(event)=>setUsername(event?.target.value)} label="username"  />
     <Input type="email" value={email} onChange={(event)=>setEmail(event?.target.value)} label="email"  />
     <Input type="password" value={password} onChange={(event)=>setPassword(event?.target.value)} label="password"  />
     <Input type="password" value={repeatPassword} onChange={(event)=>setRepeatPassword(event?.target.value)} label="repeat password"  />
     <Button text="Register"/>
     <div className="flex items-center justify-center text-purple-600 space-x-1">
-    <p className="text-xl text-purple-500">Do you have an account? </p>
-    <Link href="/register-business-owner/login" className="text-purple-700 underline text-xl">login</Link>
+    <p className="text-xl text-sky-500">Do you have an account? </p>
+    <Link href="/user/login" className="text-sky-700 underline text-xl">login</Link>
     </div>
     </form> 
     </>

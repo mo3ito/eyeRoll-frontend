@@ -32,7 +32,7 @@ const Login = ({onClick , text = "login" , path} : LoginPropsType ) => {
             email
         }
         try {
-            const response = await sender("http://localhost:5000/users/login", body)
+            const response = await sender("http://localhost:5000/login", body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
            router.push(path)
@@ -73,14 +73,14 @@ const Login = ({onClick , text = "login" , path} : LoginPropsType ) => {
       
   return (
     <form onSubmit={submitHandler} className="w-screen h-screen flex items-center justify-center flex-col overflow-x-hidden ">
-    <h2 className="underline underline-offset-4 text-xl text-purple-600">{text}</h2>
+    <h2 className=" text-xl text-sky-600 border-b rounded-lg  p-1 border-sky-500 ">{text}</h2>
     <Input type="email" value={email} onChange={(event)=>setEmail(event?.target.value)} label="email"  />
     <Input type="password" value={password} onChange={(event)=>setPassword(event?.target.value)} label="password"  />
     {!isResendEmail ? <Button text="login"/> :
     <Button text='resend email'  onClick={resendEmailHandler}/>}
     <div className="flex items-center justify-center text-purple-600 space-x-1">
-    <p className="text-xl text-purple-500">Don't you have an account? </p>
-    <Link href="/register-business-owner" className="text-purple-700 underline text-xl">register</Link>
+    <p className="text-xl text-sky-700">Don't you have an account? </p>
+    <Link href="/register-business-owner" className="text-sky-600 underline text-xl">register</Link>
     
     
     </div>

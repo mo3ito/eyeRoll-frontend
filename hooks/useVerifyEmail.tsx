@@ -15,7 +15,6 @@ const useVerifyEmail = (path : string , pathApi : string) => {
     const [emailTokenGot , setEmailTokenGot] = useState<string>("")
     const [email , setEmail]=useState("")
 
-
     const [isVerifyedHandlerDone , setIsVerifyHandlerDone]=useState(false)
     useEffect(()=>{
         if(infos){

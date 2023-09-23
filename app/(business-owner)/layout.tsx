@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
-import HeaderDashboard from "@/components/Header/headerDashboard";
+import HeaderDashboard from "@/components/Header/dashboard/headerDashboard";
 
 
 

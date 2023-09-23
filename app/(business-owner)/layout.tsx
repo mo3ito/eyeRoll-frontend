@@ -5,7 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
-import HeaderDashboard from "@/components/Header/dashboard/headerDashboard";
+import LayoutDashboard from "@/components/Header/dashboard/layoutDashboard";
+
 
 
 
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden inset-0">
         <AuthContextProvider>
           <ReactQueryProvider >
-           <HeaderDashboard/>
+           <LayoutDashboard/>
         {children}
         <ToastContainer
           position="top-center"

@@ -38,6 +38,8 @@ export const AuthContext = createContext<AuthContextProps>({
         setInfos(infos);
       }, []);
 
+      console.log(infos);
+      
      
       const logout = useCallback(async () => {
        await setToken(null);

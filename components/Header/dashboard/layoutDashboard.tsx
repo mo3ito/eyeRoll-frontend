@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Accordion from '../../shared/accordion/accordion'
 import LeftMenu from './leftMenu'
 
-const HeaderDashboard = () => {
+const LayoutDashboard = () => {
   const [showAside , setShowAside]=useState<boolean>(false)
  
   return (
@@ -20,4 +20,4 @@ const HeaderDashboard = () => {
   )
 }
 
-export default HeaderDashboard
+export default LayoutDashboard

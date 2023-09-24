@@ -1,8 +1,7 @@
-"use client";
+
 import React, { Dispatch } from "react";
-import { useState } from "react";
-import Accordion from "@/components/shared/accordion/accordion";
 import AccordionBox from "@/components/shared/accordion/accordionBox";
+import { accordions } from "@/routes/dashboardRoutes/dashboardItem";
 
 interface LeftMenuProps {
   showAside: boolean;
@@ -10,33 +9,7 @@ interface LeftMenuProps {
 }
 
 export default function LeftMenu({ setShowAside, showAside }: LeftMenuProps) {
-  const accordions = [
-    {
-      id: "44",
-      title: "Algoritm",
-      options: [
-        { id: "123", href: "#", name: "Functional word" },
-        { id: "126", href: "#", name: "Functional word" },
-      ],
-    },
-    {
-      id: "45",
-      title: "Algoritm",
-      options: [
-        { id: "124", href: "#", name: "Functional word" },
-        { id: "127", href: "#", name: "Functional word" },
-      ],
-    },
-    {
-      id: "46",
-      title: "Algoritm",
-      options: [
-        { id: "125", href: "#", name: "Functional word" },
-        { id: "128", href: "#", name: "Functional word" },
-      ],
-    },
-  ];
-
+  
   return (
     <aside
       className={` ${

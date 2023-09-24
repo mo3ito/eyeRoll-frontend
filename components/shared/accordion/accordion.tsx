@@ -2,11 +2,13 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { AccordionProps } from '@/types/accordionType/accordionPropsType'
+import { useRouter } from 'next/navigation'
 
 
 
 export default function Accordion({title , options }:AccordionProps) {
     const [showAccordion , setShowAccordion]=useState<boolean>(false)
+    const router = useRouter()
   
   
   return (
@@ -18,7 +20,7 @@ export default function Accordion({title , options }:AccordionProps) {
           </button>
           <ul className={` ${showAccordion ? 'visible ' : 'invisible'} last:border-b-2`}>
             {options.map(option=>
-                <li key={option.id} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 '>
+                <li key={option.id} onClick={()=>setShowAccordion(false)} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 '>
                     <Link href={option.href} >{option.name}</Link>
                 </li>
                 )}

@@ -7,6 +7,7 @@ interface Option {
   
  export interface AccordionProps{
       title : string,
-      options:Option[]
+      options:Option[],
+      setShowAside:React.Dispatch<React.SetStateAction<boolean>>
   }
   

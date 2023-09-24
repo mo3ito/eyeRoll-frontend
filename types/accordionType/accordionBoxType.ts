@@ -10,5 +10,6 @@ export interface AccordionBoxProps {
     id: string;
     title: string;
     options: OptionsAccordionBoxProps[]
-  }[];
+  }[],
+  setShowAside:React.Dispatch<React.SetStateAction<boolean>>
 }

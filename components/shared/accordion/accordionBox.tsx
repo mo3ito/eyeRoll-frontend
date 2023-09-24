@@ -2,7 +2,7 @@ import React from "react";
 import Accordion from "./accordion";
 import { AccordionBoxProps } from "@/types/accordionType/accordionBoxType";
 
-export default function AccordionBox({ accordions }: AccordionBoxProps) {
+export default function AccordionBox({ accordions , setShowAside}: AccordionBoxProps) {
   
 
   return (
@@ -12,6 +12,7 @@ export default function AccordionBox({ accordions }: AccordionBoxProps) {
           key={accordion.id}
           title={accordion.title}
           options={...accordion.options}
+          setShowAside={setShowAside}
         />
       ))}
     </div>

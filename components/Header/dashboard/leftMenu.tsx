@@ -14,7 +14,7 @@ export default function LeftMenu({ setShowAside, showAside }: LeftMenuProps) {
     <aside
       className={` ${
         showAside ? "left-0" : "-left-96"
-      } w-96 h-screen bg-neutral-100 absolute top-0 rounded-r-3xl shadow-lg transition-all`}
+      } w-96 h-screen bg-neutral-100 absolute top-0 rounded-r-3xl shadow-lg transition-all z-50`}
     >
       <button onClick={() => setShowAside(false)}>
         <svg

@@ -3,23 +3,23 @@ import { v4 as uuidv4 } from 'uuid';
 const accordions = [
   {
     id: uuidv4(),
-    title: "Algoritm",
+    title: "setting",
     options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/determining-discount", name: "Determining discount" },
-      { id: uuidv4(), href: "#", name: "word discount" },
+      { id: uuidv4(), href: "/business-owner-dashboard/determining-discount", name: "roll setting" },
+      { id: uuidv4(), href: "#", name: "review setting" },
     ],
   },
   {
     id: uuidv4(),
-    title: "Algoritm",
+    title: "reports",
     options: [
-      { id: uuidv4(), href: "#", name: "Functional word" },
-      { id: uuidv4(), href: "#", name: "Functional word" },
+      { id: uuidv4(), href: "/business-owner-dashboard/roll-reports", name: "roll reports" },
+      { id: uuidv4(), href: "#", name: "review reports" },
     ],
   },
   {
     id: uuidv4(),
-    title: "Algoritm",
+    title: "Determine access",
     options: [
       { id: uuidv4(), href: "#", name: "Functional word" },
       { id: uuidv4(), href: "#", name: "Functional word" },

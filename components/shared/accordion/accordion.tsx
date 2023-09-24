@@ -8,10 +8,11 @@ import { useRouter } from 'next/navigation'
 export default function Accordion({title , options , setShowAside }:AccordionProps) {
     const [showAccordion , setShowAccordion]=useState<boolean>(false)
     const router = useRouter()
-    
+
     const linkHandler = (href : string) : void =>{
       router.push(href)
       setShowAside(false)
+      setShowAccordion(false)
     }
   
   

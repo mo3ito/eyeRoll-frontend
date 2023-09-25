@@ -23,9 +23,9 @@ export default function Rate() {
   }, [rating, hoverRating]);
 
   return (
-    <div className="w-full h-44 border  flex items-center justify-center space-y-3 flex-col rounded-md ">
+    <div className="w-full h-24   flex items-center justify-center  flex-col  ">
         <div>{starRating}</div>
       <p>Your score</p>
     </div>
-  );
+  )
 }

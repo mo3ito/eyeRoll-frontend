@@ -1,18 +1,19 @@
 'use client'
-import React,{useState} from 'react'
+import React,{useState , useRef} from 'react'
 import DatesPicker from '@/components/datePicker/datePicker';
 import Rate from '@/components/shared/rate/rate';
 import "react-datepicker/dist/react-datepicker.css";
+import Chart from '@/components/chart/chart';
 
 export default function RollReports() {
-
+  const chartRef = useRef(null);
   
  
   
   return (
     <div className='w-screen h-[930px] bg-sky-100 flex items-center justify-center absolute'>
       <div className='w-11/12 h-5/6  rounded-xl flex gap-x-5 '>
-      <section className='w-10/12  h-full rounded-3xl flex justify-center flex-wrap gap-4 overflow-y-auto overflow-x-hidden px-2 py-8 bg-sky-50'>
+      <section className='w-9/12  h-full rounded-3xl flex justify-center flex-wrap gap-4 overflow-y-auto overflow-x-hidden px-2 py-8 bg-sky-50'>
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200 flex items-center  flex-col py-10 px-4'>
       
       <span className='text-4xl font-semibold'>12345</span>
@@ -33,10 +34,11 @@ export default function RollReports() {
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
       </section>
 
-       <section className='w-2/12 bg-sky-50 rounded-3xl border-2  '>
+      <section className='w-3/12 bg-sky-50 rounded-3xl border-2  '>
      <DatesPicker/>
+    <Chart />
      <Rate/>
-       </section>
+      </section>
        
        
       </div>

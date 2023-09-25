@@ -3,6 +3,7 @@ import {useState} from 'react'
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 
+
 export default function DatesPicker() {
 
     const [startDate, setStartDate] = useState(new Date());
@@ -24,6 +25,7 @@ export default function DatesPicker() {
     
     
   return (
+    <>
     <DatePicker
     
    selected={startDate}
@@ -33,5 +35,8 @@ export default function DatesPicker() {
    selectsRange
    inline
  />
+<button className='bg-indigo-400 w-full h-10 hover:bg-indigo-500 text-white rounded-md -translate-y-2 hover:font-semibold '>confirmation</button>
+
+</>
   )
 }

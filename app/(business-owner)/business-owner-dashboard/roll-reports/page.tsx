@@ -1,10 +1,12 @@
 'use client'
 import React,{useState} from 'react'
 import DatesPicker from '@/components/datePicker/datePicker';
-
+import Rate from '@/components/shared/rate/rate';
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function RollReports() {
+
+  
  
   
   return (
@@ -33,7 +35,9 @@ export default function RollReports() {
 
        <section className='w-2/12 bg-sky-50 rounded-3xl border-2  '>
      <DatesPicker/>
+     <Rate/>
        </section>
+       
        
       </div>
 

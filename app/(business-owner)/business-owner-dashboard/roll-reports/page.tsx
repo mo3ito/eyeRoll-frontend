@@ -34,9 +34,9 @@ export default function RollReports() {
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
       </section>
 
-      <section className='w-3/12 bg-sky-50 rounded-3xl border-2  '>
-     <DatesPicker/>
-    <Chart />
+      <section className='w-3/12 bg-sky-50 rounded-3xl   '>
+      <DatesPicker/>
+      <Chart/>
      <Rate/>
       </section>
        

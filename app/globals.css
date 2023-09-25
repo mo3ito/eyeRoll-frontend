@@ -3,30 +3,38 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: nunito;
-    src: url("../public/fonts/nunuito/Nunito-Medium.ttf");
+  font-family: nunito;
+  src: url("../public/fonts/nunuito/Nunito-Medium.ttf");
 }
 
-html , body{
-    font-family:  nunito , sans-serif ;
+html,
+body {
+  font-family: nunito, sans-serif;
 }
 
-@layer components {
-    
+.react-datepicker {
+  width: 100%;
+  border: none !important;
+  background: "red" !important;
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+}
+.react-datepicker__header {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
 }
 
-.react-datepicker{
-    width: 100%;
-    
-    /* border: none !important;
-    background-color: #f0f9ff !important; */
-    
+.react-datepicker__month-container {
+  width: 100%;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+  margin-top: 7px;
 }
 
-.react-datepicker__month-container{
-    width: 100%;
-}
 
-.react-datepicker__day--selected{
-    background-color: #818cf8 !important;
+.react-datepicker__day--selected {
+  background-color: #818cf8 !important;
 }

@@ -11,7 +11,7 @@ import {
   Legend,
   ArcElement
 } from 'chart.js';
-import { Bar , Pie } from 'react-chartjs-2';
+import {   Doughnut } from 'react-chartjs-2';
 // interface LineProps {
 //     options: ChartOptions<'line'>;
 //     data: ChartData<'line'>;
@@ -27,46 +27,10 @@ ChartJS.register(
     ArcElement
   );
 
-  // ChartJS.register(ArcElement, Tooltip, Legend);
+ 
 
 
-export const options = {
-    responsive: true,
-    legend: {
-      display: true,
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-    scales: {
-      x: {
-        ticks: {
-          autoSkip: true,
-          maxTicksLimit: 12, // تعداد حداکثر تیک‌ها برای نمایش (در اینجا 12 ماه)
-          fontSize: 20
-        },
-        
-      },
-      y: {
-        ticks: {
-          autoSkip: true,
-          maxTicksLimit: 5,
-          fontSize: 12, // اندازه فونت تیک‌های محور عمودی
-        },
-      },
-    },
-    plugins: {
-      legend: {
-        labels: {
-          font: {
-            size: 10, // اندازه فونت برای متن labels را تعیین کنید
-          },
-        },
-      },
-    },
-  };
+
   const data2 = [
     1200, 5000, 4000, 20000,
     1200, 30000, 4000, 20000,
@@ -93,7 +57,7 @@ export const options = {
 
 
 export const data = {
-    labels ,
+    labels : hoursOfDay ,
     datasets: [
       {
         label: 'Your sale',
@@ -108,6 +72,7 @@ export const data = {
         // borderWidth: 2
         
         
+        
       },
     
      
@@ -117,11 +82,11 @@ export const data = {
 
 
 export default function Chart() {
-    const chartRef = useRef(null)
+    
  
   return (
     <div className='w-full px-2 rpunded-md h-96'>
-   <Pie ref={chartRef} className='!h-full !text-[5px]' options={options} data={data} />
+   <Doughnut  className='!h-full !text-[5px]'  data={data} />
   </div>
     
   )

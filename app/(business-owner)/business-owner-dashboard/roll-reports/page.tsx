@@ -3,7 +3,7 @@ import React,{useState , useRef} from 'react'
 import DatesPicker from '@/components/datePicker/datePicker';
 import Rate from '@/components/shared/rate/rate';
 import "react-datepicker/dist/react-datepicker.css";
-import Chart from '@/components/chart/chart';
+import Rechart from '@/components/rechart/rechart';
 
 export default function RollReports() {
   const chartRef = useRef(null);
@@ -43,7 +43,7 @@ export default function RollReports() {
 
       <section className='w-3/12 bg-sky-50 rounded-3xl   '>
       <DatesPicker/>
-      <Chart/>
+      <Rechart/>
      <Rate/>
       </section>
        

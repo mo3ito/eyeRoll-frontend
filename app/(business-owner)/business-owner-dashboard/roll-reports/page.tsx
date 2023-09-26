@@ -11,9 +11,9 @@ export default function RollReports() {
  
   
   return (
-    <div className='w-screen h-[930px] bg-sky-100 flex items-center justify-center absolute'>
-      <div className='w-11/12 h-5/6  rounded-xl flex gap-x-5 '>
-      <section className='w-9/12  h-full rounded-3xl flex justify-center flex-wrap gap-4 overflow-y-auto overflow-x-hidden px-2 py-8 bg-sky-50'>
+    <div className='w-screen h-screen overflow-y-hidden bg-sky-100 flex items-center gap-x-5 justify-center absolute px-20'>
+
+      <section className='w-9/12  h-5/6 -translate-y-9 rounded-3xl flex justify-center flex-wrap gap-4 overflow-y-auto overflow-x-hidden px-2 py-8 bg-sky-50'>
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200 flex items-center  flex-col py-10 px-4'>
       
       <span className='text-4xl font-semibold'>12345</span>
@@ -35,20 +35,14 @@ export default function RollReports() {
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
       <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
-      <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
-      <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
-      <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
-      <div className='w-72 h-[360px] bg-indigo-100 cursor-pointer rounded-2xl hover:scale-105 duration-200'>sajad jaghparvar</div>
       </section>
 
-      <section className='w-3/12 bg-sky-50 rounded-3xl   '>
+      <section className='w-3/12 bg-sky-50 rounded-3xl  -translate-y-9 h-5/6 '>
       <DatesPicker/>
       <Rechart/>
      <Rate/>
       </section>
        
-       
-      </div>
 
     </div>
   )

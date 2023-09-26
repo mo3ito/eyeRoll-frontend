@@ -46,13 +46,9 @@ body {
   background-color: #a5b4fc !important;
 }
 .react-datepicker__day--range-start{
-  
-
-  background-color: #6366f1 !important;
+    background-color: #6366f1 !important;
 }
 .react-datepicker__day--range-end{
-  
-
   background-color: #6366f1 !important;
 }
 .range-Class::-webkit-slider-thumb {

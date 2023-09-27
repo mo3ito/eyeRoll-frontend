@@ -1,4 +1,4 @@
 interface AccordionProps {
-    title : string,
-    options:object[]
+  title: string;
+  options: object[];
 }

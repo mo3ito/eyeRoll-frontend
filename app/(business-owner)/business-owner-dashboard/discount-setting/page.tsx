@@ -4,18 +4,16 @@ import {useState , ChangeEvent} from 'react'
 import Range from '@/components/shared/range/range';
 
 export default function DeterminingDiscount() {
-    const [rangeValue , setRangeValue]=useState<number>(10)
-
-    const handleInputChange = (event : ChangeEvent<HTMLInputElement> )=>{
-        setRangeValue(parseInt(event.target.value));
-    }
-
-    console.log(rangeValue);
+   
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(0);
+ 
 
   return (
     <>
     <div>
-    <Range/>
+      <input type="number" />
+    <Range minValue={minValue} setMinValue={setMinValue} maxValue={maxValue} setMaxValue={setMaxValue} valueGap={10}/>
     </div>
     
     </>

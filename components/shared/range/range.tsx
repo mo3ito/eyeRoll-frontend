@@ -1,12 +1,14 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
+import { RangePropsType } from '@/types/rangeType/rangePropsType';
 
-export default function Range() {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(0);
-  const valueGap = 20;
 
-  const minValueHandler = (event) => {
+
+
+export default function Range({minValue = 0 , setMinValue , maxValue = 0 , setMaxValue , valueGap = 0} : RangePropsType) {
+ 
+
+  const minValueHandler = (event : ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
     let newMinValue = newValue;
 
@@ -19,7 +21,7 @@ export default function Range() {
     setMinValue(newMinValue);
   };
 
-  const maxValueHandler = (event) => {
+  const maxValueHandler = (event : ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
     let newMinValue = minValue;
   
@@ -33,19 +35,20 @@ export default function Range() {
   console.log("minValue", minValue);
   console.log("maxValue", maxValue);
 
+ 
   return (
-    <div className='ml-8 mt-8'>
-      <div className='slider'>
-        <div className='progress' style={{ left: `${(minValue / 100) * 100}%`, right: `${100 - (maxValue / 100) * 100}%` }}></div>
+    <div className=''>
+      <div className='w-64 bg-[#ddd] h-3 relative rounded-full '>
+        <div  style={{ left: `${minValue}%`, right: `${100 - (maxValue)}%` }} className=' h-3 absolute rounded-full bg-[#17A2b8] left-[25%] right-[25%]' ></div>
       </div>
-      <div className='range-input'>
+      <div className='relative'>
         <input
           type="range"
           min="0"
           max="100"
           value={minValue}
           onChange={minValueHandler}
-          className='range-min'
+          className='common-range '
         />
         <input
           type="range"
@@ -53,7 +56,7 @@ export default function Range() {
           max="100"
           value={maxValue}
           onChange={maxValueHandler}
-          className='range-max'
+          className='common-range '
         />
       </div>
     </div>

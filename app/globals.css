@@ -35,67 +35,49 @@ body {
   margin-top: 7px;
 }
 
-
 .react-datepicker__day--selected {
   background-color: #818cf8 !important;
 }
-.react-datepicker__day:hover{
+.react-datepicker__day:hover {
   background-color: #a5b4fc !important;
 }
-.react-datepicker__day--in-range{
+.react-datepicker__day--in-range {
   background-color: #a5b4fc !important;
 }
-.react-datepicker__day--range-start{
-    background-color: #6366f1 !important;
+.react-datepicker__day--range-start {
+  background-color: #6366f1 !important;
 }
-.react-datepicker__day--range-end{
+.react-datepicker__day--range-end {
   background-color: #6366f1 !important;
 }
 .range-Class::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	height: 30px;
-	width: 30px;
-	border-radius: 50%;
-	background: #06b6d4;
-	cursor: pointer;
-	box-shadow: 0 0 6px 0 #555;
-}
-
-.slider{
-  width: 300px;
-  background-color: #ddd;
-  height: 5px;
-  border-radius: 20px;
-  position: relative;
-}
-.slider .progress{
-  height: 5px;
-  position: absolute;
-  border-radius: 20px;
-  background-color: #17A2B8;
-  left: 25%;
-  right: 25%;
-}
-
-.range-input{
-  position: relative;
-}
-.range-input input{
-  position: absolute;
-  width: 300px;
-  height: 5px;
- background: none;
- appearance: none;
- top: -5px;
- pointer-events: none;
-}
-
-.range-input input[type = "range"]::-webkit-slider-thumb{
-  appearance: none;
-  height: 17px;
-  width: 17px;
-  background-color: #17A2B8;
+  -webkit-appearance: none;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
-  pointer-events: auto;
-  border:none
+  background: #06b6d4;
+  cursor: pointer;
+  box-shadow: 0 0 6px 0 #555;
+}
+
+@layer components {
+  .common-range {
+    position: absolute;
+    width: 256px;
+    height: 12px;
+    background: none;
+    appearance: none;
+    top: -12px;
+    pointer-events: none;
+  }
+
+  .common-range::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: #17a2b8;
+    border-radius: 50%;
+    pointer-events: auto;
+    border: none;
+  }
 }

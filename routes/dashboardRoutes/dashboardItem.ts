@@ -5,7 +5,7 @@ const accordions = [
     id: uuidv4(),
     title: "setting",
     options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/determining-discount", name: "roll setting" },
+      { id: uuidv4(), href: "/business-owner-dashboard/discount-setting", name: "roll setting" },
       { id: uuidv4(), href: "#", name: "review setting" },
     ],
   },

@@ -9,6 +9,7 @@ import sender from "../../../services/sender"
 import { AuthContext } from "../../../context/authContext"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { USERS_REGISTER } from "@/routeApi/endpoints"
 
 interface RegisterUserProps {
   isBusinessOwner?: boolean
@@ -27,7 +28,7 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
 
     const submitHandler = async (event : FormEvent<HTMLFormElement>)=>{
         event.preventDefault()
-        console.log("submit");
+       
         const body = {
             username,
             password,
@@ -45,7 +46,7 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
               toast.warn("the password must be at least 8 characters long")
               return
             }
-            const response = await sender("http://localhost:5000/users/register", body)
+            const response = await sender(USERS_REGISTER, body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
            router.push("/users-verify-email")

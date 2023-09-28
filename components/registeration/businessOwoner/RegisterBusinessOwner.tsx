@@ -9,6 +9,7 @@ import sender from "@/services/sender"
 import { AuthContext } from "@/context/authContext"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import {BUSINESS_OWNER_REGISTER} from "@/routeApi/endpoints"
 
 interface RegisterBusinessOwnerProps{
   isBusinessOwner?: boolean
@@ -54,10 +55,10 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
               toast.warn("the password must be at least 8 characters long")
               return
             }
-            const response = await sender("http://localhost:5000/register", body)
+            const response = await sender(BUSINESS_OWNER_REGISTER, body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
-           router.push("/verify-email")
+           router.push("/business-owner-verify-email")
             } 
               } catch (error : any) {
                 if (error.response.status === 400) {

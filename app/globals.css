@@ -70,7 +70,7 @@ body {
     top: -12px;
     pointer-events: none;
   }
-
+  
   .common-range::-webkit-slider-thumb {
     appearance: none;
     height: 20px;

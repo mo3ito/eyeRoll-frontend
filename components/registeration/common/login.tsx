@@ -8,6 +8,7 @@ import { AuthContext } from '@/context/authContext'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
 import Loading from '@/components/loading/loading'
+import {BUSINESS_OWNER_LOGIN , BUSINESS_OWNER_RESEND_EMAIL_VERIFICATION , USERS_LOGIN  , USERS_RESEND_EMAIL_VERIFICATION } from "@/routeApi/endpoints"
 
 
 
@@ -31,12 +32,12 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
 
     useEffect(()=>{
       if(isBusinessOwner){
-        setPathResendEmailApi("http://localhost:5000/resend-email-verification")
-        setPathLoginApi("http://localhost:5000/login")
-        setPathVerifyEmail("/verify-email")
+        setPathResendEmailApi(BUSINESS_OWNER_RESEND_EMAIL_VERIFICATION)
+        setPathLoginApi(BUSINESS_OWNER_LOGIN)
+        setPathVerifyEmail("/business-owner-verify-email")
       } else {
-        setPathResendEmailApi("http://localhost:5000/users/resend-email-verification")
-        setPathLoginApi("http://localhost:5000/users/login")
+        setPathResendEmailApi(USERS_RESEND_EMAIL_VERIFICATION)
+        setPathLoginApi(USERS_LOGIN)
         setPathVerifyEmail("/users-verify-email")
       }
     },[])

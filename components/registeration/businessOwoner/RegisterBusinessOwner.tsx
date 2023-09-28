@@ -26,7 +26,7 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
     const[repeatPassword , setRepeatPassword]= useState<string>("")
     const {login} = useContext(AuthContext)
     const router = useRouter()
-    const [isLogin, setIsLogin] = useState(true);
+    
 
 
     const submitHandler = async (event : FormEvent<HTMLFormElement>)=>{

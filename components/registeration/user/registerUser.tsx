@@ -33,7 +33,7 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
             username,
             password,
             repeat_password:repeatPassword,
-            email
+            email : email.toLowerCase()
         }
         try {
           if( !email || !username.length || !password.length || !repeatPassword.length){

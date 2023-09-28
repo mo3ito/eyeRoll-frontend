@@ -51,7 +51,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
         event.preventDefault()
         const body = {
             password,
-            email
+            email : email.toLowerCase()
         }
         
         try {

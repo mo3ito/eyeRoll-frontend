@@ -2,7 +2,7 @@
 
 export interface RadioButtonProps {
     sizeClasses : string;
-    circleClasses : string;
+    classes : string;
     checked : boolean ;
     value : string
 

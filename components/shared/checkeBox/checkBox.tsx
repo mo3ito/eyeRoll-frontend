@@ -2,11 +2,11 @@ import React from "react";
 import { RadioButtonProps } from "@/types/radioButtonType/radioButtonType";
 
 
-export default function RadioButton({
+export default function CheckBox({
   checked ,
   value,
   sizeClasses = "w-28 h-12",
-  circleClasses = "peer-checked:translate-x-6 bg-indigo-100 peer-checked:bg-indigo-600 ",
+  circleClasses = "peer-checked:translate-x-6 bg-indigo-100 peer-checked:bg-indigo-600 w-4 h-4",
 } : RadioButtonProps) {
   return (
     <div
@@ -24,7 +24,7 @@ export default function RadioButton({
           className=" absolute peer w-full h-full appearance-none left-0 top-0 rounded-full cursor-pointer"
         />
         <span
-          className={` w-4 h-4 ${circleClasses}   ml-1  flex items-center  rounded-full  duration-300 ease-in-out  `}
+          className={`  ${circleClasses}   ml-1  flex items-center  rounded-full  duration-300 ease-in-out  `}
         ></span>
       </label>
     </div>

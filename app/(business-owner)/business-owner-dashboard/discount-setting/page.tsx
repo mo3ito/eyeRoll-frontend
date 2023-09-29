@@ -1,7 +1,7 @@
 'use client'
 import {useState , ChangeEvent} from 'react'
 import Range from '@/components/shared/range/range';
-import RadioButton from '@/components/shared/radioButton/radioButton';
+import CheckBox from '@/components/shared/checkeBox/checkBox';
 
 export default function DeterminingDiscount() {
    
@@ -38,7 +38,7 @@ export default function DeterminingDiscount() {
   <div className='w-full h-44 bg-red-50 '>
     <div className='flex items-center mx-5'>
     <p className='inline-block text-lg font-medium'>General discount on all products</p>
-    <RadioButton sizeClasses='w-12 h-6 ml-auto '  />
+    {/* <CheckBox sizeClasses='w-12 h-6 ml-auto ' circlClesses='w-4 h-4 bg-red-400'  /> */}
     </div>
     <div className='w-full h-max py-3 rounded-xl space-y-3 flex items-center justify-center flex-col  mt-3'>
         <div className='  flex items-center justify-center'>

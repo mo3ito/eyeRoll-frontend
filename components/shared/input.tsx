@@ -10,7 +10,7 @@ const Input = ({value , onChange , placeholder , label , type  } : InputRegister
   value={value}
   onChange={onChange} 
   placeholder={placeholder}
-  className='w-full text-[17px] border  shadow-md border-indigo-600 px-2 rounded-2xl h-[53px] bg-sky-100 outline-none text-zinc-600  focus:border-2  '
+  className='w-full text-[17px] border  shadow-md border-indigo-400 px-2 rounded-2xl h-[53px] bg-sky-100 outline-none text-zinc-600 focus:border-violet-500  focus:border-2  '
   type={type}
   />
 </div>

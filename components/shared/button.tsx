@@ -6,7 +6,7 @@ const Button = ({ onClick, text, title, loading = false }: ButtonProps) => {
   return (
     <button
       title={title}
-      className="mb-2 w-64 text-xl sm:w-96 h-16 rounded-2xl bg-sky-500 mt-11 hover:bg-sky-600 flex items-center justify-center gap-x-2 text-white "
+      className="mb-2 w-64 text-xl shadow-md hover:scale-105 hover:duration-300 ease-in sm:w-96 h-16 rounded-2xl bg-violet-500 mt-11 hover:bg-violet-600 flex items-center justify-center gap-x-2 text-white "
       onClick={onClick}
     >
       {text}

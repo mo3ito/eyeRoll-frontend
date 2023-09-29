@@ -5,7 +5,7 @@ import HeaderTitleLi from './headerTitleLi'
 
 const HomePageHeader = () => {
   return (
-    <header className='h-20   bg-sky-500 flex items-center justify-center '>
+    <header className='h-20 bg-gradient-to-b from-indigo-300 to-sky-100   flex items-center justify-center '>
       <div className='container h-full mx-auto  flex items-center  text-white px-20 '>
       <div className='h-10 w-24 text-3xl  '>logo</div>
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>

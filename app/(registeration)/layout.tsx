@@ -24,7 +24,7 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body className="overflow-x-hidden inset-0 w-screen">
+      <body className="overflow-x-hidden inset-0 w-screen bg-sky-100">
         <AuthContextProvider>
           <ReactQueryProvider >
             <HomePageHeader/>

@@ -42,7 +42,7 @@ export default function DeterminingDiscount() {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-center bg-sky-100 pt-20 ">
+      <div className="w-full h-screen flex justify-center bg-sky-100 pt-8 ">
         <div className="flex w-4/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  p-8 shadow-lg">
 
          { !showInformation ?

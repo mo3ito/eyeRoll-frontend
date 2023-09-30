@@ -1,13 +1,20 @@
 'use client'
-import {ChangeEvent, useState} from 'react'
+import {ChangeEvent, Dispatch, SetStateAction, useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import CheckBox from '../checkeBox/checkBox';
 
-export default function DeterminationDiscountspecialProduct() {
+interface DeterminationDiscountspecialProductProps {
+  title: string ;
+  showInformation : ()=> void,
+  isChecked : boolean;
+  setIsChecked : Dispatch<SetStateAction<boolean>>
+}
+
+export default function DeterminationDiscountspecialProduct({showInformation , title, isChecked , setIsChecked}: DeterminationDiscountspecialProductProps) {
     const [specialProductName , setSpecialProductsName]=useState("")
     const [discountAmount , setDiscountAmount]=useState<number | null>(null)
     const [specificSpecialProducts , setSpecificSpecialProducts]=useState([])
-    const [discountSpecialProductsCheck , setDiscountSpecialProductsCheck ]= useState(false)
+    
 
     const changeSpecialProductNameHandler = (event : ChangeEvent<HTMLInputElement>)=>{
         setSpecialProductsName(event.target.value)
@@ -36,7 +43,7 @@ export default function DeterminationDiscountspecialProduct() {
 
     }
     const changeSpecialProductsHandler = (event : ChangeEvent<HTMLInputElement>) : void =>{
-        setDiscountSpecialProductsCheck(event.target.checked)
+        setIsChecked(event.target.checked)
        
         
       }
@@ -48,8 +55,14 @@ export default function DeterminationDiscountspecialProduct() {
   return (
     <div className="w-full my-4 bg-indigo-100 p-3 rounded-xl ">
         <div className='flex items-center '>
-        <p>Discounts on special products</p>
-        <CheckBox  onChange={(event)=>changeSpecialProductsHandler(event)} checked={discountSpecialProductsCheck} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-indigo-600'  />
+        <div>
+      <button title='click for information' onClick={showInformation} >
+        <svg className='w-4 h-4 inline-block mb-1 mr-1 fill-pink-500' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path></svg>
+        </button>
+        <p className='inline-block'>{title}</p>
+      </div>
+       
+      <CheckBox  onChange={(event)=>changeSpecialProductsHandler(event)} checked={isChecked} classBackground={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
         </div>
       
         <div className="flex space-x-3 mt-2">

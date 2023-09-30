@@ -8,7 +8,8 @@ interface DeterminationDiscountTimeProps {
     setLastTime : Dispatch<SetStateAction<string>> ;
     days : number ;
     setDays : Dispatch<SetStateAction<number>>;
-    title : string
+    title : string,
+    showInformation:()=> void
 }
 
 export default function DeterminationDiscountTime({firstTime = "8:30", setFirstTime , lastTime = "23:30" , setLastTime , days = 1 , setDays , title = "Determining the discount time" , showInformation}:DeterminationDiscountTimeProps) {

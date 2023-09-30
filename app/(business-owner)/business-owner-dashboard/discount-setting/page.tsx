@@ -1,8 +1,7 @@
 "use client";
 import { useState, ChangeEvent } from "react";
-import Range from "@/components/shared/range/range";
-import CheckBox from "@/components/shared/checkeBox/checkBox";
 import DeterminationRange from "@/components/shared/range/determinationRange";
+import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -11,6 +10,9 @@ export default function DeterminingDiscount() {
   const [maxValueNumberProducts, setMaxValueNumberProducts] = useState<number>(0);
   const [isCheckeAllProducts, setIsCheckeAllProducts] = useState<boolean>(false);
   const [isCheckedNumbersProduct, setIsCheckedNumbersProducts] =   useState<boolean>(false);
+  const [firstTime , setFirstTime]=useState<string>("8")
+  const [lastTime , setLastTime] = useState<string>("23:30")
+  const [days , setDays]=useState<number>(1)
   
 
   console.log("all", isCheckeAllProducts);
@@ -19,6 +21,8 @@ export default function DeterminingDiscount() {
   console.log("maxValueAllProducts",maxValueAllProducts);
   console.log("minVlueNumberProducts" , minValueNumberProducts);
   console.log("maxVlueNumberProducts" , maxValueNumberProducts);
+  console.log("lastTime", lastTime);
+  
   
   
 
@@ -45,13 +49,14 @@ export default function DeterminingDiscount() {
             setIsChecked={setIsCheckedNumbersProducts}
             title="General discount on numbers of products"
           />
-          <div className=" w-full">
-            <p>Determining the discount time</p>
-            <div className="flex space-x-4 mt-2">
-             <div><span>from</span> <input value="12" className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none" type="text" /></div>
-             <div><span>to</span> <input value="8" className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none" type="text" /></div>
-            </div>
-          </div>
+          <DeterminationDiscountTime 
+          title="Determining the discount time"
+          firstTime={firstTime}
+          setFirstTime={setFirstTime}
+          setLastTime={setLastTime} 
+          lastTime={lastTime}
+          days={days}
+          setDays={setDays}/>
         </div>
       </div>
     </>

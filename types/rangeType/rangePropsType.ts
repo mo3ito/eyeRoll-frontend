@@ -13,6 +13,7 @@ export interface DeterminationRangePropsType {
   isChecked : boolean;
   minValue: number;
   maxValue: number;
+  showInformation: ()=> void;
   setIsChecked: Dispatch<SetStateAction<boolean>>;
   setMinValue: Dispatch<SetStateAction<number>>;
   setMaxValue: Dispatch<SetStateAction<number>>

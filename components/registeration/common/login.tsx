@@ -1,5 +1,5 @@
 'use client'
-import Input from '../../shared/input'
+import Input from '../../shared/inputs/input'
 import Button from '../../shared/button'
 import { useState , FormEvent , useContext , MouseEventHandler, useEffect } from 'react'
 import sender from '@/services/sender'

@@ -1,6 +1,6 @@
 'use client'
 import { useState , FormEvent , useContext,  } from "react"
-import Input from "../../shared/input"
+import Input from "../../shared/inputs/input"
 import Button from "../../shared/button"
 import { toast } from "react-toastify"
 import Loading from "../../loading/loading"

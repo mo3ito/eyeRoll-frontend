@@ -7,3 +7,15 @@ export interface RangePropsType {
   setMaxValue: Dispatch<SetStateAction<number>>;
   valueGap: number;
 }
+
+export interface DeterminationRangePropsType {
+  title: string;
+  isChecked : boolean;
+  minValue: number;
+  maxValue: number;
+  setIsChecked: Dispatch<SetStateAction<boolean>>;
+  setMinValue: Dispatch<SetStateAction<number>>;
+  setMaxValue: Dispatch<SetStateAction<number>>
+
+
+}

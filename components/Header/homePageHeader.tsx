@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Input from '../shared/input'
+import Input from '../shared/inputs/input'
 import HeaderTitleLi from './headerTitleLi'
 
 const HomePageHeader = () => {

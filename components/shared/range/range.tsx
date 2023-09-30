@@ -37,9 +37,9 @@ export default function Range({minValue = 0 , setMinValue , maxValue = 0 , setMa
 
  
   return (
-    <div className=''>
-      <div className='w-64 bg-[#ddd] h-3 relative rounded-full '>
-        <div  style={{ left: `${minValue}%`, right: `${100 - (maxValue)}%` }} className=' h-3 absolute rounded-full bg-[#17A2b8] left-[25%] right-[25%]' ></div>
+    <div className='w-full'>
+      <div className='w-full bg-[#ddd] h-3 relative rounded-full '>
+        <div  style={{ left: `${minValue}%`, right: `${100 - (maxValue)}%` }} className=' h-3 absolute rounded-full bg-fuchsia-400 left-[25%] right-[25%]' ></div>
       </div>
       <div className='relative'>
         <input

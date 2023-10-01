@@ -7,7 +7,7 @@ export default function CheckBox({
   checked ,
   sizeClasses = "w-28 h-12",
   circleClasses = " ",
-  classBackground
+  backgroundClasses
 } : CheckBoxType) {
   return (
     <div
@@ -15,7 +15,7 @@ export default function CheckBox({
     >
       <label
         htmlFor="rr"
-        className={`relative ${classBackground}  w-full h-full rounded-full flex justify-between items-center `}
+        className={`relative ${backgroundClasses}  w-full h-full rounded-full flex justify-between items-center `}
       >
         <input
           id="rr"

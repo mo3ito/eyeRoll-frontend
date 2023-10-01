@@ -2,7 +2,7 @@
 import { useState, ChangeEvent } from "react";
 import DeterminationRange from "@/components/shared/range/determinationRange";
 import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
-import DeterminationDiscountspecialProduct from "@/components/shared/range/determinationDiscountspecialProduct";
+import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
 
 export default function DeterminingDiscount() {
@@ -30,13 +30,14 @@ export default function DeterminingDiscount() {
   console.log("minVlueNumberProducts" , minValueNumberProducts);
   console.log("maxVlueNumberProducts" , maxValueNumberProducts);
   console.log("lastTime", lastTime);
+  console.log(textInformation);
   
   const showInformationHandler = (information : string)=>{
     setShowInformation(true)
     setTextInformation(information)
   }
 
-  console.log(textInformation);
+ 
   
   
 
@@ -80,7 +81,7 @@ export default function DeterminingDiscount() {
           showInformation={()=>showInformationHandler("hellooooooooooooo")}
           />
           
-          <DeterminationDiscountspecialProduct title="Discounts on special products" setIsChecked={setIsCheckedSpecialProducts} isChecked={isCheckedSpecialProducts} showInformation={()=>showInformationHandler("sajad")} />
+          <DeterminationSpecialProduct title="Discounts on special products" setIsChecked={setIsCheckedSpecialProducts} isChecked={isCheckedSpecialProducts} showInformation={()=>showInformationHandler("sajad")} />
 
           <button className="bg-green-400 w-full h-12 rounded-lg ">confirm</button>
           </>

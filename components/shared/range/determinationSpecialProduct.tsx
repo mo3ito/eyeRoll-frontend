@@ -2,18 +2,14 @@
 import {ChangeEvent, Dispatch, SetStateAction, useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import CheckBox from '../checkeBox/checkBox';
+import { DeterminationSpecialProductProps , SpecificSpecialProductsType } from '@/types/determinationSpecialProduct/determinationSpecialProductType';
 
-interface DeterminationDiscountspecialProductProps {
-  title: string ;
-  showInformation : ()=> void,
-  isChecked : boolean;
-  setIsChecked : Dispatch<SetStateAction<boolean>>
-}
 
-export default function DeterminationDiscountspecialProduct({showInformation , title, isChecked , setIsChecked}: DeterminationDiscountspecialProductProps) {
+
+export default function DeterminationSpecialProduct({showInformation , title, isChecked , setIsChecked}: DeterminationSpecialProductProps ) {
     const [specialProductName , setSpecialProductsName]=useState("")
-    const [discountAmount , setDiscountAmount]=useState<number | null>(null)
-    const [specificSpecialProducts , setSpecificSpecialProducts]=useState([])
+    const [discountAmount , setDiscountAmount]=useState<number >(0)
+    const [specificSpecialProducts , setSpecificSpecialProducts]=useState<SpecificSpecialProductsType[]>([])
     
 
     const changeSpecialProductNameHandler = (event : ChangeEvent<HTMLInputElement>)=>{
@@ -25,19 +21,22 @@ export default function DeterminationDiscountspecialProduct({showInformation , t
     }
 
     const addSpecificSpecialProducts = ()=>{
+      if( specialProductName.length > 0 && discountAmount > 0){
         const newSpecialProduct = {
-            id : uuidv4(),
-            productName: specialProductName,
-            discountProduct: discountAmount,
+          id : uuidv4(),
+          productName: specialProductName,
+          discountProduct: discountAmount,
 
-        }
-        setSpecificSpecialProducts(prev=>[...prev , newSpecialProduct])
+      }
+      setSpecificSpecialProducts(prev=>[...prev , newSpecialProduct])
 
-        setSpecialProductsName("")
-        setDiscountAmount(0)
+      setSpecialProductsName("")
+      setDiscountAmount(0)
+      }
+      
     }
 
-    const removeSpecialHandler = (productId)=>{
+    const removeSpecialHandler = (productId : string)=>{
        const newSpecificSpecialProducts = specificSpecialProducts.filter(item=> item.id !== productId)
        setSpecificSpecialProducts(newSpecificSpecialProducts)
 
@@ -62,7 +61,7 @@ export default function DeterminationDiscountspecialProduct({showInformation , t
         <p className='inline-block'>{title}</p>
       </div>
        
-      <CheckBox  onChange={(event)=>changeSpecialProductsHandler(event)} checked={isChecked} classBackground={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
+      <CheckBox  onChange={(event)=>changeSpecialProductsHandler(event)} checked={isChecked} backgroundClasses={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
         </div>
       
         <div className="flex space-x-3 mt-2">

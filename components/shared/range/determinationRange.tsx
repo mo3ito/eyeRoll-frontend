@@ -34,7 +34,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
        
       </div>
     
-    <CheckBox  onChange={(event)=>changeProductsHandler(event)} checked={isChecked} classBackground={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
+    <CheckBox  onChange={(event)=>changeProductsHandler(event)} checked={isChecked} backgroundClasses={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-indigo-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
     </div>
     <div className='w-full  h-max py-3 rounded-xl space-y-6 flex items-center justify-center flex-col mt-3'>
         <div className='  space-x-10 flex items-center justify-center w-full'>

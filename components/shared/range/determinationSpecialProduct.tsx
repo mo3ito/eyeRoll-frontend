@@ -1,16 +1,19 @@
 'use client'
-import {ChangeEvent, Dispatch, SetStateAction, useState} from 'react'
+import {ChangeEvent, useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import CheckBox from '../checkeBox/checkBox';
+import ButtonDefault from '../buttonDefault';
 import { DeterminationSpecialProductProps , SpecificSpecialProductsType } from '@/types/determinationSpecialProduct/determinationSpecialProductType';
+import { toast } from 'react-toastify';
 
 
 
-export default function DeterminationSpecialProduct({showInformation , title, isChecked , setIsChecked}: DeterminationSpecialProductProps ) {
+export default function DeterminationSpecialProduct({showInformation , title, isChecked , setIsChecked , isDisable}: DeterminationSpecialProductProps ) {
     const [specialProductName , setSpecialProductsName]=useState("")
     const [discountAmount , setDiscountAmount]=useState<number >(0)
     const [specificSpecialProducts , setSpecificSpecialProducts]=useState<SpecificSpecialProductsType[]>([])
     
+ 
 
     const changeSpecialProductNameHandler = (event : ChangeEvent<HTMLInputElement>)=>{
         setSpecialProductsName(event.target.value)
@@ -32,7 +35,10 @@ export default function DeterminationSpecialProduct({showInformation , title, is
 
       setSpecialProductsName("")
       setDiscountAmount(0)
+      } else{
+        toast.warn("Please fill in the required fields")
       }
+     
       
     }
 
@@ -73,7 +79,8 @@ export default function DeterminationSpecialProduct({showInformation , title, is
           <p className="text-sm">Discount amount</p>
         <input placeholder="for examole : 20%" value={discountAmount} onChange={changeDiscountAmountHandler} type="number" className="outline-none pl-2 w-40 h-8 border border-fuchsia-400 bg-inherit rounded-lg  " />
         </div>
-        <button onClick={addSpecificSpecialProducts} className="w-32 h-8 bg-fuchsia-300 rounded-lg mt-5">confirm</button>
+    
+        <ButtonDefault text='confirm' onClick={addSpecificSpecialProducts} className='h-8 mt-5'/>
         </div>
         <div className='w-full max-h-24 my-2  flex items-center  gap-3 py-2 flex-wrap overflow-y-auto'>
             {specificSpecialProducts.map(item=>

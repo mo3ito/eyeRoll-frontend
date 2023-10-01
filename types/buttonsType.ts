@@ -9,6 +9,7 @@ export interface ButtonDefaultProps {
   text: string;
   title?: string | undefined;
   loading?: boolean;
+  isScale?: boolean;
   onClick?: () => void;
   className?: string;
 }

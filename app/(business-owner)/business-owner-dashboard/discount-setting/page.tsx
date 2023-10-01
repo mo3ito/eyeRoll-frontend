@@ -1,9 +1,10 @@
 "use client";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useReducer } from "react";
 import DeterminationRange from "@/components/shared/range/determinationRange";
 import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
 import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
+import ButtonDefault from "@/components/shared/buttonDefault";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -37,7 +38,7 @@ export default function DeterminingDiscount() {
     setTextInformation(information)
   }
 
- 
+
   
   
 
@@ -57,10 +58,11 @@ export default function DeterminingDiscount() {
             setIsChecked={setIsCheckeAllProducts}
             title="General discount on all products"
             showInformation={()=>showInformationHandler("hello friends")}
+            isDisable={false}
             
           />
 
-          <DeterminationRange
+           <DeterminationRange
             setMinValue={setMinValueNumberProducts}
             setMaxValue={setMaxValueNumberProducts}
             minValue={minValueNumberProducts}
@@ -69,6 +71,7 @@ export default function DeterminingDiscount() {
             setIsChecked={setIsCheckedNumbersProducts}
             title="General discount on numbers of products"
             showInformation={()=>showInformationHandler("hello mo3ito ba safa")}
+            isDisable={false}
           />
           <DeterminationDiscountTime 
           title="Determining the discount time"
@@ -79,11 +82,17 @@ export default function DeterminingDiscount() {
           days={days}
           setDays={setDays}
           showInformation={()=>showInformationHandler("hellooooooooooooo")}
+          
           />
           
-          <DeterminationSpecialProduct title="Discounts on special products" setIsChecked={setIsCheckedSpecialProducts} isChecked={isCheckedSpecialProducts} showInformation={()=>showInformationHandler("sajad")} />
+          <DeterminationSpecialProduct title="Discounts on special products"
+          setIsChecked={setIsCheckedSpecialProducts}
+          isChecked={isCheckedSpecialProducts} 
+          showInformation={()=>showInformationHandler("sajad")}
+          isDisable={false}
+           />
 
-          <button className="bg-green-400 w-full h-12 rounded-lg ">confirm</button>
+          <ButtonDefault text="send" className="h-12" isScale={true}/>
           </>
            :
            <ShowInformationRollSetting textInformation={textInformation} setShowInformation={setShowInformation} />

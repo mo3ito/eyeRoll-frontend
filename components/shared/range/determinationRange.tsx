@@ -4,7 +4,7 @@ import CheckBox from '@/components/shared/checkeBox/checkBox';
 import { DeterminationRangePropsType } from '@/types/rangeType/rangePropsType';
 
 
-export default function DeterminationRange({minValue , maxValue , setMinValue , setMaxValue ,  isChecked , setIsChecked , title , showInformation}:DeterminationRangePropsType) {
+export default function DeterminationRange({minValue , maxValue , setMinValue , setMaxValue ,  isChecked , setIsChecked , title , showInformation , isDisable}:DeterminationRangePropsType) {
     
     const addHandler = (event: ChangeEvent<HTMLInputElement>) : void => {
         const newValue = parseInt(event.target.value);

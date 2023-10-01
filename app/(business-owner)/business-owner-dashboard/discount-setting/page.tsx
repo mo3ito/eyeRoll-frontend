@@ -6,6 +6,7 @@ import DeterminationSpecialProduct from "@/components/shared/range/determination
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
 import ButtonDefault from "@/components/shared/buttonDefault";
 
+
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
   const [maxValueAllProducts, setMaxValueAllProducts] = useState<number>(0);
@@ -45,7 +46,7 @@ export default function DeterminingDiscount() {
   return (
     <>
       <div className="w-full h-screen flex justify-center bg-sky-100 pt-8 ">
-        <div className="flex w-4/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  p-8 shadow-lg">
+        <div className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  p-8 shadow-lg">
 
          { !showInformation ?
          <>
@@ -58,11 +59,11 @@ export default function DeterminingDiscount() {
             setIsChecked={setIsCheckeAllProducts}
             title="General discount on all products"
             showInformation={()=>showInformationHandler("hello friends")}
-            isDisable={false}
+            
             
           />
 
-           <DeterminationRange
+           {/* <DeterminationRange
             setMinValue={setMinValueNumberProducts}
             setMaxValue={setMaxValueNumberProducts}
             minValue={minValueNumberProducts}
@@ -72,7 +73,7 @@ export default function DeterminingDiscount() {
             title="General discount on numbers of products"
             showInformation={()=>showInformationHandler("hello mo3ito ba safa")}
             isDisable={false}
-          />
+          /> */}
           <DeterminationDiscountTime 
           title="Determining the discount time"
           firstTime={firstTime}
@@ -89,7 +90,8 @@ export default function DeterminingDiscount() {
           setIsChecked={setIsCheckedSpecialProducts}
           isChecked={isCheckedSpecialProducts} 
           showInformation={()=>showInformationHandler("sajad")}
-          isDisable={false}
+          
+         
            />
 
           <ButtonDefault text="send" className="h-12" isScale={true}/>

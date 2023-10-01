@@ -11,7 +11,7 @@ export default function CheckBox({
 } : CheckBoxType) {
   return (
     <div
-      className={`flex items-center justify-center ${sizeClasses}`}
+      className={`flex items-center justify-center  ${sizeClasses}`}
     >
       <label
         htmlFor="rr"
@@ -23,6 +23,7 @@ export default function CheckBox({
           checked={checked}
           onChange={onChange }
           className=" absolute peer w-full h-full appearance-none  left-0 top-0 rounded-full cursor-pointer"
+          
         />
         <span
           className={`  ${circleClasses} pointer-events-none  ml-1  flex items-center  rounded-full  duration-300 ease-in-out  `}

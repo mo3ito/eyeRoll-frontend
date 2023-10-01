@@ -12,4 +12,5 @@ export interface ButtonDefaultProps {
   isScale?: boolean;
   onClick?: () => void;
   className?: string;
+  disabled?: boolean
 }

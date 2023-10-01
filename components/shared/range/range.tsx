@@ -5,7 +5,7 @@ import { RangePropsType } from '@/types/rangeType/rangePropsType';
 
 
 
-export default function Range({minValue = 0 , setMinValue , maxValue = 0 , setMaxValue , valueGap = 0} : RangePropsType) {
+export default function Range({minValue = 0 , setMinValue , maxValue = 0 , setMaxValue , valueGap = 0 , isDisable} : RangePropsType) {
  
 
   const minValueHandler = (event : ChangeEvent<HTMLInputElement>) => {
@@ -38,25 +38,27 @@ export default function Range({minValue = 0 , setMinValue , maxValue = 0 , setMa
  
   return (
     <div className='w-full'>
-      <div className='w-full bg-[#ddd] h-3 relative rounded-full '>
-        <div  style={{ left: `${minValue}%`, right: `${100 - (maxValue)}%` }} className=' h-3 absolute rounded-full bg-fuchsia-400 left-[25%] right-[25%]' ></div>
+      <div className='w-full bg-[#ddd] h-4 relative rounded-full '>
+        <div  style={{ left: `${ isDisable ? '0' : minValue}%`, right: `${isDisable ? '100' : 100 - (maxValue)}%` }} className=' h-4 absolute rounded-full bg-fuchsia-400 left-[25%] right-[25%]' ></div>
       </div>
       <div className='relative'>
         <input
           type="range"
           min="0"
           max="100"
-          value={minValue}
+          value={ isDisable ? '0' : minValue}
           onChange={minValueHandler}
           className='common-range '
+          disabled={isDisable}
         />
         <input
           type="range"
           min="0"
           max="100"
-          value={maxValue}
+          value={ isDisable ? '0' : maxValue}
           onChange={maxValueHandler}
           className='common-range '
+          disabled={isDisable}
         />
       </div>
     </div>

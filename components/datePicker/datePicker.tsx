@@ -1,10 +1,11 @@
 'use client'
 import {useState} from 'react'
 import DatePicker from "react-datepicker";
-import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
 
-export default function DatesPicker() {
+
+export default function DatesPicker({isInline = true , isButton = true }) {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(null);
@@ -33,9 +34,9 @@ export default function DatesPicker() {
    startDate={startDate}
    endDate={endDate}
    selectsRange
-   inline
+  inline={isInline}
  />
-<button className='bg-indigo-400 w-full h-10 hover:bg-indigo-500 text-white rounded-md -translate-y-2 hover:font-semibold '>confirmation</button>
+{isButton && <button className='bg-indigo-400 w-full h-10 hover:bg-indigo-500 text-white rounded-md -translate-y-2 hover:font-semibold '>confirmation</button>}
 
 </>
   )

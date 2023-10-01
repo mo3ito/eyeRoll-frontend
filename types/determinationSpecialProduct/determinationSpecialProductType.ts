@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface DeterminationSpecialProductProps {
   title: string;
-  isDisable: boolean;
   showInformation: () => void;
   isChecked: boolean;
   setIsChecked: Dispatch<SetStateAction<boolean>>;

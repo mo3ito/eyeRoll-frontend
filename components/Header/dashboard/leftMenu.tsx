@@ -2,6 +2,8 @@
 import React, { Dispatch } from "react";
 import AccordionBox from "@/components/shared/accordion/accordionBox";
 import { accordions } from "@/routes/dashboardRoutes/dashboardItem";
+import DatesPicker from "@/components/datePicker/datePicker";
+import DatePicker from "react-datepicker";
 
 interface LeftMenuProps {
   showAside: boolean;
@@ -16,6 +18,7 @@ export default function LeftMenu({ setShowAside, showAside }: LeftMenuProps) {
         showAside ? "left-0" : "-left-96"
       } w-96 h-screen bg-blue-100 absolute top-0 rounded-r-3xl shadow-lg transition-all z-50`}
     >
+     <DatePicker/>
       <button onClick={() => setShowAside(false)}>
         <svg
           className="w-6 h-6 absolute right-4 top-4 fill-neutral-500"

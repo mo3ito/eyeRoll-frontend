@@ -15,23 +15,31 @@ export default function DeterminingDiscount() {
   const [isCheckeAllProducts, setIsCheckeAllProducts] = useState<boolean>(false);
   const [isCheckedNumbersProduct, setIsCheckedNumbersProducts] =useState<boolean>(false);
   const [isCheckedSpecialProducts , setIsCheckedSpecialProducts]=useState<boolean>(false)
-  const [firstTime , setFirstTime]=useState<string>("8")
-  const [lastTime , setLastTime] = useState<string>("23:30")
-  const [days , setDays]=useState<number>(1)
+  const [firstHour , setFirstHour]=useState<string>("08")
+  const [firstMins , setFirstMins] = useState<string>("30")
+  const [lastHour , setLastHour]=useState<string>("23")
+  const [lastMins , setLastMins]=useState<string>("15")
   const [showInformation , setShowInformation]=useState<boolean>(false)
   const [textInformation , setTextInformation]=useState<string>("")
+  const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
  
   
 
-  console.log("all", isCheckeAllProducts);
-  console.log("some", isCheckedNumbersProduct);
-  console.log("special" , isCheckedSpecialProducts );
+  // console.log("all", isCheckeAllProducts);
+  // console.log("some", isCheckedNumbersProduct);
+  // console.log("special" , isCheckedSpecialProducts );
   
-  console.log("minValueAllProducts",minValueAllProducts);
-  console.log("maxValueAllProducts",maxValueAllProducts);
-  console.log("minVlueNumberProducts" , minValueNumberProducts);
-  console.log("maxVlueNumberProducts" , maxValueNumberProducts);
-  console.log("lastTime", lastTime);
+  // console.log("minValueAllProducts",minValueAllProducts);
+  // console.log("maxValueAllProducts",maxValueAllProducts);
+  // console.log("minVlueNumberProducts" , minValueNumberProducts);
+  // console.log("maxVlueNumberProducts" , maxValueNumberProducts);
+
+  console.log("start date", startDate);
+  console.log("end date" ,endDate);
+  
+  
+
   console.log(textInformation);
   
   const showInformationHandler = (information : string)=>{
@@ -63,6 +71,9 @@ export default function DeterminingDiscount() {
             
           />
 
+            
+ 
+
            {/* <DeterminationRange
             setMinValue={setMinValueNumberProducts}
             setMaxValue={setMaxValueNumberProducts}
@@ -76,14 +87,19 @@ export default function DeterminingDiscount() {
           /> */}
           <DeterminationDiscountTime 
           title="Determining the discount time"
-          firstTime={firstTime}
-          setFirstTime={setFirstTime}
-          setLastTime={setLastTime} 
-          lastTime={lastTime}
-          days={days}
-          setDays={setDays}
+          firstHour={firstHour}
+          firstMins={firstMins}
+          setFirstMins={setFirstMins}
+          setFirstHour={setFirstHour}
+          setLastHour={setLastHour}
+          lastHour={lastHour}
+          lastMins={lastMins}
+          setLastMins={setLastMins}
           showInformation={()=>showInformationHandler("hellooooooooooooo")}
-          
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
           />
           
           <DeterminationSpecialProduct title="Discounts on special products"

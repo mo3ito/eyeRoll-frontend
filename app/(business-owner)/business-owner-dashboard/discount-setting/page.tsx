@@ -5,13 +5,14 @@ import DeterminationDiscountTime from "@/components/shared/range/determinationDi
 import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
 import ButtonDefault from "@/components/shared/buttonDefault";
+import DeterminationRangePeak from "@/components/shared/range/determinationRangePeak";
 
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
   const [maxValueAllProducts, setMaxValueAllProducts] = useState<number>(0);
-  const [minValueNumberProducts, setMinValueNumberProducts] = useState<number>(0);
-  const [maxValueNumberProducts, setMaxValueNumberProducts] = useState<number>(0);
+  const [minValuePeak, setMinValuePeak] = useState<number>(0);
+  const [maxValuePeak, setMaxValuePeak] = useState<number>(0);
   const [isCheckeAllProducts, setIsCheckeAllProducts] = useState<boolean>(false);
   const [isCheckedNumbersProduct, setIsCheckedNumbersProducts] =useState<boolean>(false);
   const [isCheckedSpecialProducts , setIsCheckedSpecialProducts]=useState<boolean>(false)
@@ -22,7 +23,11 @@ export default function DeterminingDiscount() {
   const [showInformation , setShowInformation]=useState<boolean>(false)
   const [textInformation , setTextInformation]=useState<string>("")
   const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [firstHourPeak , setFirstHourPeak]=useState<string>("18")
+  const [firstMinsPeak , setFirstMinsPeak]=useState<string>("30")
+  const [lastHourPeak , setLastHourPeak]=useState<string>("20")
+  const [lastMinsPeak , setLastMinsPeak]=useState<string>("30")
  
   
 
@@ -71,20 +76,6 @@ export default function DeterminingDiscount() {
             
           />
 
-            
- 
-
-           {/* <DeterminationRange
-            setMinValue={setMinValueNumberProducts}
-            setMaxValue={setMaxValueNumberProducts}
-            minValue={minValueNumberProducts}
-            maxValue={maxValueNumberProducts}
-            isChecked={isCheckedNumbersProduct}
-            setIsChecked={setIsCheckedNumbersProducts}
-            title="General discount on numbers of products"
-            showInformation={()=>showInformationHandler("hello mo3ito ba safa")}
-            isDisable={false}
-          /> */}
           <DeterminationDiscountTime 
           title="Determining the discount time"
           firstHour={firstHour}
@@ -100,6 +91,27 @@ export default function DeterminingDiscount() {
           setStartDate={setStartDate}
           endDate={endDate}
           setEndDate={setEndDate}
+          />
+
+          <DeterminationRangePeak
+            setMinValuePeak={setMinValuePeak}
+            setMaxValuePeak={setMaxValuePeak}
+            minValuePeak ={minValuePeak}
+            maxValuePeak={maxValuePeak}
+            isChecked={isCheckedNumbersProduct}
+            setIsChecked={setIsCheckedNumbersProducts}
+            title="Amount of discount during peak hours"
+            showInformation={()=>showInformationHandler("hello mo3ito ba safa")}
+            firstHourPeak={firstHourPeak}
+            setFirstHourPeak={setFirstHourPeak}
+            firstMinsPeak={firstMinsPeak}
+            setFirstMinsPeak={setFirstMinsPeak}
+            lastHourPeak={lastHourPeak}
+            setLastHourPeak={setLastHourPeak}
+            lastMinsPeak={lastMinsPeak}
+            setLastMinsPeak={setLastMinsPeak}
+            showInformation={()=>showInformationHandler("peak")}
+            
           />
           
           <DeterminationSpecialProduct title="Discounts on special products"

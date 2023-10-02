@@ -25,7 +25,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
       }
      
   return (
-    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl mb-4  p-3`}>
+    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-3`}>
     <div className='flex items-center justify-center   '>
       <div className=' h-max'>
        <InformationButton onClick={showInformation}/>

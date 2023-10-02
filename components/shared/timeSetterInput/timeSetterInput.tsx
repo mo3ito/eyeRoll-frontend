@@ -38,21 +38,21 @@ export default function TimeSetterInput({hour , mins , text , setHour , setMins}
   
   return (
     <>
-      <div>
+      <div className="flex items-center ">
         <span className="px-1">{text}</span>
         <input
           value={hour}
           onChange={hourHandler}
-          className=" px-2 bg-transparent  h-8 border rounded-lg border-fuchsia-300 outline-none w-16"
+          className=" px-2 bg-transparent  h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
           type="number"
         />
-      </div>
-      <div>
+   
+      
         <span className="mx-1">:</span>
         <input
           value={mins}
           onChange={minutsHandler}
-          className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none w-16"
+          className=" px-2 bg-transparent w-22 h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
           type="number"
         />
       </div>

@@ -60,7 +60,7 @@ export default function DeterminationSpecialProduct({showInformation , title, is
 
 
   return (
-    <div className= {` w-full my-4 ${isChecked ? ' bg-indigo-100' : 'bg-neutral-200'}  bg-indigo-100 p-3 rounded-xl`}>
+    <div className= {` w-full mb-2 ${isChecked ? ' bg-indigo-100' : 'bg-neutral-200'}  bg-indigo-100 p-3 rounded-xl`}>
         <div className='flex items-center '>
         <div>
       <InformationButton onClick={showInformation}/>

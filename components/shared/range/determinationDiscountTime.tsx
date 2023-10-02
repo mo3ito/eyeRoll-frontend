@@ -52,7 +52,7 @@ export default function DeterminationDiscountTime({firstTime = "8:30", setFirstT
              <div><span>for</span> <input value={days} onChange={daysHandler} className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="number" /><span className="pl-1">day</span></div>
             </div>
 
-              <div className=' w-44 ml-auto'>
+              <div className=' w-max ml-auto mr-20 '>
               <DatesPicker isInline={false} isButton={false}/>
               </div>
               </div>

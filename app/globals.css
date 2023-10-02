@@ -50,15 +50,16 @@ body {
 .react-datepicker__day--range-end {
   background-color: #6366f1 !important;
 }
-.react-datepicker__input-container{
-  width: 100%px;
-  background: transparent;
-  outline: none;
+
+.react-datepicker__input-container input{
   border: 1px solid #e879f9;
   border-radius: 4px;
+  background: transparent;
+  padding: 0 6px;
 }
 .react-datepicker-ignore-onclickoutside{
-  background: none;
+  padding-left: 6px;
+  background: transparent !important;
   outline: none;
   border: 1px solid #e879f9;
   border-radius: 4px;

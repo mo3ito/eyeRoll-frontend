@@ -2,9 +2,9 @@
 import {ChangeEvent, useState , Dispatch , SetStateAction} from 'react'
 import InformationButton from '@/components/informationButton/informationButton';
 import DatesPicker from '@/components/datePicker/datePicker';
-// import DatePicker, { DateObject } from "react-multi-date-picker"
-// import transition from "react-element-popper/animations/transition"
-// import type{Value} from "react-multi-date-picker"
+import { useTimer } from 'react-timer-hook';
+import Timer from '@/components/timer/timer';
+
 
 interface DeterminationDiscountTimeProps {
     firstTime : string ;
@@ -32,6 +32,8 @@ export default function DeterminationDiscountTime({firstTime = "8:30", setFirstT
         setDays(Number(event.target.value))
     }
 
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
    
     
 
@@ -47,9 +49,10 @@ export default function DeterminationDiscountTime({firstTime = "8:30", setFirstT
   
             <div className="flex  mt-2">
               <div className='flex space-x-4 justify-center'>
-              <div><span>from</span> <input value={firstTime} onChange={firstTimeHandler} className=" px-2 bg-transparent  h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="text" /></div>
+              {/* <div><span>from</span> <input value={firstTime} onChange={firstTimeHandler} className=" px-2 bg-transparent  h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="text" /></div>
              <div><span>to</span> <input value={lastTime} onChange={lastTimeHandler} className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="text" /></div>
-             <div><span>for</span> <input value={days} onChange={daysHandler} className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="number" /><span className="pl-1">day</span></div>
+             <div><span>for</span> <input value={days} onChange={daysHandler} className=" px-2 bg-transparent w-22 h-8 border rounded-lg border-fuchsia-300 outline-none w-16" type="number" /><span className="pl-1">day</span></div> */}
+              <Timer expiryTimestamp={time} />
             </div>
 
               <div className=' w-max ml-auto mr-20 '>

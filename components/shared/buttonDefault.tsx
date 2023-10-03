@@ -17,7 +17,7 @@ const ButtonDefault = ({
       title={title}
       onClick={onClick}
       className={
-        `bg-fuchsia-400 w-full ${disabled && 'bg-gray-300 hover:bg-gray-300' }  hover:bg-fuchsia-500 ${isScale && 'hover:scale-105 hover:duration-300 hover:ease-in-out'}  rounded-lg ${className}`
+        `bg-fuchsia-400 w-full ${disabled && 'bg-gray-300 hover:bg-gray-300' }  hover:bg-fuchsia-500 ${(isScale && !disabled) && 'hover:scale-105 hover:duration-500 hover:ease-in-out'}  rounded-lg ${className}`
       }
     >
       {text}

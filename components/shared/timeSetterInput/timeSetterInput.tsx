@@ -1,42 +1,34 @@
-'use client'
-import { ChangeEvent, Dispatch, SetStateAction} from "react";
+"use client";
+import { ChangeEvent } from "react";
+import { TimeSetterInputProps } from "@/types/timeSetterInput/timeSetterInputProps";
 
-interface TimeSetterInputProps {
-    hour : string;
-    mins: string;
-    text: string;
-    setHour: Dispatch<SetStateAction<string>>;
-    setMins : Dispatch<SetStateAction<string>>;
-    disabled?: boolean;
-}
+export default function TimeSetterInput({
+  hour,
+  mins,
+  text,
+  setHour,
+  setMins,
+  disabled,
+}: TimeSetterInputProps) {
+  const hourHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const parsedHour = parseInt(inputValue, 10);
 
-export default function TimeSetterInput({hour , mins , text , setHour , setMins , disabled}: TimeSetterInputProps) {
-
-
-   
-
-
-    const hourHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value;
-        const parsedHour = parseInt(inputValue, 10);
-      
-        if (!isNaN(parsedHour) && parsedHour >= 0 && parsedHour <= 23) {
-            const paddedHour = parsedHour.toString().padStart(2, '0'); 
-          setHour(paddedHour);
-        }
-      };
-
-    const minutsHandler = (event : ChangeEvent<HTMLInputElement>)=>{
-        const inputValue = event.target.value;
-        const parsedMins = parseInt(inputValue, 10);
-        if (!isNaN(parsedMins) && parsedMins >= 0 && parsedMins <= 59) {
-            const paddedMins = parsedMins.toString().padStart(2 , '0')
-            setMins(paddedMins)
-          }
-        
+    if (!isNaN(parsedHour) && parsedHour >= 0 && parsedHour <= 23) {
+      const paddedHour = parsedHour.toString().padStart(2, "0");
+      setHour(paddedHour);
     }
+  };
 
-  
+  const minutsHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const parsedMins = parseInt(inputValue, 10);
+    if (!isNaN(parsedMins) && parsedMins >= 0 && parsedMins <= 59) {
+      const paddedMins = parsedMins.toString().padStart(2, "0");
+      setMins(paddedMins);
+    }
+  };
+
   return (
     <>
       <div className="flex items-center ">
@@ -48,8 +40,7 @@ export default function TimeSetterInput({hour , mins , text , setHour , setMins 
           type="number"
           disabled={disabled}
         />
-   
-      
+
         <span className="mx-1">:</span>
         <input
           value={mins}

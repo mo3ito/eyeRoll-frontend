@@ -25,8 +25,8 @@ export default function DeterminingDiscount() {
   const [lastMins , setLastMins]=useState<string>("00")
   const [showInformation , setShowInformation]=useState<boolean>(false)
   const [textInformation , setTextInformation]=useState<string>("")
-  const [startDate, setStartDate] = useState<Date | null | string>(new Date());
-  const [endDate, setEndDate] = useState< Date | null | string>(null);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
   const [firstHourPeak , setFirstHourPeak]=useState<string>("00")
   const [firstMinsPeak , setFirstMinsPeak]=useState<string>("00")
   const [lastHourPeak , setLastHourPeak]=useState<string>("00")
@@ -93,13 +93,12 @@ export default function DeterminingDiscount() {
           setLastMins={setLastMins}
           showInformation={()=>showInformationHandler("hellooooooooooooo")}
           startDate={startDate}
-          setStartDate={setStartDate}
           endDate={endDate}
-          setEndDate={setEndDate}
           setStartDateWithoutTime={setStartDateWithoutTime}
           setEndDateWithoutTime={setEndDateWithoutTime}
           startDateWithoutTime={startDateWithoutTime}
           endDateWithoutTime={endDateWithoutTime}
+          setDateRange={setDateRange}
           />
 
           <DeterminationRangePeak
@@ -130,7 +129,7 @@ export default function DeterminingDiscount() {
          
            />
 
-          <ButtonDefault text="send" className="h-12" isScale={true}/>
+          <ButtonDefault disabled={(isCheckeAllProducts && isCheckedDiscountTime) ? false : true } text="send" className="h-12 text-lg" isScale={true}/>
           </>
            :
            <ShowInformationRollSetting textInformation={textInformation} setShowInformation={setShowInformation} />

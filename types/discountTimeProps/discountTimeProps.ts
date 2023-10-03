@@ -11,10 +11,13 @@ export interface DeterminationDiscountTimeProps {
     setLastMins: Dispatch<SetStateAction<string>>;
     title: string;
     startDate : Date | null;
-    setStartDate : Dispatch<SetStateAction<Date | null>>;
     endDate : Date | null;
-    setEndDate:Dispatch<SetStateAction<Date | null>>;
     showInformation: () => void;
     isChecked: boolean;
     setIsChecked: Dispatch<SetStateAction<boolean>>
+    setStartDateWithoutTime: Dispatch<SetStateAction<string>>;
+    setEndDateWithoutTime: Dispatch<SetStateAction<string>>;
+    startDateWithoutTime : string;
+    endDateWithoutTime : string ;
+    setDateRange: Dispatch<SetStateAction<null[]>>
   }

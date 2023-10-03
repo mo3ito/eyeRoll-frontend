@@ -17,14 +17,16 @@ export default function DeterminingDiscount() {
   const [isCheckedDiscountTime , setIsCheckedDiscountTime]=useState<boolean>(false)
   const [isCheckedSpecialProducts , setIsCheckedSpecialProducts]=useState<boolean>(false)
   const [isCheckedPeakTime , setIsCheckedPeakTime]=useState<boolean>(false)
+  const [startDateWithoutTime , setStartDateWithoutTime]=useState<string>("")
+  const [endDateWithoutTime , setEndDateWithoutTime]=useState<string>("")
   const [firstHour , setFirstHour]=useState<string>("00")
   const [firstMins , setFirstMins] = useState<string>("00")
   const [lastHour , setLastHour]=useState<string>("00")
   const [lastMins , setLastMins]=useState<string>("00")
   const [showInformation , setShowInformation]=useState<boolean>(false)
   const [textInformation , setTextInformation]=useState<string>("")
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState< Date | null>(null);
+  const [startDate, setStartDate] = useState<Date | null | string>(new Date());
+  const [endDate, setEndDate] = useState< Date | null | string>(null);
   const [firstHourPeak , setFirstHourPeak]=useState<string>("00")
   const [firstMinsPeak , setFirstMinsPeak]=useState<string>("00")
   const [lastHourPeak , setLastHourPeak]=useState<string>("00")
@@ -41,8 +43,8 @@ export default function DeterminingDiscount() {
   // console.log("minVlueNumberProducts" , minValueNumberProducts);
   // console.log("maxVlueNumberProducts" , maxValueNumberProducts);
 
-  console.log("start date", startDate);
-  console.log("end date" ,endDate);
+  console.log("start date", startDateWithoutTime);
+  console.log("end date" ,endDateWithoutTime);
   
   
 
@@ -94,6 +96,10 @@ export default function DeterminingDiscount() {
           setStartDate={setStartDate}
           endDate={endDate}
           setEndDate={setEndDate}
+          setStartDateWithoutTime={setStartDateWithoutTime}
+          setEndDateWithoutTime={setEndDateWithoutTime}
+          startDateWithoutTime={startDateWithoutTime}
+          endDateWithoutTime={endDateWithoutTime}
           />
 
           <DeterminationRangePeak

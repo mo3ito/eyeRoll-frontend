@@ -25,7 +25,11 @@ export default function DeterminationDiscountTime({
   endDate,
   setEndDate,
   isChecked,
-  setIsChecked
+  setIsChecked,
+  setStartDateWithoutTime,
+setEndDateWithoutTime,
+startDateWithoutTime,
+endDateWithoutTime
 }: DeterminationDiscountTimeProps) {
   console.log("first hour", firstHour);
   console.log("first min", firstMins);
@@ -89,16 +93,21 @@ const changeProductsHandler = (event : ChangeEvent<HTMLInputElement>)=>{
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
+            
             isInline={false}
             isButton={false}
             disabled={!isChecked}
+            setStartDateWithoutTime={setStartDateWithoutTime}
+            setEndDateWithoutTime={setEndDateWithoutTime}
           />
           {/* <Timer expiryTimestamp={time} /> */}
         </div>
       </div>
 
       <div className='text-center mt-8 '>
-            <span className='font-bold '> from</span> <span className='text-zinc-500 px-2'>{firstHour}:{firstMins}</span>  {startDate?.toLocaleString()} <span className='font-bold pl-2'> to</span> <span className='text-zinc-500 px-2'>{lastHour}:{lastMins}</span> {endDate?.toLocaleString()} 
+            {/* <span className='font-bold '> from</span> <span className='text-zinc-500 px-2'>{firstHour}:{firstMins}</span>  {startDateWithoutTime} <span className='font-bold pl-2'> to</span> <span className='text-zinc-500 px-2'>{lastHour}:{lastMins}</span> {endDateWithoutTime}  */}
+            <span className='font-bold  '> from</span> <span className='text-zinc-500 pl-2'>{firstHour}:{firstMins}</span> <span className='font-bold px-2'> to</span>  <span className='text-zinc-500 '>{lastHour}:{lastMins}</span> <span className="font-semibold px-2">on</span>  {startDateWithoutTime} 
+            <span className='font-bold pl-2'> to</span> <span className='text-zinc-500 pl-2'>{firstHour}:{firstMins}</span> <span className='font-bold px-2'> to</span>  <span className='text-zinc-500 '>{lastHour}:{lastMins}</span> <span className="font-semibold px-2">on</span>  {endDateWithoutTime} 
             </div>
     </div>
   );

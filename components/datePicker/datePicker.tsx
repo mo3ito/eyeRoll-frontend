@@ -2,6 +2,7 @@
 import {Dispatch, SetStateAction} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns';
 
 interface DatesPickerProps {
 isInline : boolean;
@@ -14,26 +15,35 @@ disabled : boolean
 }
 
 
-export default function DatesPicker({isInline = true , isButton = true , startDate , setStartDate ,endDate , setEndDate , disabled }: DatesPickerProps) {
+export default function DatesPicker({isInline = true , isButton = true , startDate , setStartDate ,endDate , setEndDate , disabled , setStartDateWithoutTime,
+  setEndDateWithoutTime }: DatesPickerProps) {
 
    
   
-    
+  
+  const handleDateChange = async (date) => {
+    if (date && date.length === 2) {
+      const [start, end] = date;
+      
+  
+      const formattedStartDate = format(start, "dd/MM/yyyy");
+      const formattedEndDate = end ? format(end, "dd/MM/yyyy") : null;
 
-    const handleDateChange = async (date)=>{
-    //    await setStartDate(date)
-    //    if(date){
-    //     const formattedDate = format(date, "dd/MM/yyyy"); // تبدیل تاریخ به فرمت "18/12/2022"
-    //   console.log("تاریخ به صورت فرمت دلخواه: ", formattedDate);
-    //    }
-    const [start, end] = date;
-    setStartDate(start);
-    setEndDate(end);
+      setStartDate(start);
+      setEndDate(end);
+      setStartDateWithoutTime(formattedStartDate)
+      setEndDateWithoutTime(formattedEndDate)
+  
+      console.log("start", formattedStartDate);
+      console.log("end", formattedEndDate);
+    } else if (date instanceof Date) {
+      setStartDate(date);
+      setEndDate(null);
+  
+      const formattedDate = format(date, "dd/MM/yyyy");
+      console.log("date", formattedDate);
     }
-    console.log("start", startDate);
-    console.log("end", endDate);
-    
-
+  };
 
     
   return (
@@ -47,6 +57,7 @@ export default function DatesPicker({isInline = true , isButton = true , startDa
    selectsRange
   inline={isInline}
   disabled={disabled}
+  isClearable={true}
    
  />
 

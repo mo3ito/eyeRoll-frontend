@@ -1,19 +1,20 @@
 'use client'
-import {Dispatch, SetStateAction, useState} from 'react'
+import {Dispatch, SetStateAction} from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface DatesPickerProps {
 isInline : boolean;
 isButton: boolean;
-startDate : Date ;
-setStartDate : Dispatch<SetStateAction<string>>;
+startDate : Date | null ;
+setStartDate : Dispatch<SetStateAction<Date | null>>;
 endDate : Date | null;
-setEndDate: Dispatch<SetStateAction<string>>;
+setEndDate: Dispatch<SetStateAction<Date | null>>;
+disabled : boolean
 }
 
 
-export default function DatesPicker({isInline = true , isButton = true , startDate , setStartDate ,endDate , setEndDate }: DatesPickerProps) {
+export default function DatesPicker({isInline = true , isButton = true , startDate , setStartDate ,endDate , setEndDate , disabled }: DatesPickerProps) {
 
    
   
@@ -45,6 +46,7 @@ export default function DatesPicker({isInline = true , isButton = true , startDa
    endDate={endDate}
    selectsRange
   inline={isInline}
+  disabled={disabled}
    
  />
 

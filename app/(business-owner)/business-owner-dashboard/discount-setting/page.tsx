@@ -14,20 +14,21 @@ export default function DeterminingDiscount() {
   const [minValuePeak, setMinValuePeak] = useState<number>(0);
   const [maxValuePeak, setMaxValuePeak] = useState<number>(0);
   const [isCheckeAllProducts, setIsCheckeAllProducts] = useState<boolean>(false);
-  const [isCheckedNumbersProduct, setIsCheckedNumbersProducts] =useState<boolean>(false);
+  const [isCheckedDiscountTime , setIsCheckedDiscountTime]=useState<boolean>(false)
   const [isCheckedSpecialProducts , setIsCheckedSpecialProducts]=useState<boolean>(false)
-  const [firstHour , setFirstHour]=useState<string>("08")
-  const [firstMins , setFirstMins] = useState<string>("30")
-  const [lastHour , setLastHour]=useState<string>("23")
-  const [lastMins , setLastMins]=useState<string>("15")
+  const [isCheckedPeakTime , setIsCheckedPeakTime]=useState<boolean>(false)
+  const [firstHour , setFirstHour]=useState<string>("00")
+  const [firstMins , setFirstMins] = useState<string>("00")
+  const [lastHour , setLastHour]=useState<string>("00")
+  const [lastMins , setLastMins]=useState<string>("00")
   const [showInformation , setShowInformation]=useState<boolean>(false)
   const [textInformation , setTextInformation]=useState<string>("")
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const [firstHourPeak , setFirstHourPeak]=useState<string>("18")
-  const [firstMinsPeak , setFirstMinsPeak]=useState<string>("30")
-  const [lastHourPeak , setLastHourPeak]=useState<string>("20")
-  const [lastMinsPeak , setLastMinsPeak]=useState<string>("30")
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState< Date | null>(null);
+  const [firstHourPeak , setFirstHourPeak]=useState<string>("00")
+  const [firstMinsPeak , setFirstMinsPeak]=useState<string>("00")
+  const [lastHourPeak , setLastHourPeak]=useState<string>("00")
+  const [lastMinsPeak , setLastMinsPeak]=useState<string>("00")
  
   
 
@@ -78,6 +79,8 @@ export default function DeterminingDiscount() {
 
           <DeterminationDiscountTime 
           title="Determining the discount time"
+          isChecked={isCheckedDiscountTime}
+          setIsChecked={setIsCheckedDiscountTime}
           firstHour={firstHour}
           firstMins={firstMins}
           setFirstMins={setFirstMins}
@@ -98,10 +101,9 @@ export default function DeterminingDiscount() {
             setMaxValuePeak={setMaxValuePeak}
             minValuePeak ={minValuePeak}
             maxValuePeak={maxValuePeak}
-            isChecked={isCheckedNumbersProduct}
-            setIsChecked={setIsCheckedNumbersProducts}
+            isChecked={isCheckedPeakTime}
+            setIsChecked={setIsCheckedPeakTime}
             title="Amount of discount during peak hours"
-            showInformation={()=>showInformationHandler("hello mo3ito ba safa")}
             firstHourPeak={firstHourPeak}
             setFirstHourPeak={setFirstHourPeak}
             firstMinsPeak={firstMinsPeak}

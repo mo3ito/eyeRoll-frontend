@@ -25,7 +25,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
       }
      
   return (
-    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-3`}>
+    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-4`}>
     <div className='flex items-center justify-center   '>
       <div className=' h-max'>
        <InformationButton onClick={showInformation}/>
@@ -35,7 +35,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
     
     <CheckBox  onChange={(event)=>changeProductsHandler(event)} checked={isChecked} backgroundClasses={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-gray-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
     </div>
-    <div className='w-full  h-max py-4  rounded-xl space-y-6 flex items-center justify-center flex-col mt-3'>
+    <div className='w-full  h-max  rounded-xl space-y-6 flex items-center justify-center flex-col mt-3'>
         <div className='  space-x-10 flex items-center justify-center w-full'>
           <div>
           <span className='text-lg pr-1'>min</span>
@@ -49,7 +49,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
          
         </div>
       
-    <Range isDisable={!isChecked} minValue={minValue} setMinValue={setMinValue} maxValue={maxValue} setMaxValue={setMaxValue} valueGap={0}/>
+    <Range disable={!isChecked} minValue={minValue} setMinValue={setMinValue} maxValue={maxValue} setMaxValue={setMaxValue} valueGap={0}/>
       </div>
     
 

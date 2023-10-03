@@ -7,9 +7,10 @@ interface TimeSetterInputProps {
     text: string;
     setHour: Dispatch<SetStateAction<string>>;
     setMins : Dispatch<SetStateAction<string>>;
+    disabled?: boolean;
 }
 
-export default function TimeSetterInput({hour , mins , text , setHour , setMins}: TimeSetterInputProps) {
+export default function TimeSetterInput({hour , mins , text , setHour , setMins , disabled}: TimeSetterInputProps) {
 
 
    
@@ -43,8 +44,9 @@ export default function TimeSetterInput({hour , mins , text , setHour , setMins}
         <input
           value={hour}
           onChange={hourHandler}
-          className=" px-2 bg-transparent  h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
+          className=" shadow-md px-2 bg-transparent  h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
           type="number"
+          disabled={disabled}
         />
    
       
@@ -52,8 +54,9 @@ export default function TimeSetterInput({hour , mins , text , setHour , setMins}
         <input
           value={mins}
           onChange={minutsHandler}
-          className=" px-2 bg-transparent w-22 h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
+          className=" shadow-md px-2 bg-transparent w-22 h-10 border rounded-lg border-fuchsia-300 outline-none w-16"
           type="number"
+          disabled={disabled}
         />
       </div>
     </>

@@ -31,6 +31,7 @@ export default function DeterminingDiscount() {
   const [firstMinsPeak , setFirstMinsPeak]=useState<string>("00")
   const [lastHourPeak , setLastHourPeak]=useState<string>("00")
   const [lastMinsPeak , setLastMinsPeak]=useState<string>("00")
+  
  
   
 
@@ -45,6 +46,8 @@ export default function DeterminingDiscount() {
 
   console.log("start date", startDateWithoutTime);
   console.log("end date" ,endDateWithoutTime);
+ 
+  
   
   
 
@@ -99,6 +102,8 @@ export default function DeterminingDiscount() {
           startDateWithoutTime={startDateWithoutTime}
           endDateWithoutTime={endDateWithoutTime}
           setDateRange={setDateRange}
+          
+
           />
 
           <DeterminationRangePeak

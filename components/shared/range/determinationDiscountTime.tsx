@@ -1,8 +1,5 @@
 "use client";
-import {
-  ChangeEvent,
- 
-} from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import InformationButton from "@/components/informationButton/informationButton";
 import DatesPicker from "@/components/datePicker/datePicker";
 import { useTimer } from "react-timer-hook";
@@ -10,6 +7,7 @@ import Timer from "@/components/timer/timer";
 import TimeSetterInput from "../timeSetterInput/timeSetterInput";
 import CheckBox from "../checkeBox/checkBox";
 import { DeterminationDiscountTimeProps } from "@/types/discountTimeProps/discountTimeProps";
+import DateRangeDisplay from "./dateRangeDisplay";
 
 export default function DeterminationDiscountTime({
   firstHour,
@@ -36,6 +34,17 @@ export default function DeterminationDiscountTime({
   console.log("first min", firstMins);
   console.log("last hour", lastHour);
   console.log("last min", lastMins);
+
+  const [calendarisValue, setCalendarIsValue] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (startDate !== null || endDate !== null) {
+      setCalendarIsValue(true);
+    } else {
+      setCalendarIsValue(false);
+    }
+  }, [calendarisValue, startDate, endDate]);
+  console.log(calendarisValue);
 
   //   const firstSelectedDate = new Date(startDate);
   // const endSelectedDate = new Date(endDate);
@@ -93,7 +102,7 @@ export default function DeterminationDiscountTime({
           />
         </div>
 
-        <div className=" w-max ml-auto mr-20  pt-2 ">
+        <div className=" w-max h-max ml-auto mr-20     ">
           <DatesPicker
             startDate={startDate}
             endDate={endDate}
@@ -109,27 +118,34 @@ export default function DeterminationDiscountTime({
         </div>
       </div>
 
-      <div className="text-center mt-8 ">
-        {/* <span className='font-bold '> from</span> <span className='text-zinc-500 px-2'>{firstHour}:{firstMins}</span>  {startDateWithoutTime} <span className='font-bold pl-2'> to</span> <span className='text-zinc-500 px-2'>{lastHour}:{lastMins}</span> {endDateWithoutTime}  */}
-        <span className="font-bold  "> from</span>{" "}
-        <span className="text-zinc-500 pl-2">
-          {firstHour}:{firstMins}
-        </span>{" "}
-        <span className="font-bold px-2"> to</span>{" "}
-        <span className="text-zinc-500 ">
-          {lastHour}:{lastMins}
-        </span>{" "}
-        <span className="font-semibold px-2">on</span> {startDateWithoutTime}
-        <span className="font-bold pl-2"> to</span>{" "}
-        <span className="text-zinc-500 pl-2">
-          {firstHour}:{firstMins}
-        </span>{" "}
-        <span className="font-bold px-2"> to</span>{" "}
-        <span className="text-zinc-500 ">
-          {lastHour}:{lastMins}
-        </span>{" "}
-        <span className="font-semibold px-2">on</span> {endDateWithoutTime}
+      {calendarisValue && (
+        <div className="text-center w-full ">
+        <DateRangeDisplay
+        className="text-center mt-6 inline-block "
+          firstTitle="sinc"
+          secondTitle="to"
+          thirdTitle="on"
+          firstHour={firstHour}
+          firstMins={firstMins}
+          lastHour={lastHour}
+          lastMins={lastMins}
+          startDateWithoutTime={startDateWithoutTime}
+        />
+        {endDateWithoutTime && <DateRangeDisplay
+        className="text-center mt-6 inline-block "
+          firstTitle="from"
+          secondTitle="to"
+          thirdTitle="on"
+          firstHour={firstHour}
+          firstMins={firstMins}
+          lastHour={lastHour}
+          lastMins={lastMins}
+          startDateWithoutTime={endDateWithoutTime}
+        />}
       </div>
+      )}
+     
+       
     </div>
   );
 }

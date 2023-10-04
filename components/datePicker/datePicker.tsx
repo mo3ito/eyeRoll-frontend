@@ -14,33 +14,31 @@ export default function DatesPicker({
   disabled,
   setStartDateWithoutTime,
   setEndDateWithoutTime,
-  isWithTime
-
+  isWithTime,
 }: DatesPickerProps) {
-
-  
-  const changeHandler = (update : any ) => {
+  const changeHandler = (update: any) => {
     setDateRange(update);
   };
 
   useEffect(() => {
-    if (startDate || endDate && isWithTime) {
+    if (startDate || (endDate && isWithTime)) {
       const formattedStartDate = startDate
         ? format(startOfDay(startDate), "dd/MM/yyyy")
         : "";
       const formattedEndDate = endDate
         ? format(startOfDay(endDate), "dd/MM/yyyy")
         : "";
-      setStartDateWithoutTime?.(formattedStartDate)
-      setEndDateWithoutTime?.(formattedEndDate)
+      setStartDateWithoutTime?.(formattedStartDate);
+      setEndDateWithoutTime?.(formattedEndDate);
     }
-  }, [startDate, endDate , isWithTime ]);
+  }, [startDate, endDate, isWithTime]);
   console.log("start date", startDate);
   console.log("end date", endDate);
 
   return (
     <>
       <DatePicker
+        placeholderText="Enter the date"
         selected={startDate}
         onChange={changeHandler}
         startDate={startDate}
@@ -49,6 +47,7 @@ export default function DatesPicker({
         inline={isInline}
         disabled={disabled}
         isClearable={true}
+        className="h-10 rounded-lg bg-transparent border border-fuchsia-400 w-58 px-3 outline-none shadow-md"
       />
 
       {isButton && (

@@ -86,8 +86,8 @@ export default function DeterminationSpecialProduct({
         />
       </div>
 
-      <div className="flex space-x-3 mt-2 ">
-        <div className="w-6/12">
+      <div className="flex space-x-3 mt-2 w-full ">
+        <div className="w-64">
           <p className="text-sm w-full">name product</p>
           <input
             disabled={!isChecked}
@@ -98,7 +98,7 @@ export default function DeterminationSpecialProduct({
             className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
           />
         </div>
-        <div className="w-2/12">
+        <div className="w-28">
           <p className="text-sm ">Discount amount</p>
           <input
             disabled={!isChecked}
@@ -114,7 +114,7 @@ export default function DeterminationSpecialProduct({
           disabled={!isChecked}
           text="confirm"
           onClick={addSpecificSpecialProducts}
-          className="h-10 w-44 mt-5  "
+          className="h-10 w-52 mt-5  "
         />
       </div>
       <div

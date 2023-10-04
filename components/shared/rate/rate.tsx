@@ -13,6 +13,7 @@ export default function Rate() {
       .map((_, index) => index + 1)
       .map((starNumber) => (
         <StarRate
+        key={starNumber}
           setHoverRating={setHoverRating}
           starNumber={starNumber}
           setRating={setRating}

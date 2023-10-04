@@ -25,7 +25,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
           </button>
           <ul className={` ${showAccordion ? 'visible ' : 'invisible'} last:border-b-2`}>
             {options?.map(option=>
-                <li key={option.id} onClick={()=>linkHandler(option.href)} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 hover:-translate-y-0.5 hover:duration-500 hover:ease-out'>
+                <li key={option.id} onClick={()=>linkHandler(option.href)} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 hover:-translate-y-0.5 hover:duration-500 hover:ease-in-out '>
                     {option.name}
                 </li>
                 )}

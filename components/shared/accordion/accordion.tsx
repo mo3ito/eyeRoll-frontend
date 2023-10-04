@@ -24,7 +24,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
          : <svg className='inline-block fill-neutral-500 w-5 h-5 ml-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>}
           </button>
           <ul className={` ${showAccordion ? 'visible ' : 'invisible'} last:border-b-2`}>
-            {options.map(option=>
+            {options?.map(option=>
                 <li key={option.id} onClick={()=>linkHandler(option.href)} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 '>
                     {option.name}
                 </li>
@@ -33,7 +33,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
         </div>
   )
 }
-// // bg-[#dcdcdc]
+
 
 
 

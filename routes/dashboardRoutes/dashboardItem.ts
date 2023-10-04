@@ -2,6 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 const accordions = [
   {
+    id:uuidv4(),
+    title:"main pages",
+    options: [
+      { id: uuidv4(), href: "/business-owner-dashboard", name: "dashboard" },
+      { id: uuidv4(), href: "/", name: "home" },
+    ],
+  },
+  {
     id: uuidv4(),
     title: "setting",
     options: [

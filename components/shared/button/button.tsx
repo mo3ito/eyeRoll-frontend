@@ -1,5 +1,5 @@
 import React from "react";
-import  Loading  from "../loading/loading";
+import Loading from "@/components/loading/loading";
 import { ButtonProps } from "@/types/buttonsType";
 
 const Button = ({ onClick, text, title, loading = false }: ButtonProps) => {

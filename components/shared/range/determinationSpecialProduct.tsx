@@ -2,7 +2,7 @@
 import { ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CheckBox from "../checkeBox/checkBox";
-import ButtonDefault from "../buttonDefault";
+import ButtonDefault from "../button/buttonDefault";
 import {
   DeterminationSpecialProductProps,
   SpecificSpecialProductsType,

@@ -1,6 +1,6 @@
 'use client'
 import Input from '../../shared/inputs/input'
-import Button from '../../shared/button'
+import Button from '@/components/shared/button/button'
 import { useState , FormEvent , useContext , MouseEventHandler, useEffect } from 'react'
 import sender from '@/services/sender'
 import { useRouter } from 'next/navigation'

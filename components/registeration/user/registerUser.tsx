@@ -1,7 +1,7 @@
 'use client'
 import { useState , FormEvent , useContext,  } from "react"
 import Input from "../../shared/inputs/input"
-import Button from "../../shared/button"
+import Button from "@/components/shared/button/button"
 import { toast } from "react-toastify"
 import Loading from "../../loading/loading"
 import { useQuery } from "react-query"

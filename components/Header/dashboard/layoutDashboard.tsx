@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Accordion from '../../shared/accordion/accordion'
 import LeftMenu from './leftMenu'
+import LinkDefault from '@/components/link/linkDefault'
 
 
 const LayoutDashboard = () => {
@@ -23,7 +24,7 @@ const LayoutDashboard = () => {
       </button>
       </div>
       <div className='ml-auto '>
-        <div className='w-12 h-12 bg-red-200 rounded-full flex items-center justify-center'>logo</div>
+        <LinkDefault className='w-12 h-12 bg-red-200 rounded-full flex items-center justify-center' href='/business-owner-dashboard' text='logo' />
       </div>
       
       <LeftMenu setShowAside={setShowAside} showAside={showAside}  />

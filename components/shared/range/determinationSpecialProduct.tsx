@@ -86,8 +86,13 @@ export default function DeterminationSpecialProduct({
         />
       </div>
 
-      <div className="flex space-x-3 mt-2 w-full ">
-        <div className="w-64">
+      <div className="flex space-x-3 mt-2 w-full items-center ">
+
+
+        <div className="flex w-9/12 space-x-4">
+
+       
+        <div className="w-9/12">
           <p className="text-sm w-full">name product</p>
           <input
             disabled={!isChecked}
@@ -98,7 +103,7 @@ export default function DeterminationSpecialProduct({
             className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
           />
         </div>
-        <div className="w-28">
+        <div className="w-3/12">
           <p className="text-sm ">Discount amount</p>
           <input
             disabled={!isChecked}
@@ -109,13 +114,16 @@ export default function DeterminationSpecialProduct({
             className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
           />
         </div>
-
-        <ButtonDefault
+        </div>
+        <div className="w-3/12 h-full">
+         <ButtonDefault
           disabled={!isChecked}
           text="confirm"
           onClick={addSpecificSpecialProducts}
-          className="h-10 w-52 mt-5  "
+          className="h-10 w-full mt-5 bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg "
         />
+        </div>
+       
       </div>
       <div
         className={`${

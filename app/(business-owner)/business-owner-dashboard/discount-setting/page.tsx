@@ -134,7 +134,7 @@ export default function DeterminingDiscount() {
          
            />
 
-          <ButtonDefault disabled={(isCheckeAllProducts && isCheckedDiscountTime) ? false : true } text="send" className="h-12 text-lg" isScale={true}/>
+          <ButtonDefault disabled={(isCheckeAllProducts && isCheckedDiscountTime) ? false : true } text="send" className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg  " isScale={true}/>
           </>
            :
            <ShowInformationRollSetting textInformation={textInformation} setShowInformation={setShowInformation} />

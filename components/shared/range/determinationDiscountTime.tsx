@@ -103,6 +103,7 @@ export default function DeterminationDiscountTime({
             disabled={!isChecked}
             setStartDateWithoutTime={setStartDateWithoutTime}
             setEndDateWithoutTime={setEndDateWithoutTime}
+            isWithTime={true}
           />
           {/* <Timer expiryTimestamp={time} /> */}
         </div>

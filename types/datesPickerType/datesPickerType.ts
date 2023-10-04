@@ -6,7 +6,8 @@ export interface DatesPickerProps {
     startDate : Date | null ;
     setDateRange : Dispatch<SetStateAction<null[]>> ;
     endDate : Date | null;
-    setStartDateWithoutTime: Dispatch<SetStateAction<string>>
-    setEndDateWithoutTime: Dispatch<SetStateAction<string>>
-    disabled : boolean
+    setStartDateWithoutTime?: Dispatch<SetStateAction<string | undefined>> 
+    setEndDateWithoutTime?: Dispatch<SetStateAction<string | undefined>> 
+    disabled? : boolean;
+    isWithTime? : boolean;
     }

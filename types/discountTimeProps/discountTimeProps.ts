@@ -15,9 +15,9 @@ export interface DeterminationDiscountTimeProps {
     showInformation: () => void;
     isChecked: boolean;
     setIsChecked: Dispatch<SetStateAction<boolean>>
-    setStartDateWithoutTime: Dispatch<SetStateAction<string>>;
-    setEndDateWithoutTime: Dispatch<SetStateAction<string>>;
-    startDateWithoutTime : string;
-    endDateWithoutTime : string ;
+    setStartDateWithoutTime: Dispatch<SetStateAction<string | undefined>> 
+    setEndDateWithoutTime: Dispatch<SetStateAction<string | undefined>> 
+    startDateWithoutTime : string | undefined;
+    endDateWithoutTime : string | undefined ;
     setDateRange: Dispatch<SetStateAction<null[]>>
   }

@@ -114,7 +114,7 @@ export default function DeterminationSpecialProduct({
           disabled={!isChecked}
           text="confirm"
           onClick={addSpecificSpecialProducts}
-          className="h-10 w-4/12 mt-5  "
+          className="h-10 w-44 mt-5  "
         />
       </div>
       <div

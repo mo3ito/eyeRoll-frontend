@@ -14,6 +14,8 @@ export default function DatesPicker({
   disabled,
   setStartDateWithoutTime,
   setEndDateWithoutTime,
+  isWithTime
+
 }: DatesPickerProps) {
 
   
@@ -22,17 +24,17 @@ export default function DatesPicker({
   };
 
   useEffect(() => {
-    if (startDate || endDate) {
+    if (startDate || endDate && isWithTime) {
       const formattedStartDate = startDate
         ? format(startOfDay(startDate), "dd/MM/yyyy")
         : "";
       const formattedEndDate = endDate
         ? format(startOfDay(endDate), "dd/MM/yyyy")
         : "";
-      setStartDateWithoutTime(formattedStartDate);
-      setEndDateWithoutTime(formattedEndDate);
+      setStartDateWithoutTime?.(formattedStartDate)
+      setEndDateWithoutTime?.(formattedEndDate)
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate , isWithTime ]);
   console.log("start date", startDate);
   console.log("end date", endDate);
 

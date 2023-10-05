@@ -33,6 +33,14 @@ const accordions = [
       { id: uuidv4(), href: "#", name: "Functional word" },
     ],
   },
+  {
+    id: uuidv4(),
+    title: "more facilities",
+    options: [
+      { id: uuidv4(), href: "/business-owner-dashboard/facilities", name: "facilities" },
+      
+    ],
+  },
 ];
 
 export { accordions };

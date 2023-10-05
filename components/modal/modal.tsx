@@ -2,14 +2,15 @@
 import React, { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "../shared/icon/closeIcon";
+import ButtonDefault from "../shared/button/buttonDefault";
 
 interface ModalProps {
-    content : string ;
+    text : string ;
     isShowModal : boolean ;
     setIsShowModal : Dispatch<SetStateAction<boolean>>
 }
 
-export default function Modal({content , isShowModal , setIsShowModal}: ModalProps) {
+export default function Modal({text , isShowModal , setIsShowModal ,  }: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -30,14 +31,21 @@ export default function Modal({content , isShowModal , setIsShowModal}: ModalPro
     >
       <div
         ref={modalRef}
-        className=" relative bg-white w-64 sm:w-96 lg:w-[700px] h-96 flex justify-center items-center rounded-lg"
+        className=" relative bg-white w-64 sm:w-96 lg:w-[500px] h-64 flex justify-center items-center rounded-lg"
       >
         <CloseIcon
           onClick={() => setIsShowModal(false)}
           classNameButton="absolute top-3 right-3"
           classNameSvg="w-6 h-6"
         />
-        <div>{content}</div>
+        <div className="w-full h-full flex flex-col items-center justify-center">
+       <p className="mb-6">{text}</p>
+       <div className=" w-full text-center">
+       <ButtonDefault  className="inline-block hover:bg-red-500 bg-red-400 h-10 rounded-lg mr-2 w-1/3" text="no"/>
+       <ButtonDefault className="inline-block hover:bg-fuchsia-500 bg-fuchsia-400 h-10 rounded-lg ml-2 w-1/3" text="yes"/>
+       </div>
+       
+        </div>
       </div>
     </div>
   );

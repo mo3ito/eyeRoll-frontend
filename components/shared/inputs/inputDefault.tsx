@@ -1,12 +1,13 @@
 "use client";
-import React, { ChangeEvent, useState, Dispatch } from "react";
+import React, { ChangeEvent } from "react";
 
 interface InputDefaultProps {
   type: string;
-  className: string
+  className: string;
   value: string | number;
   placeholder?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  disabled: boolean;
 }
 
 export default function InputDefault({
@@ -14,9 +15,17 @@ export default function InputDefault({
   value,
   onChange,
   className,
-  placeholder
-} : InputDefaultProps) {
-
-  
-  return <input  placeholder={placeholder} className={className} type={type} value={value} onChange={onChange} />;
+  placeholder,
+  disabled = false,
+}: InputDefaultProps) {
+  return (
+    <input
+      disabled={disabled}
+      placeholder={placeholder}
+      className={className}
+      type={type}
+      value={value}
+      onChange={onChange}
+    />
+  );
 }

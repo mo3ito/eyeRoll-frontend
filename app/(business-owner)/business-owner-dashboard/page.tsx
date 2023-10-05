@@ -64,7 +64,7 @@ const Page = ()=>{
 <ModalDefault closeIconClassName='w-6 h-6 fill-red-400' isShowModal={isShowModalCalculator} setIsShowModal={setIsShowModalCalculator}>
 <DiscountCalculator/>
 </ModalDefault>
-<Modal isShowModal={isShowCancelModal} setIsShowModal={setIsShowCancelModal} />
+<Modal cancelHandler={()=>setIsShowCancelModal(false)} text='Are you sure to delete?' isShowModal={isShowCancelModal} setIsShowModal={setIsShowCancelModal} />
 
     </div>
     

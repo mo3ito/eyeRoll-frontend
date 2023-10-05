@@ -7,10 +7,13 @@ import ButtonDefault from "../shared/button/buttonDefault";
 interface ModalProps {
     text : string ;
     isShowModal : boolean ;
-    setIsShowModal : Dispatch<SetStateAction<boolean>>
+    setIsShowModal : Dispatch<SetStateAction<boolean>>;
+    confirmHandler? : ()=> void;
+    cancelHandler?: ()=> void;
+
 }
 
-export default function Modal({text , isShowModal , setIsShowModal ,  }: ModalProps) {
+export default function Modal({text , isShowModal , setIsShowModal , confirmHandler , cancelHandler  }: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -41,8 +44,8 @@ export default function Modal({text , isShowModal , setIsShowModal ,  }: ModalPr
         <div className="w-full h-full flex flex-col items-center justify-center">
        <p className="mb-6">{text}</p>
        <div className=" w-full text-center">
-       <ButtonDefault  className="inline-block hover:bg-red-500 bg-red-400 h-10 rounded-lg mr-2 w-1/3" text="no"/>
-       <ButtonDefault className="inline-block hover:bg-fuchsia-500 bg-fuchsia-400 h-10 rounded-lg ml-2 w-1/3" text="yes"/>
+       <ButtonDefault onClick={cancelHandler}  className="inline-block hover:bg-red-500 bg-red-400 h-10 rounded-lg mr-2 w-1/3" text="no"/>
+       <ButtonDefault onClick={confirmHandler}  className="inline-block hover:bg-fuchsia-500 bg-fuchsia-400 h-10 rounded-lg ml-2 w-1/3" text="yes"/>
        </div>
        
         </div>

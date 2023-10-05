@@ -12,6 +12,7 @@ const ButtonDefault = ({
   disabled = false
 }: ButtonDefaultProps) => {
   return (
+ 
     <button
     disabled={disabled}
       title={title}
@@ -23,6 +24,7 @@ const ButtonDefault = ({
       {text}
       {loading && <Loading />}
     </button>
+  
   );
 };
 

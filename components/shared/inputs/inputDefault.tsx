@@ -5,9 +5,8 @@ interface InputDefaultProps {
   type: string;
   className: string
   value: string | number;
-  setInputValue: Dispatch<React.SetStateAction<string | number>>;
   placeholder?: string;
-  onChange: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputDefault({
@@ -19,5 +18,5 @@ export default function InputDefault({
 } : InputDefaultProps) {
 
   
-  return <input placeholder={placeholder} className={className} type={type} value={value} onChange={onChange} />;
+  return <input  placeholder={placeholder} className={className} type={type} value={value} onChange={onChange} />;
 }

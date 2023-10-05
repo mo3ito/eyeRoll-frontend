@@ -32,9 +32,9 @@ export default function DeterminationSpecialProduct({
   const changeDiscountAmountHandler = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    const newValue = parseInt(event.target.value);
+    const newValue = parseInt(event.target.value.trim());
     const clampedValue = Math.min(100, Math.max(0, newValue));
-    setDiscountAmount(clampedValue);
+    setDiscountAmount(clampedValue || 0);
   };
 
   const addSpecificSpecialProducts = () => {
@@ -107,10 +107,9 @@ export default function DeterminationSpecialProduct({
           <p className="text-sm ">Discount amount</p>
           <input
             disabled={!isChecked}
-            placeholder="for example : 20%"
             value={discountAmount}
             onChange={changeDiscountAmountHandler}
-            type="number"
+            type="text"
             className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
           />
         </div>

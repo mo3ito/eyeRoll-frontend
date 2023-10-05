@@ -56,7 +56,6 @@ const Page = ()=>{
 </div>
 
 </section>
-{/* <Modal isShowModal={isShowModal} setIsShowModal={setIsShowModal} content={DiscountCalculator}/> */}
 <ModalDefault closeIconClassName='w-6 h-6 fill-red-400' isShowModal={isShowModal} setIsShowModal={setIsShowModal}>
 <DiscountCalculator/>
 </ModalDefault>

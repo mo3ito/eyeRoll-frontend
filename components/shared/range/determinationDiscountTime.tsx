@@ -122,7 +122,7 @@ export default function DeterminationDiscountTime({
         <div className="text-center w-full ">
         <DateRangeDisplay
         className="text-center mt-6 inline-block "
-          firstTitle="sinc"
+          firstTitle="from"
           secondTitle="to"
           thirdTitle="on"
           firstHour={firstHour}
@@ -133,7 +133,7 @@ export default function DeterminationDiscountTime({
         />
         {endDateWithoutTime && <DateRangeDisplay
         className="text-center mt-6 inline-block "
-          firstTitle="from"
+          firstTitle="until"
           secondTitle="to"
           thirdTitle="on"
           firstHour={firstHour}

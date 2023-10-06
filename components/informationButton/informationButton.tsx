@@ -7,7 +7,7 @@ interface InformationButtonProps {
 export default function InformationButton({ onClick }: InformationButtonProps) {
   return (
     <button
-      className="hover:-translate-y-1 hover:duration-500 ease-in-out"
+      className="hover:-translate-y-0.5 hover:duration-500 ease-in-out"
       title="click for information"
       onClick={onClick}
     >

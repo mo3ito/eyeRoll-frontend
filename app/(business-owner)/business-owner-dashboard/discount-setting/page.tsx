@@ -142,7 +142,7 @@ export default function DeterminingDiscount() {
 
               <ButtonDefault
                 disabled={
-                  isCheckeAllProducts && isCheckedDiscountTime ? false : true
+                  (isCheckeAllProducts && isCheckedDiscountTime) || (isCheckedSpecialProducts && isCheckedDiscountTime ) ? false : true
                 }
                 text="send"
                 className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg  "

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Accordion({title , options , setShowAside }:AccordionProps) {
     const [showAccordion , setShowAccordion]=useState<boolean>(false)
+    const [showAccordionChild , setShowAccordionChild]=useState<boolean>(false)
     const router = useRouter()
 
     const linkHandler = (href : string) : void =>{
@@ -28,6 +29,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
                 <li key={option.id} onClick={()=>linkHandler(option.href)} className='my-3 px-6 cursor-pointer underline text-neutral-900 decoration-neutral-900 hover:text-sky-500 hover:decoration-sky-500 hover:-translate-y-0.5 hover:duration-500 hover:ease-in-out '>
                     {option.name}
                 </li>
+                
                 )}
           </ul>
         </div>

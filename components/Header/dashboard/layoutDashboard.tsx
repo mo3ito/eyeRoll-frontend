@@ -30,7 +30,7 @@ const LayoutDashboard = () => {
    <div  className='w-screen bg-sky-50 bg-gradient-to-b from-indigo-300 to-sky-100 h-20 overflow-x-auto flex items-center  px-20'>
     <div className='flex  gap-x-20 '>
       <button className='iniline-block text-xl hover:scale-90 hover:duration-300  mr-8' onClick={()=>setShowAside(true)}>
-      menu
+      <svg className='w-7 h-7' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
       </button>
       <button className=' p-2 flex items-center space-x-2 justify-center'>
         <div className='w-8 h-8 bg-red-200 rounded-full '></div>

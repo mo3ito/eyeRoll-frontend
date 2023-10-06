@@ -45,7 +45,7 @@ export default function DeterminationRangePeak({
       <div
         className={` ${
           isChecked ? "bg-indigo-100" : "bg-gray-200"
-        } w-full  h-max  my-2 rounded-xl p-4 flex flex-col  space-y-6 `}
+        } w-full  h-max  my-2 rounded-xl p-4 flex flex-col  space-y-4 `}
       >
         <div className="flex">
           <InformationButton onClick={showInformation} />

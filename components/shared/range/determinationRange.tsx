@@ -35,15 +35,22 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
     
     <CheckBox  onChange={(event)=>changeProductsHandler(event)} checked={isChecked} backgroundClasses={isChecked ? 'bg-pink-400' : 'bg-pink-300'} sizeClasses='w-12 h-6 ml-auto ' circleClasses='w-4 h-4 bg-gray-200 peer-checked:translate-x-6  peer-checked:bg-violet-500'  />
     </div>
-    <div className='w-full  h-max  rounded-xl space-y-6 flex items-center justify-center flex-col mt-3'>
+    <div className='w-full  h-max  rounded-xl space-y-4 flex items-center justify-center flex-col mt-3'>
         <div className='  space-x-10 flex items-center justify-center w-full'>
-          <div>
+          <div className=' '>
           <span className='text-lg pr-1'>min</span>
-          <input disabled={!isChecked} value={ !isChecked ? "0" : minValue} onChange={addHandler} type="number" className=' bg-transparent w-20 h-10 shadow-md rounded-lg  pl-3 border outline-none border-purple-300'/>
+          <div className='w-24  h-10 border rounded-lg border-purple-300 shadow-md inline-block'>
+          <input disabled={!isChecked} value={ !isChecked ? "0" : minValue} onChange={addHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none'/>
+          %
+          </div>
+          
           </div>
           <div>
           <span className='text-xl pr-1 ml-3'>max</span>
-          <input disabled={!isChecked} value={ !isChecked ? "0" : maxValue} onChange={minusHandler} type="number" className=' bg-transparent w-20 h-10 shadow-md rounded-lg  pl-3 border outline-none border-purple-300'/>
+          <div className='w-24  h-10 border rounded-lg border-purple-300 shadow-md inline-block'>
+          <input disabled={!isChecked} value={ !isChecked ? "0" : maxValue} onChange={minusHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none '/>
+          %
+          </div>
           </div>
           
          

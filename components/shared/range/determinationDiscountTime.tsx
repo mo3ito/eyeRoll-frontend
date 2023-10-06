@@ -121,7 +121,7 @@ export default function DeterminationDiscountTime({
       {calendarisValue && (
         <div className="text-center w-full ">
         <DateRangeDisplay
-        className="text-center mt-6 inline-block "
+        className="text-center mt-4 inline-block "
           firstTitle="from"
           secondTitle="to"
           thirdTitle="on"
@@ -132,7 +132,7 @@ export default function DeterminationDiscountTime({
           startDateWithoutTime={startDateWithoutTime}
         />
         {endDateWithoutTime && <DateRangeDisplay
-        className="text-center mt-6 inline-block "
+        className="text-center mt-4 inline-block "
           firstTitle="until"
           secondTitle="to"
           thirdTitle="on"

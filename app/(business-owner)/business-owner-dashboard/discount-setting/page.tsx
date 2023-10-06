@@ -6,6 +6,7 @@ import DeterminationSpecialProduct from "@/components/shared/range/determination
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import DeterminationRangePeak from "@/components/shared/range/determinationRangePeak";
+import DeterminationGift from "@/components/shared/range/determinationGift";
 import {
   DISCOUNT_ON_ALL_PRODUCTS_TITLE,
   DISCOUNT_ON_ALL_PRODUCTS_INFORMATION,
@@ -29,6 +30,8 @@ export default function DeterminingDiscount() {
   const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =
     useState<boolean>(false);
   const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(false);
+  const [isCheckedGift, setIsCheckedGift] = useState<boolean>(false);
+  const [numberPurchaseGift, setNumberPurchaseGift] = useState<number>(0);
   const [startDateWithoutTime, setStartDateWithoutTime] = useState<
     string | undefined
   >("");
@@ -69,8 +72,8 @@ export default function DeterminingDiscount() {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-center bg-sky-100 pt-8 ">
-        <div className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  p-8 shadow-lg">
+      <div className="w-full h-screen flex justify-center bg-sky-100 pt-2  ">
+        <div className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
               <DeterminationRange
@@ -131,6 +134,14 @@ export default function DeterminingDiscount() {
                 }
               />
 
+              <DeterminationGift
+                isChecked={isCheckedGift}
+                setIsChecked={setIsCheckedGift}
+                numberPurchaseGift={numberPurchaseGift}
+                setNumberPurchaseGift={setNumberPurchaseGift}
+                showInformation={() => showInformationHandler("hi")}
+              />
+
               <DeterminationSpecialProduct
                 title={DISCOUNT_SPECIAL_PRODUCTS_TITLE}
                 setIsChecked={setIsCheckedSpecialProducts}
@@ -142,10 +153,13 @@ export default function DeterminingDiscount() {
 
               <ButtonDefault
                 disabled={
-                  (isCheckeAllProducts && isCheckedDiscountTime) || (isCheckedSpecialProducts && isCheckedDiscountTime ) ? false : true
+                  (isCheckeAllProducts && isCheckedDiscountTime) ||
+                  (isCheckedSpecialProducts && isCheckedDiscountTime)
+                    ? false
+                    : true
                 }
                 text="send"
-                className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg  "
+                className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg mt-1 "
                 isScale={true}
               />
             </>

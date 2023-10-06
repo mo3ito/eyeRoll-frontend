@@ -100,18 +100,22 @@ export default function DeterminationSpecialProduct({
             onChange={changeSpecialProductNameHandler}
             placeholder="for examole : pizza"
             type="text"
-            className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
+            className="outline-none px-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
           />
         </div>
         <div className="w-3/12">
           <p className="text-sm ">Discount amount</p>
+          <div className="w-11/12 flex items-center justify-center  border border-fuchsia-400 rounded-lg h-10 px-2">
           <input
             disabled={!isChecked}
             value={discountAmount}
             onChange={changeDiscountAmountHandler}
             type="text"
-            className="outline-none pl-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "
+            className="outline-none  w-full h-10  bg-inherit rounded-lg "
           />
+          %
+          </div>
+        
         </div>
         </div>
         <div className="w-3/12 h-full">
@@ -127,12 +131,12 @@ export default function DeterminationSpecialProduct({
       <div
         className={`${
           specificSpecialProducts.length > 0 && "mt-3"
-        } w-full max-h-24   flex items-center  gap-3  flex-wrap overflow-y-auto`}
+        } w-full max-h-14   flex items-center  gap-3  flex-wrap overflow-y-auto`}
       >
         {specificSpecialProducts.map((item) => (
           <div
             key={item.id}
-            className="w-max px-7 h-8 pt-1 rounded-md bg-fuchsia-200 relative "
+            className="w-max px-7 h-max py-2  rounded-md bg-fuchsia-200 relative "
           >
             {item.productName}{" "}
             <span className="pl-4">{item.discountProduct}%</span>

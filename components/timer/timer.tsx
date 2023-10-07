@@ -1,38 +1,53 @@
-import React from 'react';
-import { useTimer } from 'react-timer-hook';
+import React, { useEffect, useState } from 'react';
 
-export default function Timer({ expiryTimestamp }) {
-  const {
-    totalSeconds,
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
+const COUNTER_KEY = 'timerCount';
 
+
+export default function Timer({timeMinutes}:{timeMinutes : number}) {
+
+  const [countdown, setCountdown] = useState<number>(timeMinutes*60 || 400);
+ 
+  
+
+  useEffect(() => {
+    // بازیابی مقدار تایمر از localStorage
+    const storedCountdown = parseInt(localStorage.getItem(COUNTER_KEY), 10);
+
+    if (!isNaN(storedCountdown)) {
+      setCountdown(storedCountdown);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => {
+        if (prevCountdown > 0) {
+          // ذخیره مقدار تایمر در localStorage
+          localStorage.setItem(COUNTER_KEY, prevCountdown - 2);
+          return prevCountdown - 1;
+        }
+
+        // تایمر به اتمام رسیده است
+        localStorage.removeItem(COUNTER_KEY);
+        clearInterval(timer);
+        return 0;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (time : number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
 
   return (
-    <div style={{textAlign: 'center'}}>
-     
-      <div className='text-red-400 text-xl mt-2' >
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-      </div>
-      {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
-      <button onClick={start}>Start</button>
-      {/* <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
-      <button onClick={() => {
-        // Restarts to 5 minutes timer
-        const time = new Date();
-        time.setSeconds(time.getSeconds() + 300);
-        restart(time)
-      }}>Restart</button>  */}
-      
+    <div>
+      <p>زمان باقی‌مانده: {formatTime(countdown)}</p>
     </div>
   );
 }

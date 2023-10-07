@@ -13,7 +13,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
 
    
   
-    const showChildren = (childOption : object , href : string )=>{
+    const showChildren = (childOption : object | undefined , href : string )=>{
 
       if(childOption){
         setShowAccordionChild(prev=> !prev)

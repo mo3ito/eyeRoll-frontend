@@ -10,7 +10,6 @@ export default function AccordionBox({ accordions , setShowAside , className}: A
       {accordions.map((accordion) => (
         <Accordion
           key={accordion.id}
-          accordionChild={""}
           title={accordion.title}
           options={...accordion.options}
           setShowAside={setShowAside}

@@ -84,4 +84,10 @@ body {
     pointer-events: auto;
     border: none;
   }
+
+  .hoverToUp:hover{
+    transform: translateY(-4px);
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }

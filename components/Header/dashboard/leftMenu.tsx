@@ -22,10 +22,10 @@ export default function LeftMenu({ setShowAside, showAside , leftMenuRef }: Left
       ref={leftMenuRef}
       className={` ${
         showAside ? "left-0" : "-left-96"
-      } w-96 h-screen bg-gray-100 absolute top-0 rounded-r-3xl shadow-lg transition-all z-50`}
+      } w-96 h-screen bg-[url('/images/9274889.jpg')] opacity-90 bg-gray-100 border-2 border-fuchsia-300 absolute top-0 rounded-r-3xl shadow-lg transition-all z-50`}
     >
    
-      <CloseIcon classNameButton="absolute right-4 top-4  " classNameSvg="w-6 h-6  fill-neutral-500  " onClick={() => setShowAside(false)}/>
+      <CloseIcon classNameButton="absolute right-4 top-4  " classNameSvg="w-6 h-6  fill-fuchsia-500  " onClick={() => setShowAside(false)}/>
       <AccordionBox className="w-full h-max mt-16 last:border-b-2 " accordions={accordions} setShowAside={setShowAside} />
     </aside>
   );

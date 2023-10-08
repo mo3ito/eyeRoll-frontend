@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+interface TimerProps {
+  timeMinutes:number;
+  className:string;
+  classNameTime:string
+}
+
 const COUNTER_KEY = 'timerCount';
 
 
-export default function Timer({timeMinutes}:{timeMinutes : number}) {
+export default function Timer({timeMinutes , className , classNameTime}: TimerProps) {
 
   const [countdown, setCountdown] = useState<number>(timeMinutes*60 || 400);
  
@@ -46,8 +52,8 @@ export default function Timer({timeMinutes}:{timeMinutes : number}) {
   };
 
   return (
-    <div>
-      <p>زمان باقی‌مانده: {formatTime(countdown)}</p>
+    <div className={className}>
+      <p className={classNameTime}>{formatTime(countdown)}</p>
     </div>
   );
 }

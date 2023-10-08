@@ -26,11 +26,11 @@ const DiscountSetting = () => {
 
           <div className="ml-auto   flex items-center space-x-4 h-full">
             <div className="flex itesm-center space-x-6">
-              <div className=" hoverToUp w-16 h-16 bg-green-300 rounded-full font-semibold text-sm border-4 border-white text-white pt-[18px] pl-3">
+              <div className=" hoverToUp w-14 h-14 bg-green-300 rounded-full font-semibold text-sm border-4 border-white text-white pt-[14px] pl-2">
                 13%
               </div>
 
-              <div className="w-16 h-16 bg-indigo-200 hoverToUp  rounded-full flex items-center justify-center flex-col border-4 border-white">
+              <div className="w-14 h-14 bg-indigo-200 hoverToUp  rounded-full flex items-center justify-center flex-col border-4 border-white">
                 <svg
                   className="w-4 h-4 fill-violet-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ const DiscountSetting = () => {
               </div>
 
               <Timer
-                className="w-16 h-16 bg-purple-300 rounded-full flex items-center justify-center  border-4 border-white hoverToUp"
+                className="w-14 h-14 bg-purple-300 rounded-full flex items-center justify-center  border-4 border-white hoverToUp"
                 classNameTime="text-white font-semibold text-[11px]"
                 timeMinutes={20}
               />

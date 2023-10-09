@@ -35,7 +35,7 @@ const LayoutDashboard = () => {
     <div className='flex items-center   text-xl h-full space-x-12 w-full '>
     
         <button
-          className="iniline-block text-xl hover:scale-90 hover:duration-300  mr-8"
+          className="iniline-block text-xl   mr-8"
           onClick={() => setShowAside(true)}
         >
           <svg
@@ -52,7 +52,7 @@ const LayoutDashboard = () => {
           
         <li onMouseEnter={()=>setShowBox(true)} className='relative group hover:border-b-4  border-purple-400 h-full flex items-center justify-center cursor-pointer  w-max'>
           <div className='w-max'>
-          <img className="w-12 h-12 bg-green-200 inline-block rounded-full mr-2" src="" alt="" />
+          <img className="w-12 h-12 bg-green-200 inline-block rounded-full mr-2 object-cover" src="./images/mo3ito.jpg" alt="" />
         <span className=' inline-block mr-1 text-stone-600'>mo3ito</span>
         <svg className='w-4 h-4 fill-zinc-700 inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16L6 10H18L12 16Z"></path></svg>
           </div>

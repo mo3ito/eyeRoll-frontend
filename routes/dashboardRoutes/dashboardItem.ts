@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const accordions = [
+const accordionItems = [
   {
     id:uuidv4(),
     title:"main pages",
@@ -27,20 +27,12 @@ const accordions = [
   },
   {
     id: uuidv4(),
-    title: "Determine access",
+    title: "online menu",
     options: [
-      { id: uuidv4(), href: "#", name: "Functional word" },
-      { id: uuidv4(), href: "#", name: "Functional word" },
-    ],
-  },
-  {
-    id: uuidv4(),
-    title: "more facilities",
-    options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/facilities", name: "facilities" },
+      { id: uuidv4(), href: "/business-owner-dashboard/online-menu", name: "import menu" , },
       
     ],
   },
 ];
 
-export { accordions };
+export { accordionItems };

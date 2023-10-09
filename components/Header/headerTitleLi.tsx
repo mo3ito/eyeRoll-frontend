@@ -7,7 +7,7 @@ import { HeaderTitleLiProps } from '@/types/headerTitleLiProps/headerTitleLiProp
 const HeaderTitleLi = ({title , options } : HeaderTitleLiProps) => {
   const [showBox , setShowBox]=useState(true)
   const router = useRouter()
-  const linkHandler =(path : string)=>{
+  const linkHandler =(path : any)=>{
     router.push(path)
    setShowBox(false)
   }

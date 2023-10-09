@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 
@@ -23,15 +23,21 @@ export default function Facilities() {
     }
   };
 
-  const changeProductDescriptionHandler = (event: ChangeEvent<HTMLInputElement>)=>{
+  const changeProductDescriptionHandler = (event: ChangeEvent<HTMLTextAreaElement>)=>{
     setProductDescription(event.target.value.trim())
   }
 
+  const submitHandler = (event : FormEvent)=>{
+    event.preventDefault()
+    console.log('submited');
+    
+  }
 
   return (
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
-        <div className="w-1/4 h-44 mx-auto py-12">
+        <form onSubmit={submitHandler}>
+        <div className="w-1/4 h-44 mx-auto py-12 ">
           <div className="mb-4">
             <p className="mb-3">import your product</p>
             <InputDefault
@@ -66,6 +72,7 @@ export default function Facilities() {
             className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg"
           />
         </div>
+        </form>
       </div>
     </div>
   );

@@ -9,7 +9,6 @@ export default function Facilities() {
   const [productDescription, setProductDescription] = useState<string>("");
 
   const changeProductNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    
     setProductName(event.target.value.trim());
   };
 
@@ -23,55 +22,60 @@ export default function Facilities() {
     }
   };
 
-  const changeProductDescriptionHandler = (event: ChangeEvent<HTMLTextAreaElement>)=>{
-    setProductDescription(event.target.value.trim())
-  }
+  const changeProductDescriptionHandler = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setProductDescription(event.target.value.trim());
+  };
 
-  const submitHandler = (event : FormEvent)=>{
-    event.preventDefault()
-    console.log('submited');
-    
-  }
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+    console.log("submited");
+  };
 
   return (
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitHandler}>
-        <div className="w-1/4 h-44 mx-auto py-12 ">
-          <div className="mb-4">
-            <p className="mb-3">import your product</p>
-            <InputDefault
-              disabled={false}
-              type="text"
-              value={productName}
-              onChange={changeProductNameHandler}
-              placeholder="for examole: pizza"
-              className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+          <div className="w-1/4 h-44 mx-auto pt-44 ">
+            <div className="mb-4">
+              <p className="mb-3">import your product</p>
+              <InputDefault
+                disabled={false}
+                type="text"
+                value={productName}
+                onChange={changeProductNameHandler}
+                placeholder="for examole: pizza"
+                className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+              />
+            </div>
+
+            <div className="mb-3">
+              <p className="mb-3">import your price (dollar)</p>
+              <InputDefault
+                disabled={false}
+                type="text"
+                value={productPrice}
+                onChange={changeProductPriceHandler}
+                placeholder="for examole: 3"
+                className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+              />
+            </div>
+
+            <div className="mb-3">
+              <p className="mb-3">import your description</p>
+              <textarea
+                value={productDescription}
+                onChange={changeProductDescriptionHandler}
+                className="w-full h-44 border focus:border-2 border-fuchsia-400 p-2 outline-none bg-transparent rounded-lg"
+              />
+            </div>
+
+            <ButtonDefault
+              text="send"
+              className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg"
             />
           </div>
-
-          <div className="mb-3">
-            <p className="mb-3">import your price (dollar)</p>
-            <InputDefault
-              disabled={false}
-              type="text"
-              value={productPrice}
-              onChange={changeProductPriceHandler}
-              placeholder="for examole: 3"
-              className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
-            />
-          </div>
-
-          <div className="mb-3">
-            <p className="mb-3">import your description</p>
-            <textarea value={productDescription} onChange={changeProductDescriptionHandler} className="w-full h-44 border focus:border-2 border-fuchsia-400 p-2 outline-none bg-transparent rounded-lg" />
-          </div>
-
-          <ButtonDefault
-            text="send"
-            className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg"
-          />
-        </div>
         </form>
       </div>
     </div>

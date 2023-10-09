@@ -13,7 +13,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
 
    
   
-    const showChildren = (childOption : object | undefined , href : string )=>{
+    const showChildren = (childOption : object | undefined , href : any )=>{
 
       if(childOption){
         setShowAccordionChild(prev=> !prev)
@@ -24,7 +24,7 @@ export default function Accordion({title , options , setShowAside }:AccordionPro
       }
     }
 
-    const childOptionLinkHandler = (childHref : string )=>{
+    const childOptionLinkHandler = (childHref : any )=>{
       router.push(childHref)
       setShowAside(false)
      setShowAccordion(false)

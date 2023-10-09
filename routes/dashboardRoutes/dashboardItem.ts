@@ -13,7 +13,7 @@ const accordionItems = [
     id: uuidv4(),
     title: "setting",
     options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/discount-setting", name: "roll setting" , childOption:[{"id":uuidv4() , childName:"discount range" , href:"/"},] },
+      { id: uuidv4(), name: "roll setting" , childOption:[{"id":uuidv4() , childName:"discount range" , href: "/business-owner-dashboard/discount-setting"},] },
       { id: uuidv4(), href: "#", name: "review setting" },
     ],
   },

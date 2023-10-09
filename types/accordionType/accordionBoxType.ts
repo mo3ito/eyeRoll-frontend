@@ -6,7 +6,7 @@ interface childrenOption {
 
 interface OptionsAccordionBoxProps {
   id: string;
-  href: string;
+  href?: string;
   name: string;
   childOption?: childrenOption[] | undefined
 }

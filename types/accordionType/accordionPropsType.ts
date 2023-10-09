@@ -1,24 +1,14 @@
-
 interface OptionsAccordionBoxProps {
   id: string;
-  href: string;
+  href?: string;
   name: string;
-  childOption?: childrenOption[] | undefined
+  childOption?: childrenOption[] | undefined;
 }
-
-
 
 interface childrenOption {
-  id: string ;
-  childName : string;
-  href: string
-}
-
-interface Option {
   id: string;
+  childName: string;
   href: string;
-  name: string;
-  childOption: childrenOption[]
 }
 
 export interface AccordionProps {

@@ -33,6 +33,14 @@ const accordionItems = [
       
     ],
   },
+  {
+    id: uuidv4(),
+    title: "information",
+    options: [
+      { id: uuidv4(), href: "/business-owner-dashboard/information", name: "editing information" , },
+      
+    ],
+  },
 ];
 
 export { accordionItems };

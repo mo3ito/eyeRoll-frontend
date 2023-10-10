@@ -96,4 +96,11 @@ body {
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  .starBefore::before{
+  content: "*";
+  margin-right: 4px; 
+  color: #EF4444;
+
+  }
 }

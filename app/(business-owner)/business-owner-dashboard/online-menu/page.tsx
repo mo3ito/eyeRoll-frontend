@@ -37,7 +37,7 @@ export default function Facilities() {
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitHandler}>
-          <div className="w-1/4 h-44 mx-auto pt-44 ">
+          <div className="w-1/4 h-max mx-auto pt-44 ">
             <div className="mb-4">
               <p className="mb-3">import your product</p>
               <InputDefault

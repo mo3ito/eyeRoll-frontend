@@ -6,7 +6,10 @@ import { AuthContext } from "@/context/authContext";
 
 export default function Information() {
 
-  const {name , lastName, email} = useContext(AuthContext)
+  const {infos} = useContext(AuthContext)
+
+  console.log(infos);
+  
   
 
   return (
@@ -18,6 +21,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore ">name</p>
                 <InputDefault
+                value={infos?.name}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -27,6 +31,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className=" starBefore mb-3">last name</p>
                 <InputDefault
+                value={infos?.last_name}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -36,6 +41,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore ">username</p>
                 <InputDefault
+                value={infos?.username}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -50,6 +56,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
+                value={infos.email}
                   disabled={false}
                   type="email"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -59,6 +66,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">password</p>
                 <InputDefault
+                placeholder="import new password"
                   disabled={false}
                   type="password"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -69,6 +77,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">repeat password</p>
                 <InputDefault
+                placeholder="repeat new password"
                   disabled={false}
                   type="password"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"

@@ -7,7 +7,7 @@ import Loading from '@/components/loading/loading'
 import { toast } from 'react-toastify'
 
 
-const useVerifyEmail = (path : string , pathApi : string) => {
+const useVerifyEmail = (path : any , pathApi : string) => {
     const searchParams : ReadonlyURLSearchParams = useSearchParams()
     const router = useRouter()
     const emailToken= searchParams.get("token_email")

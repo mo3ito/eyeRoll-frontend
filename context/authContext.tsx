@@ -11,7 +11,25 @@ export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
     isVerified : false,
     token : null, 
-    infos : {},
+    infos: {
+      address: "",
+      brand_name: "",
+      city_name: "",
+      country_name: "",
+      email: "",
+      id: "",
+      is_additional_specifications: false,
+      is_businessOwner: false,
+      is_verified: false,
+      last_name: "",
+      name: "",
+      phone_number: "",
+      registration_date: "",
+      state_name: "",
+      username: "",
+      postal_code: "",
+      work_phone: "",
+  },
     login : ()=>{},
     logout : ()=>{},
     setInfos: () => {},
@@ -75,7 +93,7 @@ export const AuthContext = createContext<AuthContextProps>({
      },[login , isVerifyedHandler])
     
     useEffect(()=>{
-      if(infos?.is_verified){
+      if('is_verified' in infos && infos?.is_verified){
         setIsLoggedIn(true)
       }else{
         setIsLoggedIn(false)

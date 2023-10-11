@@ -12,24 +12,43 @@ export default function Information() {
   const [lastName , setLastName]=useState<string>('')
   const [username , setUsername]=useState<string>('')
   const [email , setEmail]=useState<string>('')
+  const [phoneNumber , setPhoneNumber]=useState<string>('')
+  const [password , setPassword]=useState<string>('')
+  const [repeatPassword , setRepeatPassword]=useState<string>('')
+  const [country , setCountry]=useState<string>('')
+  const [state , setState]=useState<string>('')
+  const [city , setCity]=useState<string>('')
+  const [address , setAddress]=useState<string>('')
+  const [brandName , setBrandName]=useState<string>('')
+  const [postalCode , setPostalCode]=useState<string>('')
+  const [workPhone , setWorkPhone]=useState<string>('')
 
 
 
 
 
   useEffect(()=>{
-
     if(infos){
       setName(infos?.name)
       setLastName(infos?.last_name)
       setUsername(infos?.username)
       setEmail(infos?.email)
-
+      setPhoneNumber(infos?.phone_number)
+      setCountry(infos?.country_name)
+      setState(infos?.state_name)
+      setCity(infos?.city_name)
+      setAddress(infos?.address)
+      setBrandName(infos?.brand_name)
+      setPostalCode(infos.postal_code)
+      setWorkPhone(infos?.work_phone)
     }
 
   },[infos])
-
   console.log(infos);
+
+  const changeHandlerName = ()=>{
+    
+  }
   
   
   if(!infos){
@@ -40,19 +59,20 @@ export default function Information() {
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
         <form>
-          <div className="w-2/4 h-44 mx-auto pt-44 ">
+          <div className="w-2/4 h-max mx-auto pt-32 ">
             <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-1/2 ">
                 <p className="mb-3 starBefore ">name</p>
                 <InputDefault
-                value={name}
+                onChange={changeHandlerName}
+                  value={name}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
                 />
               </div>
 
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-1/2 ">
                 <p className=" starBefore mb-3">last name</p>
                 <InputDefault
                 value={lastName}
@@ -62,7 +82,14 @@ export default function Information() {
                 />
               </div>
 
-              <div className="mb-4 w-1/3 ">
+           
+
+
+              
+            </div>
+
+            <div className="w-full flex justify-around gap-x-5">
+            <div className="mb-4 w-2/4 ">
                 <p className="mb-3 starBefore ">username</p>
                 <InputDefault
                 value={username}
@@ -72,8 +99,15 @@ export default function Information() {
                 />
               </div>
 
-
-              
+              <div className="mb-4 w-2/4 ">
+                <p className="mb-3 starBefore ">phone number</p>
+                <InputDefault
+                value={phoneNumber}
+                  disabled={false}
+                  type="text"
+                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                />
+              </div>
             </div>
 
             <div className="w-full flex justify-around gap-x-5">
@@ -86,10 +120,12 @@ export default function Information() {
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
                 />
               </div>
+              
 
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">password</p>
                 <InputDefault
+                value={password}
                 placeholder="import new password"
                   disabled={false}
                   type="password"
@@ -101,6 +137,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">repeat password</p>
                 <InputDefault
+                value={repeatPassword}
                 placeholder="repeat new password"
                   disabled={false}
                   type="password"
@@ -117,6 +154,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">country</p>
                 <InputDefault
+                value={country}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -126,6 +164,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">state</p>
                 <InputDefault
+                value={state}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -135,6 +174,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">city</p>
                 <InputDefault
+                value={city}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -146,6 +186,7 @@ export default function Information() {
               <div className="mb-4 w-full ">
                 <p className="mb-3 starBefore">address</p>
                 <InputDefault
+                value={address}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -158,6 +199,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">brand name</p>
                 <InputDefault
+                value={brandName}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -167,6 +209,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">Postal code</p>
                 <InputDefault
+                value={postalCode}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -176,6 +219,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">work phone</p>
                 <InputDefault
+                value={workPhone}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -185,7 +229,7 @@ export default function Information() {
 
             <ButtonDefault
               text="send"
-              className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg"
+              className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
             />
           </div>
         </form>

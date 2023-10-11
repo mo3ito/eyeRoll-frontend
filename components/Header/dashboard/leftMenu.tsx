@@ -14,7 +14,7 @@ interface LeftMenuProps {
 
 export default function LeftMenu({ setShowAside, showAside , leftMenuRef }: LeftMenuProps) {
  
-  console.log(leftMenuRef.current);
+ 
   
   
   return (

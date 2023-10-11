@@ -18,7 +18,10 @@ interface InfosProps {
   phone_number:string;
   registration_date:string;
   state_name:string;
-  username:string
+  username:string;
+  postal_code:string;
+  work_phone:string;
+ 
 }
 
 export interface AuthContextProps {
@@ -26,7 +29,7 @@ export interface AuthContextProps {
   isVerified: boolean;
   isLoggedIn: boolean;
   token: string | null;
-  infos: InfosProps | null;
+  infos: InfosProps;
   login: (infos: object, token: string) => void;
   logout: () => void;
   setInfos: (infos: object) => void;

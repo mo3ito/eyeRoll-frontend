@@ -1,9 +1,10 @@
 "use client";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import { ChangeEvent, useContext , useEffect, useRef, useState } from "react";
+import { useContext , useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/context/authContext";
 import Loading from "@/components/loading/loading";
+import { handleInputChange } from "@/utils/handleInputChange";
 
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -62,51 +63,9 @@ export default function Information() {
   },[infos])
   console.log(infos);
 
-  const changeHandlerName = (event : ChangeEvent<HTMLInputElement>)=>{
-    setName(event.target.value)
-  }
-  const changeHandlerLastName = (event : ChangeEvent<HTMLInputElement>)=>{
-    setLastName(event.target.value)
-  }
-  const changeHandlerUsername = (event : ChangeEvent<HTMLInputElement>)=>{
-    setUsername(event.target.value)
-  }
-  const changeHandlerEmail = (event : ChangeEvent<HTMLInputElement>)=>{
-    setEmail(event.target.value)
-  }
-  const changeHandlerPassword = (event : ChangeEvent<HTMLInputElement>)=>{
-    setPassword(event.target.value)
-  }
-  const changeHandlerRepeatPassword = (event : ChangeEvent<HTMLInputElement>)=>{
-    setRepeatPassword(event.target.value)
-  }
-  const changeHandlerCountry = (event : ChangeEvent<HTMLInputElement>)=>{
-    setCountry(event.target.value)
-  }
-  const changeHandlerState = (event : ChangeEvent<HTMLInputElement>)=>{
-    setState(event.target.value)
-  }
-
-  const changeHandlerCity = (event : ChangeEvent<HTMLInputElement>)=>{
-    setCity(event.target.value)
-  }
-  const changeHandlerAddress = (event : ChangeEvent<HTMLInputElement>)=>{
-    setAddress(event.target.value)
-  }
-  
-  const changeHandlerBrandName = (event : ChangeEvent<HTMLInputElement>)=>{
-    setBrandName(event.target.value)
-  }
-
-  const changeHandlerPostalCode = (event : ChangeEvent<HTMLInputElement>)=>{
-    setPostalCode(event.target.value)
-  }
-
-  const changeHandlerWorkPhone = (event : ChangeEvent<HTMLInputElement>)=>{
-    setWorkPhone(event.target.value)
-  }
   
   console.log(phoneNumber);
+
   
 
   if(!infos){
@@ -122,7 +81,7 @@ export default function Information() {
               <div className="mb-4 w-1/2 ">
                 <p className="mb-3 starBefore ">name</p>
                 <InputDefault
-                onChange={changeHandlerName}
+                 onChange={(event) => handleInputChange(event, setName )}
                   value={name}
                   disabled={false}
                   type="text"
@@ -133,7 +92,7 @@ export default function Information() {
               <div className="mb-4 w-1/2 ">
                 <p className=" starBefore mb-3">last name</p>
                 <InputDefault
-                onChange={changeHandlerLastName}
+                 onChange={(event) => handleInputChange(event, setLastName)}
                 value={lastName}
                   disabled={false}
                   type="text"
@@ -146,7 +105,7 @@ export default function Information() {
             <div className="mb-4 w-2/4 ">
                 <p className="mb-3 starBefore ">username</p>
                 <InputDefault
-                onChange={changeHandlerUsername}
+                 onChange={(event) => handleInputChange(event, setUsername)}
                 value={username}
                   disabled={false}
                   type="text"
@@ -170,7 +129,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
-                onChange={changeHandlerEmail}
+                 onChange={(event) => handleInputChange(event, setEmail)}
                 value={email}
                   disabled={false}
                   type="email"
@@ -182,7 +141,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">password</p>
                 <InputDefault
-                onChange={changeHandlerPassword}
+                 onChange={(event) => handleInputChange(event, setPassword)}
                 value={password}
                 placeholder="import new password"
                   disabled={false}
@@ -195,7 +154,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">repeat password</p>
                 <InputDefault
-                onChange={changeHandlerRepeatPassword}
+                 onChange={(event) => handleInputChange(event, setRepeatPassword)}
                 value={repeatPassword}
                 placeholder="repeat new password"
                   disabled={false}
@@ -213,7 +172,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">country</p>
                 <InputDefault
-                onChange={changeHandlerCountry}
+                 onChange={(event) => handleInputChange(event, setCountry)}
                 value={country}
                   disabled={false}
                   type="text"
@@ -224,7 +183,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">state</p>
                 <InputDefault
-                onChange={changeHandlerState}
+                 onChange={(event) => handleInputChange(event, setState)}
                 value={state}
                   disabled={false}
                   type="text"
@@ -235,7 +194,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">city</p>
                 <InputDefault
-                onChange={changeHandlerCity}
+                 onChange={(event) => handleInputChange(event, setCity)}
                 value={city}
                   disabled={false}
                   type="text"
@@ -248,7 +207,7 @@ export default function Information() {
               <div className="mb-4 w-full ">
                 <p className="mb-3 starBefore">address</p>
                 <InputDefault
-                onChange={changeHandlerAddress}
+                 onChange={(event) => handleInputChange(event, setAddress)}
                 value={address}
                   disabled={false}
                   type="text"
@@ -262,7 +221,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">brand name</p>
                 <InputDefault
-                onChange={changeHandlerBrandName}
+                onChange={(event) => handleInputChange(event, setBrandName)}
                 value={brandName}
                   disabled={false}
                   type="text"
@@ -273,7 +232,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">Postal code</p>
                 <InputDefault
-                onChange={changeHandlerPostalCode}
+                 onChange={(event) => handleInputChange(event, setPostalCode)}
                 value={postalCode}
                   disabled={false}
                   type="text"
@@ -284,7 +243,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">work phone</p>
                 <InputDefault
-                onChange={changeHandlerWorkPhone}
+                 onChange={(event) => handleInputChange(event, setWorkPhone)}
                 value={workPhone}
                   disabled={false}
                   type="text"

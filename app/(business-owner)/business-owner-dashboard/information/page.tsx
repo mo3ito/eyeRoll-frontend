@@ -1,9 +1,12 @@
 "use client";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import { ChangeEvent, useContext , useEffect, useState } from "react";
+import { ChangeEvent, useContext , useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/context/authContext";
 import Loading from "@/components/loading/loading";
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 export default function Information() {
 
@@ -12,7 +15,7 @@ export default function Information() {
   const [lastName , setLastName]=useState<string>('')
   const [username , setUsername]=useState<string>('')
   const [email , setEmail]=useState<string>('')
-  const [phoneNumber , setPhoneNumber]=useState<string>('')
+  const [phoneNumber , setPhoneNumber]=useState<string | undefined >('')
   const [password , setPassword]=useState<string>('')
   const [repeatPassword , setRepeatPassword]=useState<string>('')
   const [country , setCountry]=useState<string>('')
@@ -22,6 +25,23 @@ export default function Information() {
   const [brandName , setBrandName]=useState<string>('')
   const [postalCode , setPostalCode]=useState<string>('')
   const [workPhone , setWorkPhone]=useState<string>('')
+  const [isBorderBold , setIsBorderBold]=useState<boolean>(false)
+  const phoneNumberRef = useRef<null | HTMLDivElement>(null)
+
+  useEffect(() => {
+   
+    const handleOutSidePhoneNumberRef = (event : MouseEvent)=>{
+      if(phoneNumberRef.current && !phoneNumberRef.current.contains(event.target as Node)){
+        setIsBorderBold(false)
+      }
+    }
+
+    document.addEventListener("click", handleOutSidePhoneNumberRef);
+
+    return () => {
+      document.removeEventListener("click", handleOutSidePhoneNumberRef);
+    };
+  }, []);
 
   useEffect(()=>{
     if(infos){
@@ -53,14 +73,6 @@ export default function Information() {
   }
   const changeHandlerEmail = (event : ChangeEvent<HTMLInputElement>)=>{
     setEmail(event.target.value)
-  }
-  const changeHandlerPhoneNumber= (event : ChangeEvent<HTMLInputElement>)=>{
-      const parsedPhoneNumber = parseInt(event.target.value.trim())
-      if( !isNaN(parsedPhoneNumber) && parsedPhoneNumber >= 0 ){
-        setPhoneNumber(parsedPhoneNumber.toString())
-      }else{
-        setPhoneNumber('')
-      }
   }
   const changeHandlerPassword = (event : ChangeEvent<HTMLInputElement>)=>{
     setPassword(event.target.value)
@@ -94,6 +106,8 @@ export default function Information() {
     setWorkPhone(event.target.value)
   }
   
+  console.log(phoneNumber);
+  
 
   if(!infos){
     return <Loading/>
@@ -112,7 +126,7 @@ export default function Information() {
                   value={name}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -123,7 +137,7 @@ export default function Information() {
                 value={lastName}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -136,22 +150,22 @@ export default function Information() {
                 value={username}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
-              <div className="mb-4 w-2/4 ">
+              <div ref={phoneNumberRef} className="mb-4 w-2/4"> 
                 <p className="mb-3 starBefore ">phone number</p>
-                <InputDefault
-                onChange={changeHandlerPhoneNumber}
-                value={phoneNumber}
-                  disabled={false}
-                  type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
-                />
-              </div>
+                <div  onClick={()=>setIsBorderBold(true)} className={`w-full h-10 border border-fuchsia-400 rounded-lg pl-2 ${isBorderBold && 'border-2'}`}>
+                  <PhoneInput
+                  defaultCountry="US"
+                  placeholder="Enter phone number"
+                  value={phoneNumber}
+                  onChange={setPhoneNumber}/>
+                  </div> 
+                  </div>
             </div>
-
+     
             <div className="w-full flex justify-around gap-x-5">
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">email</p>
@@ -160,7 +174,7 @@ export default function Information() {
                 value={email}
                   disabled={false}
                   type="email"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
               
@@ -173,7 +187,7 @@ export default function Information() {
                 placeholder="import new password"
                   disabled={false}
                   type="password"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
                 
               </div>
@@ -186,7 +200,7 @@ export default function Information() {
                 placeholder="repeat new password"
                   disabled={false}
                   type="password"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
                 
               </div>
@@ -203,7 +217,7 @@ export default function Information() {
                 value={country}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -214,7 +228,7 @@ export default function Information() {
                 value={state}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -225,7 +239,7 @@ export default function Information() {
                 value={city}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
             </div>
@@ -238,7 +252,7 @@ export default function Information() {
                 value={address}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
               </div>
@@ -252,7 +266,7 @@ export default function Information() {
                 value={brandName}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -263,7 +277,7 @@ export default function Information() {
                 value={postalCode}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
 
@@ -274,7 +288,7 @@ export default function Information() {
                 value={workPhone}
                   disabled={false}
                   type="text"
-                  className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+                  className="inputInformationForm"
                 />
               </div>
               </div>

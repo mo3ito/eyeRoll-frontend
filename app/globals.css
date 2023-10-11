@@ -50,7 +50,7 @@ body {
 .react-datepicker__day--range-end {
   background-color: #6366f1 !important;
 }
-.react-datepicker__close-icon::after{
+.react-datepicker__close-icon::after {
   background-color: #e879f9 !important;
 }
 
@@ -63,6 +63,11 @@ body {
   cursor: pointer;
   box-shadow: 0 0 6px 0 #555;
 }
+.PhoneInputInput {
+  background: transparent;
+  outline: none;
+  height: 40px;
+}
 
 @layer components {
   .common-range {
@@ -74,7 +79,7 @@ body {
     top: -15px;
     pointer-events: none;
   }
-  
+
   .common-range::-webkit-slider-thumb {
     appearance: none;
     height: 25px;
@@ -85,22 +90,34 @@ body {
     border: none;
   }
 
-  .hoverToUp:hover{
+  .hoverToUp:hover {
     transform: translateY(-4px);
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .hoverScale:hover{
+  .hoverScale:hover {
     transform: scale(1.03);
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .starBefore::before{
-  content: "*";
-  margin-right: 4px; 
-  color: #EF4444;
+  .starBefore::before {
+    content: "*";
+    margin-right: 4px;
+    color: #ef4444;
+  }
 
+  .inputInformationForm {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #e879f9;
+    border-radius: 8px;
+    padding: 0px 8px;
+    outline: none;
+    background: transparent;
+  }
+  .inputInformationForm:focus {
+    border-width: 2px;
   }
 }

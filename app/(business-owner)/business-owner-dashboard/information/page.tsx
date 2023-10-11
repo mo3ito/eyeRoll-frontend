@@ -1,16 +1,40 @@
 "use client";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import { useContext } from "react";
+import { useContext , useEffect, useState } from "react";
 import { AuthContext } from "@/context/authContext";
+import Loading from "@/components/loading/loading";
 
 export default function Information() {
 
   const {infos} = useContext(AuthContext)
+  const [name , setName] = useState<string>('')
+  const [lastName , setLastName]=useState<string>('')
+  const [username , setUsername]=useState<string>('')
+  const [email , setEmail]=useState<string>('')
+
+
+
+
+
+  useEffect(()=>{
+
+    if(infos){
+      setName(infos?.name)
+      setLastName(infos?.last_name)
+      setUsername(infos?.username)
+      setEmail(infos?.email)
+
+    }
+
+  },[infos])
 
   console.log(infos);
   
   
+  if(!infos){
+    return <Loading/>
+  }
 
   return (
     <div className="bg-sky-100 w-full h-screen">
@@ -21,7 +45,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore ">name</p>
                 <InputDefault
-                value={infos?.name}
+                value={name}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -31,7 +55,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className=" starBefore mb-3">last name</p>
                 <InputDefault
-                value={infos?.last_name}
+                value={lastName}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -41,7 +65,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore ">username</p>
                 <InputDefault
-                value={infos?.username}
+                value={username}
                   disabled={false}
                   type="text"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
@@ -56,7 +80,7 @@ export default function Information() {
               <div className="mb-4 w-1/3 ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
-                value={infos.email}
+                value={email}
                   disabled={false}
                   type="email"
                   className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"

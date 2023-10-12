@@ -6,6 +6,8 @@ import HeaderTitleLi from "../headerTitleLi";
 import { useContext } from "react";
 import { AuthContext } from "@/context/authContext";
 import Loading from "@/components/loading/loading";
+import logOutHandler from "@/utils/logOutHandler";
+import { useRouter } from "next/navigation";
 
 
 const LayoutDashboard = () => {
@@ -13,6 +15,7 @@ const LayoutDashboard = () => {
   const leftMenuRef = useRef<HTMLDivElement | null>(null);
   const [showBox , setShowBox] = useState<boolean>(false)
   const { infos } = useContext(AuthContext);
+  const router = useRouter()
 
 
 
@@ -76,7 +79,7 @@ const LayoutDashboard = () => {
               <li className="px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white">rez</li>
             </ul>
               </li>
-                <li className='px-6 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
+                <li onClick={()=>logOutHandler(router)} className='px-6 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             log out
               </li>
           </ul>

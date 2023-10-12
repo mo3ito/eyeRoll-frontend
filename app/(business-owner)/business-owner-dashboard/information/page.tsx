@@ -241,7 +241,7 @@ export default function Information() {
               </div>
 
               <div className="mb-4 w-1/3 ">
-                <p className="mb-3 starBefore">work phone</p>
+                <p className="mb-3 ">work phone</p>
                 <InputDefault
                  onChange={(event) => handleInputChange(event, setWorkPhone)}
                 value={workPhone}

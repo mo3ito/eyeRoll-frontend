@@ -1,22 +1,43 @@
 "use client";
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Modal from "@/components/modal/modal";
 import DiscountCalculator from "@/components/discountCalculator/discountCalculator";
 import ModalDefault from "@/components/modal/modalDefault";
 import Timer from "@/components/timer/timer";
-
-
+import { AuthContext } from "@/context/authContext";
+import { toast } from "react-toastify";
+import EYEROLL_TOKEN from "@/help/tokenName";
+import Cookies from "js-cookie";
+import useWarnInformation from "@/hooks/useWarnInformation";
+import { useRouter } from "next/navigation";
+import Loading from "@/components/loading/loading";
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
     useState<boolean>(false);
   const [isShowCancelModal, setIsShowCancelModal] = useState<boolean>(false);
+  const [token ,setToken]=useState(Cookies.get(EYEROLL_TOKEN))
+  const { infos } = useContext(AuthContext);
+  const router = useRouter()
+  useWarnInformation(infos)
+  console.log(infos);
+  
+  // useEffect(()=>{
+  //   if (infos && !infos.is_businessOwner ) {
+  //     console.log(infos.is_businessOwner);
+  //     router.push("/register-business-owner/login");
+  // }
+  // },[infos])
 
+  // console.log(token);
+
+  if(!infos){
+    return <Loading/>
+  }
   
 
   return (
     <div className="w-screen h-screen  bg-sky-100 flex items-center gap-x-5 justify-center absolute px-20">
-      
       <section className="w-9/12  h-5/6 -translate-y-9 rounded-3xl  flex-wrap gap-4 overflow-y-auto overflow-x-hidden p-8 bg-sky-50">
         <div className="w-full h-20 bg-pink-200 rounded-xl flex items-center px-10 mb-4">
           <svg
@@ -140,16 +161,14 @@ const DiscountSetting = () => {
           <p className="inline-block pt-3">sajad lorestani</p>
           <div className="inline-block float-right h-full ">
             <p className="inline-block  h-full pt-3 pr-3">13%</p>
-          <svg
-            className="w-4 h-4 inline-block float-right mt-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path>
-          </svg>
-
+            <svg
+              className="w-4 h-4 inline-block float-right mt-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path>
+            </svg>
           </div>
-         
         </div>
         <div className="bg-indigo-300 w-full h-12 rounded-lg px-4 mb-3 ">
           <p className="inline-block pt-3">mostafa entezami</p>

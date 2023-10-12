@@ -92,7 +92,7 @@ const LayoutDashboard = () => {
      
 
     </div>
-    <div className='h-10 w-24 text-3xl text-white '>logoo</div>
+    <div className='h-10 w-24 text-3xl text-white '>logo</div>
     </div>
   </header>
   <LeftMenu leftMenuRef={leftMenuRef} setShowAside={setShowAside} showAside={showAside} />

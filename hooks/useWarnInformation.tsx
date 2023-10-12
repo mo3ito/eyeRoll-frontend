@@ -14,7 +14,7 @@ interface InfosType {
             toast.warn(
               "please fill you information from menu -> information -> editting information"
             );
-          }, 12000);
+          }, 120000);
         }
 
         // if (infos && !infos.is_businessOwner) {

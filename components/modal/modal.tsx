@@ -33,18 +33,18 @@ export default function Modal({text , isShowModal , setIsShowModal , confirmHand
     >
       <div
         ref={modalRef}
-        className=" relative bg-sky-100 w-64 sm:w-96 lg:w-[500px] h-64 flex justify-center items-center rounded-lg"
+        className=" relative bg-sky-50 w-64 sm:w-96 lg:w-[500px] h-64 flex justify-center items-center rounded-lg"
       >
         <CloseIcon
           onClick={() => setIsShowModal(false)}
           classNameButton="absolute top-3 right-3"
-          classNameSvg="w-6 h-6"
+          classNameSvg="w-8 h-8 fill-red-400"
         />
         <div className="w-full h-full flex flex-col items-center justify-center">
-       <p className="mb-6">{text}</p>
+       <p className="mb-6 text-lg">{text}</p>
        <div className=" w-full text-center">
-       <button onClick={cancelHandler}  className="inline-block hover:bg-red-500 bg-red-400 h-10 rounded-lg mr-2 w-1/3" >no</button>
-       <button onClick={confirmHandler}  className="inline-block hover:bg-fuchsia-500 bg-fuchsia-400 h-10 rounded-lg ml-2 w-1/3" >yes</button>
+       <button onClick={cancelHandler}  className="inline-block bg-rose-300 hover:bg-rose-400  h-10 rounded-lg mr-2 w-1/3" >No</button>
+       <button onClick={confirmHandler}  className="inline-block  bg-green-300 hover:bg-green-400 h-10 rounded-lg ml-2 w-1/3" >Yes</button>
        </div>
        
         </div>

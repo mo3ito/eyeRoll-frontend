@@ -205,7 +205,7 @@ const DiscountSetting = () => {
       </ModalDefault>
       <Modal
         cancelHandler={() => setIsShowCancelModal(false)}
-        text="Are you sure to delete?"
+        text="Are you sure to cancel?"
         isShowModal={isShowCancelModal}
         setIsShowModal={setIsShowCancelModal}
       />

@@ -31,14 +31,14 @@ export default function ModalDefault({children , isShowModal , setIsShowModal , 
     >
       <div
         ref={modalRef}
-        className=" relative bg-white w-max   h-max flex justify-center items-center rounded-lg"
+        className=" relative bg-white w-4/12 h-2/4   flex justify-center items-center rounded-lg"
       >
         <CloseIcon
           onClick={() => setIsShowModal(false)}
           classNameButton="absolute top-3 right-3 "
           classNameSvg={closeIconClassName}
         /> 
-       <div>{children}</div>
+       <div className="w-full h-full" >{children}</div>
        </div>
     </div>
   );

@@ -2,28 +2,25 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 interface InfosType {
-    is_additional_specifications: boolean; 
+    is_furtherـinformation: boolean; 
   }
   
 
  const useWarnInformation = (infos : InfosType )=>{
-    useEffect(() => {
-        let interValTime: NodeJS.Timeout;
-        if (infos && !infos.is_additional_specifications) {
-          interValTime = setInterval(() => {
-            toast.warn(
-              "please fill you information from menu -> information -> editting information"
-            );
-          }, 120000);
-        }
+    // useEffect(() => {
+    //     let interValTime: NodeJS.Timeout;
+    //     if (infos && !infos.is_furtherـinformation) {
+    //       interValTime = setInterval(() => {
+    //         toast.warn(
+    //           "please fill you information from menu -> information -> editting information"
+    //         );
+    //       }, 1200000);
+    //     }
 
-        // if (infos && !infos.is_businessOwner) {
-        //     console.log("is_businessOwner is false");
-        //     router.push("/register-business-owner/login");
-        // }
+      
     
-        return () => clearInterval(interValTime);
-      }, [infos]);
+    //     return () => clearInterval(interValTime);
+    //   }, [infos]);
 
 }
 

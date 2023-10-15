@@ -29,7 +29,8 @@ const accordionItems = [
     id: uuidv4(),
     title: "online menu",
     options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/online-menu", name: "import menu" , },
+      { id: uuidv4(), href: "/business-owner-dashboard/online-menu", name: "add new product" , },
+      { id: uuidv4(), href: "/business-owner-dashboard/online-menu/edit-menu", name: "edit menu" , },
       
     ],
   },

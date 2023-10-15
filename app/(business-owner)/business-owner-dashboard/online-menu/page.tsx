@@ -50,21 +50,26 @@ export default function Facilities() {
       productPrice,
       productDescription,
     }
-    try {
-      const response = await senderWithAuth(BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT , body)
-    if (response?.status === 200) {
-      toast.success("Product added to the online menu successfully")
-      clearStates()
-    } 
-    } catch (error : any) {
-      if (error.response.status === 400) {
-        const errorMessage = error.response.data.message;
-        toast.error(errorMessage);
-      } else {
-      toast.error("An error occurred while processing your request");
-      }
-}
     
+    if(productName.length > 0 && productName !== "" && productPrice !== "" && productAssortment.length > 0 && productAssortment !== ""){
+      try {
+        const response = await senderWithAuth(BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT , body)
+      if (response?.status === 200) {
+        toast.success("Product added to the online menu successfully")
+        clearStates()
+      } 
+      } catch (error : any) {
+        if (error.response.status === 400) {
+          const errorMessage = error.response.data.message;
+          toast.error(errorMessage);
+        } else {
+        toast.error("An error occurred while processing your request");
+        }
+  }
+    }else{
+      toast.warn("Please fill all required fields")
+    }
+
     
   };
 

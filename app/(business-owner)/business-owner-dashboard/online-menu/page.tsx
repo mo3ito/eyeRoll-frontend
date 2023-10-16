@@ -1,11 +1,13 @@
 "use client";
-import React, { ChangeEvent, FormEvent, useCallback, useState  } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useState, useContext  } from "react";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import { BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT } from "@/routeApi/endpoints";
 import { handleInputChange } from "@/utils/handleInputChange";
 import senderWithAuth from "@/services/senderWithAuth";
 import { toast } from "react-toastify";
+import { AuthContext } from "@/context/authContext";
+import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 
 
 export default function Facilities() {
@@ -13,6 +15,12 @@ export default function Facilities() {
   const [productPrice, setProductPrice] = useState<string | number>("");
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
+  const {infos}=useContext(AuthContext)
+  const{businessOwnerId}=useGetBusinessOwnerId(infos)
+
+
+  
+  
 
   const changeProductPriceHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim();
@@ -45,6 +53,7 @@ export default function Facilities() {
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
     const body = {
+      businessOwnerId,
       productAssortment,
       productName,
       productPrice,

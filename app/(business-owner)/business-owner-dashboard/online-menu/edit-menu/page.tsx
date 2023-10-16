@@ -3,13 +3,15 @@ import {useContext, useState , useEffect} from 'react';
 import { AuthContext } from '@/context/authContext';
 import InputDefault from '@/components/shared/inputs/inputDefault';
 import getterWithAuthId from '@/services/getterWithAuthId';
-import {
-  useQuery,useQueryClient,} from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query'
 import {BUSINESS_OWNER_ONLINE_MENU_ALL_Product,
   BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT} from '@/routeApi/endpoints';
 import Loading from '@/components/loading/loading';
+import ModalDefault from '@/components/modal/modalDefault';
+import DescriptionContent from '@/components/descriptionContent/descriptionContent';
+
   
  interface ProductsType{
   productName: string;
@@ -17,11 +19,17 @@ import Loading from '@/components/loading/loading';
   productPrice:string;
   productDescription:string;
  }
+ interface DescriptionContentProps {
+  productName: string | undefined;
+  productDescription:string | undefined;
+}
 
 export default function EditMenu() {
   const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
   const { infos } = useContext(AuthContext);
-  const queryClient = useQueryClient();
+  const [isShowModalDescription , setIsShowModalDescription]=useState<boolean>(false)
+  const [descriptionInfos , setDescriptionInfos]=useState<DescriptionContentProps | null>(null)
+  
 
   useEffect(() => {
     if (infos && infos.id) {
@@ -39,6 +47,15 @@ export default function EditMenu() {
     }
     return null;
   });
+
+  const descriptionHandler = async (productName , productDescription)=>{
+   await setDescriptionInfos({
+      productName,
+      productDescription
+    })
+
+    setIsShowModalDescription(true)
+  }
  
  
   
@@ -48,6 +65,7 @@ export default function EditMenu() {
   }
 
   return (
+    <>
     <div className="w-full h-screen overflow-y-auto bg-sky-100 px-8 py-10">
       <div className="container mx-auto">
 
@@ -74,9 +92,9 @@ export default function EditMenu() {
                 {product.productName}
               </div>
               <div className="w-1/6 break-words  p-2  mx-3">{product.productAssortment}</div>
-              <div className="w-1/6 break-words  p-2  mx-3">{product.productPrice}</div>
+              <div className="w-1/6 break-words  p-2  mx-3">{product.productPrice} $</div>
               <div className="w-1/6 break-words  p-2  mx-3">
-                <button className="hoverScale w-40 bg-fuchsia-200 py-2 rounded-lg">{product.productDescription}</button>
+                <button onClick={()=>descriptionHandler(product.productName , product.productDescription)} className="hoverScale w-40 bg-fuchsia-200 py-2 rounded-lg">show description</button>
               </div>
               <div className="w-1/6 break-words  p-2  mx-3">
                 <button className="mr-4 pt-2">
@@ -107,5 +125,14 @@ export default function EditMenu() {
         </div>
       </div>
     </div>
+    <ModalDefault
+        closeIconClassName="w-8 h-8 fill-red-400"
+        isShowModal={isShowModalDescription}
+        setIsShowModal={setIsShowModalDescription}
+      >
+        <DescriptionContent  productName={descriptionInfos?.productName}
+         productDescription={descriptionInfos?.productDescription} /> 
+      </ModalDefault>
+    </>
   );
 }

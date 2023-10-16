@@ -57,7 +57,7 @@ export const AuthContext = createContext<AuthContextProps>({
         setInfos(infos);
       }, []);
 
-      console.log(infos);
+   
       
      
       const logout = useCallback(async () => {
@@ -100,10 +100,6 @@ export const AuthContext = createContext<AuthContextProps>({
         setIsLoggedIn(false)
       }
     },[infos])
-    
-    console.log(infos);
-    console.log(isLoggedIn);
-    
     
    return ( <AuthContext.Provider value={{isLoggedIn ,token , infos, login , logout, setInfos ,setIsLoggedIn , isVerifyedHandler , isVerified , setIsVerified  }}>
         {children}

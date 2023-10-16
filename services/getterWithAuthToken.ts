@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import EYEROLL_TOKEN from "@/help/tokenName";
 
-const getterWithAuth = async (path: string): Promise<AxiosResponse | undefined> => {
+const getterWithAuthToken = async (path: string): Promise<AxiosResponse | undefined> => {
     const token = Cookies.get(EYEROLL_TOKEN);
 
     try {
@@ -28,4 +28,4 @@ const getterWithAuth = async (path: string): Promise<AxiosResponse | undefined> 
     return undefined; 
 };
 
-export default getterWithAuth;
+export default getterWithAuthToken;

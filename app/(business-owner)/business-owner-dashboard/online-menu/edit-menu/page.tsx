@@ -66,18 +66,22 @@ export default function EditMenu() {
 
   return (
     <>
-    <div className="w-full h-screen overflow-y-auto bg-sky-100 px-8 py-10">
+    <div className="w-full h-screen overflow-y-auto pb-40 bg-sky-100 px-8 ">
       <div className="container mx-auto">
 
-      <div className='w-full h-10 mb-10'>
-        <div className='w-1/5 h-full border-2 border-fuchsia-300 rounded-lg'>
+      <div className="flex flex-col h-max gap-y-6 items-center w-full  bg-sky-100 pt-4 sticky top-0">
+      <div className='w-full h-10'>
+
+
+        <div className='w-1/5 h-full border-2 inline-block border-fuchsia-300 rounded-lg'>
         <svg className='w-4 h-4 inline-block mx-1 fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
           <InputDefault placeholder='search product name' className=' h-full w-11/12 pr-2 outline-none  bg-transparent ' />
+          
         </div>
+        <button className='inline-block ml-3 w-24 rounded-lg h-full bg-fuchsia-300'>search</button>
         </div>
-
-        <div className="flex flex-col h-max items-center ">
-          <div className="flex text-center h-16 w-full font-semibold">
+        
+        <div className="flex text-center h-16 w-full font-semibold">
             <div className="w-1/6 rounded-l-lg">number</div>
             <div className="w-1/6 break-words">name</div>
             <div className="w-1/6 break-words">assortment</div>
@@ -85,6 +89,9 @@ export default function EditMenu() {
             <div className="w-1/6 break-words">description</div>
             <div className="w-1/6 break-words rounded-r-lg">edit</div>
           </div>
+        </div>
+
+        <div className="flex flex-col h-max items-center">
           {products?.data?.map((product: ProductsType , index : number)=>
             <div className="flex border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
             <div className="w-1/6 break-words  p-2  mx-3">{index+1}</div>

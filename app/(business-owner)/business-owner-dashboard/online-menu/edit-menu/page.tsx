@@ -1,5 +1,5 @@
 'use client'
-import {useContext, useState , useEffect} from 'react';
+import {useContext, useState , useEffect , FormEvent} from 'react';
 import { AuthContext } from '@/context/authContext';
 import InputDefault from '@/components/shared/inputs/inputDefault';
 import getterWithAuthId from '@/services/getterWithAuthId';
@@ -11,9 +11,11 @@ import {BUSINESS_OWNER_ONLINE_MENU_ALL_Product,
 import Loading from '@/components/loading/loading';
 import ModalDefault from '@/components/modal/modalDefault';
 import DescriptionContent from '@/components/descriptionContent/descriptionContent';
+import EditProducts from '@/components/editProducts/editProducts';
 import Modal from '@/components/modal/modal';
 import removal from '@/services/removal';
 import { toast } from 'react-toastify';
+import updaterWithId from '@/services/updaterWithId';
 
 
   
@@ -23,6 +25,7 @@ import { toast } from 'react-toastify';
   productAssortment:string;
   productPrice:string;
   productDescription:string;
+  productPricePetty: string ;
  }
  interface DescriptionContentProps {
   productName: string | undefined;
@@ -35,8 +38,26 @@ export default function EditMenu() {
   const [isShowModalDescription , setIsShowModalDescription]=useState<boolean>(false)
   const [descriptionInfos , setDescriptionInfos]=useState<DescriptionContentProps | null>(null)
   const [isShowDeleteProduct , setIsShowDeleteProduct]=useState<boolean>(false)
+  const [isShowEditProdct , setIsShowEditProduct]=useState<boolean>(false)
+  const [productInfos , setProductInfos]=useState()
   const [productId , setProductId]=useState<string>('')
+  const [productName, setProductName] = useState<string>("");
+  const [productPrice, setProductPrice] = useState<string | number>("");
+  const [productPricePetty , setProductPricePetty]=useState<string | number>("")
+  const [productDescription, setProductDescription] = useState<string>("");
+  const [productAssortment , setProductAssortment] = useState<string>("")
   const queryClient = useQueryClient();
+
+  console.log("productName",productName);
+  console.log("productPrice",productPrice);
+  console.log("productPricePetty",productPricePetty);
+  console.log("productDescription",productDescription);
+  console.log("productAssortment" , productDescription);
+  
+  
+  
+  
+  
 
   useEffect(() => {
     if (infos && infos.id) {
@@ -63,6 +84,7 @@ export default function EditMenu() {
 
     setIsShowModalDescription(true)
   }
+  console.log(products);
   
   const processDeleteHandler = async (productId : string)=>{
     await setProductId(productId)
@@ -93,7 +115,49 @@ export default function EditMenu() {
       }
     }
   }
- 
+
+  const processEditHandler = (producName: string ,productPrice : string , productPricePetty : string , productAssortment : string ,productDescription:string , productId : string )=>{
+    setIsShowEditProduct(true)
+    setProductName(producName)
+    setProductAssortment(productAssortment)
+    setProductDescription(productDescription)
+    setProductPrice(productPrice)
+    setProductPricePetty(productPricePetty)
+    setProductId(productId)
+  }
+  
+  const submitHandler= async (event : FormEvent)=>{
+    event.preventDefault()
+    console.log("clicked");
+
+    const body = {
+      productName,
+      productPricePetty,
+      productAssortment,
+      productPrice,
+      productDescription
+    }
+
+    try {
+        const response = await updaterWithId(BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT , productId , body)
+        if(response?.status === 200){
+          queryClient.invalidateQueries(queryKey)
+          setIsShowEditProduct(false)
+          toast.success("product updated successfully")
+        }
+    } catch (error : any) {
+      if(error?.response.status === 400 ){
+        const errorMessage = error.response.data.message;
+          toast.error(errorMessage);
+      }else{
+        toast.error("An error occurred while processing your request");
+      }
+        
+    }
+    
+  }
+
+
   
 
   if (isLoading) {
@@ -135,12 +199,14 @@ export default function EditMenu() {
                 {product.productName}
               </div>
               <div className="w-1/6 break-words  p-2  mx-3">{product.productAssortment}</div>
-              <div className="w-1/6 break-words  p-2  mx-3">{product.productPrice} $</div>
+              { product.productPricePetty  ? <div className="w-1/6 break-words  p-2  mx-3"> {product.productPrice}.{product.productPricePetty} $</div>
+             : <div className="w-1/6 break-words  p-2  mx-3"> {product.productPrice} $</div>
+              }
               <div className="w-1/6 break-words  p-2  mx-3">
                 <button onClick={()=>descriptionHandler(product.productName , product.productDescription)} className="hoverScale w-40 bg-fuchsia-200 py-2 rounded-lg">show description</button>
               </div>
               <div className="w-1/6 break-words  p-2  mx-3">
-                <button className="mr-4 pt-2">
+                <button onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product._id)} className="mr-4 pt-2">
                   <svg
                     className="w-6 h-6"
                     xmlns="http://www.w3.org/2000/svg"
@@ -179,6 +245,16 @@ export default function EditMenu() {
         setIsShowModal={setIsShowDeleteProduct}
         confirmHandler={deleteProductHandler}
       />
+       <ModalDefault
+        closeIconClassName="w-8 h-8 fill-red-400"
+        isShowModal={isShowEditProdct}
+        setIsShowModal={setIsShowEditProduct}
+      >
+       <EditProducts onSubmit={submitHandler} setProductName={setProductName} setProductAssortment={setProductAssortment} setProductPrice={setProductPrice} setProductPricePetty={setProductPricePetty} setProductDescription={setProductDescription} producName={productName} productPrice={productPrice}
+productPricePetty={productPricePetty}
+productDescription={productDescription}
+productAssortment={productAssortment} />
+      </ModalDefault>
     </>
   );
 }

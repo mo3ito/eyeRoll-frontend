@@ -13,7 +13,7 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 export default function Facilities() {
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string | number>("");
-  const [productPriceCent , setProductPriceCent]=useState<string | number>("")
+  const [productPricePetty , setProductPricePetty]=useState<string | number>("")
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
   const {infos}=useContext(AuthContext)
@@ -25,7 +25,7 @@ export default function Facilities() {
 
   const changeProductPriceHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim();
-    const parseValue = parseFloat(inputValue);
+    const parseValue = parseInt(inputValue);
     if (parseValue >= 0 && !isNaN(parseValue)) {
       setProductPrice(parseValue.toString());
     } else {
@@ -33,13 +33,13 @@ export default function Facilities() {
     }
   },[])
 
-  const changeProductPriceCentHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
+  const changeProductPricepettyHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim();
     const parseValue = parseInt(inputValue);
     if (parseValue >= 0 && !isNaN(parseValue)) {
-      setProductPriceCent(parseValue.toString());
+      setProductPricePetty(parseValue.toString());
     } else {
-      setProductPrice("");
+      setProductPricePetty("");
     }
   },[])
 
@@ -65,12 +65,12 @@ export default function Facilities() {
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    let finalProductPrice = productPriceCent ? `${productPrice}.${productPriceCent}` : productPrice
     const body = {
       businessOwnerId,
       productAssortment,
       productName,
-      productPrice :finalProductPrice ,
+      productPrice ,
+      productPricePetty,
       productDescription,
     }
     
@@ -144,8 +144,8 @@ export default function Facilities() {
               <InputDefault
                 disabled={false}
                 type="text"
-                value={productPriceCent}
-                onChange={changeProductPriceCentHandler}
+                value={productPricePetty}
+                onChange={changeProductPricepettyHandler}
                 placeholder="for examole: 3"
                 className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
               />

@@ -3,7 +3,7 @@ import {useContext, useState , useEffect} from 'react';
 import { AuthContext } from '@/context/authContext';
 import InputDefault from '@/components/shared/inputs/inputDefault';
 import getterWithAuthId from '@/services/getterWithAuthId';
-import {useQuery} from '@tanstack/react-query'
+import {useQuery , useQueryClient} from '@tanstack/react-query'
 import {BUSINESS_OWNER_ONLINE_MENU_ALL_Product,
   BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT,
@@ -11,9 +11,14 @@ import {BUSINESS_OWNER_ONLINE_MENU_ALL_Product,
 import Loading from '@/components/loading/loading';
 import ModalDefault from '@/components/modal/modalDefault';
 import DescriptionContent from '@/components/descriptionContent/descriptionContent';
+import Modal from '@/components/modal/modal';
+import removal from '@/services/removal';
+import { toast } from 'react-toastify';
+
 
   
  interface ProductsType{
+  _id : string;
   productName: string;
   productAssortment:string;
   productPrice:string;
@@ -29,7 +34,9 @@ export default function EditMenu() {
   const { infos } = useContext(AuthContext);
   const [isShowModalDescription , setIsShowModalDescription]=useState<boolean>(false)
   const [descriptionInfos , setDescriptionInfos]=useState<DescriptionContentProps | null>(null)
-  
+  const [isShowDeleteProduct , setIsShowDeleteProduct]=useState<boolean>(false)
+  const [productId , setProductId]=useState<string>('')
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (infos && infos.id) {
@@ -48,7 +55,7 @@ export default function EditMenu() {
     return null;
   });
 
-  const descriptionHandler = async (productName , productDescription)=>{
+  const descriptionHandler = async (productName : string , productDescription:string)=>{
    await setDescriptionInfos({
       productName,
       productDescription
@@ -56,7 +63,36 @@ export default function EditMenu() {
 
     setIsShowModalDescription(true)
   }
- 
+  
+  const processDeleteHandler = async (productId : string)=>{
+    await setProductId(productId)
+    setIsShowDeleteProduct(true)
+  }
+  console.log(productId);
+  
+  
+  const deleteProductHandler = async ()=>{
+
+    console.log(productId);
+    
+    try {
+      if(productId){
+        const response = await removal(BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT , productId )
+        if(response?.status === 200){
+          await queryClient.invalidateQueries(queryKey);
+          setIsShowDeleteProduct(false);
+          toast.success("Product deleted successfully");
+        }
+      }
+    } catch (error : any) {
+      if(error?.response.status === 400){
+        const errorMessage = error.response.data.message;
+          toast.error(errorMessage);
+      } else{
+        toast.error("An error occurred while processing your request");
+      }
+    }
+  }
  
   
 
@@ -69,7 +105,7 @@ export default function EditMenu() {
     <div className="w-full h-screen overflow-y-auto pb-40 bg-sky-100 px-8 ">
       <div className="container mx-auto">
 
-      <div className="flex flex-col h-max gap-y-6 items-center w-full  bg-sky-100 pt-4 sticky top-0">
+      <div className="flex flex-col h-max gap-y-10 items-center w-full  bg-sky-100 pt-4 sticky top-0">
       <div className='w-full h-10'>
 
 
@@ -93,7 +129,7 @@ export default function EditMenu() {
 
         <div className="flex flex-col h-max items-center">
           {products?.data?.map((product: ProductsType , index : number)=>
-            <div className="flex border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
+            <div key={product._id} className="flex border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
             <div className="w-1/6 break-words  p-2  mx-3">{index+1}</div>
               <div className="w-1/6 break-words  p-2  mx-3">
                 {product.productName}
@@ -113,7 +149,7 @@ export default function EditMenu() {
                     <path d="M15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89H6.41421L15.7279 9.57629ZM17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786L17.1421 8.16207ZM7.24264 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L7.24264 20.89Z"></path>
                   </svg>
                 </button>
-                <button className="">
+                <button onClick={()=>processDeleteHandler(product._id)} className="">
                   <svg
                     className="w-6 h-6"
                     xmlns="http://www.w3.org/2000/svg"
@@ -125,10 +161,6 @@ export default function EditMenu() {
               </div>
             </div>
             )}
-          
-
-          
-
         </div>
       </div>
     </div>
@@ -140,6 +172,13 @@ export default function EditMenu() {
         <DescriptionContent  productName={descriptionInfos?.productName}
          productDescription={descriptionInfos?.productDescription} /> 
       </ModalDefault>
+      <Modal
+        cancelHandler={() => setIsShowDeleteProduct(false)}
+        text="Are you sure to delete?"
+        isShowModal={isShowDeleteProduct}
+        setIsShowModal={setIsShowDeleteProduct}
+        confirmHandler={deleteProductHandler}
+      />
     </>
   );
 }

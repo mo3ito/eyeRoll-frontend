@@ -38,7 +38,7 @@ export default function EditProducts({producName , productPrice , productAssortm
         
         const inputValue = event.target.value.trim();
         const parseValue = parseInt(inputValue);
-        if (parseValue >= 0 && !isNaN(parseValue) && parseValue.toString().length <= 2) {
+        if (parseValue >= 0 && !isNaN(parseValue) && inputValue.length <= 2) {
           setProductPricePetty(parseValue.toString());
         } else {
             setProductPricePetty("");

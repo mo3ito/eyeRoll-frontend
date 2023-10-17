@@ -13,6 +13,7 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 export default function Facilities() {
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string | number>("");
+  const [productPriceCent , setProductPriceCent]=useState<string | number>("")
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
   const {infos}=useContext(AuthContext)
@@ -24,13 +25,25 @@ export default function Facilities() {
 
   const changeProductPriceHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim();
-    const parseValue = parseInt(inputValue);
+    const parseValue = parseFloat(inputValue);
     if (parseValue >= 0 && !isNaN(parseValue)) {
       setProductPrice(parseValue.toString());
     } else {
       setProductPrice("");
     }
   },[])
+
+  const changeProductPriceCentHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value.trim();
+    const parseValue = parseInt(inputValue);
+    if (parseValue >= 0 && !isNaN(parseValue)) {
+      setProductPriceCent(parseValue.toString());
+    } else {
+      setProductPrice("");
+    }
+  },[])
+
+
   console.log("productAssortment", productAssortment);
   console.log("productName", productName);
   console.log("productPrice", productPrice);
@@ -52,11 +65,12 @@ export default function Facilities() {
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
+    let finalProductPrice = productPriceCent ? `${productPrice}.${productPriceCent}` : productPrice
     const body = {
       businessOwnerId,
       productAssortment,
       productName,
-      productPrice,
+      productPrice :finalProductPrice ,
       productDescription,
     }
     
@@ -112,7 +126,8 @@ export default function Facilities() {
               />
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3 w-full space-x-2 flex items-center justify-center">
+            <div className="">
               <p className="mb-3">import your price (dollar)</p>
               <InputDefault
                 disabled={false}
@@ -123,6 +138,20 @@ export default function Facilities() {
                 className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
               />
             </div>
+
+            <div className="">
+              <p className="mb-3">import your price (cent)</p>
+              <InputDefault
+                disabled={false}
+                type="text"
+                value={productPriceCent}
+                onChange={changeProductPriceCentHandler}
+                placeholder="for examole: 3"
+                className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+              />
+            </div>
+            </div>
+           
 
             <div className="mb-3">
               <p className="mb-3">import your description</p>

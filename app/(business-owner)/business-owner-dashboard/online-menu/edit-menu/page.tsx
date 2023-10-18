@@ -172,7 +172,7 @@ export default function EditMenu() {
   return (
     <>
     <div className="w-full h-screen overflow-y-auto pb-40 bg-sky-100 px-8 ">
-      <div className="container mx-auto">
+      {allProducts && allProducts.length > 0 ? <div className="container mx-auto">
 
       <div className="flex flex-col h-max gap-y-10 items-center w-full  bg-sky-100 pt-4 sticky top-0">
       <div className='w-full h-max '>
@@ -234,7 +234,7 @@ export default function EditMenu() {
             </div>
             )}
         </div>
-      </div>
+      </div> : <p className='text-center text-lg mt-20'>there is no product in your online menu</p>}
     </div>
     <ModalDefault
         closeIconClassName="w-8 h-8 fill-red-400"

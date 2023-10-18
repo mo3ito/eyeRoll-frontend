@@ -92,6 +92,10 @@ export const AuthContext = createContext<AuthContextProps>({
          getMe()
        } 
      },[login , isVerifyedHandler])
+
+    //  const updateInformation = ()=>{
+
+    //  }
     
     useEffect(()=>{
       if('is_verified' in infos && infos?.is_verified){

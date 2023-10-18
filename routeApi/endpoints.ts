@@ -11,6 +11,7 @@ export const BUSINESS_OWNER_VERIFY_EMAIL_TOKEN = `${BASE_URL_BUSINESS_OWNER}/ver
 export const BUSINESS_OWNER_UPDATE_INFORMATION = `${BASE_URL_BUSINESS_OWNER}/update-information`;
 export const BUSINESS_OWNER_IS_PASSWORD = `${BASE_URL_BUSINESS_OWNER}/is-password`;
 
+
 //--business-owner-online-menu
 export const BUSINESS_OWNER_ONLINE_MENU = `${BASE_URL_BUSINESS_OWNER}/online-menu`;
 export const BUSINESS_OWNER_ONLINE_MENU_ALL_Product = `${BUSINESS_OWNER_ONLINE_MENU}/all-products`;

@@ -1,17 +1,22 @@
 "use client";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import { useContext , useEffect, useRef, useState } from "react";
+import { FormEvent, useContext , useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/context/authContext";
 import Loading from "@/components/loading/loading";
 import { handleInputChange } from "@/utils/handleInputChange";
-
+import { BUSINESS_OWNER_UPDATE_INFORMATION } from "@/routeApi/endpoints";
+import updaterWithPatch from "@/services/updaterWihPatch";
+import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import EYEROLL_TOKEN from "@/help/tokenName";
 
 export default function Information() {
 
-  const {infos} = useContext(AuthContext)
+  const {infos , login} = useContext(AuthContext)
   const [name , setName] = useState<string>('')
   const [lastName , setLastName]=useState<string>('')
   const [username , setUsername]=useState<string>('')
@@ -28,6 +33,14 @@ export default function Information() {
   const [workPhone , setWorkPhone]=useState<string>('')
   const [isBorderBold , setIsBorderBold]=useState<boolean>(false)
   const phoneNumberRef = useRef<null | HTMLDivElement>(null)
+  const {businessOwnerId} = useGetBusinessOwnerId(infos)
+ const token = Cookies.get(EYEROLL_TOKEN)
+
+  console.log(businessOwnerId);
+  console.log(token);
+  
+  
+  
 
   useEffect(() => {
    
@@ -43,6 +56,9 @@ export default function Information() {
       document.removeEventListener("click", handleOutSidePhoneNumberRef);
     };
   }, []);
+
+  console.log(infos);
+  
 
   useEffect(()=>{
     if(infos){
@@ -66,7 +82,56 @@ export default function Information() {
   
   console.log(phoneNumber);
 
-  
+  const informationSubmitHandler = async (event : FormEvent)=>{
+    event.preventDefault()
+    
+    const body = { 
+      name,
+      last_name : lastName,
+      phone_number: phoneNumber,
+      username,
+      email,
+      country_name:country,
+      state_name:state,
+      city_name:city,
+      address,
+      brand_name:brandName,
+      postal_code:postalCode,
+      work_phone:workPhone,
+      password
+      }
+      if( !email || !name.length || !lastName.length || !phoneNumber.length || !username.length ){
+        toast.warn("Please Fill in the empty inputs")
+        return
+        }else if(password !== repeatPassword){
+          toast.warn("Repeating the password is not the same as the password")
+          return
+        }else if (isNaN(+phoneNumber)){
+          toast.warn("the phoneNumber must be number")
+          return
+        }else if(password.length < 8){
+          toast.warn("the password must be at least 8 characters long")
+          return
+        }
+      try {
+        const response = await updaterWithPatch(BUSINESS_OWNER_UPDATE_INFORMATION , businessOwnerId , body)
+        if(response?.status === 200){
+         console.log(response);
+         
+        await login(response.data.userInfos , response.data.token)
+          toast.success("information updated successfully")
+          
+        }
+      } catch (error : any) {
+        if(error.response?.status === 400){
+          const errorMessage = error?.response.data.message;
+          toast.error(errorMessage)
+        }else{
+          toast.error("An error occurred while processing your request");
+        }
+      }
+    
+  }
 
   if(!infos){
     return <Loading/>
@@ -75,7 +140,7 @@ export default function Information() {
   return (
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
-        <form>
+        <form onSubmit={informationSubmitHandler}>
           <div className="w-2/4 h-max mx-auto pt-32 ">
             <div className="w-full flex justify-around gap-x-5">
               <div className="mb-4 w-1/2 ">

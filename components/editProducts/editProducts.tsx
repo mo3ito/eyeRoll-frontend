@@ -1,8 +1,23 @@
 'use client'
-import React, { useCallback , ChangeEvent, FormEvent } from 'react'
+import React, { useCallback , ChangeEvent, Dispatch , SetStateAction} from 'react'
 import InputDefault from '../shared/inputs/inputDefault'
 import ButtonDefault from '../shared/button/buttonDefault'
 import { handleInputChange } from "@/utils/handleInputChange";
+
+interface EditProductsProps {
+  producName : string;
+  productPrice:string | number;
+  productAssortment:string;
+  productDescription:string;
+  productPricePetty:string | number;
+  setProductName: Dispatch<SetStateAction<string>>;
+  setProductAssortment: Dispatch<SetStateAction<string>>;
+  setProductPrice: Dispatch<SetStateAction<string | number>>;
+  setProductPricePetty: Dispatch<SetStateAction<string | number>>;
+  setProductDescription: Dispatch<SetStateAction<string>>;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+
+}
 
 
 
@@ -11,7 +26,7 @@ export default function EditProducts({producName , productPrice , productAssortm
     setProductAssortment,
     setProductPrice,
     setProductPricePetty,
-    setProductDescription , onSubmit}) {
+    setProductDescription , onSubmit}:EditProductsProps) {
         
   
   

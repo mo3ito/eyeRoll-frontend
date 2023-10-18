@@ -1,13 +1,10 @@
 'use client'
-import {useContext, useState , useEffect , FormEvent} from 'react';
+import {useContext, useState , useEffect , FormEvent, useCallback, ChangeEvent} from 'react';
 import { AuthContext } from '@/context/authContext';
 import InputDefault from '@/components/shared/inputs/inputDefault';
 import getterWithAuthId from '@/services/getterWithAuthId';
 import {useQuery , useQueryClient} from '@tanstack/react-query'
-import {BUSINESS_OWNER_ONLINE_MENU_ALL_Product,
-  BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT,
-  BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT,
-  BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT} from '@/routeApi/endpoints';
+import {BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT, BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT, BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT} from '@/routeApi/endpoints';
 import Loading from '@/components/loading/loading';
 import ModalDefault from '@/components/modal/modalDefault';
 import DescriptionContent from '@/components/descriptionContent/descriptionContent';
@@ -17,8 +14,6 @@ import removal from '@/services/removal';
 import { toast } from 'react-toastify';
 import updaterWithId from '@/services/updaterWithId';
 
-
-  
  interface ProductsType{
   _id : string;
   productName: string;
@@ -32,6 +27,7 @@ import updaterWithId from '@/services/updaterWithId';
   productDescription:string | undefined;
 }
 
+
 export default function EditMenu() {
   const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
   const { infos } = useContext(AuthContext);
@@ -39,13 +35,14 @@ export default function EditMenu() {
   const [descriptionInfos , setDescriptionInfos]=useState<DescriptionContentProps | null>(null)
   const [isShowDeleteProduct , setIsShowDeleteProduct]=useState<boolean>(false)
   const [isShowEditProdct , setIsShowEditProduct]=useState<boolean>(false)
-  const [productInfos , setProductInfos]=useState()
   const [productId , setProductId]=useState<string>('')
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string | number>("");
   const [productPricePetty , setProductPricePetty]=useState<string | number>("")
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
+  const [inputSearchValue , setInputSearchValue]=useState<string>('')
+  const [allProducts , setAllProducts]=useState([])
   const queryClient = useQueryClient();
 
   console.log("productName",productName);
@@ -75,6 +72,10 @@ export default function EditMenu() {
     }
     return null;
   });
+
+  useEffect(()=>{
+    products && setAllProducts(products?.data)
+  },[products])
 
   const descriptionHandler = async (productName : string , productDescription:string)=>{
    await setDescriptionInfos({
@@ -157,8 +158,30 @@ export default function EditMenu() {
     
   }
 
-
+  const inputSearchValueHandler =useCallback((event : ChangeEvent<HTMLInputElement>)=>{
+    setInputSearchValue(event.target.value)
+  }
+ ,[]) 
   
+ console.log(inputSearchValue);
+ useEffect(()=>{
+  if(inputSearchValue && products){
+   const searchedValue = products?.data.filter((product : ProductsType)=> product.productName.startsWith(inputSearchValue))
+    setAllProducts(searchedValue)
+  }
+  if(inputSearchValue === ""){
+    setAllProducts(products?.data)
+  }
+ },[inputSearchValue , products])
+
+ 
+ const clearSearchHandler = ()=>{
+  setInputSearchValue("")
+  setAllProducts(products?.data)
+ }
+ 
+
+ 
 
   if (isLoading) {
     return <Loading />;
@@ -170,15 +193,16 @@ export default function EditMenu() {
       <div className="container mx-auto">
 
       <div className="flex flex-col h-max gap-y-10 items-center w-full  bg-sky-100 pt-4 sticky top-0">
-      <div className='w-full h-10'>
-
-
-        <div className='w-1/5 h-full border-2 inline-block border-fuchsia-300 rounded-lg'>
-        <svg className='w-4 h-4 inline-block mx-1 fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-          <InputDefault placeholder='search product name' className=' h-full w-11/12 pr-2 outline-none  bg-transparent ' />
-          
+      <div className='w-full h-max '>
+      <div className='w-max  h-10   pt-2'>
+          <span>Total number of goods: {products?.data.length}</span>
         </div>
-        <button className='inline-block ml-3 w-24 rounded-lg h-full bg-fuchsia-300'>search</button>
+        <div className='w-1/5  border-2 inline-block border-fuchsia-300 rounded-lg h-10 '>
+        <svg className='w-4 h-4 inline-block mx-1 fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
+          <InputDefault type='text' value={inputSearchValue} onChange={inputSearchValueHandler} placeholder='search product name' className=' h-full w-11/12 pr-2 outline-none  bg-transparent ' />
+        </div>
+        <button onClick={clearSearchHandler} className='inline-block ml-3 px-4 rounded-lg h-10 bg-fuchsia-300'>clear search</button>
+      
         </div>
         
         <div className="flex text-center h-16 w-full font-semibold">
@@ -192,7 +216,7 @@ export default function EditMenu() {
         </div>
 
         <div className="flex flex-col h-max items-center">
-          {products?.data?.map((product: ProductsType , index : number)=>
+          {allProducts?.map((product: ProductsType , index : number)=>
             <div key={product._id} className="flex border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
             <div className="w-1/6 break-words  p-2  mx-3">{index+1}</div>
               <div className="w-1/6 break-words  p-2  mx-3">
@@ -250,10 +274,17 @@ export default function EditMenu() {
         isShowModal={isShowEditProdct}
         setIsShowModal={setIsShowEditProduct}
       >
-       <EditProducts onSubmit={submitHandler} setProductName={setProductName} setProductAssortment={setProductAssortment} setProductPrice={setProductPrice} setProductPricePetty={setProductPricePetty} setProductDescription={setProductDescription} producName={productName} productPrice={productPrice}
-productPricePetty={productPricePetty}
-productDescription={productDescription}
-productAssortment={productAssortment} />
+       <EditProducts onSubmit={submitHandler}
+      setProductName={setProductName}
+      setProductAssortment={setProductAssortment}
+      setProductPrice={setProductPrice}
+      setProductPricePetty={setProductPricePetty}
+      setProductDescription={setProductDescription}
+      producName={productName}
+      productPrice={productPrice}
+      productPricePetty={productPricePetty}
+      productDescription={productDescription}
+      productAssortment={productAssortment} />
       </ModalDefault>
     </>
   );

@@ -7,7 +7,7 @@ interface InputDefaultProps {
   value: string | number;
   placeholder?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default function InputDefault({

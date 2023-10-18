@@ -100,17 +100,15 @@ export default function Information() {
       work_phone:workPhone,
       password
       }
-      if( !email || !name.length || !lastName.length || !phoneNumber.length || !username.length ){
+      if( !email || !name.length || !lastName.length || !phoneNumber || !username.length ){
         toast.warn("Please Fill in the empty inputs")
         return
-        }else if(password !== repeatPassword){
-          toast.warn("Repeating the password is not the same as the password")
-          return
-        }else if (isNaN(+phoneNumber)){
-          toast.warn("the phoneNumber must be number")
-          return
-        }else if(password.length < 8){
+        }else if (password !== "" && password.length <8){
           toast.warn("the password must be at least 8 characters long")
+          return
+        }
+        else if(password !== repeatPassword){
+          toast.warn("Repeating the password is not the same as the password")
           return
         }
       try {

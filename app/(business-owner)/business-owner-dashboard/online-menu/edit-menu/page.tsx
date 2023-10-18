@@ -13,21 +13,9 @@ import Modal from '@/components/modal/modal';
 import removal from '@/services/removal';
 import { toast } from 'react-toastify';
 import updaterWithId from '@/services/updaterWithId';
+import { ProductsType , DescriptionContentProps } from '@/types/onlineMenuBo/productsType';
 
- interface ProductsType{
-  _id : string;
-  productName: string;
-  productAssortment:string;
-  productPrice:string;
-  productDescription:string;
-  productPricePetty: string ;
- }
- interface DescriptionContentProps {
-  productName: string | undefined;
-  productDescription:string | undefined;
-}
-
-
+ 
 export default function EditMenu() {
   const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
   const { infos } = useContext(AuthContext);
@@ -82,7 +70,6 @@ export default function EditMenu() {
       productName,
       productDescription
     })
-
     setIsShowModalDescription(true)
   }
   console.log(products);
@@ -91,13 +78,10 @@ export default function EditMenu() {
     await setProductId(productId)
     setIsShowDeleteProduct(true)
   }
-  console.log(productId);
+ 
   
   
-  const deleteProductHandler = async ()=>{
-
-    console.log(productId);
-    
+  const deleteProductHandler = async ()=>{  
     try {
       if(productId){
         const response = await removal(BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT , productId )
@@ -129,8 +113,6 @@ export default function EditMenu() {
   
   const submitHandler= async (event : FormEvent)=>{
     event.preventDefault()
-    console.log("clicked");
-
     const body = {
       productName,
       productPricePetty,

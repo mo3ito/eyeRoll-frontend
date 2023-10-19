@@ -2,18 +2,20 @@
 import { InputRegisterType } from '@/types/InputsType'
 
 
-const Input = ({value , onChange , placeholder , label , type  } : InputRegisterType ) => {
+
+const Input = ({value , onChange , placeholder , type , className , label , disabled = false } : InputRegisterType ) => {
   return (
-<div className='my-5 w-64 sm:w-96 h-9 hover:scale-[1.03] hover:duration-300 ease-in'>
-<label  className='relative top-3 text-lg  bg-sky-100 px-2 -right-6 text-indigo-500 '>{label}</label>
-<input 
-  value={value}
-  onChange={onChange} 
-  placeholder={placeholder}
-  className='w-full text-[17px] border  shadow-md border-indigo-400 px-2 rounded-2xl h-[53px] bg-sky-100 outline-none text-zinc-600 focus:border-violet-500  focus:border-2  '
-  type={type}
-  />
-</div>
+    <div className={className}>
+    <p className=" starBefore mb-3">{label}</p>
+    <input
+    placeholder={placeholder}
+     onChange={onChange}
+    value={value}
+      disabled={disabled}
+      type={type}
+      className="inputInformationForm"
+    />
+  </div>
   )
 }
 

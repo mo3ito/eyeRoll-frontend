@@ -4,11 +4,9 @@ import EYEROLL_TOKEN from "./help/tokenName";
 import jwt_decode from "jwt-decode";
 
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
   const token = await request.cookies.get(EYEROLL_TOKEN)?.value;
-  if (
-    !token &&
-    request.nextUrl.pathname.startsWith("/business-owner-dashboard")
-  ) {
+  if (!token && pathname.startsWith("/business-owner-dashboard")) {
     return NextResponse.redirect(
       new URL("/register-business-owner/login", request.url)
     );
@@ -19,7 +17,7 @@ export async function middleware(request: NextRequest) {
         is_businessOwner: boolean;
       };
       if (
-        request.nextUrl.pathname.startsWith("/business-owner-dashboard") &&
+        pathname.startsWith("/business-owner-dashboard") &&
         !informationToken.is_businessOwner
       ) {
         return NextResponse.redirect(

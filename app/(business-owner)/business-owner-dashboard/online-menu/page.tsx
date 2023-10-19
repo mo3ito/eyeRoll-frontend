@@ -8,6 +8,8 @@ import senderWithAuth from "@/services/senderWithAuth";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/context/authContext";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
+import handleNumberInputChange from "@/utils/handleNumberInputChange";
+
 
 
 export default function Facilities() {
@@ -21,17 +23,8 @@ export default function Facilities() {
 
 
   
+  console.log(infos);
   
-
-  const changeProductPriceHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.trim();
-    const parseValue = parseInt(inputValue);
-    if (parseValue >= 0 && !isNaN(parseValue)) {
-      setProductPrice(parseValue.toString());
-    } else {
-      setProductPrice("");
-    }
-  },[])
 
   const changeProductPricepettyHandler =useCallback( (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim();
@@ -133,7 +126,7 @@ export default function Facilities() {
                 disabled={false}
                 type="text"
                 value={productPrice}
-                onChange={changeProductPriceHandler}
+                onChange={useCallback((event)=>handleNumberInputChange(event , setProductPrice),[])}
                 placeholder="for examole: 3"
                 className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
               />

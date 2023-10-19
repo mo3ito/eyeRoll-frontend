@@ -13,10 +13,11 @@ import PhoneInput from 'react-phone-number-input'
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import EYEROLL_TOKEN from "@/help/tokenName";
+import { useRouter } from "next/navigation";
 
 export default function Information() {
 
-  const {infos , login} = useContext(AuthContext)
+  const {infos , login } = useContext(AuthContext)
   const [name , setName] = useState<string>('')
   const [lastName , setLastName]=useState<string>('')
   const [username , setUsername]=useState<string>('')
@@ -35,6 +36,7 @@ export default function Information() {
   const phoneNumberRef = useRef<null | HTMLDivElement>(null)
   const {businessOwnerId} = useGetBusinessOwnerId(infos)
  const token = Cookies.get(EYEROLL_TOKEN)
+ const router = useRouter()
 
   console.log(businessOwnerId);
   console.log(token);
@@ -118,6 +120,7 @@ export default function Information() {
          
         await login(response.data.userInfos , response.data.token)
           toast.success("information updated successfully")
+          router.refresh()
           
         }
       } catch (error : any) {
@@ -202,11 +205,11 @@ export default function Information() {
               
 
               <div className="mb-4 w-1/3 ">
-                <p className="mb-3 starBefore">password</p>
+                <p className="mb-3 ">password</p>
                 <InputDefault
                  onChange={(event) => handleInputChange(event, setPassword)}
                 value={password}
-                placeholder="import new password"
+                placeholder="if you want change password"
                   disabled={false}
                   type="password"
                   className="inputInformationForm"
@@ -215,7 +218,7 @@ export default function Information() {
               </div>
 
               <div className="mb-4 w-1/3 ">
-                <p className="mb-3 starBefore">repeat password</p>
+                <p className="mb-3 ">repeat password</p>
                 <InputDefault
                  onChange={(event) => handleInputChange(event, setRepeatPassword)}
                 value={repeatPassword}
@@ -266,7 +269,7 @@ export default function Information() {
               </div>
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex justify-around gap-x-5 ">
               <div className="mb-4 w-full ">
                 <p className="mb-3 starBefore">address</p>
                 <InputDefault
@@ -274,7 +277,7 @@ export default function Information() {
                 value={address}
                   disabled={false}
                   type="text"
-                  className="inputInformationForm"
+                  className="inputInformationForm  "
                 />
               </div>
               </div>
@@ -310,7 +313,7 @@ export default function Information() {
                 value={workPhone}
                   disabled={false}
                   type="text"
-                  className="inputInformationForm"
+                  className="inputInformationForm !invalid:bg-red-200"
                 />
               </div>
               </div>

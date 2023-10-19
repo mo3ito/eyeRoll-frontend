@@ -172,7 +172,7 @@ export default function EditMenu() {
   return (
     <>
     <div className="w-full h-screen overflow-y-auto pb-40 bg-sky-100 px-8 ">
-      {allProducts && allProducts.length > 0 ? <div className="container mx-auto">
+      <div className="container mx-auto">
 
       <div className="flex flex-col h-max gap-y-10 items-center w-full  bg-sky-100 pt-4 sticky top-0">
       <div className='w-full h-max '>
@@ -187,17 +187,17 @@ export default function EditMenu() {
       
         </div>
         
-        <div className="flex text-center h-16 w-full font-semibold">
+        {allProducts && allProducts.length > 0 && <div className="flex text-center h-16 w-full font-semibold">
             <div className="w-1/6 rounded-l-lg">number</div>
             <div className="w-1/6 break-words">name</div>
             <div className="w-1/6 break-words">assortment</div>
             <div className="w-1/6 break-words">amount</div>
             <div className="w-1/6 break-words">description</div>
             <div className="w-1/6 break-words rounded-r-lg">edit</div>
-          </div>
+          </div>}
         </div>
 
-        <div className="flex flex-col h-max items-center">
+          {allProducts && allProducts.length > 0 ? <div className="flex flex-col h-max items-center">
           {allProducts?.map((product: ProductsType , index : number)=>
             <div key={product._id} className="flex border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
             <div className="w-1/6 break-words  p-2  mx-3">{index+1}</div>
@@ -233,8 +233,8 @@ export default function EditMenu() {
               </div>
             </div>
             )}
-        </div>
-      </div> : <p className='text-center text-lg mt-20'>there is no product in your online menu</p>}
+        </div> : <p className='text-center mt-28 text-xl '>there is no product </p> }
+      </div> 
     </div>
     <ModalDefault
         closeIconClassName="w-8 h-8 fill-red-400"

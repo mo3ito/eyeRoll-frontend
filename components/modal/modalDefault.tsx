@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
+import React, { useRef, SetStateAction, Dispatch } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "../shared/icon/closeIcon";
 

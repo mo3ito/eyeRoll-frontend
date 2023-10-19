@@ -103,7 +103,7 @@ export default function Facilities() {
           <div className="w-1/4 h-max mx-auto pt-44 ">
 
           <div className="mb-4">
-              <p className="mb-3">import your group</p>
+              <p className="mb-3 starBefore">group</p>
               <InputDefault
                 disabled={false}
                 type="text"
@@ -115,7 +115,7 @@ export default function Facilities() {
             </div>
 
             <div className="mb-4">
-              <p className="mb-3">import your product</p>
+              <p className="mb-3 starBefore">product name</p>
               <InputDefault
                 disabled={false}
                 type="text"
@@ -128,7 +128,7 @@ export default function Facilities() {
 
             <div className="mb-3 w-full space-x-2 flex items-center justify-center">
             <div className="">
-              <p className="mb-3">import your price (dollar)</p>
+              <p className="mb-3 starBefore">price (dollar)</p>
               <InputDefault
                 disabled={false}
                 type="text"

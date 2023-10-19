@@ -10,17 +10,13 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import {BUSINESS_OWNER_REGISTER} from "@/routeApi/endpoints"
 import { handleInputChange } from "@/utils/handleInputChange"
-import handleNumberInputChange from "@/utils/handleNumberInputChange"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import InputDefault from "@/components/shared/inputs/inputDefault"
 import ButtonDefault from "@/components/shared/button/buttonDefault"
 
-interface RegisterBusinessOwnerProps{
-  isBusinessOwner?: boolean
-}
 
-const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerProps) => {
+
+const RegisterBusinessOwner = () => {
 
     const[name , setName]=useState<string>("")
     const[lastName , setLastName]=useState<string>("")
@@ -66,7 +62,7 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
             email: email.toLowerCase()
         }
         try {
-          if( !email || !name.length || !lastName.length || !phoneNumber.length || !username.length || !password.length || !repeatPassword.length){
+          if( !email || !name.length || !lastName.length || !phoneNumber || !username.length || !password.length || !repeatPassword.length){
             toast.warn("Please Fill in the empty inputs")
             return
             }else if(password !== repeatPassword){
@@ -121,14 +117,8 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
                 disabled={false}
                 type="text"
                   />
-
-             
-
-             
-
             </div>
 
-        
             <div className="w-full flex justify-around gap-x-5">
             <Input
                className="mb-4 w-1/2" 
@@ -164,9 +154,6 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
             </div>
      
             <div className="w-full flex justify-around gap-x-5">
-             
-              
-
             <Input
                className="mb-4 w-full" 
                label="password" 
@@ -175,8 +162,7 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
                 disabled={false}
                 type="password"
                   />
-            
-
+          
             <Input
                className="mb-4 w-full" 
                label="repeat password" 
@@ -185,11 +171,6 @@ const RegisterBusinessOwner = ({isBusinessOwner=true} : RegisterBusinessOwnerPro
                 disabled={false}
                 type="password"
                   />
-                
-             
-
-
-         
             </div>
 
             <ButtonDefault

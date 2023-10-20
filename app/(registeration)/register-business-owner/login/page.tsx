@@ -4,7 +4,7 @@ import Login from "@/components/registeration/common/login";
 const LoginBusinessOwner = () => {
   return (
     <Login
-      text="login business owner"
+      text="login as business owner"
       path="/business-owner-dashboard"
       isBusinessOwner={true}
       link="/register-business-owner"

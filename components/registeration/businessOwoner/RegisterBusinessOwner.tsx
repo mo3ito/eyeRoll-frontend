@@ -97,6 +97,7 @@ const RegisterBusinessOwner = () => {
       <div className="container px-4  h-max mx-auto">
         <form autoComplete="off" onSubmit={submitHandler}>
           <div className="w-2/4 h-max mx-auto pt-32 ">
+            <h2 className="mb-12 text-center text-lg font-semibold">register as business owner</h2>
             <div className="w-full flex justify-around gap-x-5">
 
 

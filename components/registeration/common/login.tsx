@@ -16,9 +16,9 @@ import InputPassword from '@/components/shared/inputs/inputPassword'
 interface LoginPropsType {
     onClick? : MouseEventHandler<HTMLButtonElement> | undefined,
     text: string,
-    path:string,
+    path:any,
     isBusinessOwner: boolean,
-    link: string
+    link: any
 }
 
 const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link} : LoginPropsType ) => {
@@ -28,7 +28,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
     const [pathResendEmailApi , setPathResendEmailApi]=useState<string>("")
     const [pathLoginApi , setPathLoginApi] = useState<string>("")
     const {login} = useContext(AuthContext)
-    const [pathVerifyEmail , setPathVerifyEmail]=useState<string>("")
+    const [pathVerifyEmail , setPathVerifyEmail]=useState<any>("")
     const router = useRouter()
 
     useEffect(()=>{
@@ -110,7 +110,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
     <div className="container px-4  h-max mx-auto">
       <form  onSubmit={submitHandler}>
         <div className="w-2/4 h-max mx-auto pt-32 ">
-          <p className='text-center mb-3'>{text}</p>
+          <h2 className='mb-12 text-center text-lg font-semibold'>{text}</h2>
           <div className="w-full flex justify-around gap-x-5">
 
 

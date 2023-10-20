@@ -24,6 +24,7 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
     const[email , setEmail]= useState<string>("")
     const[password , setPassword]= useState<string>("")
     const[repeatPassword , setRepeatPassword]= useState<string>("")
+    const [isLoading , setIsLoading]=useState<boolean>(false)
     const {login} = useContext(AuthContext)
     const router = useRouter();
 
@@ -48,16 +49,20 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
               toast.warn("the password must be at least 8 characters long")
               return
             }
+            setIsLoading(true)
             const response = await sender(USERS_REGISTER, body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
+           setIsLoading(false)
            router.push("/users-verify-email")
             } 
               } catch (error : any) {
                 if (error.response.status === 400) {
                   const errorMessage = error.response.data.message;
+                  setIsLoading(false)
                   toast.error(errorMessage);
                 } else {
+                  setIsLoading(false)
                 toast.error("An error occurred while processing your request");
                 }
         }
@@ -141,6 +146,7 @@ const RegisterUser = ({isBusinessOwner = false}:RegisterUserProps) => {
           </div>
 
           <ButtonDefault
+          loading={isLoading}
               text="register"
               className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
             />

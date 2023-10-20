@@ -9,3 +9,7 @@ export type InputRegisterType = {
   type: string;
   disabled?: boolean
 };
+
+
+export type InputPasswordProps = Omit<InputRegisterType, "type">
+

@@ -29,6 +29,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
     const [pathLoginApi , setPathLoginApi] = useState<string>("")
     const {login} = useContext(AuthContext)
     const [pathVerifyEmail , setPathVerifyEmail]=useState<any>("")
+    const [isLoading , setIsLoading]=useState<boolean>(false)
     const router = useRouter()
 
     useEffect(()=>{
@@ -63,23 +64,29 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
               toast.warn("the password must be at least 8 characters long")
               return
             }
+            setIsLoading(true)
             const response = await sender(pathLoginApi, body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
+           setIsLoading(false)
            router.push(path)
             } else if (response?.status === 201){
               if(!isResendEmail){
                 toast.warn("You have not confirmed your email, please click the resend email button")
-              setIsResendEmail(true)
+                setIsLoading(false)
+                setIsResendEmail(true)
+              
               }
               
             }
               }  catch (error : any) {
                 console.error(error)
                 if (error.response.status === 400) {
+                  setIsLoading(false)
                   const errorMessage = error.response.data.message;
                   toast.error(errorMessage);
                 } else {
+                  setIsLoading(false)
                 toast.error("An error occurred while processing your request");
                 }
       }
@@ -139,6 +146,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
 
           <div className="w-1/2 mx-auto flex flex-col justify-around ">
           {!isResendEmail ? <ButtonDefault
+              loading={isLoading} 
               text="login"
               className="hoverScale w-1/2 mt-4 bg-fuchsia-400 h-12 rounded-lg"
             /> : <ButtonDefault className="hoverScale w-1/2 mt-4 bg-fuchsia-400 h-12 rounded-lg" text='resend email'  onClick={resendEmailHandler}/>} 

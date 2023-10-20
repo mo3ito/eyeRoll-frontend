@@ -13,6 +13,7 @@ import { handleInputChange } from "@/utils/handleInputChange"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import ButtonDefault from "@/components/shared/button/buttonDefault"
+import InputPassword from "@/components/shared/inputs/inputPassword"
 
 
 
@@ -28,6 +29,7 @@ const RegisterBusinessOwner = () => {
     const {login} = useContext(AuthContext)
     const phoneNumberRef = useRef<null | HTMLDivElement>(null)
     const [isBorderBold , setIsBorderBold]=useState<boolean>(false)
+    const [isLoading , setIsLoading]=useState<boolean>(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -75,16 +77,20 @@ const RegisterBusinessOwner = () => {
               toast.warn("the password must be at least 8 characters long")
               return
             }
+            setIsLoading(true)
             const response = await sender(BUSINESS_OWNER_REGISTER, body)
             if(response?.status === 200){
            await login(response?.data.userInfos , response?.data.token)
+           setIsLoading(false)
            router.push("/business-owner-verify-email")
             } 
               } catch (error : any) {
                 if (error.response.status === 400) {
+                  setIsLoading(false)
                   const errorMessage = error.response.data.message;
                   toast.error(errorMessage);
                 } else {
+                  setIsLoading(false)
                 toast.error("An error occurred while processing your request");
                 }
         }
@@ -155,26 +161,29 @@ const RegisterBusinessOwner = () => {
             </div>
      
             <div className="w-full flex justify-around gap-x-5">
-            <Input
+            <InputPassword
                className="mb-4 w-full" 
                label="password" 
+               labelClassName="mb-3 starBefore"
                 value={password}
                 onChange={useCallback((event)=>handleInputChange(event , setPassword),[])}
                 disabled={false}
-                type="password"
+                
                   />
           
-            <Input
+            <InputPassword
                className="mb-4 w-full" 
                label="repeat password" 
+               labelClassName="mb-3 starBefore"
                 value={repeatPassword}
                 onChange={useCallback((event)=>handleInputChange(event , setRepeatPassword),[])}
                 disabled={false}
-                type="password"
+               
                   />
             </div>
 
             <ButtonDefault
+            loading={isLoading}
               text="register"
               className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
             />

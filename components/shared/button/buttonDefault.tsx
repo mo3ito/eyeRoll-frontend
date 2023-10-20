@@ -22,7 +22,8 @@ const ButtonDefault = ({
       }
     >
       {text}
-      {loading && <Loading />}
+      <span className="float-right -translate-x-3">{loading && <Loading />}</span>
+      
     </button>
   
   );

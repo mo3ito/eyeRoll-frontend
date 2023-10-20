@@ -11,5 +11,7 @@ export type InputRegisterType = {
 };
 
 
-export type InputPasswordProps = Omit<InputRegisterType, "type">
+export type InputPasswordProps = Omit<InputRegisterType, "type"> & {
+  labelClassName : string
+}
 

@@ -9,6 +9,7 @@ const InputPassword = ({
   className,
   label,
   disabled = false,
+  labelClassName,
 }: InputPasswordProps) => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [isBoldBorderInputPassword, setIsBoldBorderInputPassword] =
@@ -31,8 +32,8 @@ const InputPassword = ({
   }, []);
 
   return (
-    <div className={`${className}`}>
-      <p className=" starBefore mb-3">{label}</p>
+    <div className={className}>
+      <p className={labelClassName} >{label}</p>
       <div
         onClick={() => setIsBoldBorderInputPassword(true)}
         ref={containerPasswordRef}

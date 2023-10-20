@@ -128,6 +128,7 @@ const Login = ({onClick , text = "login" , path , isBusinessOwner = false , link
           <div className="w-full flex justify-around ">
           <InputPassword
              className="mb-4 w-1/2" 
+             labelClassName=" starBefore mb-3"
              label="password" 
               value={password}
               onChange={(event)=>handleInputChange(event , setPassword)}

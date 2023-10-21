@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState , useContext, FormEvent } from "react";
 import DeterminationRange from "@/components/shared/range/determinationRange";
 import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
 import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
@@ -7,6 +7,10 @@ import ShowInformationRollSetting from "@/components/showInformationRollSetting/
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import DeterminationRangePeak from "@/components/shared/range/determinationRangePeak";
 import DeterminationGift from "@/components/shared/range/determinationGift";
+import { AuthContext } from "@/context/authContext";
+import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
+import senderWithAuthId from "@/services/senderWithAuthId";
+import moment from "moment";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -33,6 +37,11 @@ export default function DeterminingDiscount() {
   const [firstMinsPeak, setFirstMinsPeak] = useState<string>("00");
   const [lastHourPeak, setLastHourPeak] = useState<string>("00");
   const [lastMinsPeak, setLastMinsPeak] = useState<string>("00");
+  const {infos}=useContext(AuthContext)
+  const {businessOwnerId}=useGetBusinessOwnerId(infos)
+
+  
+  
 
   // console.log("all", isCheckeAllProducts);
   // console.log("some", isCheckedNumbersProduct);
@@ -45,6 +54,16 @@ export default function DeterminingDiscount() {
 
   console.log("start date", startDateWithoutTime);
   console.log("end date", endDateWithoutTime);
+  const first_date = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
+  const last_date = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
+  const firstDatePeake = moment(`${startDateWithoutTime} ${firstHourPeak}:${firstMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
+  const LastDatePeake = moment(`${endDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
+ 
+  console.log("first date", first_date);
+  console.log(firstDatePeake);
+  
+  
+  
 
   console.log(textInformation);
 
@@ -53,10 +72,39 @@ export default function DeterminingDiscount() {
     setTextInformation(information);
   };
 
+  const sendInformation = (event : FormEvent)=>{
+    event.preventDefault()
+    console.log("submited");
+    const body = {
+            businessOwner_name,
+            businessOwner_last_name,
+            businessOwner_id,
+            firstـpercentageـrange,
+            lastـpercentageـrange,
+            first_time_discount,
+            last_time_discount,
+            gift,
+            peak_time_discount,
+            special_product_discount,
+            first_date,
+            last_date,
+            first_peak_time,
+            last_peak_time,
+            first_percentage_peak_Time,
+            last_percentage_peak_Time
+    }
+    try {
+     
+    } catch (error) {
+      
+    }
+    
+  }
+
   return (
     <>
       <div className="w-full h-screen flex justify-center bg-sky-100 pt-2  ">
-        <div className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
+        <form onSubmit={sendInformation} className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
               <DeterminationRange
@@ -149,6 +197,7 @@ export default function DeterminingDiscount() {
                     ? false
                     : true
                 }
+                
                 text="send"
                 className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg mt-1 "
                 isScale={true}
@@ -160,7 +209,7 @@ export default function DeterminingDiscount() {
               setShowInformation={setShowInformation}
             />
           )}
-        </div>
+        </form>
       </div>
     </>
   );

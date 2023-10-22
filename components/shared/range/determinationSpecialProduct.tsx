@@ -33,7 +33,8 @@ export default function DeterminationSpecialProduct({
     setDiscountAmount(clampedValue || 0);
   };
 
-  const addSpecificSpecialProducts = () => {
+  const addSpecificSpecialProducts = (event : MouseEvent) => {
+    event.preventDefault()
     if (specialProductName.length > 0 && discountAmount > 0) {
       const newSpecialProduct = {
         id: uuidv4(),

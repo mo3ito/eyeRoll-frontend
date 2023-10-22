@@ -9,6 +9,8 @@ export interface DeterminationDiscountTimeProps {
     lastHour: string;
     lastMins: string;
     setLastMins: Dispatch<SetStateAction<string>>;
+    calendarisValue:boolean;
+    setCalendarIsValue:Dispatch<SetStateAction<boolean>>;
     title: string;
     startDate : Date | null;
     endDate : Date | null;

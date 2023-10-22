@@ -29,13 +29,15 @@ export default function DeterminationDiscountTime({
   startDateWithoutTime,
   endDateWithoutTime,
   setDateRange,
+  calendarisValue,
+  setCalendarIsValue
 }: DeterminationDiscountTimeProps) {
   console.log("first hour", firstHour);
   console.log("first min", firstMins);
   console.log("last hour", lastHour);
   console.log("last min", lastMins);
 
-  const [calendarisValue, setCalendarIsValue] = useState<boolean>(false);
+  
 
   useEffect(() => {
     if (startDate !== null || endDate !== null) {
@@ -46,17 +48,7 @@ export default function DeterminationDiscountTime({
   }, [calendarisValue, startDate, endDate]);
   console.log(calendarisValue);
 
-  //   const firstSelectedDate = new Date(startDate);
-  // const endSelectedDate = new Date(endDate);
 
-  // محاسبه تفاوت زمانی به میلی‌ثانیه
-  // const timeDifferenceInMillis = Math.abs(endSelectedDate.getTime() - firstSelectedDate.getTime());
-  // const timeDifferenceInMinutes = Math.floor(timeDifferenceInMillis / (1000 * 60));
-
-  // console.log(timeDifferenceInMinutes);
-
-  // const time = new Date();
-  // time.setMinutes(time.getMinutes() + 1440);
 
   const changeProductsHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
@@ -102,7 +94,7 @@ export default function DeterminationDiscountTime({
           />
         </div>
 
-        <div className=" w-max h-max ml-auto mr-20     ">
+        <div className=" w-max h-max ml-auto mr-20">
           <DatesPicker
             startDate={startDate}
             endDate={endDate}

@@ -47,6 +47,7 @@ export default function DeterminingDiscount() {
   const [lastDate , setLastDate]=useState<Date | undefined>()
   const [firstDatePeak , setFirstDatePeak]=useState<Date | undefined>()
   const [lastDatePeak , setLastDatePeak]=useState<Date | undefined>()
+  const [calendarisValue, setCalendarIsValue] = useState<boolean>(false);
   const {infos}=useContext(AuthContext)
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
   const router = useRouter()
@@ -137,19 +138,18 @@ export default function DeterminingDiscount() {
 
   const sendInformation = async (event : FormEvent)=>{
     event.preventDefault()
-    console.log("submited");
     const body = {
       businessOwner_name: infos?.name,
       businessOwner_last_name:infos?.last_name,
       businessOwner_id: businessOwnerId,
       minـpercentage:minValueAllProducts.toString(),
       maxـpercentage:maxValueAllProducts.toString(),
+      min_percentage_peak: minValuePeak.toString(),
+      max_percentage_peak:maxValuePeak.toString(),
       first_date:firstDate,
       last_date:lastDate,
       first_date_peak : firstDatePeak,
       last_date_peak: lastDatePeak,
-      first_percentage_peak:minValueAllProducts,
-      last_percentage_peak:maxValueAllProducts,
       special_product_discount : specificSpecialProducts,
       gift: giftValue,
       number_Purchase_gift:numberPurchaseGift
@@ -157,6 +157,11 @@ export default function DeterminingDiscount() {
 
 
       if(!infos?.is_furtherـinformation){
+
+        if(!calendarisValue){
+          toast.warn("Please enter the date")
+          return
+        }
 
         try {
           setIsLoadingForApi(true)
@@ -218,6 +223,8 @@ export default function DeterminingDiscount() {
                 setLastMins={setLastMins}
                 startDate={startDate}
                 endDate={endDate}
+                calendarisValue={calendarisValue}
+                setCalendarIsValue={setCalendarIsValue}
                 setStartDateWithoutTime={setStartDateWithoutTime}
                 setEndDateWithoutTime={setEndDateWithoutTime}
                 startDateWithoutTime={startDateWithoutTime}

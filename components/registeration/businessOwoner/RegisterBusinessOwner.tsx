@@ -16,7 +16,7 @@ import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BUSINESS_OWNER_REGISTER } from "@/routeApi/endpoints";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import ButtonDefault from "@/components/shared/button/buttonDefault";

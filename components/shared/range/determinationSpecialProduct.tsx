@@ -10,25 +10,21 @@ import {
 import { toast } from "react-toastify";
 import InformationButton from "@/components/informationButton/informationButton";
 import CloseIcon from "../icon/closeIcon";
+import handleInputChange from "@/utils/handleInputChange";
 
 export default function DeterminationSpecialProduct({
   showInformation,
   title,
   isChecked,
   setIsChecked,
+  specificSpecialProducts,
+  setSpecificSpecialProducts
 }: DeterminationSpecialProductProps) {
   const [specialProductName, setSpecialProductsName] = useState("");
   const [discountAmount, setDiscountAmount] = useState<number>(0);
-  const [specificSpecialProducts, setSpecificSpecialProducts] = useState<
-    SpecificSpecialProductsType[]
-  >([]);
+ 
 
-  const changeSpecialProductNameHandler = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setSpecialProductsName(event.target.value);
-  };
-
+ 
   const changeDiscountAmountHandler = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -97,7 +93,7 @@ export default function DeterminationSpecialProduct({
           <input
             disabled={!isChecked}
             value={specialProductName}
-            onChange={changeSpecialProductNameHandler}
+            onChange={(event)=>handleInputChange(event , setSpecialProductsName )}
             placeholder="for examole : pizza"
             type="text"
             className="outline-none px-2 w-full h-10 border border-fuchsia-400 bg-inherit rounded-lg  "

@@ -11,7 +11,7 @@ import { AuthContext } from "../../../context/authContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { USERS_REGISTER } from "@/routeApi/endpoints";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 interface RegisterUserProps {
   isBusinessOwner?: boolean;

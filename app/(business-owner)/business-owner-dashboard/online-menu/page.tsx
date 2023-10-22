@@ -3,7 +3,7 @@ import React, { ChangeEvent, FormEvent, useCallback, useState, useContext  } fro
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import { BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT } from "@/routeApi/endpoints";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import senderWithAuth from "@/services/senderWithAuth";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/context/authContext";

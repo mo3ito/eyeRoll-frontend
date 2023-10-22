@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { ROLL_GET_SETTING } from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import moment from "moment";
+import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
+import { toast } from "react-toastify";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -21,6 +23,7 @@ export default function DeterminingDiscount() {
   const [maxValuePeak, setMaxValuePeak] = useState<number>(0);
   const [isCheckeAllProducts, setIsCheckeAllProducts] =useState<boolean>(false);
   const [isCheckedDiscountTime, setIsCheckedDiscountTime] =useState<boolean>(false);
+  const [specificSpecialProducts, setSpecificSpecialProducts] = useState<SpecificSpecialProductsType[]>([]);
   const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =useState<boolean>(false);
   const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(false);
   const [giftValue , setGiftValue]=useState<string>("")
@@ -47,6 +50,7 @@ export default function DeterminingDiscount() {
   const {infos}=useContext(AuthContext)
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
   const router = useRouter()
+  const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
 
   console.log(infos);
   
@@ -114,6 +118,8 @@ export default function DeterminingDiscount() {
   console.log("first date peak", firstDatePeak);
   console.log("last date peak", lastDatePeak);
   console.log(lastMinsPeak);
+  console.log("special products", specificSpecialProducts);
+  
   
   
   
@@ -121,19 +127,21 @@ export default function DeterminingDiscount() {
   
 
   console.log(textInformation);
+  console.log(maxValueAllProducts);
+  
 
   const showInformationHandler = (information: string) => {
     setShowInformation(true);
     setTextInformation(information);
   };
 
-  const sendInformation = (event : FormEvent)=>{
+  const sendInformation = async (event : FormEvent)=>{
     event.preventDefault()
     console.log("submited");
     const body = {
       businessOwner_name: infos?.name,
       businessOwner_last_name:infos?.last_name,
-      businessOwner_id:infos?.id,
+      businessOwner_id: businessOwnerId,
       minـpercentage:minValueAllProducts.toString(),
       maxـpercentage:maxValueAllProducts.toString(),
       first_date:firstDate,
@@ -142,24 +150,38 @@ export default function DeterminingDiscount() {
       last_date_peak: lastDatePeak,
       first_percentage_peak:minValueAllProducts,
       last_percentage_peak:maxValueAllProducts,
-      special_product_discount,
-      gift,
+      special_product_discount : specificSpecialProducts,
+      gift: giftValue,
       number_Purchase_gift:numberPurchaseGift
     }
-    try {
-
-      if(infos?.is_furtherـinformation){
 
 
+      if(!infos?.is_furtherـinformation){
+
+        try {
+          setIsLoadingForApi(true)
+          const response = await senderWithAuthId(ROLL_GET_SETTING , body , businessOwnerId)
+          if(response?.status === 200){
+            setIsLoadingForApi(false)
+            console.log(response);
+            toast.success("Settings applied successfully.")
+          }
+        } catch (error : any) {
+          if(error.response?.status === 400){
+            const errorMessage = error?.response.data.message;
+            setIsLoadingForApi(false)
+            toast.error(errorMessage)
+          } else{
+            setIsLoadingForApi(false)
+            toast.error("An error occurred while processing your request");
+          }
+        }
       }else{
         router.push("/business-owner-dashboard/information")
       }
-     
-    } catch (error) {
-      
-    }
-    
+        
   }
+
 
   return (
     <>
@@ -244,6 +266,8 @@ export default function DeterminingDiscount() {
 
               <DeterminationSpecialProduct
                 title="Discounts on special products"
+                specificSpecialProducts={specificSpecialProducts}
+                setSpecificSpecialProducts={setSpecificSpecialProducts}
                 setIsChecked={setIsCheckedSpecialProducts}
                 isChecked={isCheckedSpecialProducts}
                 showInformation={() =>
@@ -254,6 +278,7 @@ export default function DeterminingDiscount() {
               />
 
               <ButtonDefault
+                loading={isLoadingForApi}
                 disabled={
                   (isCheckeAllProducts && isCheckedDiscountTime) ||
                   (isCheckedSpecialProducts && isCheckedDiscountTime)

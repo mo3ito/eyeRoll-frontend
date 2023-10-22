@@ -4,7 +4,7 @@ import ButtonDefault from "@/components/shared/button/buttonDefault";
 import { FormEvent, useContext , useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/context/authContext";
 import Loading from "@/components/loading/loading";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import { BUSINESS_OWNER_UPDATE_INFORMATION } from "@/routeApi/endpoints";
 import updaterWithPatch from "@/services/updaterWihPatch";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";

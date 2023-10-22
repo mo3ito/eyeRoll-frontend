@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import InformationButton from "@/components/informationButton/informationButton";
 import CheckBox from "../checkeBox/checkBox";
 import { DeterminationGiftProps } from "@/types/determinationGiftProps/determinationGiftProps";
-import { handleInputChange  } from "@/utils/handleInputChange";
+import  handleInputChange   from "@/utils/handleInputChange";
 import handleNumberInputChange from "@/utils/handleNumberInputChange";
 
 export default function DeterminationGift({

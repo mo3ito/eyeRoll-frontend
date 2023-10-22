@@ -5,7 +5,7 @@ import React, {
 } from "react";
 import InputDefault from "../shared/inputs/inputDefault";
 import ButtonDefault from "../shared/button/buttonDefault";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import { EditProductsProps } from "@/types/onlineMenuBo/productsType";
 
 export default function EditProducts({

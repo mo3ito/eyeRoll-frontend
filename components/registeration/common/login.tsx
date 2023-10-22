@@ -21,7 +21,7 @@ import {
   USERS_LOGIN,
   USERS_RESEND_EMAIL_VERIFICATION,
 } from "@/routeApi/endpoints";
-import { handleInputChange } from "@/utils/handleInputChange";
+import  handleInputChange  from "@/utils/handleInputChange";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import InputPassword from "@/components/shared/inputs/inputPassword";
 

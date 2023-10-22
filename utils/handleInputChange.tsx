@@ -1,5 +1,7 @@
 import { ChangeEvent } from "react";
 
-export const handleInputChange = (event: ChangeEvent<HTMLInputElement>, setStateFunction: Function) => {
+ const handleInputChange = (event: ChangeEvent<HTMLInputElement>, setStateFunction: Function) => {
     setStateFunction(event?.target.value);
   }
+
+  export default handleInputChange;

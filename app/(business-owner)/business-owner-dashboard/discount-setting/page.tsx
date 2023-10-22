@@ -23,6 +23,7 @@ export default function DeterminingDiscount() {
   const [isCheckedDiscountTime, setIsCheckedDiscountTime] =useState<boolean>(false);
   const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =useState<boolean>(false);
   const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(false);
+  const [giftValue , setGiftValue]=useState<string>("")
   const [isCheckedGift, setIsCheckedGift] = useState<boolean>(false);
   const [numberPurchaseGift, setNumberPurchaseGift] = useState<number>(0);
   const [startDateWithoutTime, setStartDateWithoutTime] = useState<string | undefined>("");
@@ -143,6 +144,7 @@ export default function DeterminingDiscount() {
       last_percentage_peak:maxValueAllProducts,
       special_product_discount,
       gift,
+      number_Purchase_gift:numberPurchaseGift
     }
     try {
 
@@ -232,9 +234,12 @@ export default function DeterminingDiscount() {
               <DeterminationGift
                 isChecked={isCheckedGift}
                 setIsChecked={setIsCheckedGift}
+                giftValue={giftValue}
+                setGiftValue={setGiftValue}
                 numberPurchaseGift={numberPurchaseGift}
                 setNumberPurchaseGift={setNumberPurchaseGift}
                 showInformation={() => showInformationHandler("hi")}
+
               />
 
               <DeterminationSpecialProduct

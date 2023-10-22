@@ -2,6 +2,8 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import InformationButton from "@/components/informationButton/informationButton";
 import CheckBox from "../checkeBox/checkBox";
 import { DeterminationGiftProps } from "@/types/determinationGiftProps/determinationGiftProps";
+import { handleInputChange  } from "@/utils/handleInputChange";
+import handleNumberInputChange from "@/utils/handleNumberInputChange";
 
 export default function DeterminationGift({
   isChecked,
@@ -9,18 +11,11 @@ export default function DeterminationGift({
   numberPurchaseGift,
   setNumberPurchaseGift,
   showInformation,
+  giftValue,
+  setGiftValue,
 }: DeterminationGiftProps) {
   const changeGiftHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setIsChecked(event.target.checked);
-  };
-
-  const changeNumberPurchaseGigtHandler = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newValue = parseInt(event.target.value);
-    if (newValue >= 0) {
-      setNumberPurchaseGift(newValue);
-    }
   };
 
   return (
@@ -46,7 +41,7 @@ export default function DeterminationGift({
         <span>The number of purchases</span>
         <input
           value={numberPurchaseGift}
-          onChange={changeNumberPurchaseGigtHandler}
+          onChange={(event)=>handleNumberInputChange(event , setNumberPurchaseGift)}
           disabled={!isChecked}
           className="w-20 h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent ml-1 shadow-md"
           type="number"
@@ -56,6 +51,8 @@ export default function DeterminationGift({
       <div className="inline-block ml-12">
         <span>enter the gift</span>
         <input
+          value={giftValue}
+          onChange={(event)=>handleInputChange(event,setGiftValue)}
           disabled={!isChecked}
           placeholder="for example moca"
           className="w-44 h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent ml-1 shadow-md "

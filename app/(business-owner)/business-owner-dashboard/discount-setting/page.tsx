@@ -15,6 +15,7 @@ import senderWithAuthId from "@/services/senderWithAuthId";
 import moment from "moment";
 import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
 import { toast } from "react-toastify";
+import Loading from "@/components/loading/loading";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -53,9 +54,10 @@ export default function DeterminingDiscount() {
   const router = useRouter()
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
 
+
   console.log(infos);
   
-  
+ 
   
 
   // console.log("all", isCheckeAllProducts);
@@ -69,10 +71,6 @@ export default function DeterminingDiscount() {
 
   console.log("start date", startDateWithoutTime);
   console.log("end date", endDateWithoutTime);
-  
-  const last_date = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
-  const firstDatePeake = moment(`${startDateWithoutTime} ${firstHourPeak}:${firstMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
-  const LastDatePeake = moment(`${endDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
  
   useEffect(()=>{
     if(startDateWithoutTime && firstHour && firstMins ){
@@ -155,9 +153,13 @@ export default function DeterminingDiscount() {
       number_Purchase_gift:numberPurchaseGift
     }
 
+   
+    
 
-      if(!infos?.is_furtherـinformation){
-
+      if(!infos?.is_further_information){
+        router.push("/business-owner-dashboard/information")
+      }else{
+       
         if(!calendarisValue){
           toast.warn("Please enter the date")
           return;
@@ -181,12 +183,13 @@ export default function DeterminingDiscount() {
             toast.error("An error occurred while processing your request");
           }
         }
-      }else{
-        router.push("/business-owner-dashboard/information")
       }
         
   }
 
+  if(!infos){
+    return<Loading/>
+  }
 
   return (
     <>

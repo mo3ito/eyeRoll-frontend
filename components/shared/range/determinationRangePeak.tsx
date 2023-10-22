@@ -1,9 +1,11 @@
-import { ChangeEvent } from "react";
+'use client'
+import { ChangeEvent , useEffect } from "react";
 import Range from "./range";
 import TimeSetterInput from "../timeSetterInput/timeSetterInput";
 import InformationButton from "@/components/informationButton/informationButton";
 import CheckBox from "../checkeBox/checkBox";
 import { DeterminationRangePeakProps } from "@/types/rangePeakProps/rangePeakProps";
+
 
 export default function DeterminationRangePeak({
   setMinValuePeak,
@@ -40,6 +42,15 @@ export default function DeterminationRangePeak({
   ): void => {
     setIsChecked(event.target.checked);
   };
+
+  useEffect(()=>{
+    if(!isChecked){
+      setMinValuePeak(0)
+      setMaxValuePeak(0)
+    }
+  },[isChecked])
+
+
   return (
     <>
       <div

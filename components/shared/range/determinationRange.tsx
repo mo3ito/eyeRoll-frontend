@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react'
+'use client'
+import { ChangeEvent , useEffect } from 'react'
 import Range from '@/components/shared/range/range';
 import CheckBox from '@/components/shared/checkeBox/checkBox';
 import { DeterminationRangePropsType } from '@/types/rangeType/rangePropsType';
@@ -23,6 +24,12 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
        
         
       }
+      useEffect(()=>{
+        if(!isChecked){
+          setMinValue(0);
+          setMaxValue(0)
+        }
+      },[isChecked])
      
   return (
     <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-4`}>

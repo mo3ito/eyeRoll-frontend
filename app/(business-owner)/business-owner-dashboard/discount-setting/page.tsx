@@ -160,7 +160,7 @@ export default function DeterminingDiscount() {
 
         if(!calendarisValue){
           toast.warn("Please enter the date")
-          return
+          return;
         }
 
         try {

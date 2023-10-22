@@ -18,8 +18,8 @@ import { toast } from "react-toastify";
 import Loading from "@/components/loading/loading";
 
 export default function DeterminingDiscount() {
-  const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
-  const [maxValueAllProducts, setMaxValueAllProducts] = useState<number>(0);
+  const [minValueAllProducts, setMinValueAllProducts] = useState<string>("0");
+  const [maxValueAllProducts, setMaxValueAllProducts] = useState<string>("0");
   const [minValuePeak, setMinValuePeak] = useState<number>(0);
   const [maxValuePeak, setMaxValuePeak] = useState<number>(0);
   const [isCheckeAllProducts, setIsCheckeAllProducts] =useState<boolean>(false);
@@ -159,9 +159,21 @@ export default function DeterminingDiscount() {
       if(!infos?.is_further_information){
         router.push("/business-owner-dashboard/information")
       }else{
-       
+  
         if(!calendarisValue){
           toast.warn("Please enter the date")
+          return;
+        }
+        if(minValueAllProducts > maxValueAllProducts){
+          toast.warn("The maximum amount in discount all product is lower than its minimum")
+          return;
+        }
+        if(minValueAllProducts === "0" && maxValueAllProducts === "0"){
+          toast.warn("The maximum and minimum value in discount all product must be greater than zero")
+          return;
+        }
+        if(minValuePeak > maxValuePeak){
+          toast.warn("The maximum amount in peak sales hours is lower than its minimum")
           return;
         }
 

@@ -26,8 +26,11 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
       }
       useEffect(()=>{
         if(!isChecked){
-          setMinValue(0);
-          setMaxValue(0)
+          setMinValue("");
+          setMaxValue("")
+        }else{
+          setMinValue("0");
+          setMaxValue("0")
         }
       },[isChecked])
      
@@ -47,7 +50,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
           <div className=' '>
           <span className='text-lg pr-1'>min</span>
           <div className='w-24  h-10 border rounded-lg border-purple-300 shadow-md inline-block'>
-          <input disabled={!isChecked} value={ !isChecked ? "0" : minValue} onChange={addHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none'/>
+          <input disabled={!isChecked} value={ !isChecked ? "" : minValue} onChange={addHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none'/>
           %
           </div>
           
@@ -55,7 +58,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
           <div>
           <span className='text-xl pr-1 ml-3'>max</span>
           <div className='w-24  h-10 border rounded-lg border-purple-300 shadow-md inline-block'>
-          <input disabled={!isChecked} value={ !isChecked ? "0" : maxValue} onChange={minusHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none '/>
+          <input disabled={!isChecked} value={ !isChecked ? "" : maxValue} onChange={minusHandler} type="number" className=' bg-transparent w-16 h-10  rounded-lg  pl-3  outline-none '/>
           %
           </div>
           </div>

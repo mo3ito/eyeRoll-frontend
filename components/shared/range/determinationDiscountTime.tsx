@@ -54,6 +54,23 @@ export default function DeterminationDiscountTime({
     setIsChecked(event.target.checked);
   };
 
+  useEffect(()=>{
+    if(!isChecked){
+      setFirstMins("")
+      setFirstHour("")
+      setLastHour("")
+      setLastMins("")
+      setStartDateWithoutTime("")
+      setEndDateWithoutTime("")
+    }else{
+      setFirstMins("00")
+      setFirstHour("00")
+      setLastHour("00")
+      setLastMins("00")
+   
+    }
+  },[isChecked])
+
   return (
     <div
       className={`${

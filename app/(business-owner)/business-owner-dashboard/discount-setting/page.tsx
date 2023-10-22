@@ -1,5 +1,5 @@
 "use client";
-import { useState , useContext, FormEvent } from "react";
+import { useState , useContext, FormEvent, useEffect } from "react";
 import DeterminationRange from "@/components/shared/range/determinationRange";
 import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
 import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
@@ -9,6 +9,8 @@ import DeterminationRangePeak from "@/components/shared/range/determinationRange
 import DeterminationGift from "@/components/shared/range/determinationGift";
 import { AuthContext } from "@/context/authContext";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
+import { useRouter } from "next/navigation";
+import { ROLL_GET_SETTING } from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import moment from "moment";
 
@@ -37,9 +39,16 @@ export default function DeterminingDiscount() {
   const [firstMinsPeak, setFirstMinsPeak] = useState<string>("00");
   const [lastHourPeak, setLastHourPeak] = useState<string>("00");
   const [lastMinsPeak, setLastMinsPeak] = useState<string>("00");
+  const [firstDate , setFirstDate]=useState<Date | undefined>()
+  const [lastDate , setLastDate]=useState<Date | undefined>()
+  const [firstDatePeak , setFirstDatePeak]=useState<Date | undefined>()
+  const [lastDatePeak , setLastDatePeak]=useState<Date | undefined>()
   const {infos}=useContext(AuthContext)
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
+  const router = useRouter()
 
+  console.log(infos);
+  
   
   
 
@@ -54,13 +63,58 @@ export default function DeterminingDiscount() {
 
   console.log("start date", startDateWithoutTime);
   console.log("end date", endDateWithoutTime);
-  const first_date = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
+  
   const last_date = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
   const firstDatePeake = moment(`${startDateWithoutTime} ${firstHourPeak}:${firstMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
   const LastDatePeake = moment(`${endDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
  
-  console.log("first date", first_date);
-  console.log(firstDatePeake);
+  useEffect(()=>{
+    if(startDateWithoutTime && firstHour && firstMins ){
+      const firstDateData = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
+    setFirstDate(firstDateData)
+    }
+  },[startDateWithoutTime , firstHour , firstMins ])
+
+  useEffect(()=>{
+    if(endDateWithoutTime && lastHour && lastMins ){
+      const lastDateData = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
+    setLastDate(lastDateData)
+    return;
+    } 
+    if(!endDateWithoutTime && lastHour && lastMins && startDateWithoutTime ){
+      const lastDateData = moment(`${startDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
+      setLastDate(lastDateData)
+    }
+  },[endDateWithoutTime , lastHour , lastMins , startDateWithoutTime])
+
+  useEffect(()=>{
+    if(startDateWithoutTime && firstHourPeak && firstMinsPeak ){
+      const firstDatePeakeDate = moment(`${startDateWithoutTime} ${firstHourPeak}:${firstMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
+      setFirstDatePeak(firstDatePeakeDate)
+    }
+  },[startDateWithoutTime , firstHourPeak , firstMinsPeak  ])
+
+
+
+  useEffect(()=>{
+    if(endDateWithoutTime && lastHourPeak && lastMinsPeak ){
+      const lastDatePeakData = moment(`${endDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
+    setLastDatePeak(lastDatePeakData)
+    return;
+    } 
+    if(!endDateWithoutTime && lastHourPeak && lastMinsPeak && startDateWithoutTime ){
+      const lastDatePeakData = moment(`${startDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
+      setLastDatePeak(lastDatePeakData)
+    }
+  },[endDateWithoutTime , lastHourPeak , lastMinsPeak , startDateWithoutTime])
+
+  console.log("first date", firstDate);
+  console.log("last date", lastDate);
+  console.log("first date peak", firstDatePeak);
+  console.log("last date peak", lastDatePeak);
+  console.log(lastMinsPeak);
+  
+  
   
   
   
@@ -76,24 +130,28 @@ export default function DeterminingDiscount() {
     event.preventDefault()
     console.log("submited");
     const body = {
-            businessOwner_name,
-            businessOwner_last_name,
-            businessOwner_id,
-            firstـpercentageـrange,
-            lastـpercentageـrange,
-            first_time_discount,
-            last_time_discount,
-            gift,
-            peak_time_discount,
-            special_product_discount,
-            first_date,
-            last_date,
-            first_peak_time,
-            last_peak_time,
-            first_percentage_peak_Time,
-            last_percentage_peak_Time
+      businessOwner_name: infos?.name,
+      businessOwner_last_name:infos?.last_name,
+      businessOwner_id:infos?.id,
+      minـpercentage:minValueAllProducts.toString(),
+      maxـpercentage:maxValueAllProducts.toString(),
+      first_date:firstDate,
+      last_date:lastDate,
+      first_date_peak : firstDatePeak,
+      last_date_peak: lastDatePeak,
+      first_percentage_peak:minValueAllProducts,
+      last_percentage_peak:maxValueAllProducts,
+      special_product_discount,
+      gift,
     }
     try {
+
+      if(infos?.is_furtherـinformation){
+
+
+      }else{
+        router.push("/business-owner-dashboard/information")
+      }
      
     } catch (error) {
       

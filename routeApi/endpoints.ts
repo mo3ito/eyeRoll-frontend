@@ -1,4 +1,4 @@
-import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS } from "./baseUrlNextApi";
+import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL } from "./baseUrlNextApi";
 
 //--business-owner-routes
 
@@ -21,6 +21,20 @@ export const BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT = `${BUSINESS_OWNER_ONLIN
 export const BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/get-product`;
 
 //--business-owner-routes
+
+
+//--roll-routes
+export const ROLL_GET_SETTING = `${BASE_URL_ROLL}/getAll`;
+
+//--roll-routes
+
+
+
+
+
+
+
+
 
 //--users
 export const USERS = BASE_URL_USERS;

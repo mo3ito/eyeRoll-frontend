@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, useEffect } from "react";
 import InformationButton from "@/components/informationButton/informationButton";
 import CheckBox from "../checkeBox/checkBox";
 import { DeterminationGiftProps } from "@/types/determinationGiftProps/determinationGiftProps";
@@ -17,6 +17,14 @@ export default function DeterminationGift({
   const changeGiftHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setIsChecked(event.target.checked);
   };
+
+  useEffect(()=>{
+    if(!isChecked){
+      setNumberPurchaseGift(0)
+      setGiftValue("")
+
+    }
+  },[isChecked])
 
   return (
     <div

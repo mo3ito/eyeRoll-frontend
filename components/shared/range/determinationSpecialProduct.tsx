@@ -1,11 +1,10 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CheckBox from "../checkeBox/checkBox";
 import ButtonDefault from "../button/buttonDefault";
 import {
   DeterminationSpecialProductProps,
-  SpecificSpecialProductsType,
 } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
 import { toast } from "react-toastify";
 import InformationButton from "@/components/informationButton/informationButton";
@@ -22,6 +21,14 @@ export default function DeterminationSpecialProduct({
 }: DeterminationSpecialProductProps) {
   const [specialProductName, setSpecialProductsName] = useState("");
   const [discountAmount, setDiscountAmount] = useState<number>(0);
+
+  useEffect(()=>{
+    if(!isChecked){
+      setSpecificSpecialProducts([])
+      setSpecialProductsName('')
+      setDiscountAmount(0)
+    }
+  },[isChecked])
  
 
  
@@ -46,7 +53,7 @@ export default function DeterminationSpecialProduct({
       setSpecialProductsName("");
       setDiscountAmount(0);
     } else {
-      toast.warn("Please fill in the required fields");
+      toast.warn("Please fill in the required fields on Discounts on special products");
     }
   };
 

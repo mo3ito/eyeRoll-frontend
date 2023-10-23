@@ -47,6 +47,15 @@ export default function DeterminationRangePeak({
     if(!isChecked){
       setMinValuePeak(0)
       setMaxValuePeak(0)
+      setLastHourPeak("")
+      setLastMinsPeak("")
+      setFirstHourPeak("")
+      setFirstMinsPeak("")
+    }else{
+      setLastHourPeak("00")
+      setLastMinsPeak("00")
+      setFirstHourPeak("00")
+      setFirstMinsPeak("00")
     }
   },[isChecked])
 

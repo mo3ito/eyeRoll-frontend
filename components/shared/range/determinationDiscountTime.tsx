@@ -62,6 +62,7 @@ export default function DeterminationDiscountTime({
       setLastMins("")
       setStartDateWithoutTime("")
       setEndDateWithoutTime("")
+      setDateRange([])
     }else{
       setFirstMins("00")
       setFirstHour("00")
@@ -127,7 +128,7 @@ export default function DeterminationDiscountTime({
         </div>
       </div>
 
-      {calendarisValue && (
+      {calendarisValue && isChecked && (
         <div className="text-center w-full ">
         <DateRangeDisplay
         className="text-center mt-4 inline-block "

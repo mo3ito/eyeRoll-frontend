@@ -4,7 +4,7 @@ import LoadingPage from '@/components/loading/loadingPage'
 
 const page = () => {
   return (
-<LoadingPage/>
+    <p>home</p>
   )
 }
 

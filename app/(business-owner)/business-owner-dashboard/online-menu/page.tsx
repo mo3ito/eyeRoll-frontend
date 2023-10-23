@@ -18,6 +18,7 @@ export default function Facilities() {
   const [productPricePetty , setProductPricePetty]=useState<string | number>("")
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
+  const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
   const {infos}=useContext(AuthContext)
   const{businessOwnerId}=useGetBusinessOwnerId(infos)
 
@@ -69,16 +70,20 @@ export default function Facilities() {
     
     if(productName.length > 0 && productName !== "" && productPrice !== "" && productAssortment.length > 0 && productAssortment !== ""){
       try {
+        setIsLoadingForApi(true)
         const response = await senderWithAuth(BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT , body)
       if (response?.status === 200) {
+        setIsLoadingForApi(false)
         toast.success("Product added to the online menu successfully")
         clearStates()
       } 
       } catch (error : any) {
         if (error.response.status === 400) {
+          setIsLoadingForApi(false)
           const errorMessage = error.response.data.message;
           toast.error(errorMessage);
         } else {
+          setIsLoadingForApi(false)
         toast.error("An error occurred while processing your request");
         }
   }
@@ -156,6 +161,7 @@ export default function Facilities() {
             </div>
 
             <ButtonDefault
+              loading={isLoadingForApi}
               text="send"
               className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg"
             />

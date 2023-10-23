@@ -9,7 +9,7 @@ interface InfosProps {
   country_name: string;
   email: string;
   id: string;
-  is_further_information: boolean;
+  is_complete_information: boolean;
   is_businessOwner:boolean;
   is_verified:boolean;
   last_name: string;

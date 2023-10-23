@@ -19,7 +19,7 @@ export const AuthContext = createContext<AuthContextProps>({
       country_name: "",
       email: "",
       id: "",
-      is_furtherـinformation: false,
+      is_complete_information: false,
       is_businessOwner: false,
       is_verified: false,
       last_name: "",

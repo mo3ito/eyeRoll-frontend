@@ -156,8 +156,9 @@ export default function DeterminingDiscount() {
    
     
 
-      if(!infos?.is_further_information){
+      if(!infos?.is_complete_information){
         router.push("/business-owner-dashboard/information")
+        return;
       }else{
   
         if(!calendarisValue){
@@ -198,9 +199,9 @@ export default function DeterminingDiscount() {
             setIsLoadingForApi(false)
             toast.error("An error occurred while processing your request");
           }
-        }
-      }
         
+      }
+    }
   }
 
   if(!infos){

@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState , MouseEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CheckBox from "../checkeBox/checkBox";
 import ButtonDefault from "../button/buttonDefault";
@@ -40,7 +40,7 @@ export default function DeterminationSpecialProduct({
     setDiscountAmount(clampedValue || 0);
   };
 
-  const addSpecificSpecialProducts = (event : MouseEvent) => {
+  const addSpecificSpecialProducts = (event : React.MouseEvent<HTMLButtonElement>) : void => {
     event.preventDefault()
     if (specialProductName.length > 0 && discountAmount > 0) {
       const newSpecialProduct = {
@@ -123,19 +123,17 @@ export default function DeterminationSpecialProduct({
         </div>
         </div>
         <div className="w-3/12 h-full">
-         <ButtonDefault
+         <button
           disabled={!isChecked}
-          text="confirm"
           onClick={addSpecificSpecialProducts}
-          className="h-10 w-full mt-5 bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg "
-        />
+          className="h-10 w-full mt-5 bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg ">confirm</button>
         </div>
        
       </div>
       <div
         className={`${
           specificSpecialProducts.length > 0 && "mt-3"
-        } w-full max-h-14   flex items-center  gap-3  flex-wrap overflow-y-auto`}
+        } w-full max-h-24   flex items-center  gap-3  flex-wrap overflow-y-auto`}
       >
         {specificSpecialProducts.map((item) => (
           <div

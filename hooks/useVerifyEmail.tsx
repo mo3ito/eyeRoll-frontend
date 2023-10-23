@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useSearchParams , useRouter , ReadonlyURLSearchParams } from 'next/navigation'
 import sender from "@/services/sender"
 import { AuthContext } from "@/context/authContext"
-import Loading from '@/components/loading/loading'
+import LoadingPage from '@/components/loading/loadingPage'
 import { toast } from 'react-toastify'
 
 
@@ -41,7 +41,7 @@ const useVerifyEmail = (path : any , pathApi : string) => {
               setIsVerifyHandlerDone(true)
              }
            } else if (!emailTokenGot){
-             <Loading/>
+             <LoadingPage/>
            } else {
              toast.error("An error occurred. Please try again later")
             

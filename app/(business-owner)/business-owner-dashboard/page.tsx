@@ -10,7 +10,7 @@ import EYEROLL_TOKEN from "@/help/tokenName";
 import Cookies from "js-cookie";
 import useWarnInformation from "@/hooks/useWarnInformation";
 import { useRouter } from "next/navigation";
-import Loading from "@/components/loading/loading";
+import LoadingPage from "@/components/loading/loadingPage";
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -25,7 +25,7 @@ const DiscountSetting = () => {
 
 
   if(!infos){
-    return <Loading/>
+    return <LoadingPage/>
   }
   
 

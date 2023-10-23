@@ -24,6 +24,7 @@ import {
 import  handleInputChange  from "@/utils/handleInputChange";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import InputPassword from "@/components/shared/inputs/inputPassword";
+import LoadingPage from "@/components/loading/loadingPage";
 
 interface LoginPropsType {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
@@ -126,7 +127,7 @@ const Login = ({
   };
 
   if (!pathLoginApi && !pathResendEmailApi && !pathVerifyEmail) {
-    return <Loading />;
+    return <LoadingPage />;
   }
 
   return (
@@ -142,7 +143,7 @@ const Login = ({
                 value={email}
                 onChange={(event) => handleInputChange(event, setEmail)}
                 disabled={false}
-                type="text"
+                type="email"
               />
             </div>
             <div className="w-full flex justify-around ">

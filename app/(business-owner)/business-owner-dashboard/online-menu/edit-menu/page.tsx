@@ -5,7 +5,7 @@ import InputDefault from '@/components/shared/inputs/inputDefault';
 import getterWithAuthId from '@/services/getterWithAuthId';
 import {useQuery , useQueryClient} from '@tanstack/react-query'
 import {BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT, BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT, BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT} from '@/routeApi/endpoints';
-import Loading from '@/components/loading/loading';
+import LoadingPage from '@/components/loading/loadingPage';
 import ModalDefault from '@/components/modal/modalDefault';
 import DescriptionContent from '@/components/descriptionContent/descriptionContent';
 import EditProducts from '@/components/editProducts/editProducts';
@@ -166,7 +166,7 @@ export default function EditMenu() {
  
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingPage/>;
   }
 
   return (

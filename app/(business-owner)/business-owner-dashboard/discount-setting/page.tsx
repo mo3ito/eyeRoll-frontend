@@ -16,6 +16,7 @@ import moment from "moment";
 import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
 import { toast } from "react-toastify";
 import Loading from "@/components/loading/loading";
+import LoadingPage from "@/components/loading/loadingPage";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -205,7 +206,7 @@ export default function DeterminingDiscount() {
   }
 
   if(!infos){
-    return<Loading/>
+    return<LoadingPage/>
   }
 
   return (

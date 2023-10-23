@@ -3,7 +3,7 @@ import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import { FormEvent, useContext , useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/context/authContext";
-import Loading from "@/components/loading/loading";
+import LoadingPage from "@/components/loading/loadingPage";
 import  handleInputChange  from "@/utils/handleInputChange";
 import { BUSINESS_OWNER_UPDATE_INFORMATION } from "@/routeApi/endpoints";
 import updaterWithPatch from "@/services/updaterWihPatch";
@@ -135,7 +135,7 @@ export default function Information() {
   }
 
   if(!infos){
-    return <Loading/>
+    return <LoadingPage/>
   }
 
   return (

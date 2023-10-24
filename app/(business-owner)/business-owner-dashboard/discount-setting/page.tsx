@@ -10,7 +10,7 @@ import DeterminationGift from "@/components/shared/range/determinationGift";
 import { AuthContext } from "@/context/authContext";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { useRouter } from "next/navigation";
-import { ROLL_GET_SETTING } from "@/routeApi/endpoints";
+import { GET_ROLL_INFORMATION } from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import moment from "moment";
 import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
@@ -185,7 +185,7 @@ export default function DeterminingDiscount() {
 
         try {
           setIsLoadingForApi(true)
-          const response = await senderWithAuthId(ROLL_GET_SETTING , body , businessOwnerId)
+          const response = await senderWithAuthId(GET_ROLL_INFORMATION , body , businessOwnerId)
           if(response?.status === 200){
             setIsLoadingForApi(false)
             console.log(response);

@@ -24,7 +24,7 @@ export const BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT = `${BUSINESS_OWNER_ONLINE
 
 
 //--roll-routes
-export const ROLL_GET_SETTING = `${BASE_URL_ROLL}/getAll`;
+export const ROLL_GET_SETTING = `${BASE_URL_ROLL}/get-roll-information`;
 
 //--roll-routes
 

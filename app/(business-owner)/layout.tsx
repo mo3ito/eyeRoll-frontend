@@ -1,4 +1,3 @@
-
 import "../globals.css";
 import { ToastContainer } from "@/components/clients/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,11 +5,6 @@ import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
 import LayoutDashboard from "@/components/Header/dashboard/layoutDashboard";
-
-
-
-
-
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -22,34 +16,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  
-
-
-  
-  
   return (
     <html lang="en">
       <body className="overflow-x-hidden inset-0">
         <AuthContextProvider>
-          <ReactQueryProvider >
-           <LayoutDashboard/>
-        {children}
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        </ReactQueryProvider>
+          <ReactQueryProvider>
+            <LayoutDashboard />
+            {children}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </ReactQueryProvider>
         </AuthContextProvider>
-     
       </body>
     </html>
   );

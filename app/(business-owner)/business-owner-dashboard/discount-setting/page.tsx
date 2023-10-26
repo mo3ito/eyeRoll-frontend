@@ -45,10 +45,6 @@ export default function DeterminingDiscount() {
   const [firstMinsPeak, setFirstMinsPeak] = useState<string>("00");
   const [lastHourPeak, setLastHourPeak] = useState<string>("00");
   const [lastMinsPeak, setLastMinsPeak] = useState<string>("00");
-  const [firstDate , setFirstDate]=useState<Date | undefined>()
-  const [lastDate , setLastDate]=useState<Date | undefined>()
-  const [firstDatePeak , setFirstDatePeak]=useState<Date | undefined>()
-  const [lastDatePeak , setLastDatePeak]=useState<Date | undefined>()
   const [calendarisValue, setCalendarIsValue] = useState<boolean>(false);
   const {infos}=useContext(AuthContext)
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
@@ -56,69 +52,71 @@ export default function DeterminingDiscount() {
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
 
 
+
+  const [startDay , setstartDay]=useState<Date | undefined>()
+  const [finishDay , setfinishDay]=useState<Date | undefined>()
+  const [startDayTime , setStartTime]=useState<string>("")
+  const [endDayTime , setEndDayTime]=useState<string>("")
+  const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
+  const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
+ 
+
   console.log(infos);
   
- 
-  
-
-  // console.log("all", isCheckeAllProducts);
-  // console.log("some", isCheckedNumbersProduct);
-  // console.log("special" , isCheckedSpecialProducts );
-
-  // console.log("minValueAllProducts",minValueAllProducts);
-  // console.log("maxValueAllProducts",maxValueAllProducts);
-  // console.log("minVlueNumberProducts" , minValueNumberProducts);
-  // console.log("maxVlueNumberProducts" , maxValueNumberProducts);
-
-  console.log("start date", startDateWithoutTime);
-  console.log("end date", endDateWithoutTime);
- 
   useEffect(()=>{
-    if(startDateWithoutTime && firstHour && firstMins ){
-      const firstDateData = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
-    setFirstDate(firstDateData)
+    if( startDateWithoutTime && firstHour && firstMins){
+      const startDay = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
+      setstartDay(startDay)
     }
-  },[startDateWithoutTime , firstHour , firstMins ])
+  },[ startDateWithoutTime , firstHour , firstMins])
 
   useEffect(()=>{
-    if(endDateWithoutTime && lastHour && lastMins ){
-      const lastDateData = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
-    setLastDate(lastDateData)
-    return;
-    } 
-    if(!endDateWithoutTime && lastHour && lastMins && startDateWithoutTime ){
-      const lastDateData = moment(`${startDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
-      setLastDate(lastDateData)
+    if( endDateWithoutTime && lastHour && lastMins){
+      const finishDay = moment(`${endDateWithoutTime} ${lastHour}:${lastMins}`, "DD/MM/YYYY HH:mm").toDate();
+      setfinishDay(finishDay)
     }
-  },[endDateWithoutTime , lastHour , lastMins , startDateWithoutTime])
+  },[ endDateWithoutTime , lastHour , lastMins])
 
   useEffect(()=>{
-    if(startDateWithoutTime && firstHourPeak && firstMinsPeak ){
-      const firstDatePeakeDate = moment(`${startDateWithoutTime} ${firstHourPeak}:${firstMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
-      setFirstDatePeak(firstDatePeakeDate)
+    if(startDateWithoutTime && firstHour && firstMins){
+      const startDayTime = `${firstHour}:${firstMins}`
+      setStartTime(startDayTime)
     }
-  },[startDateWithoutTime , firstHourPeak , firstMinsPeak  ])
-
-
+  },[startDateWithoutTime , firstHour , firstMins])
 
   useEffect(()=>{
-    if(endDateWithoutTime && lastHourPeak && lastMinsPeak ){
-      const lastDatePeakData = moment(`${endDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
-    setLastDatePeak(lastDatePeakData)
-    return;
-    } 
-    if(!endDateWithoutTime && lastHourPeak && lastMinsPeak && startDateWithoutTime ){
-      const lastDatePeakData = moment(`${startDateWithoutTime} ${lastHourPeak}:${lastMinsPeak}`, "DD/MM/YYYY HH:mm").toDate();
-      setLastDatePeak(lastDatePeakData)
+    if(endDateWithoutTime && lastHour && lastMins){
+      const endDayTime = `${lastHour}:${lastMins}`
+      setEndDayTime(endDayTime)
     }
-  },[endDateWithoutTime , lastHourPeak , lastMinsPeak , startDateWithoutTime])
+  },[endDateWithoutTime , lastHour , lastMins])
 
-  console.log("first date", firstDate);
-  console.log("last date", lastDate);
-  console.log("first date peak", firstDatePeak);
-  console.log("last date peak", lastDatePeak);
-  console.log(lastMinsPeak);
-  console.log("special products", specificSpecialProducts);
+  useEffect(()=>{
+    if(startDateWithoutTime && firstHourPeak && firstMinsPeak){
+      const startDayPeakTime = `${firstHourPeak}:${firstMinsPeak}`
+      setStartDayPeakTime(startDayPeakTime)
+    }
+  },[startDateWithoutTime , firstHourPeak , firstMinsPeak])
+
+  useEffect(()=>{
+    if(endDateWithoutTime && lastHourPeak && lastMinsPeak){
+      const endDayPeakTime = `${lastHourPeak}:${lastMinsPeak}`
+      setEndDayPeakTime(endDayPeakTime)
+    }
+  },[endDateWithoutTime , lastHourPeak , lastMinsPeak])
+
+
+  console.log("start day1",startDay);
+  console.log("finish day1", finishDay);
+  console.log("start time",startDayTime);
+  console.log("end time",endDayTime);
+  console.log("start peak time",startDayPeakTime);
+  console.log("end peak time",endDayPeakTime);
+
+  
+  
+  
+  
   
   
   
@@ -126,9 +124,6 @@ export default function DeterminingDiscount() {
   
   
 
-  console.log(textInformation);
-  console.log(maxValueAllProducts);
-  
 
   const showInformationHandler = (information: string) => {
     setShowInformation(true);
@@ -137,18 +132,21 @@ export default function DeterminingDiscount() {
 
   const sendInformation = async (event : FormEvent)=>{
     event.preventDefault()
+ 
     const body = {
       businessOwner_name: infos?.name,
       businessOwner_last_name:infos?.last_name,
       businessOwner_id: businessOwnerId,
       min_percentage:minValueAllProducts.toString(),
       max_percentage:maxValueAllProducts.toString(),
-      min_percentage_peak: minValuePeak.toString(),
+      start_day:startDay,
+      finish_day:finishDay,
+      start_day_time:startDayTime,
+      end_day_time:endDayTime,
+      start_day_peak_time:startDayPeakTime,
+      end_day_peak_time:endDayPeakTime,
+      min_percentage_peak:minValuePeak.toString(),
       max_percentage_peak:maxValuePeak.toString(),
-      first_date:firstDate,
-      last_date:lastDate,
-      first_date_peak : firstDatePeak,
-      last_date_peak: lastDatePeak,
       special_product_discount : specificSpecialProducts,
       gift: giftValue,
       number_Purchase_gift:numberPurchaseGift

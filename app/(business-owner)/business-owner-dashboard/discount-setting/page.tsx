@@ -113,18 +113,6 @@ export default function DeterminingDiscount() {
   console.log("start peak time",startDayPeakTime);
   console.log("end peak time",endDayPeakTime);
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
   const showInformationHandler = (information: string) => {
     setShowInformation(true);
     setTextInformation(information);

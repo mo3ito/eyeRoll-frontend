@@ -18,6 +18,7 @@ import moment from "moment";
 import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
 import { toast } from "react-toastify";
 import LoadingPage from "@/components/loading/loadingPage";
+import { adjustedRollType } from "@/types/rollType/adjustedRollType";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -27,10 +28,10 @@ export default function DeterminingDiscount() {
   const [isCheckeAllProducts, setIsCheckeAllProducts] =useState<boolean>(true);
   const [isCheckedDiscountTime, setIsCheckedDiscountTime] =useState<boolean>(true);
   const [specificSpecialProducts, setSpecificSpecialProducts] = useState<SpecificSpecialProductsType[]>([]);
-  const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =useState<boolean>(false);
-  const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(false);
+  const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =useState<boolean>(true);
+  const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(true);
   const [giftValue , setGiftValue]=useState<string>("")
-  const [isCheckedGift, setIsCheckedGift] = useState<boolean>(false);
+  const [isCheckedGift, setIsCheckedGift] = useState<boolean>(true);
   const [numberPurchaseGift, setNumberPurchaseGift] = useState<number>(0);
   const [startDateWithoutTime, setStartDateWithoutTime] = useState<string | undefined>("");
   const [endDateWithoutTime, setEndDateWithoutTime] = useState<string | undefined>("");
@@ -40,7 +41,7 @@ export default function DeterminingDiscount() {
   const [lastMins, setLastMins] = useState<string>("00");
   const [showInformation, setShowInformation] = useState<boolean>(false);
   const [textInformation, setTextInformation] = useState<string>("");
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState<any>([null, null]);
   const [startDate, endDate] = dateRange;
   const [firstHourPeak, setFirstHourPeak] = useState<string>("00");
   const [firstMinsPeak, setFirstMinsPeak] = useState<string>("00");
@@ -58,10 +59,10 @@ export default function DeterminingDiscount() {
   const [endDayTime , setEndDayTime]=useState<string>("")
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
   const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
-  const [adjustedRoll , setAdjustedRoll]=useState<object| undefined>()
+  const [adjustedRoll , setAdjustedRoll]=useState<adjustedRollType>()
   const queryClient = useQueryClient();
   const queryKey = ['all roll setting', businessOwnerId];
-  const currentDate = new Date()
+  
 
   const {data:allRollSetting , isLoading}=useQuery(businessOwnerId ? queryKey : [],()=>{
     if (businessOwnerId) {
@@ -76,17 +77,39 @@ export default function DeterminingDiscount() {
     }
   }, [allRollSetting]);
 
-  // useEffect(()=>{
-  //   if (adjustedRoll) {
-  //     // تغییرات را در متغیرهای موقت ذخیره کنید
-  //     const newFirstHour = adjustedRoll?.firstHour || "00";
-  //     const newFirstMins = adjustedRoll?.firstMins || "00";
-  
-  //     // حالا مقادیر را به استیت تنظیم کنید
-  //     setFirstHour(newFirstHour);
-  //     setFirstMins(newFirstMins);
-  //   }
-  // },[adjustedRoll])
+  useEffect(()=>{
+    if (adjustedRoll) {
+      if(+adjustedRoll?.maxPercentageAllProducts > 0){
+        setIsCheckeAllProducts(true)
+      }else{
+        setIsCheckeAllProducts(false)
+      }
+      if(+adjustedRoll?.maxPercentagePeak > 0){
+        setIsCheckedPeakTime(true)
+      }else{
+        setIsCheckedPeakTime(false)
+      }
+      setMinValueAllProducts(+adjustedRoll?.minPercentageAllProducts || 0)
+      setMaxValueAllProducts(+adjustedRoll?.maxPercentageAllProducts || 0)
+      setFirstHour(adjustedRoll?.firstHour || "00");
+      setFirstMins(adjustedRoll?.firstMins || "00");
+      setLastHour(adjustedRoll?.lastHour || "00")
+      setLastMins(adjustedRoll?.lastMins || "00")
+      setDateRange([
+        new Date(adjustedRoll?.startDate) || null,
+        new Date(adjustedRoll?.endDate) || null
+      ]);
+      setFirstHourPeak(adjustedRoll.firstHourPeak || "00")
+      setFirstMinsPeak(adjustedRoll?.firstMinsPeak || "00")
+      setLastHourPeak(adjustedRoll?.lastHourPeak || "00")
+      setLastMinsPeak(adjustedRoll?.lastMinsPeak || "00")
+      setMinValuePeak(+adjustedRoll?.minPercentagePeak || 0)
+      setMaxValuePeak(+adjustedRoll?.maxPercentagePeak || 0)
+      setGiftValue(adjustedRoll?.giftValue || "")
+      setNumberPurchaseGift(+adjustedRoll?.numberPurchaseGift || 0)
+      setSpecificSpecialProducts(adjustedRoll?.specialProducts || [])
+    }
+  },[adjustedRoll])
   console.log(allRollSetting);
   
   console.log(adjustedRoll);
@@ -178,17 +201,17 @@ export default function DeterminingDiscount() {
       maxPercentagePeak:maxValuePeak,
       giftValue,
       numberPurchaseGift,
-      startDateWithoutTime,
-      endDateWithoutTime,
+      startDate :startDay,
+      endDate: finishDay,
       firstHour,
       firstMins,
       lastHour,
       lastMins,
-      startDate,
       firstHourPeak,
       firstMinsPeak,
       lastHourPeak,
       lastMinsPeak,
+      specialProducts: specificSpecialProducts
     }
    
     
@@ -223,54 +246,55 @@ export default function DeterminingDiscount() {
           return;
         }
 
-        try {
-          setIsLoadingForApi(true)
-          const response = await senderWithAuthId(GET_ROLL_INFORMATION , body , businessOwnerId)
-          if(response?.status === 200){
-            setIsLoadingForApi(false)
-            console.log(response);
-            toast.success("Settings applied successfully.")
-            // const sendRollAdjusted = await senderWithAuthId(SEND_ROLL_ADJUSTED , adjustedBody , businessOwnerId)
-          }
-        } catch (error : any) {
-          if(error.response?.status === 400){
-            const errorMessage = error?.response.data.message;
-            setIsLoadingForApi(false)
-            toast.error(errorMessage)
-          } else{
-            setIsLoadingForApi(false)
-            toast.error("An error occurred while processing your request");
-          }
+      //   try {
+      //     setIsLoadingForApi(true)
+      //     const response = await senderWithAuthId(GET_ROLL_INFORMATION , body , businessOwnerId)
+      //     if(response?.status === 200){
+      //       setIsLoadingForApi(false)
+      //       console.log(response);
+      //       toast.success("Settings applied successfully.")
+            
+      //     }
+      //   } catch (error : any) {
+      //     if(error.response?.status === 400){
+      //       const errorMessage = error?.response.data.message;
+      //       setIsLoadingForApi(false)
+      //       toast.error(errorMessage)
+      //     } else{
+      //       setIsLoadingForApi(false)
+      //       toast.error("An error occurred while processing your request");
+      //     }
         
-      }
-      // try {
-      //   setIsLoadingForApi(true);
-      
-      //   const responsePromise = senderWithAuthId(GET_ROLL_INFORMATION, body, businessOwnerId);
-      //   const sendRollAdjustedPromise = senderWithAuthId(SEND_ROLL_ADJUSTED, adjustedBody, businessOwnerId);
-      
-      //   const [response, sendRollAdjusted] = await Promise.all([responsePromise, sendRollAdjustedPromise]);
-      
-      //   if (response?.status === 200 && sendRollAdjusted?.status === 200) {
-      //     setIsLoadingForApi(false);
-      //     console.log(response);
-      //     console.log(sendRollAdjusted);
-      //     toast.success("Settings applied successfully.");
-      //   }
-      // } catch (error : any) {
-      //   if (error.response?.status === 400) {
-      //     const errorMessage = error?.response.data.message;
-      //     setIsLoadingForApi(false);
-      //     toast.error(errorMessage);
-      //   } else {
-      //     setIsLoadingForApi(false);
-      //     toast.error("An error occurred while processing your request");
-      //   }
       // }
+    
+      try {
+        setIsLoadingForApi(true);
+      
+        const responsePromise = senderWithAuthId(GET_ROLL_INFORMATION, body, businessOwnerId);
+        const sendRollAdjustedPromise = senderWithAuthId(SEND_ROLL_ADJUSTED, adjustedBody, businessOwnerId);
+      
+        const [response, sendRollAdjusted] = await Promise.all([responsePromise, sendRollAdjustedPromise]);
+      
+        if (response?.status === 200 && sendRollAdjusted?.status === 200) {
+          setIsLoadingForApi(false);
+          console.log(response);
+          console.log(sendRollAdjusted);
+          toast.success("Settings applied successfully.");
+        }
+      } catch (error : any) {
+        if (error.response?.status === 400) {
+          const errorMessage = error?.response.data.message;
+          setIsLoadingForApi(false);
+          toast.error(errorMessage);
+        } else {
+          setIsLoadingForApi(false);
+          toast.error("An error occurred while processing your request");
+        }
+      }
     }
   }
 
-  if(!infos && isLoading && !rollAdjusted){
+  if(!infos && isLoading && !adjustedRoll){
     return<LoadingPage/>
   }
 

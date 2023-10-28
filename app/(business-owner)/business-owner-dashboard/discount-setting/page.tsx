@@ -58,9 +58,10 @@ export default function DeterminingDiscount() {
   const [endDayTime , setEndDayTime]=useState<string>("")
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
   const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
-  const [rollAdjusted , setRollAdjusted]=useState<object| undefined>({})
+  const [adjustedRoll , setAdjustedRoll]=useState<object| undefined>()
   const queryClient = useQueryClient();
   const queryKey = ['all roll setting', businessOwnerId];
+  const currentDate = new Date()
 
   const {data:allRollSetting , isLoading}=useQuery(businessOwnerId ? queryKey : [],()=>{
     if (businessOwnerId) {
@@ -69,20 +70,26 @@ export default function DeterminingDiscount() {
     return null
   })
  
-  useEffect(()=>{
-    allRollSetting && setRollAdjusted(allRollSetting?.data)
-  },[allRollSetting])
-  console.log(rollAdjusted);
+  useEffect(() => {
+    if (allRollSetting) {
+      setAdjustedRoll(allRollSetting?.data);
+    }
+  }, [allRollSetting]);
 
   // useEffect(()=>{
-  //   if(rollAdjusted){
-  //     // setMinValueAllProducts(rollAdjusted?.min_percentage )
-  //     setFirstHour(rollAdjusted.firstHour)
-  //     setFirstMins(rollAdjusted.firstMins)
-  //   }
-  // },[rollAdjusted])
+  //   if (adjustedRoll) {
+  //     // تغییرات را در متغیرهای موقت ذخیره کنید
+  //     const newFirstHour = adjustedRoll?.firstHour || "00";
+  //     const newFirstMins = adjustedRoll?.firstMins || "00";
   
-  console.log(rollAdjusted);
+  //     // حالا مقادیر را به استیت تنظیم کنید
+  //     setFirstHour(newFirstHour);
+  //     setFirstMins(newFirstMins);
+  //   }
+  // },[adjustedRoll])
+  console.log(allRollSetting);
+  
+  console.log(adjustedRoll);
   
   console.log(infos);
   
@@ -205,6 +212,10 @@ export default function DeterminingDiscount() {
         }
         if(giftValue && numberPurchaseGift === 0){
           toast.warn("The number purchase gift must be greater than zero")
+          return;
+        } 
+        if(minValuePeak === 0 && maxValuePeak === 0 && isCheckedPeakTime){
+          toast.warn("The maximum value in discount amount during peak must be greater than zero")
           return;
         }
         if(minValuePeak > maxValuePeak){

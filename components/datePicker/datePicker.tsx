@@ -39,6 +39,7 @@ export default function DatesPicker({
     <>
       <DatePicker
         placeholderText="Enter the date"
+        minDate={new Date()} 
         selected={startDate}
         onChange={changeHandler}
         startDate={startDate}

@@ -10,12 +10,13 @@ import DeterminationGift from "@/components/shared/range/determinationGift";
 import { AuthContext } from "@/context/authContext";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { useRouter } from "next/navigation";
-import { GET_ROLL_INFORMATION } from "@/routeApi/endpoints";
+import { GET_ROLL_INFORMATION , SEND_ROLL_ADJUSTED , GET_ROLL_ADJUSTED} from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
+import getterWithAuthId from "@/services/getterWithAuthId";
+import {useQuery , useQueryClient} from '@tanstack/react-query'
 import moment from "moment";
 import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct/determinationSpecialProductType";
 import { toast } from "react-toastify";
-import Loading from "@/components/loading/loading";
 import LoadingPage from "@/components/loading/loadingPage";
 
 export default function DeterminingDiscount() {
@@ -23,8 +24,8 @@ export default function DeterminingDiscount() {
   const [maxValueAllProducts, setMaxValueAllProducts] = useState<number>(0);
   const [minValuePeak, setMinValuePeak] = useState<number>(0);
   const [maxValuePeak, setMaxValuePeak] = useState<number>(0);
-  const [isCheckeAllProducts, setIsCheckeAllProducts] =useState<boolean>(false);
-  const [isCheckedDiscountTime, setIsCheckedDiscountTime] =useState<boolean>(false);
+  const [isCheckeAllProducts, setIsCheckeAllProducts] =useState<boolean>(true);
+  const [isCheckedDiscountTime, setIsCheckedDiscountTime] =useState<boolean>(true);
   const [specificSpecialProducts, setSpecificSpecialProducts] = useState<SpecificSpecialProductsType[]>([]);
   const [isCheckedSpecialProducts, setIsCheckedSpecialProducts] =useState<boolean>(false);
   const [isCheckedPeakTime, setIsCheckedPeakTime] = useState<boolean>(false);
@@ -51,16 +52,38 @@ export default function DeterminingDiscount() {
   const router = useRouter()
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
 
-
-
   const [startDay , setstartDay]=useState<Date | undefined>()
   const [finishDay , setfinishDay]=useState<Date | undefined>()
   const [startDayTime , setStartTime]=useState<string>("")
   const [endDayTime , setEndDayTime]=useState<string>("")
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
   const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
- 
+  const [rollAdjusted , setRollAdjusted]=useState<object| undefined>({})
+  const queryClient = useQueryClient();
+  const queryKey = ['all roll setting', businessOwnerId];
 
+  const {data:allRollSetting , isLoading}=useQuery(businessOwnerId ? queryKey : [],()=>{
+    if (businessOwnerId) {
+      return getterWithAuthId(GET_ROLL_ADJUSTED, businessOwnerId);
+    }
+    return null
+  })
+ 
+  useEffect(()=>{
+    allRollSetting && setRollAdjusted(allRollSetting?.data)
+  },[allRollSetting])
+  console.log(rollAdjusted);
+
+  // useEffect(()=>{
+  //   if(rollAdjusted){
+  //     // setMinValueAllProducts(rollAdjusted?.min_percentage )
+  //     setFirstHour(rollAdjusted.firstHour)
+  //     setFirstMins(rollAdjusted.firstMins)
+  //   }
+  // },[rollAdjusted])
+  
+  console.log(rollAdjusted);
+  
   console.log(infos);
   
   useEffect(()=>{
@@ -140,6 +163,26 @@ export default function DeterminingDiscount() {
       number_Purchase_gift:numberPurchaseGift
     }
 
+    const adjustedBody = {
+      businessOwner_id: businessOwnerId,
+      minPercentageAllProducts: minValueAllProducts,
+      maxPercentageAllProducts : maxValueAllProducts,
+      minPercentagePeak : minValuePeak,
+      maxPercentagePeak:maxValuePeak,
+      giftValue,
+      numberPurchaseGift,
+      startDateWithoutTime,
+      endDateWithoutTime,
+      firstHour,
+      firstMins,
+      lastHour,
+      lastMins,
+      startDate,
+      firstHourPeak,
+      firstMinsPeak,
+      lastHourPeak,
+      lastMinsPeak,
+    }
    
     
 
@@ -176,6 +219,7 @@ export default function DeterminingDiscount() {
             setIsLoadingForApi(false)
             console.log(response);
             toast.success("Settings applied successfully.")
+            // const sendRollAdjusted = await senderWithAuthId(SEND_ROLL_ADJUSTED , adjustedBody , businessOwnerId)
           }
         } catch (error : any) {
           if(error.response?.status === 400){
@@ -188,10 +232,34 @@ export default function DeterminingDiscount() {
           }
         
       }
+      // try {
+      //   setIsLoadingForApi(true);
+      
+      //   const responsePromise = senderWithAuthId(GET_ROLL_INFORMATION, body, businessOwnerId);
+      //   const sendRollAdjustedPromise = senderWithAuthId(SEND_ROLL_ADJUSTED, adjustedBody, businessOwnerId);
+      
+      //   const [response, sendRollAdjusted] = await Promise.all([responsePromise, sendRollAdjustedPromise]);
+      
+      //   if (response?.status === 200 && sendRollAdjusted?.status === 200) {
+      //     setIsLoadingForApi(false);
+      //     console.log(response);
+      //     console.log(sendRollAdjusted);
+      //     toast.success("Settings applied successfully.");
+      //   }
+      // } catch (error : any) {
+      //   if (error.response?.status === 400) {
+      //     const errorMessage = error?.response.data.message;
+      //     setIsLoadingForApi(false);
+      //     toast.error(errorMessage);
+      //   } else {
+      //     setIsLoadingForApi(false);
+      //     toast.error("An error occurred while processing your request");
+      //   }
+      // }
     }
   }
 
-  if(!infos){
+  if(!infos && isLoading && !rollAdjusted){
     return<LoadingPage/>
   }
 

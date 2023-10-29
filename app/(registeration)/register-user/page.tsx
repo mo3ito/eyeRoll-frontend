@@ -4,7 +4,7 @@ import RegisterUser from "@/components/registeration/user/registerUser"
 
 const Page = () => {
   return (
-    <RegisterUser isBusinessOwner={false}/>
+    <RegisterUser/>
   )
 }
 

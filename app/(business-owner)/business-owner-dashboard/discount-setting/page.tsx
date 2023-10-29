@@ -20,7 +20,7 @@ import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct
 import { toast } from "react-toastify";
 import LoadingPage from "@/components/loading/loadingPage";
 import { adjustedRollType } from "@/types/rollType/adjustedRollType";
-import CheckBox from "@/components/shared/checkeBox/checkBox";
+
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -54,10 +54,14 @@ export default function DeterminingDiscount() {
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
   const router = useRouter()
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
-  const [isCheckedWithoutDiscount , setIsCheckedWithoutdiscount]=useState<boolean | null>(false)
+  const [isCheckedWithoutDiscount , setIsCheckedWithoutdiscount]=useState<boolean>(false)
+  const [specialProductName, setSpecialProductsName] = useState("");
+  const [discountAmount, setDiscountAmount] = useState<number>(0);
 
-  const [startDay , setstartDay]=useState<Date | undefined>()
-  const [finishDay , setfinishDay]=useState<Date | undefined>()
+
+
+  const [startDay , setStartDay]=useState<Date | null>()
+  const [finishDay , setfinishDay]=useState<Date | null >()
   const [startDayTime , setStartTime]=useState<string>("")
   const [endDayTime , setEndDayTime]=useState<string>("")
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
@@ -74,7 +78,10 @@ export default function DeterminingDiscount() {
       setIsCheckedGift(false)
       setIsCheckedPeakTime(false)
       setIsCheckedSpecialProducts(false)
-    }
+      
+      
+      
+    } 
   },[isCheckedWithoutDiscount])
 
   useEffect(()=>{
@@ -143,11 +150,14 @@ export default function DeterminingDiscount() {
   console.log(adjustedRoll);
   
   console.log(infos);
+  console.log(isCheckedWithoutDiscount);
+  
+  console.log(specificSpecialProducts);
   
   useEffect(()=>{
     if( startDateWithoutTime && firstHour && firstMins){
       const startDay = moment(`${startDateWithoutTime} ${firstHour}:${firstMins}`, "DD/MM/YYYY HH:mm").toDate();
-      setstartDay(startDay)
+      setStartDay(startDay)
     }
   },[ startDateWithoutTime , firstHour , firstMins])
 
@@ -187,8 +197,8 @@ export default function DeterminingDiscount() {
   },[endDateWithoutTime , lastHourPeak , lastMinsPeak])
 
 
-  console.log("start day1",startDay);
-  console.log("finish day1", finishDay);
+  console.log("start day",startDay);
+  console.log("finish day", finishDay);
   console.log("start time",startDayTime);
   console.log("end time",endDayTime);
   console.log("start peak time",startDayPeakTime);
@@ -202,7 +212,10 @@ export default function DeterminingDiscount() {
   const sendInformation = async (event : FormEvent)=>{
     event.preventDefault()
  
+  
+    
     const body = {
+      isRollUse : isCheckedWithoutDiscount ? false : true ,
       businessOwner_name: infos?.name,
       businessOwner_last_name:infos?.last_name,
       businessOwner_id: businessOwnerId,
@@ -249,7 +262,7 @@ export default function DeterminingDiscount() {
         return;
       }else{
   
-        if(!calendarisValue){
+        if(!calendarisValue && isCheckedDiscountTime){
           toast.warn("Please enter the date")
           return;
         }
@@ -257,7 +270,7 @@ export default function DeterminingDiscount() {
           toast.warn("The maximum amount in discount all product is lower than its minimum")
           return;
         }
-        if(minValueAllProducts === 0 && maxValueAllProducts === 0){
+        if(minValueAllProducts === 0 && maxValueAllProducts === 0 && isCheckeAllProducts ){
           toast.warn("The maximum value in discount all product must be greater than zero")
           return;
         }
@@ -271,6 +284,10 @@ export default function DeterminingDiscount() {
         }
         if(minValuePeak > maxValuePeak){
           toast.warn("The maximum amount in peak sales hours is lower than its minimum")
+          return;
+        }
+        if( specialProductName && isCheckedSpecialProducts  && discountAmount === 0){
+          toast.warn("Please fill in all the fields in the Discounts on special products section")
           return;
         }
         if((+numberPurchaseGift >0 && !giftValue) || (!numberPurchaseGift && giftValue)){
@@ -408,6 +425,10 @@ export default function DeterminingDiscount() {
                 setSpecificSpecialProducts={setSpecificSpecialProducts}
                 setIsChecked={setIsCheckedSpecialProducts}
                 isChecked={isCheckedSpecialProducts}
+                specialProductName={specialProductName}
+                setSpecialProductsName={setSpecialProductsName}
+                discountAmount={discountAmount}
+                setDiscountAmount={setDiscountAmount}
                 showInformation={() =>
                   showInformationHandler(
                     "In this section, you specify the discount amount for a specific product, which is entirely separate from the general discount."
@@ -418,8 +439,9 @@ export default function DeterminingDiscount() {
               <ButtonDefault
                 loading={isLoadingForApi}
                 disabled={
-                  (isCheckeAllProducts && isCheckedDiscountTime) ||
-                  (isCheckedSpecialProducts && isCheckedDiscountTime)
+                  (isCheckeAllProducts && isCheckedDiscountTime ) ||
+                  (isCheckedSpecialProducts && isCheckedDiscountTime  ) ||
+                  (isCheckedWithoutDiscount)
                     ? false
                     : true
                 }

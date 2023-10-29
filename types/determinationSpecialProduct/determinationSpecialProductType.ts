@@ -14,5 +14,9 @@ export interface DeterminationSpecialProductProps {
   setIsChecked: Dispatch<SetStateAction<boolean>>;
   specificSpecialProducts: SpecificSpecialProductsType[],
   setSpecificSpecialProducts:Dispatch<SetStateAction<SpecificSpecialProductsType[]>>
+  specialProductName: string;
+  setSpecialProductsName: Dispatch<SetStateAction<string>>
+  discountAmount:number;
+  setDiscountAmount: Dispatch<SetStateAction<number>>
 }
 

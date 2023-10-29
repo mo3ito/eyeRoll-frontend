@@ -17,10 +17,14 @@ export default function DeterminationSpecialProduct({
   isChecked,
   setIsChecked,
   specificSpecialProducts,
-  setSpecificSpecialProducts
+  setSpecificSpecialProducts,
+  specialProductName,
+  setSpecialProductsName,
+  discountAmount,
+  setDiscountAmount
+  
 }: DeterminationSpecialProductProps) {
-  const [specialProductName, setSpecialProductsName] = useState("");
-  const [discountAmount, setDiscountAmount] = useState<number>(0);
+  
 
   useEffect(()=>{
     if(!isChecked){

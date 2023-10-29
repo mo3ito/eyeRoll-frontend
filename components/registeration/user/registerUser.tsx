@@ -2,10 +2,7 @@
 import { useState, FormEvent, useContext, useCallback } from "react";
 import Input from "../../shared/inputs/input";
 import InputPassword from "@/components/shared/inputs/inputPassword";
-import Button from "@/components/shared/button/button";
 import { toast } from "react-toastify";
-import Loading from "../../loading/loading";
-import { useQuery } from "react-query";
 import sender from "../../../services/sender";
 import { AuthContext } from "../../../context/authContext";
 import { useRouter } from "next/navigation";
@@ -13,11 +10,9 @@ import Link from "next/link";
 import { USERS_REGISTER } from "@/routeApi/endpoints";
 import  handleInputChange  from "@/utils/handleInputChange";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-interface RegisterUserProps {
-  isBusinessOwner?: boolean;
-}
 
-const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
+
+const RegisterUser = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -71,17 +66,17 @@ const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
   };
 
   return (
-    <div className="bg-sky-100 w-full h-screen">
+    <div className="bg-sky-100 w-full  h-max ">
       <div className="container px-4  h-max mx-auto">
         <form autoComplete="off" onSubmit={submitHandler}>
-          <div className="w-2/4 h-max mx-auto pt-32 ">
+        <div className=" max-[420px]:w-11/12 w-9/12 sm:w-4/5 lg:w-3/5 xl:w-2/5 h-max mx-auto pt-32">
             <h2 className="mb-12 text-center text-lg font-semibold">
               register as customer
             </h2>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="username"
                 value={username}
                 onChange={useCallback(
@@ -93,7 +88,7 @@ const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
               />
 
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="email"
                 value={email}
                 onChange={useCallback(
@@ -105,9 +100,9 @@ const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
               />
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <InputPassword
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="password"
                 labelClassName="mb-3 starBefore"
                 value={password}
@@ -119,7 +114,7 @@ const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
               />
 
               <InputPassword
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="repeat password"
                 labelClassName="mb-3 starBefore"
                 value={repeatPassword}
@@ -137,10 +132,10 @@ const RegisterUser = ({ isBusinessOwner = false }: RegisterUserProps) => {
               className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
             />
             <div className="flex items-center justify-center  space-x-1 mt-3">
-              <p className=" ">Do you have an account? </p>
+              <p className="text-sm sm:text-base ">Do you have an account? </p>
               <Link
                 href="/register-user/login"
-                className="text-fuchsia-500 underline text-xl"
+                className="text-fuchsia-500 underline text-sm sm:text-xl"
               >
                 login
               </Link>

@@ -7,14 +7,12 @@ import {
   useContext,
   MouseEventHandler,
   useEffect,
-  useCallback,
 } from "react";
 import sender from "@/services/sender";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import Loading from "@/components/loading/loading";
 import {
   BUSINESS_OWNER_LOGIN,
   BUSINESS_OWNER_RESEND_EMAIL_VERIFICATION,
@@ -35,7 +33,6 @@ interface LoginPropsType {
 }
 
 const Login = ({
-  onClick,
   text = "login",
   path,
   isBusinessOwner = false,
@@ -131,14 +128,14 @@ const Login = ({
   }
 
   return (
-    <div className="bg-sky-100 w-full h-screen">
+    <div className="bg-sky-100 w-full h-max ">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitHandler}>
-          <div className="w-2/4 h-max mx-auto pt-32 ">
+          <div className=" min-[400px]:w-4/5  min-[450px]:w-3/5  w-11/12  sm:w-3/5 md:w-2/4  lg:w-2/5  xl:w-1/4 h-max mx-auto pt-32 ">
             <h2 className="mb-12 text-center text-lg font-semibold">{text}</h2>
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full  flex justify-around gap-x-5">
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full"
                 label="email"
                 value={email}
                 onChange={(event) => handleInputChange(event, setEmail)}
@@ -148,7 +145,7 @@ const Login = ({
             </div>
             <div className="w-full flex justify-around ">
               <InputPassword
-                className="mb-4 w-1/2"
+                className="mb-4 w-full "
                 labelClassName=" starBefore mb-3"
                 label="password"
                 value={password}
@@ -157,26 +154,26 @@ const Login = ({
               />
             </div>
 
-            <div className="w-1/2 mx-auto flex flex-col justify-around ">
+            <div className="w-full mx-auto flex flex-col justify-around ">
               {!isResendEmail ? (
                 <ButtonDefault
                   loading={isLoading}
                   text="login"
-                  className="hoverScale w-1/2 mt-4 bg-fuchsia-400 h-12 rounded-lg"
+                  className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
                 />
               ) : (
                 <ButtonDefault
                   loading={isLoading}
-                  className="hoverScale w-1/2 mt-4 bg-fuchsia-400 h-12 rounded-lg"
+                  className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
                   text="resend email"
                   onClick={resendEmailHandler}
                 />
               )}
               <div className="flex items-center justify-center  space-x-1 mt-3">
-                <p className=" ">Do you have an account? </p>
+                <p className="text-sm sm:text-base ">Don't you have an account? </p>
                 <Link
                   href={link}
-                  className="text-fuchsia-500 underline text-xl"
+                  className="text-fuchsia-500 underline text-sm sm:text-xl"
                 >
                   register
                 </Link>

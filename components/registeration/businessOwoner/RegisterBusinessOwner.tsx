@@ -8,9 +8,7 @@ import {
   useEffect,
 } from "react";
 import Input from "../../shared/inputs/input";
-import Button from "@/components/shared/button/button";
 import { toast } from "react-toastify";
-import Loading from "../../loading/loading";
 import sender from "@/services/sender";
 import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
@@ -110,13 +108,13 @@ const RegisterBusinessOwner = () => {
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
         <form autoComplete="off" onSubmit={submitHandler}>
-          <div className="w-2/4 h-max mx-auto pt-32 ">
+          <div className=" max-[420px]:w-11/12 w-9/12 sm:w-4/5 lg:w-3/5 xl:w-2/5 h-max mx-auto pt-32">
             <h2 className="mb-12 text-center text-lg font-semibold">
               register as business owner
             </h2>
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="name"
                 value={name}
                 onChange={useCallback(
@@ -128,7 +126,7 @@ const RegisterBusinessOwner = () => {
               />
 
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="last name"
                 value={lastName}
                 onChange={useCallback(
@@ -140,9 +138,9 @@ const RegisterBusinessOwner = () => {
               />
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full  flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <Input
-                className="mb-4 w-1/2"
+                className="mb-4 w-full sm:w-1/2"
                 label="username"
                 value={username}
                 onChange={useCallback(
@@ -153,16 +151,16 @@ const RegisterBusinessOwner = () => {
                 type="text"
               />
 
-              <div ref={phoneNumberRef} className="mb-4 w-2/4">
+              <div ref={phoneNumberRef} className="mb-4 w-full  sm:w-1/2    ">
                 <p className="mb-3 starBefore ">phone number</p>
                 <div
                   onClick={() => setIsBorderBold(true)}
-                  className={`w-full h-10 border border-fuchsia-400 rounded-lg  pl-2 ${
+                  className={`w-full h-10 border border-fuchsia-400  rounded-lg  ${
                     isBorderBold && "border-2"
                   }`}
                 >
                   <PhoneInput
-                    className=""
+                    className=" px-2 "
                     defaultCountry="US"
                     placeholder="Enter phone number"
                     value={phoneNumber}
@@ -172,9 +170,9 @@ const RegisterBusinessOwner = () => {
               </div>
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <Input
-                className="mb-4 w-full"
+                className="mb-4 w-full "
                 label="email"
                 value={email}
                 onChange={useCallback(
@@ -186,9 +184,9 @@ const RegisterBusinessOwner = () => {
               />
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
+            <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
               <InputPassword
-                className="mb-4 w-full"
+                className="mb-4 w-full sm:w-1/2"
                 label="password"
                 labelClassName="mb-3 starBefore"
                 value={password}
@@ -200,7 +198,7 @@ const RegisterBusinessOwner = () => {
               />
 
               <InputPassword
-                className="mb-4 w-full"
+                className="mb-4 w-full sm:w-1/2"
                 label="repeat password"
                 labelClassName="mb-3 starBefore"
                 value={repeatPassword}
@@ -218,10 +216,10 @@ const RegisterBusinessOwner = () => {
               className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
             />
             <div className="flex items-center justify-center  space-x-1 mt-3">
-              <p className=" ">Do you have an account? </p>
+              <p className="text-sm sm:text-base ">Do you have an account? </p>
               <Link
                 href="/register-business-owner/login"
-                className="text-fuchsia-500 underline text-xl"
+                className="text-fuchsia-500 underline text-sm sm:text-xl"
               >
                 login
               </Link>

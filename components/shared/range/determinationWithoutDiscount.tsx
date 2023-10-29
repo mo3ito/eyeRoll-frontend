@@ -21,7 +21,7 @@ export default function DeterminationWithoutDiscount({
     setIsChecked(event.target.checked);
   };
   return (
-    <div className="w-full h-14 bg-indigo-100 rounded-xl p-4">
+    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-4`}>
       <div className="flex items-center justify-center   ">
         <div className=" h-max">
           <InformationButton onClick={showInformation} />

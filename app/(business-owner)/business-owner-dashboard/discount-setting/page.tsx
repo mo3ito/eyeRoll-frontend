@@ -67,7 +67,6 @@ export default function DeterminingDiscount() {
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
   const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
   const [adjustedRoll , setAdjustedRoll]=useState<adjustedRollType>()
-  const queryClient = useQueryClient();
   const queryKey = ['all roll setting', businessOwnerId];
   
 
@@ -124,6 +123,12 @@ export default function DeterminingDiscount() {
       }else{
         setIsCheckedGift(false)
       }
+      if(adjustedRoll.specialProducts.length >0 ){
+        setIsCheckedSpecialProducts(true)
+      }else{
+        setIsCheckedSpecialProducts(false)
+      }
+      // if(adjustedRoll.startDate && a)
       setMinValueAllProducts(+adjustedRoll?.minPercentageAllProducts || 0)
       setMaxValueAllProducts(+adjustedRoll?.maxPercentageAllProducts || 0)
       setFirstHour(adjustedRoll?.firstHour || "00");
@@ -328,7 +333,7 @@ export default function DeterminingDiscount() {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-center bg-sky-100 pt-8 overflow-y-auto  ">
+      <div className="w-full min-h-screen h-max flex justify-center bg-sky-100 py-8 overflow-y-auto  ">
         <form onSubmit={sendInformation} className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>

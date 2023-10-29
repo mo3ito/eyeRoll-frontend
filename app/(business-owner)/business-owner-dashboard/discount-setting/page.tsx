@@ -315,11 +315,14 @@ export default function DeterminingDiscount() {
         <form onSubmit={sendInformation} className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
-            <DeterminationWithoutDiscount   showInformation={() =>
-                  showInformationHandler(
-                    "In this section, you apply everything without discount."
-                  )
-                } title='without discount' isChecked={isCheckedWithoutDiscount} setIsChecked={setIsCheckedWithoutdiscount} />
+
+             <DeterminationWithoutDiscount   
+              showInformation={() =>
+             showInformationHandler(
+              "In this section, you apply everything without discount."
+              )}
+              title='without discount' isChecked={isCheckedWithoutDiscount} setIsChecked={setIsCheckedWithoutdiscount}  
+             />
            
 
               <DeterminationRange

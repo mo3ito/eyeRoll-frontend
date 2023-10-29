@@ -1,13 +1,20 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 import CheckBox from "../checkeBox/checkBox";
 import InformationButton from "@/components/informationButton/informationButton";
+
+interface DeterminationWithoutDiscountProps {
+  isChecked: boolean;
+  title: string;
+  showInformation: () => void;
+  setIsChecked: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function DeterminationWithoutDiscount({
   isChecked,
   title,
   showInformation,
   setIsChecked,
-}) {
+}: DeterminationWithoutDiscountProps) {
   const cheangeCheckedHandler = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {

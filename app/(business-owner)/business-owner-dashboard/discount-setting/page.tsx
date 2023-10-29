@@ -4,6 +4,7 @@ import DeterminationRange from "@/components/shared/range/determinationRange";
 import DeterminationDiscountTime from "@/components/shared/range/determinationDiscountTime";
 import DeterminationSpecialProduct from "@/components/shared/range/determinationSpecialProduct";
 import ShowInformationRollSetting from "@/components/showInformationRollSetting/showInformationRollSetting";
+import DeterminationWithoutDiscount from "@/components/shared/range/determinationWithoutDiscount";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import DeterminationRangePeak from "@/components/shared/range/determinationRangePeak";
 import DeterminationGift from "@/components/shared/range/determinationGift";
@@ -19,6 +20,7 @@ import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct
 import { toast } from "react-toastify";
 import LoadingPage from "@/components/loading/loadingPage";
 import { adjustedRollType } from "@/types/rollType/adjustedRollType";
+import CheckBox from "@/components/shared/checkeBox/checkBox";
 
 export default function DeterminingDiscount() {
   const [minValueAllProducts, setMinValueAllProducts] = useState<number>(0);
@@ -52,6 +54,7 @@ export default function DeterminingDiscount() {
   const {businessOwnerId}=useGetBusinessOwnerId(infos)
   const router = useRouter()
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
+  const [isCheckedWithoutDiscount , setIsCheckedWithoutdiscount]=useState<boolean | null>(false)
 
   const [startDay , setstartDay]=useState<Date | undefined>()
   const [finishDay , setfinishDay]=useState<Date | undefined>()
@@ -63,6 +66,26 @@ export default function DeterminingDiscount() {
   const queryClient = useQueryClient();
   const queryKey = ['all roll setting', businessOwnerId];
   
+
+  useEffect(()=>{
+    if(isCheckedWithoutDiscount){
+      setIsCheckeAllProducts(false)
+      setIsCheckedDiscountTime(false)
+      setIsCheckedGift(false)
+      setIsCheckedPeakTime(false)
+      setIsCheckedSpecialProducts(false)
+    }
+  },[isCheckedWithoutDiscount])
+
+  useEffect(()=>{
+    if(isCheckeAllProducts || isCheckedDiscountTime || isCheckedGift || isCheckedPeakTime || isCheckedSpecialProducts 
+      ) {
+        setIsCheckedWithoutdiscount(false)
+        
+      } else{
+        setIsCheckedWithoutdiscount(true)
+      }
+  },[isCheckeAllProducts , isCheckedDiscountTime , isCheckedGift , isCheckedPeakTime ,isCheckedSpecialProducts , isCheckedWithoutDiscount])
 
   const {data:allRollSetting , isLoading}=useQuery(businessOwnerId ? queryKey : [],()=>{
     if (businessOwnerId) {
@@ -88,6 +111,11 @@ export default function DeterminingDiscount() {
         setIsCheckedPeakTime(true)
       }else{
         setIsCheckedPeakTime(false)
+      }
+      if(adjustedRoll.giftValue && +adjustedRoll.numberPurchaseGift > 0){
+        setIsCheckedGift(true)
+      }else{
+        setIsCheckedGift(false)
       }
       setMinValueAllProducts(+adjustedRoll?.minPercentageAllProducts || 0)
       setMaxValueAllProducts(+adjustedRoll?.maxPercentageAllProducts || 0)
@@ -245,28 +273,11 @@ export default function DeterminingDiscount() {
           toast.warn("The maximum amount in peak sales hours is lower than its minimum")
           return;
         }
+        if((+numberPurchaseGift >0 && !giftValue) || (!numberPurchaseGift && giftValue)){
+          toast.warn("Please fill in all the fields in the gift selection section")
+          return;
+        }
 
-      //   try {
-      //     setIsLoadingForApi(true)
-      //     const response = await senderWithAuthId(GET_ROLL_INFORMATION , body , businessOwnerId)
-      //     if(response?.status === 200){
-      //       setIsLoadingForApi(false)
-      //       console.log(response);
-      //       toast.success("Settings applied successfully.")
-            
-      //     }
-      //   } catch (error : any) {
-      //     if(error.response?.status === 400){
-      //       const errorMessage = error?.response.data.message;
-      //       setIsLoadingForApi(false)
-      //       toast.error(errorMessage)
-      //     } else{
-      //       setIsLoadingForApi(false)
-      //       toast.error("An error occurred while processing your request");
-      //     }
-        
-      // }
-    
       try {
         setIsLoadingForApi(true);
       
@@ -304,6 +315,13 @@ export default function DeterminingDiscount() {
         <form onSubmit={sendInformation} className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
+            <DeterminationWithoutDiscount   showInformation={() =>
+                  showInformationHandler(
+                    "In this section, you apply everything without discount."
+                  )
+                } title='without discount' isChecked={isCheckedWithoutDiscount} setIsChecked={setIsCheckedWithoutdiscount} />
+           
+
               <DeterminationRange
                 setMinValue={setMinValueAllProducts}
                 setMaxValue={setMaxValueAllProducts}

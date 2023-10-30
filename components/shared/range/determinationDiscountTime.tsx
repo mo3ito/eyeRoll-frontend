@@ -62,7 +62,7 @@ export default function DeterminationDiscountTime({
       setLastMins("")
       setStartDateWithoutTime("")
       setEndDateWithoutTime("")
-      setDateRange([])
+      setDateRange([null , null])
     }else{
       setFirstMins("00")
       setFirstHour("00")

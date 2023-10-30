@@ -128,7 +128,11 @@ export default function DeterminingDiscount() {
       }else{
         setIsCheckedSpecialProducts(false)
       }
-      // if(adjustedRoll.startDate && a)
+      if( adjustedRoll.firstHour === "" && adjustedRoll.firstMins === "" && adjustedRoll.lastHour === "" && adjustedRoll.lastMins === ""){
+        setIsCheckedDiscountTime(false)
+      }else{
+        setIsCheckedDiscountTime(true)
+      }
       setMinValueAllProducts(+adjustedRoll?.minPercentageAllProducts || 0)
       setMaxValueAllProducts(+adjustedRoll?.maxPercentageAllProducts || 0)
       setFirstHour(adjustedRoll?.firstHour || "00");
@@ -247,8 +251,8 @@ export default function DeterminingDiscount() {
       maxPercentagePeak:maxValuePeak,
       giftValue,
       numberPurchaseGift,
-      startDate :startDay,
-      endDate: finishDay,
+      startDate :startDate,
+      endDate: endDate,
       firstHour,
       firstMins,
       lastHour,

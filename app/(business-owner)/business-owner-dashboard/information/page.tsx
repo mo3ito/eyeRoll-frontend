@@ -158,26 +158,7 @@ export default function Information() {
     }
   };
 
-  // const submitImage = async (event : FormEvent)=>{
-  //   event.preventDefault()
-  //   console.log("hello");
 
-  //   if(profileImage){
-  //     const formData = await new FormData()
-  //     await formData.append("profileImage", profileImage)
-    
-  //     try {
-  //       const response = await sender("http://localhost:5000/business-owner/upload-image" , formData )
-  //     } catch (error) {
-  //       console.log(error);
-        
-  //     }
-
-        
-  //   }
-  
-    
-  // }
   const submitImage = async (event: FormEvent) => {
     event.preventDefault();
     console.log("hello");
@@ -192,13 +173,20 @@ export default function Information() {
         console.log(response?.data); 
        await login(response?.data.userInfos , response?.data.token )
        router.refresh()
-      } catch (error) {
-        console.error("خطا در ارسال درخواست:", error);
+      } catch (error : any) {
+        if (error.response?.status === 400) {
+          const errorMessage = error?.response.data.message;
+          toast.error(errorMessage);
+        } else {
+          toast.error("An error occurred while processing your request");
+        }
       }
     }
   };
 
   console.log(profileImage);
+  console.log(infos);
+  
   
 
   if (!infos) {
@@ -206,7 +194,7 @@ export default function Information() {
   }
 
   return (
-    <div className="bg-sky-100 w-full h-screen">
+    <div className="bg-sky-100 w-full h-max pb-20 pt-4">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitImage} className="w-2/4 h-max mx-auto mb-5 ">
         <label className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">

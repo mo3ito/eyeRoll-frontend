@@ -8,7 +8,9 @@ import {
   useRef,
   useState,
   useCallback,
+  ChangeEvent,
 } from "react";
+import axios from "axios";
 import { AuthContext } from "@/context/authContext";
 import LoadingPage from "@/components/loading/loadingPage";
 import handleInputChange from "@/utils/handleInputChange";
@@ -22,6 +24,7 @@ import Cookies from "js-cookie";
 import EYEROLL_TOKEN from "@/help/tokenName";
 import { useRouter } from "next/navigation";
 import InputPassword from "@/components/shared/inputs/inputPassword";
+import senderFormDataWithId from "@/services/senderFormDataWithId";
 
 export default function Information() {
   const { infos, login } = useContext(AuthContext);
@@ -40,6 +43,9 @@ export default function Information() {
   const [postalCode, setPostalCode] = useState<string>("");
   const [workPhone, setWorkPhone] = useState<string>("");
   const [isBorderBold, setIsBorderBold] = useState<boolean>(false);
+  const [profileImage , setProfileImage]=useState<string>("")
+  const [isSendProfileImage , setIsProfileImage]=useState<boolean>(false)
+  const [formDataToSend , setFormDataToSend]=useState({})
   const phoneNumberRef = useRef<null | HTMLDivElement>(null);
   const { businessOwnerId } = useGetBusinessOwnerId(infos);
   const token = Cookies.get(EYEROLL_TOKEN);
@@ -144,6 +150,57 @@ export default function Information() {
     }
   };
 
+  const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const selectedFile = event.target.files[0];
+      setProfileImage(selectedFile);
+      
+    }
+  };
+
+  // const submitImage = async (event : FormEvent)=>{
+  //   event.preventDefault()
+  //   console.log("hello");
+
+  //   if(profileImage){
+  //     const formData = await new FormData()
+  //     await formData.append("profileImage", profileImage)
+    
+  //     try {
+  //       const response = await sender("http://localhost:5000/business-owner/upload-image" , formData )
+  //     } catch (error) {
+  //       console.log(error);
+        
+  //     }
+
+        
+  //   }
+  
+    
+  // }
+  const submitImage = async (event: FormEvent) => {
+    event.preventDefault();
+    console.log("hello");
+  
+    if (profileImage) {
+      const formData = new FormData();
+      formData.append("profileImage", profileImage);
+      formData.append("businessOwnerId", businessOwnerId)
+  
+      try {
+        const response = await senderFormDataWithId("http://localhost:5000/business-owner/upload-image" , businessOwnerId , formData )
+        console.log(response?.data); 
+       await login(response?.data.userInfos , response?.data.token )
+       router.refresh()
+      } catch (error) {
+        console.error("خطا در ارسال درخواست:", error);
+      }
+    }
+  };
+
+  console.log(profileImage);
+  
+
   if (!infos) {
     return <LoadingPage />;
   }
@@ -151,8 +208,22 @@ export default function Information() {
   return (
     <div className="bg-sky-100 w-full h-screen">
       <div className="container px-4  h-max mx-auto">
+        <form onSubmit={submitImage} className="w-2/4 h-max mx-auto mb-5 ">
+        <label className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
+            <img src="" alt="" className="w-32 h-32 rounded-full bg-green-200 mx-auto"/>
+            <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
+            <span className="  inline-block ">file name:</span>
+            <span className="inline-block pl-2">{profileImage?.name}</span>
+            </div>
+            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" />
+            <button  className="bg-fuchsia-400 p-2 rounded-lg hoverScale">confirm</button>
+            </label>
+        </form>
+        
         <form onSubmit={informationSubmitHandler}>
-          <div className="w-2/4 h-max mx-auto pt-32 ">
+          <div className="w-2/4 h-max mx-auto  ">
+           
+         
             <div className="w-full flex justify-around gap-x-5">
               <div className="mb-4 w-1/2 ">
                 <p className="mb-3 starBefore ">name</p>

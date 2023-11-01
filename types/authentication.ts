@@ -21,6 +21,8 @@ interface InfosProps {
   username:string;
   postal_code:string;
   work_phone:string;
+  profile_image_path:string
+
  
 }
 

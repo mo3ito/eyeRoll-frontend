@@ -166,7 +166,7 @@ export default function Information() {
     if (profileImage) {
       const formData = new FormData();
       formData.append("profileImage", profileImage);
-      formData.append("businessOwnerId", businessOwnerId)
+     
   
       try {
         const response = await senderFormDataWithId("http://localhost:5000/business-owner/upload-image" , businessOwnerId , formData )
@@ -198,7 +198,7 @@ export default function Information() {
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitImage} className="w-2/4 h-max mx-auto mb-5 ">
         <label className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
-            <img src="" alt="" className="w-32 h-32 rounded-full bg-green-200 mx-auto"/>
+            <img src={infos?.profile_image_path} alt="" className="w-32 h-32 rounded-full bg-green-200 mx-auto object-cover"/>
             <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
             <span className="  inline-block ">file name:</span>
             <span className="inline-block pl-2">{profileImage?.name}</span>

@@ -77,9 +77,6 @@ export default function DeterminingDiscount() {
       setIsCheckedGift(false)
       setIsCheckedPeakTime(false)
       setIsCheckedSpecialProducts(false)
-      
-      
-      
     } 
   },[isCheckedWithoutDiscount])
 
@@ -334,6 +331,8 @@ export default function DeterminingDiscount() {
   if(!infos && isLoading && !adjustedRoll){
     return<LoadingPage/>
   }
+
+  
 
   return (
     <>

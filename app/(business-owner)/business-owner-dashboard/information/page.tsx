@@ -44,8 +44,8 @@ export default function Information() {
   const [workPhone, setWorkPhone] = useState<string>("");
   const [isBorderBold, setIsBorderBold] = useState<boolean>(false);
   const [profileImage , setProfileImage]=useState<string>("")
-  const [isSendProfileImage , setIsProfileImage]=useState<boolean>(false)
-  const [formDataToSend , setFormDataToSend]=useState({})
+  const [isShowInputsForImageProfile , setIsShowInputsForImageProfile]=useState<boolean>(false)
+  const [isLoadingForApi , setIsLosdingForApi]=useState<boolean>(false)
   const phoneNumberRef = useRef<null | HTMLDivElement>(null);
   const { businessOwnerId } = useGetBusinessOwnerId(infos);
   const token = Cookies.get(EYEROLL_TOKEN);
@@ -153,7 +153,6 @@ export default function Information() {
   const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       console.log(event.target.files[0].type);
-      
       if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg"){
         const selectedFile = event.target.files[0];
         setProfileImage(selectedFile);
@@ -176,15 +175,25 @@ export default function Information() {
      
   
       try {
+       
+        setIsLosdingForApi(true)
         const response = await senderFormDataWithId( BUSINESS_OWNER_PROFILE_IMAGE , businessOwnerId , formData )
         console.log(response?.data); 
-       await login(response?.data.userInfos , response?.data.token )
-       router.refresh()
+        if(response?.status === 200){
+          await login(response?.data.userInfos , response?.data.token )
+          router.refresh()
+          toast.success("Avatar updated successfully")
+          setIsLosdingForApi(false)
+        
+        }
+      
       } catch (error : any) {
         if (error.response?.status === 400) {
+          setIsLosdingForApi(false)
           const errorMessage = error?.response.data.message;
           toast.error(errorMessage);
         } else {
+          setIsLosdingForApi(false)
           toast.error("An error occurred while processing your request");
         }
       }
@@ -204,15 +213,24 @@ export default function Information() {
     <div className="bg-sky-100 w-full h-max pb-20 pt-4">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitImage} className="w-2/4 h-max mx-auto mb-5 ">
-        <label className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
-            <img src={infos?.profile_image_path} alt="" className="w-32 h-32 rounded-full bg-green-200 mx-auto object-cover"/>
-            <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
-            <span className="  inline-block ">file name:</span>
+        <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
+          <div className="w-32 h-32 rounded-full relative">
+            <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
+            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute bottom-3 right-0 ">
+            <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
+            </div>
+          
+            
+            </div>
+            {isShowInputsForImageProfile && <> <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
+            <span className="  inline-block font-semibold">file name:</span>
             <span className="inline-block pl-2">{profileImage?.name}</span>
             </div>
-            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" />
-            <button  className="bg-fuchsia-400 p-2 rounded-lg hoverScale">confirm</button>
+            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
+           
             </label>
+            
+            {isShowInputsForImageProfile && <ButtonDefault loading={isLoadingForApi} className="bg-fuchsia-400 p-2 rounded-lg hoverScale  block mx-auto mt-4 w-44" text="confirm image" />}
         </form>
         
         <form onSubmit={informationSubmitHandler}>

@@ -14,7 +14,7 @@ import axios from "axios";
 import { AuthContext } from "@/context/authContext";
 import LoadingPage from "@/components/loading/loadingPage";
 import handleInputChange from "@/utils/handleInputChange";
-import { BUSINESS_OWNER_UPDATE_INFORMATION } from "@/routeApi/endpoints";
+import { BUSINESS_OWNER_UPDATE_INFORMATION , BUSINESS_OWNER_PROFILE_IMAGE } from "@/routeApi/endpoints";
 import updaterWithPatch from "@/services/updaterWihPatch";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import "react-phone-number-input/style.css";
@@ -152,8 +152,15 @@ export default function Information() {
 
   const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      const selectedFile = event.target.files[0];
-      setProfileImage(selectedFile);
+      console.log(event.target.files[0].type);
+      
+      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg"){
+        const selectedFile = event.target.files[0];
+        setProfileImage(selectedFile);
+      }else{
+        toast.warn("Only photos in jpg and jpeg format are allowed")
+      }
+     
       
     }
   };
@@ -169,7 +176,7 @@ export default function Information() {
      
   
       try {
-        const response = await senderFormDataWithId("http://localhost:5000/business-owner/upload-image" , businessOwnerId , formData )
+        const response = await senderFormDataWithId( BUSINESS_OWNER_PROFILE_IMAGE , businessOwnerId , formData )
         console.log(response?.data); 
        await login(response?.data.userInfos , response?.data.token )
        router.refresh()

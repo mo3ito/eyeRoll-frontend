@@ -10,6 +10,7 @@ export const BUSINESS_OWNER_RESEND_EMAIL_VERIFICATION = `${BASE_URL_BUSINESS_OWN
 export const BUSINESS_OWNER_VERIFY_EMAIL_TOKEN = `${BASE_URL_BUSINESS_OWNER}/verify-email`;
 export const BUSINESS_OWNER_UPDATE_INFORMATION = `${BASE_URL_BUSINESS_OWNER}/update-information`;
 export const BUSINESS_OWNER_IS_PASSWORD = `${BASE_URL_BUSINESS_OWNER}/is-password`;
+export const BUSINESS_OWNER_PROFILE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-image`  
 
 
 //--business-owner-online-menu

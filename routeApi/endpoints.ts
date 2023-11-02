@@ -11,6 +11,8 @@ export const BUSINESS_OWNER_VERIFY_EMAIL_TOKEN = `${BASE_URL_BUSINESS_OWNER}/ver
 export const BUSINESS_OWNER_UPDATE_INFORMATION = `${BASE_URL_BUSINESS_OWNER}/update-information`;
 export const BUSINESS_OWNER_IS_PASSWORD = `${BASE_URL_BUSINESS_OWNER}/is-password`;
 export const BUSINESS_OWNER_PROFILE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-image`  
+export const BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE = `${BASE_URL_BUSINESS_OWNER}/delete-profile-image` 
+
 
 
 //--business-owner-online-menu

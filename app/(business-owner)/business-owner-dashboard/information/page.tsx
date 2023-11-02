@@ -1,20 +1,11 @@
 "use client";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import {
-  FormEvent,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  ChangeEvent,
-} from "react";
-import axios from "axios";
+import {FormEvent, useContext, useEffect, useRef, useState, useCallback, ChangeEvent,} from "react";
 import { AuthContext } from "@/context/authContext";
 import LoadingPage from "@/components/loading/loadingPage";
 import handleInputChange from "@/utils/handleInputChange";
-import { BUSINESS_OWNER_UPDATE_INFORMATION , BUSINESS_OWNER_PROFILE_IMAGE } from "@/routeApi/endpoints";
+import { BUSINESS_OWNER_UPDATE_INFORMATION , BUSINESS_OWNER_PROFILE_IMAGE , BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE  } from "@/routeApi/endpoints";
 import updaterWithPatch from "@/services/updaterWihPatch";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import "react-phone-number-input/style.css";
@@ -25,6 +16,9 @@ import EYEROLL_TOKEN from "@/help/tokenName";
 import { useRouter } from "next/navigation";
 import InputPassword from "@/components/shared/inputs/inputPassword";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
+import removal from "@/services/removal";
+import Modal from "@/components/modal/modal";
+
 
 export default function Information() {
   const { infos, login } = useContext(AuthContext);
@@ -43,9 +37,10 @@ export default function Information() {
   const [postalCode, setPostalCode] = useState<string>("");
   const [workPhone, setWorkPhone] = useState<string>("");
   const [isBorderBold, setIsBorderBold] = useState<boolean>(false);
-  const [profileImage , setProfileImage]=useState<string>("")
+  const [profileImage , setProfileImage]=useState<File | null>(null)
   const [isShowInputsForImageProfile , setIsShowInputsForImageProfile]=useState<boolean>(false)
   const [isLoadingForApi , setIsLosdingForApi]=useState<boolean>(false)
+  const [isShowDeleteProfileImageModal , setIsShowDeleteProfileImageModal]=useState<boolean>(false)
   const phoneNumberRef = useRef<null | HTMLDivElement>(null);
   const { businessOwnerId } = useGetBusinessOwnerId(infos);
   const token = Cookies.get(EYEROLL_TOKEN);
@@ -164,18 +159,11 @@ export default function Information() {
     }
   };
 
-
-  const submitImage = async (event: FormEvent) => {
-    event.preventDefault();
-    console.log("hello");
-  
+  const submitImage = async () => {
     if (profileImage) {
       const formData = new FormData();
       formData.append("profileImage", profileImage);
-     
-  
       try {
-       
         setIsLosdingForApi(true)
         const response = await senderFormDataWithId( BUSINESS_OWNER_PROFILE_IMAGE , businessOwnerId , formData )
         console.log(response?.data); 
@@ -184,43 +172,62 @@ export default function Information() {
           router.refresh()
           toast.success("Avatar updated successfully")
           setIsLosdingForApi(false)
+          setIsShowInputsForImageProfile(false)
         
         }
-      
       } catch (error : any) {
         if (error.response?.status === 400) {
           setIsLosdingForApi(false)
+          setIsShowInputsForImageProfile(false)
           const errorMessage = error?.response.data.message;
           toast.error(errorMessage);
         } else {
           setIsLosdingForApi(false)
+          setIsShowInputsForImageProfile(false)
           toast.error("An error occurred while processing your request");
         }
       }
     }
   };
 
+  const DeleteProfileImageHandler = async ()=>{
+    try {
+      const response = await removal(BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE , businessOwnerId)
+      if(response?.status === 200){
+        await login(response?.data.userInfos , response?.data.token )
+      router.refresh()
+      setIsShowDeleteProfileImageModal(false)
+      toast.success("Avatar deleted successfully")
+      }
+    } catch (error : any) {
+      if (error.response?.status === 400) {
+        const errorMessage = error?.response.data.message;
+        setIsShowDeleteProfileImageModal(false)
+        toast.error(errorMessage);
+      } else {
+        setIsShowDeleteProfileImageModal(false)
+        toast.error("An error occurred while processing your request");
+      }
+    }
+  
+  }
+
   console.log(profileImage);
   console.log(infos);
   
-  
-
   if (!infos) {
     return <LoadingPage />;
   }
-
   return (
     <div className="bg-sky-100 w-full h-max pb-20 pt-4">
       <div className="container px-4  h-max mx-auto">
-        <form onSubmit={submitImage} className="w-2/4 h-max mx-auto mb-5 ">
+        <div  className="w-2/4 h-max mx-auto mb-5 ">
         <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
           <div className="w-32 h-32 rounded-full relative">
             <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
             <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute bottom-3 right-0 ">
             <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
             </div>
-          
-            
             </div>
             {isShowInputsForImageProfile && <> <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
             <span className="  inline-block font-semibold">file name:</span>
@@ -229,9 +236,12 @@ export default function Information() {
             <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
            
             </label>
+           <div className="w-1/2 mt-4 flex gap-x-4  mx-auto">
+           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400 p-2 rounded-lg hoverScale  " text="confirm image" />}
+           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400 p-2 rounded-lg hoverScale" text="delete image" />}
+            </div>
             
-            {isShowInputsForImageProfile && <ButtonDefault loading={isLoadingForApi} className="bg-fuchsia-400 p-2 rounded-lg hoverScale  block mx-auto mt-4 w-44" text="confirm image" />}
-        </form>
+        </div>
         
         <form onSubmit={informationSubmitHandler}>
           <div className="w-2/4 h-max mx-auto  ">
@@ -422,6 +432,13 @@ export default function Information() {
           </div>
         </form>
       </div>
+      <Modal
+        cancelHandler={() => setIsShowDeleteProfileImageModal(false)}
+        text="Are you sure to delete?"
+        isShowModal={isShowDeleteProfileImageModal}
+        setIsShowModal={setIsShowDeleteProfileImageModal}
+        confirmHandler={DeleteProfileImageHandler}
+      />
     </div>
   );
 }

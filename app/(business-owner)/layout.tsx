@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden inset-0">
         <AuthContextProvider>
           <ReactQueryProvider>
-            <LayoutDashboard />
+            {/* <LayoutDashboard /> */}
             {children}
             <ToastContainer
               position="top-center"

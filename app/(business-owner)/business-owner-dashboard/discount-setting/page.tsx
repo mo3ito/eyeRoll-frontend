@@ -115,17 +115,17 @@ export default function DeterminingDiscount() {
       }else{
         setIsCheckedPeakTime(false)
       }
-      if(adjustedRoll.giftValue && +adjustedRoll.numberPurchaseGift > 0){
+      if(adjustedRoll?.giftValue && +adjustedRoll?.numberPurchaseGift > 0){
         setIsCheckedGift(true)
       }else{
         setIsCheckedGift(false)
       }
-      if(adjustedRoll.specialProducts.length >0 ){
+      if(adjustedRoll?.specialProducts?.length >0 ){
         setIsCheckedSpecialProducts(true)
       }else{
         setIsCheckedSpecialProducts(false)
       }
-      if( adjustedRoll.firstHour === "" && adjustedRoll.firstMins === "" && adjustedRoll.lastHour === "" && adjustedRoll.lastMins === ""){
+      if( adjustedRoll?.firstHour === "" && adjustedRoll?.firstMins === "" && adjustedRoll?.lastHour === "" && adjustedRoll?.lastMins === ""){
         setIsCheckedDiscountTime(false)
       }else{
         setIsCheckedDiscountTime(true)
@@ -140,7 +140,7 @@ export default function DeterminingDiscount() {
         new Date(adjustedRoll?.startDate) || null,
         new Date(adjustedRoll?.endDate) || null
       ]);
-      setFirstHourPeak(adjustedRoll.firstHourPeak || "00")
+      setFirstHourPeak(adjustedRoll?.firstHourPeak || "00")
       setFirstMinsPeak(adjustedRoll?.firstMinsPeak || "00")
       setLastHourPeak(adjustedRoll?.lastHourPeak || "00")
       setLastMinsPeak(adjustedRoll?.lastMinsPeak || "00")

@@ -269,41 +269,49 @@ export default function DeterminingDiscount() {
     
 
       if(!infos?.is_complete_information){
-        router.push("/business-owner-dashboard/information")
-        return;
+      return  router.push("/business-owner-dashboard/information")
+      
       }else{
   
         if(!calendarisValue && isCheckedDiscountTime){
-          toast.warn("Please enter the date")
-          return;
+         return toast.warn("Please enter the date")
+          
         }
         if(minValueAllProducts > maxValueAllProducts){
-          toast.warn("The maximum amount in discount all product is lower than its minimum")
-          return;
+         return toast.warn("The maximum amount in discount all product is lower than its minimum")
+          
         }
-        if(minValueAllProducts === 0 && maxValueAllProducts === 0 && isCheckeAllProducts ){
-          toast.warn("The maximum value in discount all product must be greater than zero")
-          return;
+        if(minValueAllProducts === 0 && isCheckeAllProducts ){
+         return toast.warn("The minimum value of the  discount all product must be one")
+          
+        }
+        if(minValueAllProducts === 1 && maxValueAllProducts === 0 && isCheckeAllProducts ){
+         return toast.warn("The maximum value in discount all product must be greater than minmum")
+          
         }
         if(giftValue && numberPurchaseGift === 0){
-          toast.warn("The number purchase gift must be greater than zero")
-          return;
-        } 
-        if(minValuePeak === 0 && maxValuePeak === 0 && isCheckedPeakTime){
-          toast.warn("The maximum value in discount amount during peak must be greater than zero")
-          return;
+         return toast.warn("The number purchase gift must be greater than zero")
+          
+        }
+        if(minValuePeak === 0 && isCheckedPeakTime ){
+          return toast.warn("The minimum value of the discount amount during peak must be greater than zero")
+           
+         } 
+        if(minValuePeak === 1 && maxValuePeak === 0 && isCheckedPeakTime){
+         return toast.warn("The maximum value in discount amount during peak must be greater than minimum")
+          
         }
         if(minValuePeak > maxValuePeak){
-          toast.warn("The maximum amount in peak sales hours is lower than its minimum")
-          return;
+         return toast.warn("The maximum amount in peak sales hours is lower than its minimum")
+          
         }
         if( specialProductName && isCheckedSpecialProducts  && discountAmount === 0){
-          toast.warn("Please fill in all the fields in the Discounts on special products section")
-          return;
+         return toast.warn("Please fill in all the fields in the Discounts on special products section")
+          
         }
         if((+numberPurchaseGift >0 && !giftValue) || (!numberPurchaseGift && giftValue)){
-          toast.warn("Please fill in all the fields in the gift selection section")
-          return;
+         return toast.warn("Please fill in all the fields in the gift selection section")
+        
         }
 
       try {

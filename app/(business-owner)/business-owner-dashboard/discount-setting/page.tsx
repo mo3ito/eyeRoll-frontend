@@ -43,7 +43,7 @@ export default function DeterminingDiscount() {
   const [lastMins, setLastMins] = useState<string>("00");
   const [showInformation, setShowInformation] = useState<boolean>(false);
   const [textInformation, setTextInformation] = useState<string>("");
-  const [dateRange, setDateRange] = useState<any>([null, null]);
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDate, endDate] = dateRange;
   const [firstHourPeak, setFirstHourPeak] = useState<string>("00");
   const [firstMinsPeak, setFirstMinsPeak] = useState<string>("00");
@@ -91,14 +91,18 @@ export default function DeterminingDiscount() {
   },[isCheckeAllProducts , isCheckedDiscountTime , isCheckedGift , isCheckedPeakTime ,isCheckedSpecialProducts , isCheckedWithoutDiscount])
 
   const {data:allRollSetting , isLoading}=useQuery(businessOwnerId ? queryKey : [],()=>{
-    if (businessOwnerId) {
+    if (businessOwnerId ) {
       return getterWithAuthId(GET_ROLL_ADJUSTED, businessOwnerId);
     }
     return null
+ 
   })
  
   useEffect(() => {
-    if (allRollSetting) {
+    if (Object.keys(allRollSetting?.data || {}).length === 0) {
+      
+      setDateRange([null, null]);
+    } else {
       setAdjustedRoll(allRollSetting?.data);
     }
   }, [allRollSetting]);
@@ -127,6 +131,7 @@ export default function DeterminingDiscount() {
       }
       if( adjustedRoll?.firstHour === "" && adjustedRoll?.firstMins === "" && adjustedRoll?.lastHour === "" && adjustedRoll?.lastMins === ""){
         setIsCheckedDiscountTime(false)
+        
       }else{
         setIsCheckedDiscountTime(true)
       }
@@ -140,7 +145,7 @@ export default function DeterminingDiscount() {
         new Date(adjustedRoll?.startDate) || null,
         new Date(adjustedRoll?.endDate) || null
       ]);
-      setFirstHourPeak(adjustedRoll?.firstHourPeak || "00")
+      setFirstHourPeak(adjustedRoll.firstHourPeak || "00")
       setFirstMinsPeak(adjustedRoll?.firstMinsPeak || "00")
       setLastHourPeak(adjustedRoll?.lastHourPeak || "00")
       setLastMinsPeak(adjustedRoll?.lastMinsPeak || "00")

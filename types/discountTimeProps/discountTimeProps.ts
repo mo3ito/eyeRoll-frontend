@@ -21,5 +21,5 @@ export interface DeterminationDiscountTimeProps {
     setEndDateWithoutTime: Dispatch<SetStateAction<string | undefined>> 
     startDateWithoutTime : string | undefined;
     endDateWithoutTime : string | undefined ;
-    setDateRange: Dispatch<SetStateAction<null[]>>
+    setDateRange: Dispatch<SetStateAction<[Date | null , Date | null]>>
   }

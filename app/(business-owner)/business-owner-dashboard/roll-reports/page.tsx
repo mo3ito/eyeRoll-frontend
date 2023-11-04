@@ -7,7 +7,7 @@ import Rechart from "@/components/rechart/rechart";
 import StatisticsDisplay from "@/components/rollReports/statisticsDisplay";
 
 export default function RollReports() {
-  const [dateRange, setDateRange] = useState([null, null]);
+  const [dateRange, setDateRange] = useState<[Date | null , Date | null]>([null, null]);
   const [startDate, endDate] = dateRange;
 
   console.log(startDate);

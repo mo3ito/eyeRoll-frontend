@@ -221,7 +221,7 @@ export default function Information() {
   return (
     <div className="bg-sky-100 w-full min-h-screen h-max pb-20 pt-4">
       <div className="container px-4  h-max mx-auto">
-        <div  className="max-[350px]:w-11/12 w-max h-max mx-auto mb-5 ">
+        <div  className="max-[350px]:w-11/12  max-w-xs h-max mx-auto mb-5 ">
         <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
           <div className=" w-24 h-24 sm:w-32 sm:h-32 rounded-full relative">
             <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
@@ -237,9 +237,9 @@ export default function Information() {
             <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
            
             </label>
-           <div className=" w-full h-max mt-4 flex gap-x-4 mx-auto  max-[350px]:text-sm  ">
-           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400 h-fit px-2 py-1 rounded-md hoverScale " text="confirm image" />}
-           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400 h-fit px-2 py-1  rounded-md hoverScale " text="delete image" />}
+           <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto  max-[350px]:text-sm  ">
+           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  px-2  py-1 rounded-md hoverScale " text="confirm image" />}
+           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400  px-2 py-1  rounded-md hoverScale " text="delete image" />}
             </div>
             
         </div>

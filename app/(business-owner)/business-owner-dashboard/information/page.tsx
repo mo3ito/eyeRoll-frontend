@@ -219,36 +219,37 @@ export default function Information() {
     return <LoadingPage />;
   }
   return (
-    <div className="bg-sky-100 w-full h-max pb-20 pt-4">
+    <div className="bg-sky-100 w-full min-h-screen h-max pb-20 pt-4">
       <div className="container px-4  h-max mx-auto">
-        <div  className="w-2/4 h-max mx-auto mb-5 ">
+        <div  className="max-[350px]:w-11/12 w-max h-max mx-auto mb-5 ">
         <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
-          <div className="w-32 h-32 rounded-full relative">
+          <div className=" w-24 h-24 sm:w-32 sm:h-32 rounded-full relative">
             <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
             <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute bottom-3 right-0 ">
             <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
             </div>
             </div>
-            {isShowInputsForImageProfile && <> <div className="border border-fuchsia-400 h-10 rounded-lg px-2 pt-[6px]">
-            <span className="  inline-block font-semibold">file name:</span>
-            <span className="inline-block pl-2">{profileImage?.name}</span>
+            {isShowInputsForImageProfile && <> <div className="border w-full text-sm sm:text-base border-fuchsia-400 min-h-10 h-max flex  justify-start items-center p-1 rounded-lg ">
+    
+            <p className="mr-auto w-full sm:w-max truncate">file name: {profileImage?.name}</p>
+           
             </div>
             <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
            
             </label>
-           <div className="w-1/2 mt-4 flex gap-x-4  mx-auto">
-           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400 p-2 rounded-lg hoverScale  " text="confirm image" />}
-           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400 p-2 rounded-lg hoverScale" text="delete image" />}
+           <div className=" w-full h-max mt-4 flex gap-x-4 mx-auto  max-[350px]:text-sm  ">
+           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400 h-fit px-2 py-1 rounded-md hoverScale " text="confirm image" />}
+           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400 h-fit px-2 py-1  rounded-md hoverScale " text="delete image" />}
             </div>
             
         </div>
         
         <form onSubmit={informationSubmitHandler}>
-          <div className="w-2/4 h-max mx-auto  ">
+          <div className=" max-[450px]:w-11/12 w-8/12 sm:w-10/12  md:w-full  lg:w-10/12  xl:w-7/12 2xl:w-2/4 h-max mx-auto  ">
            
          
-            <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-1/2 ">
+            <div className="w-full flex flex-col sm:flex-row justify-around gap-x-5">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore ">name</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setName),[])}
@@ -259,7 +260,7 @@ export default function Information() {
                 />
               </div>
 
-              <div className="mb-4 w-1/2 ">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className=" starBefore mb-3">last name</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setLastName),[])}
@@ -270,8 +271,8 @@ export default function Information() {
                 />
               </div>
             </div>
-            <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-2/4 ">
+            <div className="w-full flex flex-col sm:flex-row justify-around gap-x-5">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore ">username</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setUsername),[])}
@@ -282,7 +283,7 @@ export default function Information() {
                 />
               </div>
 
-              <div ref={phoneNumberRef} className="mb-4 w-2/4">
+              <div ref={phoneNumberRef} className="mb-4 w-full sm:w-1/2">
                 <p className="mb-3 starBefore ">phone number</p>
                 <div
                   onClick={() => setIsBorderBold(true)}
@@ -300,8 +301,8 @@ export default function Information() {
               </div>
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-1/3 ">
+            <div className="w-full   flex flex-col md:flex-row justify-around gap-x-5">
+              <div className="mb-4 w-full md:w-1/3 ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setEmail),[])}
@@ -311,8 +312,12 @@ export default function Information() {
                   className="inputInformationForm"
                 />
               </div>
+                
+              
+                
 
-              <div className="mb-4 w-1/3 ">
+              <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <InputPassword
                   placeholder="if you want to change"
                   className="mb-4 w-full"
@@ -327,7 +332,7 @@ export default function Information() {
                 />
               </div>
 
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <InputPassword
                   className="mb-4 w-full"
                   label="repeat password"
@@ -340,10 +345,11 @@ export default function Information() {
                   disabled={false}
                 />
               </div>
+              </div>
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-1/3 ">
+            <div className="w-full flex flex-col md:flex-row justify-around gap-x-5">
+            <div className="mb-4 w-full md:w-1/3 ">
                 <p className="mb-3 starBefore">country</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setCountry),[])}
@@ -354,7 +360,8 @@ export default function Information() {
                 />
               </div>
 
-              <div className="mb-4 w-1/3 ">
+              <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">        
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore">state</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setState),[])}
@@ -365,7 +372,7 @@ export default function Information() {
                 />
               </div>
 
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore">city</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setCity),[])}
@@ -374,6 +381,7 @@ export default function Information() {
                   type="text"
                   className="inputInformationForm"
                 />
+              </div>
               </div>
             </div>
 
@@ -390,8 +398,9 @@ export default function Information() {
               </div>
             </div>
 
-            <div className="w-full flex justify-around gap-x-5">
-              <div className="mb-4 w-1/3 ">
+            <div className="w-full flex flex-col md:flex-row justify-around gap-x-5">
+            <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">  
+            <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore">brand name</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setBrandName),[])}
@@ -401,8 +410,9 @@ export default function Information() {
                   className="inputInformationForm"
                 />
               </div>
+                
 
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-full sm:w-1/2 ">
                 <p className="mb-3 starBefore">Postal code</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setPostalCode),[])}
@@ -412,8 +422,9 @@ export default function Information() {
                   className="inputInformationForm"
                 />
               </div>
+              </div>
 
-              <div className="mb-4 w-1/3 ">
+              <div className="mb-4 w-full md:w-1/3 ">
                 <p className="mb-3 ">work phone</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setWorkPhone),[])}

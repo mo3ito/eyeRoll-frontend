@@ -37,7 +37,7 @@ export default function MoblilMode() {
         }
       }, []);
 
-      const linkHandler = (href)=>{
+      const linkHandler = (href : any)=>{
         router.push(href)
         setIsShowMobileMenu(false)
       }

@@ -127,11 +127,13 @@ const Login = ({
     return <LoadingPage />;
   }
 
+ 
+
   return (
     <div className="bg-sky-100 w-full h-max ">
       <div className="container px-4  h-max mx-auto">
         <form onSubmit={submitHandler}>
-          <div className=" min-[400px]:w-4/5  min-[450px]:w-3/5  w-11/12  sm:w-3/5 md:w-2/4  lg:w-2/5  xl:w-1/4 h-max mx-auto pt-32 ">
+          <div className=" max-[420px]:w-11/12 w-8/12  sm:w-3/5 md:w-2/4  lg:w-2/5  xl:w-1/4 h-max mx-auto pt-32 ">
             <h2 className="mb-12 text-center text-lg font-semibold">{text}</h2>
             <div className="w-full  flex justify-around gap-x-5">
               <Input

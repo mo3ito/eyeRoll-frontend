@@ -2,11 +2,12 @@
 import React from 'react'
 import Input from '../shared/inputs/input'
 import HeaderTitleLi from './headerTitleLi'
+import MoblilMode from './user/moblilMode'
 
 const HomePageHeader = () => {
   return (
     <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100   flex items-center justify-center '>
-      <div className='container h-full mx-auto  flex items-center    px-20 '>
+      <div className='container hidden sm:flex h-full mx-auto   items-center    px-20 '>
       <div className='h-10 w-24 text-3xl text-white '>logo</div>
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>
       
@@ -17,6 +18,10 @@ const HomePageHeader = () => {
 
       </ul>
       </div>
+
+
+      <MoblilMode/>
+
     </header>
   )
 }

@@ -69,7 +69,7 @@ const RegisterUser = () => {
     <div className="bg-sky-100 w-full  h-max ">
       <div className="container px-4  h-max mx-auto">
         <form autoComplete="off" onSubmit={submitHandler}>
-        <div className=" max-[420px]:w-11/12 w-9/12 sm:w-4/5 lg:w-3/5 xl:w-2/5 h-max mx-auto pt-32">
+        <div className=" max-[420px]:w-11/12 w-9/12 sm:w-4/5 lg:w-3/5 xl:w-2/5 h-max mx-auto py-12 sm:pt-32">
             <h2 className="mb-12 text-center text-lg font-semibold">
               register as customer
             </h2>

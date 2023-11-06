@@ -139,15 +139,16 @@ export default function DeterminationSpecialProduct({
       <div
         className={`${
           specificSpecialProducts.length > 0 && "mt-3"
-        } w-full max-h-24   flex items-center  gap-3  flex-wrap overflow-y-auto`}
+        } w-full max-h-28   flex items-center  gap-3  flex-wrap overflow-y-auto`}
       >
         {specificSpecialProducts.map((item) => (
           <div
             key={item.id}
-            className="w-max px-7 h-max py-2  rounded-md bg-fuchsia-200 relative "
+            className="  w-max px-2 h-max pt-2  rounded-md bg-fuchsia-200 relative  "
           >
-            {item.productName}{" "}
-            <span className="pl-4">{item.discountProduct}%</span>
+
+            <span className=" w-fit  max-w-[200px]  truncate  inline-block">{item.productName}</span>
+            <span className="ml-2 mr-4  -translate-y-[6px] inline-block  ">{item.discountProduct}%</span>
            
               <CloseIcon onClick={()=>removeSpecialHandler(item.id)} classNameSvg="w-4 h-4 fill-red-400" />
             

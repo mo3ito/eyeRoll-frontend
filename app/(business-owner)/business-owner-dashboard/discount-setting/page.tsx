@@ -353,7 +353,7 @@ export default function DeterminingDiscount() {
         <div className="container px-6 flex justify-center">
 
        
-        <form onSubmit={sendInformation} className="flex   w-full lg:w-9/12 xl:w-7/12 2xl:w-7/12   h-max relative flex-col items-center border bg-sky-50 rounded-xl px-2 sm:px-6 py-2 shadow-lg">
+        <form onSubmit={sendInformation} className="flex   w-full lg:w-9/12 xl:w-7/12 2xl:w-6/12   h-max relative flex-col items-center border bg-sky-50 rounded-xl px-2 sm:px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
 

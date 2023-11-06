@@ -23,17 +23,16 @@ export default function DeterminationWithoutDiscount({
   return (
     <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'}  w-full h-max  rounded-xl my-2  p-2`}>
       <div className="flex items-center justify-center  ">
-        <div className=" h-max">
-          <InformationButton onClick={showInformation} />
-          <p className="inline-block max-[420px]:text-xs text-lg font-medium ">{title}</p>
-        </div>
+      <div className='w-10/12'>
+       <p className="inline-block max-xs:text-xs text-sm  sm:text-lg font-medium "><InformationButton onClick={showInformation}/> {title}</p>
+      </div>
 
         <CheckBox
           onChange={cheangeCheckedHandler}
           checked={isChecked}
           backgroundClasses={isChecked ? "bg-pink-400" : "bg-pink-300"}
-          sizeClasses="max-[420px]:w-7 max-[420px]:h-[14px]    w-12 h-6 ml-auto "
-          circleClasses=" max-[420px]:w-[8px] max-[420px]:h-[8px] max-[420px]:peer-checked:translate-x-3 w-4 h-4 bg-gray-200 peer-checked:translate-x-6  peer-checked:bg-violet-500"
+          sizeClasses="max-xs:w-6 max-xs:h-[14px]   w-8 h-[18px]   sm:w-12 sm:h-6 ml-auto "
+          circleClasses=" max-xs:w-2 max-xs:h-2 max-xs:peer-checked:translate-x-[10px] w-3 h-3 sm:w-4 sm:h-4 bg-gray-200 peer-checked:translate-x-3 sm:peer-checked:translate-x-6   peer-checked:bg-violet-500"
         />
       </div>
     </div>

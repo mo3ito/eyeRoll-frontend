@@ -7,12 +7,12 @@ interface InformationButtonProps {
 export default function InformationButton({ onClick }: InformationButtonProps) {
   return (
     <button
-      className="hover:-translate-y-0.5 hover:duration-500 ease-in-out"
+      className="hover:-translate-y-0.5 hover:duration-500 ease-in-out  h-max w-max "
       title="click for information"
       onClick={onClick}
     >
       <svg
-        className="max-[420px]:w-4 max-[420px]:h-4 max-[420px]:mr-0.5  w-6 h-6 inline-block max-[420px]:mb-0  mb-1 mr-1 fill-pink-500"
+        className="max-xs:w-4 max-xs:h-4 max-xs:mr-0.5  w-6 h-6 inline-block max-xs:mb-0  mb-1 mr-1 fill-pink-500"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >

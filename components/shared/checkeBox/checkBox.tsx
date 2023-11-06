@@ -22,7 +22,7 @@ export default function CheckBox({
           className=" absolute peer w-full h-full appearance-none  left-0 top-0 rounded-full cursor-pointer"
         />
         <span
-          className={`${circleClasses} pointer-events-none  ml-1  flex items-center  rounded-full  duration-300 ease-in-out`}
+          className={`${circleClasses} pointer-events-none max-xs:ml-[3px]  ml-1  flex items-center  rounded-full  duration-300 ease-in-out`}
         ></span>
       </label>
     </div>

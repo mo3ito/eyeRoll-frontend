@@ -350,7 +350,10 @@ export default function DeterminingDiscount() {
   return (
     <>
       <div className="w-full min-h-screen h-max flex justify-center bg-sky-100 py-8 overflow-y-auto  ">
-        <form onSubmit={sendInformation} className="flex w-5/12 h-max relative flex-col items-center border bg-sky-50 rounded-xl  px-6 py-2 shadow-lg">
+        <div className="container px-6 flex justify-center">
+
+       
+        <form onSubmit={sendInformation} className="flex   w-full lg:w-9/12 xl:w-7/12 2xl:w-7/12   h-max relative flex-col items-center border bg-sky-50 rounded-xl px-2 sm:px-6 py-2 shadow-lg">
           {!showInformation ? (
             <>
 
@@ -479,6 +482,7 @@ export default function DeterminingDiscount() {
             />
           )}
         </form>
+        </div>
       </div>
     </>
   );

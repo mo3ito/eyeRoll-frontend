@@ -12,7 +12,7 @@ export default function InformationButton({ onClick }: InformationButtonProps) {
       onClick={onClick}
     >
       <svg
-        className="w-6 h-6 inline-block mb-1 mr-1 fill-pink-500"
+        className="max-[420px]:w-4 max-[420px]:h-4 max-[420px]:mr-0.5  w-6 h-6 inline-block max-[420px]:mb-0  mb-1 mr-1 fill-pink-500"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >

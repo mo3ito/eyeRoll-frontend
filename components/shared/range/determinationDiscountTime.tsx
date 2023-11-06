@@ -76,9 +76,9 @@ export default function DeterminationDiscountTime({
     <div
       className={`${
         isChecked ? "bg-indigo-100 " : "bg-gray-200"
-      } w-full p-4 rounded-xl `}
+      } w-full p-4 rounded-xl max-[590px]:text-xs `}
     >
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center bg-red-400">
         <div className="">
           <InformationButton onClick={showInformation} />
           <p className="inline-block">{title}</p>
@@ -92,8 +92,8 @@ export default function DeterminationDiscountTime({
         />
       </div>
 
-      <div className="flex  mt-2">
-        <div className="flex  justify-center">
+      <div className=" flex flex-col gap-y-2 items-center justify-around  lg:bg-red-500 xl:bg-gray-400 2xl:bg-slate-600 md:flex-row bg-green-500 mt-2 md:gap-y-0">
+        <div className="flex bg-yellow-200  justify-center">
           <TimeSetterInput
             setHour={setFirstHour}
             setMins={setFirstMins}
@@ -112,7 +112,7 @@ export default function DeterminationDiscountTime({
           />
         </div>
 
-        <div className=" w-max h-max ml-auto mr-20">
+        <div className=" ">
           <DatesPicker
             startDate={startDate}
             endDate={endDate}

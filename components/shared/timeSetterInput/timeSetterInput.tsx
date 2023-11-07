@@ -31,7 +31,7 @@ export default function TimeSetterInput({
 
   return (
     <>
-      <div className="flex items-center ">
+      <div className="flex  items-center ">
         <span className="px-1 ml-auto">{text}</span>
         <input
           value={hour}

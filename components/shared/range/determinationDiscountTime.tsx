@@ -91,7 +91,7 @@ export default function DeterminationDiscountTime({
     </div>
 
       <div className=" flex flex-col gap-y-2 items-center justify-around  md:flex-row mt-2 md:gap-y-0">
-        <div className=" flex flex-col sm:flex-row  justify-center">
+        <div className=" flex flex-col sm:flex-row  justify-center sm:my-2 md:my-0">
           <TimeSetterInput
             setHour={setFirstHour}
             setMins={setFirstMins}

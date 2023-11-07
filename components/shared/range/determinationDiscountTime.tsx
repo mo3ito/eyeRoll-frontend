@@ -73,27 +73,25 @@ export default function DeterminationDiscountTime({
   },[isChecked])
 
   return (
-    <div
-      className={`${
-        isChecked ? "bg-indigo-100 " : "bg-gray-200"
-      } w-full p-4 rounded-xl max-[590px]:text-xs `}
-    >
-      <div className="flex items-center justify-center bg-red-400">
-        <div className="">
-          <InformationButton onClick={showInformation} />
-          <p className="inline-block">{title}</p>
-        </div>
-        <CheckBox
-          onChange={(event) => changeProductsHandler(event)}
+    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'}  w-full h-max  rounded-xl my-2  p-2`}>
+    <div className='flex  items-center justify-center   '>
+      <div className='w-10/12'>
+       <p className="inline-block max-xs:text-xs text-sm  sm:text-lg font-medium "><InformationButton onClick={showInformation}/> {title}</p>
+      </div>
+    
+   
+
+    <CheckBox
+          onChange={(event)=>changeProductsHandler(event)}
           checked={isChecked}
           backgroundClasses={isChecked ? "bg-pink-400" : "bg-pink-300"}
-          sizeClasses="w-12 h-6 ml-auto "
-          circleClasses="w-4 h-4 bg-gray-200 peer-checked:translate-x-6  peer-checked:bg-violet-500"
+          sizeClasses="max-xs:w-6 max-xs:h-[14px]   w-8 h-[18px]   sm:w-12 sm:h-6 ml-auto "
+          circleClasses=" max-xs:w-2 max-xs:h-2 max-xs:peer-checked:translate-x-[10px] w-3 h-3 sm:w-4 sm:h-4 bg-gray-200 peer-checked:translate-x-3 sm:peer-checked:translate-x-6  peer-checked:bg-violet-500"
         />
-      </div>
+    </div>
 
-      <div className=" flex flex-col gap-y-2 items-center justify-around  lg:bg-red-500 xl:bg-gray-400 2xl:bg-slate-600 md:flex-row bg-green-500 mt-2 md:gap-y-0">
-        <div className="flex bg-yellow-200  justify-center">
+      <div className=" flex flex-col gap-y-2 items-center justify-around  md:flex-row mt-2 md:gap-y-0">
+        <div className=" flex flex-col sm:flex-row  justify-center">
           <TimeSetterInput
             setHour={setFirstHour}
             setMins={setFirstMins}
@@ -131,7 +129,7 @@ export default function DeterminationDiscountTime({
       {calendarisValue && isChecked && (
         <div className="text-center w-full ">
         <DateRangeDisplay
-        className="text-center mt-4 inline-block "
+        className=" max-xs:text-[11px] text-sm sm:text-base  text-center mt-4 inline-block "
           firstTitle="from"
           secondTitle="to"
           thirdTitle="on"
@@ -142,7 +140,7 @@ export default function DeterminationDiscountTime({
           startDateWithoutTime={startDateWithoutTime}
         />
         {endDateWithoutTime && <DateRangeDisplay
-        className="text-center mt-4 inline-block "
+         className=" max-xs:text-[11px] text-sm sm:text-base  text-center mt-4 inline-block "
           firstTitle="until"
           secondTitle="to"
           thirdTitle="on"

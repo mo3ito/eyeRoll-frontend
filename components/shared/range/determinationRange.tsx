@@ -33,7 +33,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
      
   return (
     <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'} w-full h-max  rounded-xl my-2  p-2`}>
-    <div className='flex  items-start justify-center   '>
+    <div className='flex  items-center justify-center   '>
       <div className='w-10/12'>
        <p className="inline-block max-xs:text-xs text-sm  sm:text-lg font-medium "><InformationButton onClick={showInformation}/> {title}</p>
       </div>

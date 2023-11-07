@@ -48,7 +48,7 @@ export default function DatesPicker({
         inline={isInline}
         disabled={disabled}
         isClearable={true}
-        className="h-10 rounded-lg bg-transparent border border-fuchsia-400 w-58 px-3 outline-none shadow-md"
+        className=" max-xs:w-44 max-xs:text-[12px] max-xs:px-1 w-58 h-10 rounded-lg bg-transparent border border-fuchsia-400  px-3 outline-none shadow-md"
       />
 
       {isButton && (

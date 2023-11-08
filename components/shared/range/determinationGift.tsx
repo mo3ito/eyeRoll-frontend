@@ -27,45 +27,47 @@ export default function DeterminationGift({
   },[isChecked])
 
   return (
-    <div
-      className={` ${
-        isChecked ? "bg-indigo-100" : "bg-gray-200"
-      } w-full h-max rounded-lg  mb-2 p-4`}
-    >
-      <div className="w-full flex items-center justify-center mb-4">
-        <div>
-          <InformationButton onClick={showInformation} />
-          <p className="inline-block">Determining the gift</p>
-        </div>
-        <CheckBox
-          onChange={(event) => changeGiftHandler(event)}
+    <div className={` ${isChecked ? ' bg-indigo-100' : 'bg-gray-200'}  w-full h-max  rounded-xl my-2  p-2`}>
+     <div className='flex  items-center justify-center   '>
+      <div className='w-10/12'>
+       <p className="inline-block max-xs:text-xs text-sm  sm:text-lg font-medium "><InformationButton onClick={showInformation}/>Determination gift</p>
+      </div>
+    
+   
+
+    <CheckBox
+          onChange={(event)=>changeGiftHandler(event)}
           checked={isChecked}
           backgroundClasses={isChecked ? "bg-pink-400" : "bg-pink-300"}
-          sizeClasses="w-12 h-6 ml-auto "
-          circleClasses="w-4 h-4 bg-gray-200 peer-checked:translate-x-6  peer-checked:bg-violet-500"
+          sizeClasses="max-xs:w-6 max-xs:h-[14px]   w-8 h-[18px]   sm:w-12 sm:h-6 ml-auto "
+          circleClasses=" max-xs:w-2 max-xs:h-2 max-xs:peer-checked:translate-x-[10px] w-3 h-3 sm:w-4 sm:h-4 bg-gray-200 peer-checked:translate-x-3 sm:peer-checked:translate-x-6  peer-checked:bg-violet-500"
         />
-      </div>
-      <div className="inline-block">
-        <span>The number of purchases</span>
+    </div>
+    <div className=" mt-2 w-full flex sm:gap-x-4  flex-col justify-center items-start sm:flex-row sm:items-center">
+
+  
+      <div className="  mb-2 sm:mb-0 w-full sm:w-1/2 ">
+        <span className=" max-xs:block max-xs:mb-1  text-sm sm:text-base inline-block sm:mb-1">The number of purchases</span>
         <input
           value={numberPurchaseGift}
           onChange={(event)=>handleNumberInputChange(event , setNumberPurchaseGift)}
           disabled={!isChecked}
-          className="w-20 h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent ml-1 shadow-md"
+          className=" max-xs:text-sm max-xs:ml-0 ml-2 sm:ml-0 max-xs:h-8 max-xs:w-full w-[136px]  h-10 sm:w-full sm:h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent  shadow-md"
           type="number"
         />
       </div>
 
-      <div className="inline-block ml-12">
-        <span>enter the gift</span>
+      <div className=" w-full sm:w-1/2">
+        <span className="text-sm max-xs:mb-1 sm:text-base inline-block sm:mb-1">enter the gift</span>
         <input
           value={giftValue}
           onChange={(event)=>handleInputChange(event,setGiftValue)}
           disabled={!isChecked}
           placeholder="for example moca"
-          className="w-44 h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent ml-1 shadow-md "
+          className=" max-xs:w-full max-xs:ml-0 ml-2 sm:ml-0  max-xs:text-sm max-xs:h-8 sm:w-full   h-10 outline-none border border-fuchsia-300 px-2 rounded-lg bg-transparent  shadow-md "
           type="text"
         />
+      </div>
       </div>
     </div>
   );

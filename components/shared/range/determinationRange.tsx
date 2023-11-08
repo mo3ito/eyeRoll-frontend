@@ -52,7 +52,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
         <div className=' space-x-4 max-xs:space-x-2  sm:space-x-10 flex  items-center justify-center w-full'>
           <div className=''>
           <span className=' pl-6  max-xs:text-base max-xs:pl-4 sm:pl-8 text-lg '>min</span>
-          <div className=' flex items-center justify-center  max-xs:w-16 max-xs:h-8 w-20 h-9   sm:w-24  sm:h-10 border rounded-lg border-purple-300 shadow-md '>
+          <div className=' flex items-center justify-center  max-xs:w-16 max-xs:h-8 w-20 h-8   sm:w-24  sm:h-10 border rounded-lg border-purple-300 shadow-md '>
           <input disabled={!isChecked} value={ !isChecked ? 0 : minValue} onChange={addHandler} type="number" className='w-14 max-xs:text-sm bg-transparent max-xs:w-12  pl-2  sm:w-16 sm:h-10  rounded-lg  sm:pl-3  outline-none'/>
           <span className='pr-2'>%</span>
          
@@ -61,7 +61,7 @@ export default function DeterminationRange({minValue , maxValue , setMinValue , 
           </div>
           <div className=''>
           <span className=' pl-6  max-xs:text-base max-xs:pl-4 sm:pl-8 text-lg '>max</span>
-          <div className=' flex items-center justify-center  max-xs:w-16 max-xs:h-8 w-20 h-9   sm:w-24  sm:h-10 border rounded-lg border-purple-300 shadow-md '>
+          <div className=' flex items-center justify-center  max-xs:w-16 max-xs:h-8 w-20 h-8   sm:w-24  sm:h-10 border rounded-lg border-purple-300 shadow-md '>
           <input disabled={!isChecked} value={ !isChecked ? 0 : maxValue} onChange={minusHandler} type="number" className='w-14 max-xs:text-sm bg-transparent max-xs:w-12  pl-2  sm:w-16 sm:h-10  rounded-lg  sm:pl-3  outline-none'/>
           <span className='pr-2'>%</span>
           </div>

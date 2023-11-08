@@ -144,7 +144,7 @@ export default function DeterminationSpecialProduct({
             className="  w-max px-2 h-max pt-2 text-sm sm:text-base rounded-md bg-fuchsia-200 relative  "
           >
 
-            <span className=" w-fit max-w-[75px] sm:max-w-[200px]  truncate  inline-block">{item.productName}</span>
+            <span className=" w-fit max-xs:max-w-[75px] max-w-[200px]  truncate  inline-block">{item.productName}</span>
             <span className="ml-2 mr-4  -translate-y-[6px] inline-block  ">{item.discountProduct}%</span>
            
               <CloseIcon onClick={()=>removeSpecialHandler(item.id)} classNameSvg="w-4 h-4 fill-red-400" />

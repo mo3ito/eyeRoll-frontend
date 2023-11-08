@@ -2,7 +2,7 @@
 import { ChangeEvent, useEffect, useState , MouseEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CheckBox from "../checkeBox/checkBox";
-import ButtonDefault from "../button/buttonDefault";
+
 import {
   DeterminationSpecialProductProps,
 } from "@/types/determinationSpecialProduct/determinationSpecialProductType";

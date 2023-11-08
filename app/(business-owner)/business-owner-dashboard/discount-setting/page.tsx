@@ -471,7 +471,7 @@ export default function DeterminingDiscount() {
                 }
                 
                 text="send"
-                className="h-12 text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg mt-1 "
+                className=" max-xs:h-8 h-10 sm:h-12 max-xs:text-sm text-base sm:text-lg bg-fuchsia-400 hover:bg-fuchsia-500 rounded-lg mt-1 "
                 isScale={true}
               />
             </>

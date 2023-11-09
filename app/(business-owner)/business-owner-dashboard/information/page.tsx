@@ -231,15 +231,15 @@ export default function Information() {
             </div>
             {isShowInputsForImageProfile && <> <div className="border w-full text-sm sm:text-base border-fuchsia-400 min-h-10 h-max flex  justify-start items-center p-1 rounded-lg ">
     
-            <p className="mr-auto w-full sm:w-max truncate">file name: {profileImage?.name}</p>
+            <p className="mr-auto w-full sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {profileImage?.name}</p>
            
             </div>
             <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
            
             </label>
            <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto  max-[350px]:text-sm  ">
-           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  px-2  py-1 rounded-md hoverScale " text="confirm image" />}
-           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400  px-2 py-1  rounded-md hoverScale " text="delete image" />}
+           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  sm:px-2  py-1 rounded-md hoverScale " text="confirm image" />}
+           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />}
             </div>
             
         </div>

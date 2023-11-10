@@ -34,7 +34,7 @@ export default function ModalDefault({children , isShowModal , setIsShowModal , 
      
       <div
         ref={modalRef}
-        className=" relative bg-white text-sm sm:text-base max-xs:w-full w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 h-2/4   flex justify-center items-center rounded-lg"
+        className=" relative bg-white -translate-y-20 text-sm sm:text-base max-xs:w-full w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 h-2/4   flex justify-center items-center rounded-lg"
       >
         <CloseIcon
           onClick={() => setIsShowModal(false)}

@@ -55,6 +55,7 @@ export default function Facilities() {
       setProductDescription("")
       setProductName("")
       setProductPrice("")
+      setProductPricePetty("")
   }
 
   const submitHandler = async (event: FormEvent) => {

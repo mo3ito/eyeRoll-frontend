@@ -57,8 +57,9 @@ export default function EditProducts({
   );
 
   return (
-    <form onSubmit={onSubmit} className=" py-5 h-full px-8">
+    <form onSubmit={onSubmit} className=" py-5 h-full px-2 sm:px-8">
       <div className="mb-2">
+        <p className="text-center mb-2">edit product</p>
         <p className="mb-2">group product</p>
         <InputDefault
           onChange={(event) => handleInputChange(event, setProductAssortment)}
@@ -87,7 +88,7 @@ export default function EditProducts({
 
       <div className="flex w-full mb-3 space-x-2">
         <div className=" w-1/2">
-          <p className="mb-2">price product</p>
+          <p className="mb-2">price</p>
           <InputDefault
             onChange={changeProductPriceHandler}
             value={productPrice}
@@ -98,7 +99,7 @@ export default function EditProducts({
           />
         </div>
         <div className="w-1/2">
-          <p className="mb-2">price product (cent)</p>
+          <p className="mb-2">price(cent)</p>
           <InputDefault
             onChange={changeProductPricePettyHandler}
             value={productPricePetty}

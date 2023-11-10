@@ -95,12 +95,12 @@ export default function Facilities() {
   };
 
   return (
-    <div className="bg-sky-100 w-full h-screen">
-      <div className="container px-4  h-max mx-auto">
+    <div className="bg-sky-100 w-full h-max">
+      <div className="container max-xs:px-2 px-4 min-h-screen max-h-max  mx-auto">
         <form onSubmit={submitHandler}>
-          <div className="w-1/4 h-max mx-auto pt-44 ">
+          <div className=" text-sm sm:text-base sm:w-7/12  md:w-6/12 lg:w-5/12 xl:w-4/12  2xl:w-3/12  h-max mx-auto pt-32 pb-4  ">
 
-          <div className="mb-4">
+          <div className="mb-4 ">
               <p className="mb-3 starBefore">group</p>
               <InputDefault
                 disabled={false}
@@ -138,7 +138,7 @@ export default function Facilities() {
             </div>
 
             <div className="">
-              <p className="mb-3">import your price (cent)</p>
+              <p className="mb-3"> price (cent)</p>
               <InputDefault
                 disabled={false}
                 type="text"

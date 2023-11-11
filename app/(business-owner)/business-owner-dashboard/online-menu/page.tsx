@@ -99,7 +99,7 @@ export default function Facilities() {
     <div className="bg-sky-100 w-full h-max">
       <div className="container max-xs:px-2 px-4 min-h-screen max-h-max  mx-auto">
         <form onSubmit={submitHandler}>
-          <div className=" text-sm sm:text-base sm:w-7/12  md:w-6/12 lg:w-5/12 xl:w-4/12  2xl:w-3/12  h-max mx-auto pt-32 pb-4  ">
+          <div className=" text-sm sm:text-base sm:w-7/12  md:w-6/12 lg:w-5/12 xl:w-4/12  2xl:w-3/12  h-max mx-auto pt-44 pb-4  ">
 
           <div className="mb-4 ">
               <p className="mb-3 starBefore">group</p>

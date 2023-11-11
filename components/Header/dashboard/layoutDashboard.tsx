@@ -42,7 +42,7 @@ const LayoutDashboard = () => {
 
   return (
 <>
-    <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100   flex items-center justify-center '>
+    <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100 w-full fixed top-0 z-50  flex items-center justify-center '>
     <div className=' w-full h-full  mx-auto  flex items-center justify-between max-xs:px-2 px-10 sm:px-20 '>
    
     <div className='flex items-center   text-xl h-full space-x-3  w-full '>

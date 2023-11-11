@@ -349,7 +349,7 @@ export default function DeterminingDiscount() {
 
   return (
     <>
-      <div className="w-full min-h-screen h-max flex justify-center bg-sky-100 py-8 overflow-y-auto  ">
+      <div className="w-full min-h-screen h-max flex justify-center bg-sky-100 pt-28 pb-6 overflow-y-auto  ">
         <div className="container px-6 flex justify-center">
 
        

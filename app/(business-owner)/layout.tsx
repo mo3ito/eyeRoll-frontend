@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="overflow-x-hidden inset-0">
+      <body className="overflow-x-hidden inset-0 bg-sky-100">
         <AuthContextProvider>
           <ReactQueryProvider>
             <LayoutDashboard />

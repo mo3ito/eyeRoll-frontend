@@ -219,7 +219,7 @@ export default function Information() {
     return <LoadingPage />;
   }
   return (
-    <div className="bg-sky-100 w-full min-h-screen h-max pb-20 pt-4">
+    <div className="bg-sky-100 w-full min-h-screen h-max pb-20 pt-28">
       <div className="container px-4  h-max mx-auto">
         <div  className="max-[350px]:w-11/12  max-w-xs h-max mx-auto mb-5 ">
         <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">

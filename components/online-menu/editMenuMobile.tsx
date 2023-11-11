@@ -4,9 +4,9 @@ export default function EditMenuMobile({allProducts , processDeleteHandler , des
   
   return (
    
-    <div className='w-full  h-max py-8 block md:hidden'>
+    <div className='w-full  h-max py-8 block mt-16 md:hidden'>
       { allProducts && allProducts.map((product: ProductsType , index : number)=>
-        <div key={product._id} className='flex gap-y-2 flex-col divide-y divide-fuchsia-400 border border-fuchsia-400 rounded-lg mb-8'>
+        <div key={product._id} className='flex gap-y-2 flex-col divide-y divide-fuchsia-400 border border-fuchsia-400 rounded-lg mb-8 '>
         <div className='h-8 pt-2 px-2 break-words '>number: <span className='text-zinc-500'>{index+1}</span></div>
         <div  className='h-max pt-2 px-2  break-words '>name: <span className='text-zinc-500'>{product.productName}</span></div>
         <div  className='h-max pt-2 px-2 break-words'>group: <span className='text-zinc-500'>{product.productAssortment}</span></div>

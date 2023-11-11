@@ -6,7 +6,7 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
   return (
     <>
     
-     {allProducts && allProducts.length > 0 && <div className=" hidden md:flex  items-center text-center sticky top-28 z-50 bg-sky-100 h-20 w-full font-semibold pt-4">
+     {allProducts && allProducts.length > 0 && <div className=" hidden md:flex  items-center text-center container sticky top-52 z-40 bg-sky-100 h-20 w-full font-semibold pt-4">
             <div className="w-1/6 rounded-l-lg ">number</div>
             <div className="w-1/6 break-words  ">name</div>
             <div className="w-1/6 break-words  ">group</div>
@@ -15,7 +15,7 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
             <div className="w-1/6 break-words rounded-r-lg ">edit</div>
           </div>}
         
-    {allProducts && allProducts.length > 0 ? <div className=" hidden md:flex flex-col h-max items-center overflow-y-auto ">
+    {allProducts && allProducts.length > 0 ? <div className=" hidden md:flex flex-col mt-16 h-max items-center overflow-y-auto ">
     {allProducts?.map((product: ProductsType , index : number)=>
       <div key={product._id} className="flex  md:text-sm  xl:text-base border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
       <div className="w-1/6 break-words  p-2 text-center ">{index+1}</div>

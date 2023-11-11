@@ -161,8 +161,8 @@ export default function EditMenu() {
   }
   return (
     <>
-      <div className="w-full h-5/6  pb-40 bg-sky-100 px-2 sm:px-8 ">
-        <div className="container mx-auto">
+      <div className="w-full min-h-screen h-max  pb-40 bg-sky-100 px-2 sm:px-8 ">
+        <div className="container mx-auto ">
           <HeaderOnlineMenu
             allProducts={allProducts}
             setAllProducts={setAllProducts}

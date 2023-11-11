@@ -17,18 +17,9 @@ export default function HeaderOnlineMenu({products , allProducts , setAllProduct
       <div className='w-max  h-10   pt-2'>
           <span>Total number of goods: {allProducts?.length}</span>
         </div>
-      
         <Searcher items={products}  setAllItems={setAllProducts}/>
-      
-      
         </div>
-        
-        
-    
         </div>
   )
-  // <div className='w-full bg-red-200 h-12 top-24 sticky mx-auto container'>
 
-  // </div>
-  
 }

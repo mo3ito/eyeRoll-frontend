@@ -1,8 +1,15 @@
 'use client'
-import {useState , useCallback , ChangeEvent , useEffect} from 'react'
+import {useState , useCallback , ChangeEvent , useEffect, SetStateAction, Dispatch} from 'react'
 import InputDefault from '../shared/inputs/inputDefault'
+import { ProductsType  } from '@/types/onlineMenuBo/productsType'
+import { AxiosResponse } from 'axios'
 
-export default function Searcher({items , allItems , setAllItems }) {
+interface SearcherProps {
+items: AxiosResponse<any, any> | null | undefined;
+setAllItems: Dispatch<SetStateAction<ProductsType[]>>
+}
+
+export default function Searcher({items , setAllItems }: SearcherProps) {
     const [inputSearchValue , setInputSearchValue]=useState<string>('')
 
     const inputSearchValueHandler =useCallback((event : ChangeEvent<HTMLInputElement>)=>{
@@ -25,7 +32,7 @@ export default function Searcher({items , allItems , setAllItems }) {
       
   return (
     
-      <div className="flex flex-col h-max gap-y-10 items-center w-full  bg-sky-100 pt-4 sticky top-0">
+      <div className="flex flex-col h-max gap-y-10 items-center w-full mb-5 md:mb-0 pt-4 sticky top-0">
       <div className='w-full h-max '>
   <div className=' flex flex-col gap-y-2 sm:gap-y-0 sm:flex-row'>
         <div className=' w-full sm:w-1/2 md:w-5/12 lg:w-4/12 xl:w-3/12  2xl:w-3/12  border-2 border-fuchsia-300 rounded-lg h-10   flex items-center '>

@@ -1,12 +1,6 @@
 "use client";
-import {
-  useContext,
-  useState,
-  useEffect,
-  FormEvent,
-} from "react";
+import {useContext,useState,useEffect,FormEvent,} from "react";
 import { AuthContext } from "@/context/authContext";
-import InputDefault from "@/components/shared/inputs/inputDefault";
 import getterWithAuthId from "@/services/getterWithAuthId";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -22,34 +16,26 @@ import Modal from "@/components/modal/modal";
 import removal from "@/services/removal";
 import { toast } from "react-toastify";
 import updaterWithId from "@/services/updaterWithId";
-import {
-  ProductsType,
-  DescriptionContentProps,
-} from "@/types/onlineMenuBo/productsType";
+import {ProductsType,DescriptionContentProps,} from "@/types/onlineMenuBo/productsType";
 import EditMenuScreen from "@/components/online-menu/editMenuScreen";
 import EditMenuMobile from "@/components/online-menu/editMenuMobile";
 import HeaderOnlineMenu from "@/components/online-menu/headerOnlineMenu";
 
+
 export default function EditMenu() {
   const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
   const { infos } = useContext(AuthContext);
-  const [isShowModalDescription, setIsShowModalDescription] =
-    useState<boolean>(false);
-  const [descriptionInfos, setDescriptionInfos] =
-    useState<DescriptionContentProps | null>(null);
-  const [isShowDeleteProduct, setIsShowDeleteProduct] =
-    useState<boolean>(false);
+  const [isShowModalDescription, setIsShowModalDescription] =useState<boolean>(false);
+  const [descriptionInfos, setDescriptionInfos] =useState<DescriptionContentProps | null>(null);
+  const [isShowDeleteProduct, setIsShowDeleteProduct] =useState<boolean>(false);
   const [isShowEditProdct, setIsShowEditProduct] = useState<boolean>(false);
   const [productId, setProductId] = useState<string>("");
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string | number>("");
-  const [productPricePetty, setProductPricePetty] = useState<string | number>(
-    ""
-  );
+  const [productPricePetty, setProductPricePetty] = useState<string | number>("");
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment, setProductAssortment] = useState<string>("");
-  const [inputSearchValue, setInputSearchValue] = useState<string>("");
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
   const queryClient = useQueryClient();
 
   console.log("productName", productName);
@@ -63,8 +49,6 @@ export default function EditMenu() {
       setBusinessOwnerId(infos.id);
     }
   }, [infos]);
-
-  console.log(businessOwnerId);
 
   const queryKey = ["all products", businessOwnerId];
 
@@ -95,7 +79,6 @@ export default function EditMenu() {
     });
     setIsShowModalDescription(true);
   };
-  console.log(products);
 
   const processDeleteHandler = async (productId: string) => {
     await setProductId(productId);
@@ -173,30 +156,12 @@ export default function EditMenu() {
     }
   };
 
-
-
-  console.log(inputSearchValue);
-  useEffect(() => {
-    if (inputSearchValue && products) {
-      const searchedValue = products?.data.filter((product: ProductsType) =>
-        product.productName.startsWith(inputSearchValue)
-      );
-      setAllProducts(searchedValue);
-    }
-    if (inputSearchValue === "") {
-      setAllProducts(products?.data);
-    }
-  }, [inputSearchValue, products]);
-
-
-
   if (isLoading) {
     return <LoadingPage />;
   }
-
   return (
     <>
-      <div className="w-full h-screen overflow-y-auto pb-40 bg-sky-100 px-2 sm:px-8 ">
+      <div className="w-full h-5/6  pb-40 bg-sky-100 px-2 sm:px-8 ">
         <div className="container mx-auto">
           <HeaderOnlineMenu
             allProducts={allProducts}

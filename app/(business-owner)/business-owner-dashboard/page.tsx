@@ -30,7 +30,7 @@ const DiscountSetting = () => {
   
 
   return (
-    <div className="w-screen h-screen  bg-sky-100 flex items-center gap-x-5 justify-center absolute px-20">
+    <div className="w-screen h-screen mt-20  bg-sky-100 flex items-center gap-x-5 justify-center absolute px-20">
       <section className="w-9/12  h-5/6 -translate-y-9 rounded-3xl flex flex-col gap-4 overflow-y-auto overflow-x-hidden p-8 bg-sky-50">
 
 

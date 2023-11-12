@@ -61,9 +61,9 @@ const LayoutDashboard = () => {
         </button>
 
 
-        <ul className="flex space-x-12 h-full">
+        <ul  className="flex space-x-12 h-full">
           
-        <li onMouseEnter={()=>setShowBox(true)} className='relative group hover:border-b-4  border-purple-400 h-full flex items-center justify-center cursor-pointer  w-max'>
+        <li onClick={()=>setShowBox(true)} onMouseEnter={()=>setShowBox(true)} className='relative group hover:border-b-4  border-purple-400 h-full flex items-center justify-center cursor-pointer  w-max'>
           <div className='w-max'>
           <img className="w-12 h-12 bg-indigo-300  inline-block rounded-full mr-2 object-cover" src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"}  alt="" />
         <span className=' inline-block mr-1 text-stone-600'>{infos.username}</span>
@@ -71,7 +71,7 @@ const LayoutDashboard = () => {
           </div>
           <ul className={`hidden ${ showBox && 'group-hover:block'} text-sm sm:text-lg absolute border p-1 border-purple-500 bg-blue-100 z-50 shadow-md  top-24 left-0 h-max w-52 sm:min-w-[176px] sm:w-max  rounded-xl `}>
            
-            <li onMouseEnter={()=>setShowSwitchAccount(true)} onClick={()=>setShowSwitchAccount(prev => !prev)} className=' px-2 sm:px-6 py-2 group/item relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
+            <li  onMouseEnter={()=>setShowSwitchAccount(true)} onClick={()=>setShowSwitchAccount(prev => !prev)} className=' px-2 sm:px-6 py-2 group/item relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             switch the other account
             <svg className="inline-block w-4 h-4 ml-2 fill-fuchsia-700 group-hover/item:fill-white " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 12L10 18V6L16 12Z"></path></svg>
             { showSwitchAccount && <ul className="absolute  hidden group-hover/item:block top-8 w-44 sm:left-full sm:top-0 sm:min-w-xl sm:max-w-max border border-purple-500 bg-blue-100 p-1  rounded-lg">

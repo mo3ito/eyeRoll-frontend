@@ -53,12 +53,12 @@ const LayoutDashboard = () => {
             <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
           </svg>
         </button>
-        <div onMouseLeave={()=>setShowBox(false)} onMouseEnter={()=>setShowBox(true)} className="w-max max-w-[200px] h-12 relative ">
+        <div onMouseLeave={()=>setShowBox(false)} onMouseEnter={()=>setShowBox(true)} className="w-max max-w-[200px] h-max relative ">
           <div  onClick={()=>setShowBox(prev=> !prev)} className="w-max flex items-center justify-center cursor-pointer">
             <img className=" w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full inline-block" src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" />
             <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm sm:text-base md:text-lg sm:max-w-[150px]">{infos.username}</p>
           </div>
-          <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60 sm:w-[272px] h-44 top-10 sm:top-12 border rounded-lg border-purple-400`}>
+          <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60 sm:w-[272px] h-max top-10 sm:top-12 border rounded-lg border-purple-400`}>
           <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1">
           <li onTouchEnd={()=>setShowSwitchAccount(prev=>!prev)} onMouseLeave={()=>setShowSwitchAccount(false)}  onMouseEnter={()=>setShowSwitchAccount(true)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             <span className="">

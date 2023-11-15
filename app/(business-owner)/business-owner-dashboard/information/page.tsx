@@ -316,7 +316,7 @@ export default function Information() {
               
                 
 
-              <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">
+              {/* <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">
               <div className="mb-4 w-full sm:w-1/2 ">
                 <InputPassword
                   placeholder="if you want to change"
@@ -345,7 +345,7 @@ export default function Information() {
                   disabled={false}
                 />
               </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="w-full flex flex-col md:flex-row justify-around gap-x-5">

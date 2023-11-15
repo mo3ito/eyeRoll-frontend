@@ -12,7 +12,7 @@ interface LeftMenuProps {
   leftMenuRef: React.RefObject<HTMLElement>
 }
 
-export default function LeftMenu({ setShowAside, showAside , leftMenuRef }: LeftMenuProps) {
+export default function LeftMenu({ setShowAside, showAside , leftMenuRef , setIsShowImportPassword}: LeftMenuProps) {
  
  
   
@@ -26,7 +26,7 @@ export default function LeftMenu({ setShowAside, showAside , leftMenuRef }: Left
     >
    
       <CloseIcon classNameButton="absolute right-4 top-4  " classNameSvg="w-6 h-6  fill-fuchsia-500  " onClick={() => setShowAside(false)}/>
-      <AccordionBox className="w-full h-max mt-16 last:border-b-2 " accordions={accordionItems} setShowAside={setShowAside} />
+      <AccordionBox className="w-full h-max mt-16 last:border-b-2 " setIsShowImportPassword={setIsShowImportPassword} accordions={accordionItems} setShowAside={setShowAside} />
     </aside>
   );
 }

@@ -6,15 +6,25 @@ import { AuthContext } from "@/context/authContext";
 
 import logOutHandler from "@/utils/logOutHandler";
 import { useRouter } from "next/navigation";
-
+import ModalDefault from "@/components/modal/modalDefault";
+import InputPassword from "@/components/shared/inputs/inputPassword";
+import handleInputChange from "@/utils/handleInputChange";
+import { BUSINESS_OWNER_VALIDATOR_PASSWORD } from "@/routeApi/endpoints";
+import senderWithAuthId from "@/services/senderWithAuthId";
+import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
+import { toast } from "react-toastify";
 
 const LayoutDashboard = () => {
   const [showAside, setShowAside] = useState<boolean>(false);
   const leftMenuRef = useRef<HTMLDivElement | null>(null);
   const [showBox , setShowBox] = useState<boolean>(false)
   const [showSwitchAccount , setShowSwitchAccount]=useState<boolean>(false)
+  const [isShowImportPassword , setIsShowImportPassword]=useState<boolean>(false)
+  const [passwordInput , setPasswordInput]=useState<string>("")
   const { infos } = useContext(AuthContext);
+  const [isPasswordMatch , setIsPasswordMatch]=useState<boolean>(false)
   const router = useRouter()
+  const {businessOwnerId} = useGetBusinessOwnerId(infos)
 
 
   useEffect(() => {
@@ -34,6 +44,43 @@ const LayoutDashboard = () => {
     };
   }, [showAside]);
 
+  const validatorPassword = async ()=>{
+    try {
+      const response = await  senderWithAuthId(BUSINESS_OWNER_VALIDATOR_PASSWORD , {password: passwordInput},businessOwnerId)
+      if(response?.status === 200){
+        console.log(response);
+        if(response?.data?.value === true){
+          setIsPasswordMatch(response?.data?.value)
+        } else{
+          setPasswordInput("")
+          setIsShowImportPassword(false)
+          setIsPasswordMatch(false)
+          toast.error("the password is not valid")
+        }
+        
+      }
+    } catch (error : any) {
+      if (error.response?.status === 400) {
+        const errorMessage = error?.response.data.message;
+        toast.error(errorMessage);
+      } else {
+        toast.error("An error occurred while processing your request");
+      }
+    }
+ 
+  }
+
+  console.log(isPasswordMatch);
+  useEffect(()=>{
+    if(isPasswordMatch){
+      router.push("/business-owner-dashboard/information/edit-password")
+      setPasswordInput("")
+      setIsShowImportPassword(false)
+      setIsPasswordMatch(false)
+    }
+  },[isPasswordMatch])
+  
+  
  
   return (
 <>
@@ -84,7 +131,21 @@ const LayoutDashboard = () => {
     <div className='h-10 w-24 text-3xl text-white '>logo</div>
     </div>
   </header>
-  <LeftMenu leftMenuRef={leftMenuRef} setShowAside={setShowAside} showAside={showAside} />
+  <LeftMenu setIsShowImportPassword={setIsShowImportPassword} leftMenuRef={leftMenuRef} setShowAside={setShowAside} showAside={showAside} />
+  <ModalDefault
+        closeIconClassName="w-8 h-8 fill-red-400"
+        isShowModal={isShowImportPassword}
+        setIsShowModal={setIsShowImportPassword}
+      >
+        <div className="w-full px-4 h-64 pt-12 ">
+        <p className="text-center">input your password</p>
+        <InputPassword  value={passwordInput} onChange={(event)=>(handleInputChange(event , setPasswordInput))} className=" h-max mx-auto  outline-none rounded-lg px-2 pt-4 " />
+        <div className="px-2">
+        <button onClick={validatorPassword} className="w-full rounded-lg bg-fuchsia-400 h-12 mt-8 hoverScale">confirm</button>
+        </div>
+        </div>
+    
+      </ModalDefault>
   </>
   );
 };

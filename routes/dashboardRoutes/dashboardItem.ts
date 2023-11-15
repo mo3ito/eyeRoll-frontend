@@ -38,7 +38,8 @@ const accordionItems = [
     id: uuidv4(),
     title: "information",
     options: [
-      { id: uuidv4(), href: "/business-owner-dashboard/information", name: "editing information" , },
+      { id: uuidv4(), href: "/business-owner-dashboard/information", name: "edit information" , },
+      { id: uuidv4(), href: "/business-owner-dashboard/information/edit-password", name: "edit password" , },
       
     ],
   },

@@ -16,7 +16,7 @@ const InputPassword = ({
   const [isBoldBorderInputPassword, setIsBoldBorderInputPassword] =
     useState<boolean>(false);
   const containerPasswordRef = useRef<null | HTMLDivElement>(null);
-  const inputRef = useRef<null | HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const outClickHandler = (event: MouseEvent) => {

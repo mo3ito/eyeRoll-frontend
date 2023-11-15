@@ -6,12 +6,10 @@ import { AuthContext } from "@/context/authContext";
 
 import logOutHandler from "@/utils/logOutHandler";
 import { useRouter } from "next/navigation";
-import ModalDefault from "@/components/modal/modalDefault";
-import InputPassword from "@/components/shared/inputs/inputPassword";
-import handleInputChange from "@/utils/handleInputChange";
 import { BUSINESS_OWNER_VALIDATOR_PASSWORD } from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
+import ValidatorPassword from "@/components/shared/ValidatorPassword/validatorPassword";
 import { toast } from "react-toastify";
 
 const LayoutDashboard = () => {
@@ -25,6 +23,7 @@ const LayoutDashboard = () => {
   const [isPasswordMatch , setIsPasswordMatch]=useState<boolean>(false)
   const router = useRouter()
   const {businessOwnerId} = useGetBusinessOwnerId(infos)
+
 
 
   useEffect(() => {
@@ -132,20 +131,11 @@ const LayoutDashboard = () => {
     </div>
   </header>
   <LeftMenu setIsShowImportPassword={setIsShowImportPassword} leftMenuRef={leftMenuRef} setShowAside={setShowAside} showAside={showAside} />
-  <ModalDefault
-        closeIconClassName="w-8 h-8 fill-red-400"
-        isShowModal={isShowImportPassword}
-        setIsShowModal={setIsShowImportPassword}
-      >
-        <div className="w-full px-4 h-64 pt-12 ">
-        <p className="text-center">input your password</p>
-        <InputPassword  value={passwordInput} onChange={(event)=>(handleInputChange(event , setPasswordInput))} className=" h-max mx-auto  outline-none rounded-lg px-2 pt-4 " />
-        <div className="px-2">
-        <button onClick={validatorPassword} className="w-full rounded-lg bg-fuchsia-400 h-12 mt-8 hoverScale">confirm</button>
-        </div>
-        </div>
-    
-      </ModalDefault>
+ 
+  <ValidatorPassword isShowModal={isShowImportPassword}
+  passwordInput={passwordInput} setPasswordInput={setPasswordInput} 
+  setIsShowModal={setIsShowImportPassword}onClick={validatorPassword} />
+  
   </>
   );
 };

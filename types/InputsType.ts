@@ -7,7 +7,8 @@ export type InputRegisterType = {
   label?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   type: string;
-  disabled?: boolean
+  disabled?: boolean,
+  isFocus?:boolean
 };
 
 

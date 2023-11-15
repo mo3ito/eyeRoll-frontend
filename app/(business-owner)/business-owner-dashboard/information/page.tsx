@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import EYEROLL_TOKEN from "@/help/tokenName";
 import { useRouter } from "next/navigation";
-import InputPassword from "@/components/shared/inputs/inputPassword";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
 import removal from "@/services/removal";
 import Modal from "@/components/modal/modal";
@@ -27,8 +26,6 @@ export default function Information() {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>("");
-  const [password, setPassword] = useState<string>("");
-  const [repeatPassword, setRepeatPassword] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [state, setState] = useState<string>("");
   const [city, setCity] = useState<string>("");
@@ -104,7 +101,7 @@ export default function Information() {
       brand_name: brandName,
       postal_code: postalCode,
       work_phone: workPhone,
-      password,
+     
     };
     if (
       !email ||
@@ -116,13 +113,7 @@ export default function Information() {
      return toast.warn("Please Fill in the empty inputs");
       
     }
-    //  else if (password !== "" && password.length < 8) {
-    //   toast.warn("the password must be at least 8 characters long");
-    //   return;
-    // } else if (password !== repeatPassword) {
-    //   toast.warn("Repeating the password is not the same as the password");
-    //   return;
-    // }
+
     try {
       const response = await updaterWithPatch(
         BUSINESS_OWNER_UPDATE_INFORMATION,
@@ -303,7 +294,7 @@ export default function Information() {
             </div>
 
             <div className="w-full   flex flex-col md:flex-row justify-around gap-x-5">
-              <div className="mb-4 w-full md:w-1/3 ">
+              <div className="mb-4 w-full  ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
                   onChange={useCallback((event) => handleInputChange(event, setEmail),[])}
@@ -313,40 +304,6 @@ export default function Information() {
                   className="inputInformationForm"
                 />
               </div>
-                
-              
-                
-
-              {/* <div className="flex flex-col sm:flex-row md:w-2/3 gap-x-5">
-              <div className="mb-4 w-full sm:w-1/2 ">
-                <InputPassword
-                  placeholder="if you want to change"
-                  className="mb-4 w-full"
-                  label="password"
-                  labelClassName="mb-3 starBefore"
-                  value={password}
-                  onChange={useCallback(
-                    (event) => handleInputChange(event, setPassword),
-                    []
-                  )}
-                  disabled={false}
-                />
-              </div>
-
-              <div className="mb-4 w-full sm:w-1/2 ">
-                <InputPassword
-                  className="mb-4 w-full"
-                  label="repeat password"
-                  labelClassName="mb-3 starBefore"
-                  value={repeatPassword}
-                  onChange={useCallback(
-                    (event) => handleInputChange(event, setRepeatPassword),
-                    []
-                  )}
-                  disabled={false}
-                />
-              </div>
-              </div> */}
             </div>
 
             <div className="w-full flex flex-col md:flex-row justify-around gap-x-5">

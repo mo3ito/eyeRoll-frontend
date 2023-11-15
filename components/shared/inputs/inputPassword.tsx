@@ -10,11 +10,13 @@ const InputPassword = ({
   label,
   disabled = false,
   labelClassName,
+  isFocus = false
 }: InputPasswordProps) => {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [isBoldBorderInputPassword, setIsBoldBorderInputPassword] =
     useState<boolean>(false);
   const containerPasswordRef = useRef<null | HTMLDivElement>(null);
+  const inputRef = useRef<null | HTMLInputElement>()
 
   useEffect(() => {
     const outClickHandler = (event: MouseEvent) => {
@@ -30,6 +32,12 @@ const InputPassword = ({
 
     return () => document.removeEventListener("click", outClickHandler);
   }, []);
+
+  useEffect(()=>{
+    if( isFocus && inputRef.current){
+      inputRef.current.focus()
+    }
+  },[isFocus])
 
   return (
     <div className={className}>
@@ -48,6 +56,7 @@ const InputPassword = ({
           disabled={disabled}
           type={isShowPassword ? "text" : "password"}
           className="w-full h-full outline-none bg-transparent pr-2"
+          ref={inputRef}
         />
         {!isShowPassword ? (
           <button

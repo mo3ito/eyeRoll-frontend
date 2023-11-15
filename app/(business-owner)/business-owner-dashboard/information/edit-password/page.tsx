@@ -87,7 +87,7 @@ export default function EditPassword() {
     <ButtonDefault
     onClick={changePassword}
               text="send"
-              className="mb-4 w-full sm:w-8/12 md:w-7/12 lg:w-5/12 xl:w-4/12 2xl:w-4/12 bg-fuchsia-400 h-12 rounded-lg "
+              className=" hoverScale  mb-4 w-full sm:w-8/12 md:w-7/12 lg:w-5/12 xl:w-4/12 2xl:w-4/12 bg-fuchsia-400 h-12 rounded-lg "
             />
     </div>
     

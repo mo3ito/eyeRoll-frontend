@@ -10,6 +10,7 @@ interface LeftMenuProps {
   showAside: boolean;
   setShowAside: Dispatch<React.SetStateAction<boolean>>;
   leftMenuRef: React.RefObject<HTMLElement>
+  setIsShowImportPassword:Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function LeftMenu({ setShowAside, showAside , leftMenuRef , setIsShowImportPassword}: LeftMenuProps) {

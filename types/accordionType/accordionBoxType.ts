@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 interface childrenOption {
   id: string ;
   childName : string;
@@ -18,5 +19,7 @@ export interface AccordionBoxProps {
     options: OptionsAccordionBoxProps[];
   }[];
   setShowAside: React.Dispatch<React.SetStateAction<boolean>>;
-  className: string
+  className: string;
+  setIsShowImportPassword:Dispatch<React.SetStateAction<boolean>>;
+  
 }

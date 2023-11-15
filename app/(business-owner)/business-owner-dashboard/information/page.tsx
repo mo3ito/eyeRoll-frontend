@@ -113,15 +113,16 @@ export default function Information() {
       !phoneNumber ||
       !username.length
     ) {
-      toast.warn("Please Fill in the empty inputs");
-      return;
-    } else if (password !== "" && password.length < 8) {
-      toast.warn("the password must be at least 8 characters long");
-      return;
-    } else if (password !== repeatPassword) {
-      toast.warn("Repeating the password is not the same as the password");
-      return;
+     return toast.warn("Please Fill in the empty inputs");
+      
     }
+    //  else if (password !== "" && password.length < 8) {
+    //   toast.warn("the password must be at least 8 characters long");
+    //   return;
+    // } else if (password !== repeatPassword) {
+    //   toast.warn("Repeating the password is not the same as the password");
+    //   return;
+    // }
     try {
       const response = await updaterWithPatch(
         BUSINESS_OWNER_UPDATE_INFORMATION,

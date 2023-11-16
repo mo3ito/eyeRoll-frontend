@@ -3,8 +3,17 @@
 import ModalDefault from '@/components/modal/modalDefault'
 import InputPassword from '../inputs/inputPassword'
 import handleInputChange from '@/utils/handleInputChange'
+import { Dispatch, SetStateAction } from 'react';
 
-export default function ValidatorPassword({onClick , isShowModal , setIsShowModal , passwordInput , setPasswordInput }) {
+interface ValidatorPasswordProps{
+  onClick:()=> void;
+  isShowModal: boolean;
+  setIsShowModal:Dispatch<SetStateAction<boolean>>;
+  passwordInput:string;
+  setPasswordInput:Dispatch<SetStateAction<string>>
+}
+
+export default function ValidatorPassword({onClick , isShowModal , setIsShowModal , passwordInput , setPasswordInput }:ValidatorPasswordProps) {
 
   return (
     <ModalDefault

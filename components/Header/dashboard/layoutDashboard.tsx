@@ -105,14 +105,14 @@ const LayoutDashboard = () => {
             <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm sm:text-base md:text-lg sm:max-w-[150px]">{infos.username}</p>
           </div>
           <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60 sm:w-[272px] h-max top-10 sm:top-12 border rounded-lg border-purple-400`}>
-          <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1">
+          <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1 shadow-md">
           <li onTouchEnd={()=>setShowSwitchAccount(prev=>!prev)} onMouseLeave={()=>setShowSwitchAccount(false)}  onMouseEnter={()=>setShowSwitchAccount(true)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             <span className="">
             switch to the other account
             { !showSwitchAccount ? <svg className=" w-4 h-4  sm:w-5 sm:h-5 ml-4 sm:ml-5 fill-fuchsia-700 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z"></path></svg>
            : <svg className="w-4 h-4  sm:w-5 sm:h-5 ml-4  sm:ml-5 fill-white inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.1717 12.0005L9.34326 9.17203L10.7575 7.75781L15.0001 12.0005L10.7575 16.2431L9.34326 14.8289L12.1717 12.0005Z"></path></svg>}
              </span>
-            <ul className={` ${showSwitchAccount ? 'absolute' : 'hidden'} left-[10px] z-40 w-11/12 sm:left-60 sm:top-0 rounded-lg sm:w-36 h-max bg-blue-100 border border-fuchsia-400`}>
+            <ul className={` ${showSwitchAccount ? 'absolute' : 'hidden'} left-[10px] z-40 w-11/12 sm:left-60 sm:top-0 rounded-lg sm:w-36 h-max bg-blue-100 border border-fuchsia-400 p-1`}>
             <li className=" px-2 sm:px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">mostafasssssssssssssssssssssssssss</li>
               <li className=" px-2 sm:px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">saj</li>
               <li className=" px-2 sm:px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">rez</li>
@@ -123,8 +123,6 @@ const LayoutDashboard = () => {
           </div>
 
         </div>
-
-     
 
     </div>
     <div className='h-10 w-24 text-3xl text-white '>logo</div>

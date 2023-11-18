@@ -51,7 +51,7 @@ export default function OnlineMenu() {
           clickable: true,
         }}
        
-        className=" shadow-md h-12 flex items-center justify-center  bg-black/50 !px-6 !py-1 border border-purple-400"
+        className=" shadow-md h-12 flex items-center justify-center   !px-6 !py-1 border border-purple-400"
       >
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>

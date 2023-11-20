@@ -3,37 +3,44 @@ import { ProductsType , EditMenuType } from '@/types/onlineMenuBo/productsType'
 
 
 export default function EditMenuScreen({allProducts , descriptionHandler , processEditHandler , processDeleteHandler }:EditMenuType) {
+
+  console.log(allProducts);
+  
   return (
     <>
     
-     {allProducts && allProducts.length > 0 && <div className=" hidden md:flex  items-center text-center container sticky top-52 z-40 bg-sky-100 h-20 w-full font-semibold pt-4">
-            <div className="w-1/6 rounded-l-lg ">number</div>
-            <div className="w-1/6 break-words  ">name</div>
-            <div className="w-1/6 break-words  ">group</div>
-            <div className="w-1/6 break-words ">amount</div>
-            <div className="w-1/6 break-words ">description</div>
-            <div className="w-1/6 break-words rounded-r-lg ">edit</div>
+     {allProducts && allProducts.length > 0 && <div className=" hidden lg:flex  items-center text-center container sticky top-52 z-40 bg-sky-100 h-20 w-full font-semibold pt-4">
+            <div className="w-[14%] rounded-l-lg ">number</div>
+            <div className="w-[14%] break-words  ">name</div>
+            <div className="w-[14%] break-words  ">group</div>
+            <div className="w-[14%] break-words ">amount</div>
+            <div className="w-[14%] break-words ">description</div>
+            <div className="w-[14%] break-words ">image product</div>
+            <div className="w-[14%] break-words rounded-r-lg pl-4 ">edit product</div>
           </div>}
         
-    {allProducts && allProducts.length > 0 ? <div className=" hidden md:flex flex-col mt-16 h-max items-center overflow-y-auto ">
+    {allProducts && allProducts.length > 0 ? <div className=" hidden lg:flex flex-col mt-16 h-max items-center overflow-y-auto ">
     {allProducts?.map((product: ProductsType , index : number)=>
       <div key={product._id} className="flex  md:text-sm  xl:text-base border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
-      <div className="w-1/6 break-words  p-2 text-center ">{index+1}</div>
-        <div className="w-1/6 break-words  p-2 text-center  ">
+      <div className="w-[14%] break-words  p-2 text-center ">{index+1}</div>
+        <div className="w-[14%] break-words  p-2 text-center  ">
           {product.productName}
          
         </div>
-        <div className="w-1/6 break-words  p-2 text-center ">{product.productAssortment}</div>
+        <div className="w-[14%] break-words  p-2 text-center ">{product.productAssortment}</div>
         { product.productPricePetty  ? <div className="w-1/6 break-words  p-2 text-center  "> {product.productPrice}.{product.productPricePetty} $</div>
-       : <div className="w-1/6 break-words  p-2  "> {product.productPrice} $</div>
+       : <div className="w-[14%] break-words  p-2  "> {product.productPrice} $</div>
         }
-        <div className="w-1/6 break-words  p-2 text-center translate-x-1 ">
-          <button onClick={()=>descriptionHandler(product.productName , product.productDescription)} className="  w-max text-sm px-2 bg-fuchsia-300 py-2 rounded-lg">show description</button>
+        <div className="w-[14%] break-words  p-2 text-center translate-x-1 ">
+          <button onClick={()=>descriptionHandler(product.productName , product.productDescription)} className="  w-max md:text-xs lg:text-sm px-2 bg-fuchsia-300 py-2 rounded-lg">show description</button>
         </div>
-        <div className="w-1/6 break-words  p-2  text-center  ">
+        <div className="w-[14%] break-words   px-2 text-center translate-x-1 ">
+         <img className=' md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-20 xl:h-20 block mx-auto rounded-md object-cover' src={product.product_image_path ? product.product_image_path : ""} alt="" />
+        </div>
+        <div className="w-[14%] mx-auto flex items-center justify-center break-words  p-2  text-center  ">
           <button onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product._id)} className="mr-4 pt-2">
             <svg
-              className=" w-5 h-5 xl:w-6 xl:h-6"
+              className=" w-6 h-6 mb-1 xl:w-6 xl:h-6"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -42,7 +49,7 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
           </button>
           <button onClick={()=>processDeleteHandler(product._id)} className="">
             <svg
-               className=" w-5 h-5 xl:w-6 xl:h-6"
+               className=" w-6 h-6 xl:w-6 xl:h-6"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >

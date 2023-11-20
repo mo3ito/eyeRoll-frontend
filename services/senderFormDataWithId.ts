@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import Cookies from "js-cookie";
-import EYEROLL_TOKEN from "@/help/tokenName";
+
 
 const senderFormDataWithId = async (
   path: string,

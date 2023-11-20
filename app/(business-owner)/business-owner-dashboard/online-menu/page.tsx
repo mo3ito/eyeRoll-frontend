@@ -19,6 +19,8 @@ export default function Facilities() {
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment , setProductAssortment] = useState<string>("")
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
+  const [productImage , setProductImage]=useState<File | null>(null)
+  const [isShowInputsForImageProfile , setIsShowInputsForImageProfile]=useState<boolean>(false)
   const {infos}=useContext(AuthContext)
   const{businessOwnerId}=useGetBusinessOwnerId(infos)
 
@@ -95,6 +97,21 @@ export default function Facilities() {
     
   };
 
+  const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      console.log(event.target.files[0].type);
+      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png"){
+        const selectedFile = event.target.files[0];
+        setProductImage(selectedFile);
+      }else{
+        toast.warn("Only photos in jpg , jpeg and png format are allowed")
+      }
+     
+      
+    }
+  };
+
+
   return (
     <div className="bg-sky-100 w-full h-max">
       <div className="container max-xs:px-2 px-4 min-h-screen max-h-max  mx-auto">
@@ -150,6 +167,41 @@ export default function Facilities() {
               />
             </div>
             </div>
+
+
+
+
+            <div className="mb-3">
+              <p className="mb-3">import your product image</p>
+              <div  className="max-[350px]:w-11/12  w-full h-max mx-auto mb-5 ">
+        <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
+          <div className=" w-44 h-44 sm:w-full sm:h-48  relative">
+            <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full  bg-fuchsia-400  mx-auto object-cover"/>
+            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute -bottom-2 right-0 ">
+            <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
+            </div>
+            </div>
+            { <> <div className="border w-full text-sm sm:text-base border-fuchsia-400 min-h-10 h-max flex  justify-start items-center p-1 rounded-lg ">
+    
+            <p className="mr-auto w-full sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {productImage?.name}</p>
+           
+            </div>
+            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
+           
+            </label>
+           <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto  max-[350px]:text-sm  ">
+           {/* { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  sm:px-2  py-1 rounded-md hoverScale " text="confirm image" />}
+           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />} */}
+            </div>
+            
+        </div>
+              
+              </div>
+
+
+
+
+
            
             <div className="mb-3">
               <p className="mb-3">import your description</p>

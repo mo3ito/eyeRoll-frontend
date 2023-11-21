@@ -15,7 +15,6 @@ export const BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE = `${BASE_URL_BUSIN
 export const BUSINESS_OWNER_VALIDATOR_PASSWORD =`${BASE_URL_BUSINESS_OWNER}/validator-password`
 
 
-
 //--business-owner-online-menu
 export const BUSINESS_OWNER_ONLINE_MENU = `${BASE_URL_BUSINESS_OWNER}/online-menu`;
 export const BUSINESS_OWNER_ONLINE_MENU_ALL_Product = `${BUSINESS_OWNER_ONLINE_MENU}/all-products`;
@@ -23,6 +22,7 @@ export const BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT = `${BUSINESS_OWNER_ONLINE_M
 export const BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/update-product`;
 export const BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/delete-product`;
 export const BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/get-product`;
+export const BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/upload-product-image`
 
 //--business-owner-routes
 
@@ -33,12 +33,6 @@ export const SEND_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-send`
 export const GET_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-get`
 
 //--roll-routes
-
-
-
-
-
-
 
 
 

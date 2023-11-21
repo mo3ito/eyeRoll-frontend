@@ -2,7 +2,7 @@
 import React, { ChangeEvent, FormEvent, useCallback, useState, useContext, useEffect  } from "react";
 import InputDefault from "@/components/shared/inputs/inputDefault";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
-import { BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT } from "@/routeApi/endpoints";
+import { BUSINESS_OWNER_ONLINE_MENU_ADD_PRODUCT , BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT } from "@/routeApi/endpoints";
 import  handleInputChange  from "@/utils/handleInputChange";
 import senderWithAuth from "@/services/senderWithAuth";
 import { toast } from "react-toastify";
@@ -36,8 +36,7 @@ export default function Facilities() {
     setProductImage(null)
 
 }
-  // console.log(infos);
-  console.log(productId);
+
 
   useEffect(()=>{
 
@@ -47,7 +46,7 @@ export default function Facilities() {
         formData.append("productImage",productImage)
   
         try {
-        const response = await senderFormDataWithId(`http://localhost:5000/business-owner/online-menu/upload-product-image?productId=${productId}`,businessOwnerId,formData)
+        const response = await senderFormDataWithId(`${BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT}?productId=${productId}`,businessOwnerId,formData)
         console.log(response);
         if(response?.status === 200){
            setIsLoadingForApi(false)
@@ -66,7 +65,6 @@ export default function Facilities() {
             toast.error("An error occurred while processing your request");
           }
         }
-  
       }
     }
 
@@ -215,41 +213,16 @@ export default function Facilities() {
             </div>
             </div>
 
-
-
-
             <div className="mb-3">
               <p className="mb-3">import your product image</p>
-              <div  className="max-[350px]:w-11/12  w-full h-max mx-auto mb-5 ">
-        <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
-          <div className=" w-44 h-44 sm:w-full sm:h-max  relative">
-            
-            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute -bottom-2 right-0 ">
-            <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
+            <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
+             <div className="border w-full text-sm sm:text-base border-fuchsia-400  h-10 flex  justify-start items-center p-1 rounded-lg ">
+            { productImage && <p className="mr-auto w-full sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {productImage?.name}</p>}
             </div>
-            </div>
-            { <> <div className="border w-full text-sm sm:text-base border-fuchsia-400 min-h-10 h-max flex  justify-start items-center p-1 rounded-lg ">
-    
-            <p className="mr-auto w-full sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {productImage?.name}</p>
-           
-            </div>
-            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
-           
+            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" />
             </label>
-           <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto  max-[350px]:text-sm  ">
-           {/* {<ButtonDefault onClick={submitProductImage} loading={isLoadingForApi} className="bg-fuchsia-400  sm:px-2  py-1 rounded-md hoverScale " text="confirm image" />}
-           {<ButtonDefault  className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />} */}
-            </div>
-            
-        </div>
-              
               </div>
 
-
-
-
-
-           
             <div className="mb-3">
               <p className="mb-3">import your description</p>
               <textarea

@@ -21,6 +21,7 @@ export interface ProductsType {
   productPrice: string;
   productDescription: string;
   productPricePetty: string;
+  product_image_path:string;
 }
 
 export interface DescriptionContentProps {

@@ -28,7 +28,7 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
          
         </div>
         <div className="w-[14%] break-words  p-2 text-center ">{product.productAssortment}</div>
-        { product.productPricePetty  ? <div className="w-1/6 break-words  p-2 text-center  "> {product.productPrice}.{product.productPricePetty} $</div>
+        { product.productPricePetty  ? <div className="w-[14%] break-words  p-2 text-center  "> {product.productPrice}.{product.productPricePetty} $</div>
        : <div className="w-[14%] break-words  p-2  "> {product.productPrice} $</div>
         }
         <div className="w-[14%] break-words  p-2 text-center translate-x-1 ">

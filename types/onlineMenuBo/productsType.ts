@@ -6,6 +6,9 @@ export interface EditProductsProps {
   productAssortment: string;
   productDescription: string;
   productPricePetty: string | number;
+  productImage:string;
+  imageFile: null | File;
+  setImageFile: Dispatch<SetStateAction<null | File>>;
   setProductName: Dispatch<SetStateAction<string>>;
   setProductAssortment: Dispatch<SetStateAction<string>>;
   setProductPrice: Dispatch<SetStateAction<string | number>>;
@@ -38,6 +41,7 @@ export interface EditMenuType {
     productPricePetty: string,
     productAssortment: string,
     productDescription: string,
+    productImage:string,
     productId: string
   ) => void;
   processDeleteHandler: (productId: string) => void;

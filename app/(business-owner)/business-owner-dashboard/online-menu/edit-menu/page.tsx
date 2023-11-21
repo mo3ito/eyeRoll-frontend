@@ -7,6 +7,7 @@ import {
   BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT,
+  BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT
 } from "@/routeApi/endpoints";
 import LoadingPage from "@/components/loading/loadingPage";
 import ModalDefault from "@/components/modal/modalDefault";
@@ -20,6 +21,7 @@ import {ProductsType,DescriptionContentProps,} from "@/types/onlineMenuBo/produc
 import EditMenuScreen from "@/components/online-menu/editMenuScreen";
 import EditMenuMobile from "@/components/online-menu/editMenuMobile";
 import HeaderOnlineMenu from "@/components/online-menu/headerOnlineMenu";
+import senderFormDataWithId from "@/services/senderFormDataWithId";
 
 
 export default function EditMenu() {
@@ -35,7 +37,10 @@ export default function EditMenu() {
   const [productPricePetty, setProductPricePetty] = useState<string | number>("");
   const [productDescription, setProductDescription] = useState<string>("");
   const [productAssortment, setProductAssortment] = useState<string>("");
+  const [productImage , setProductImage]=useState<string>("")
+  const [imageFile , setImageFile]=useState<null | File>(null)
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
+  const [isChangeImage , setIsChangeImage]=useState<boolean>(false)
   const queryClient = useQueryClient();
 
   console.log("productName", productName);
@@ -43,6 +48,8 @@ export default function EditMenu() {
   console.log("productPricePetty", productPricePetty);
   console.log("productDescription", productDescription);
   console.log("productAssortment", productDescription);
+  console.log("file image" , imageFile);
+  
 
   useEffect(() => {
     if (infos && infos.id) {
@@ -114,6 +121,7 @@ export default function EditMenu() {
     productPricePetty: string,
     productAssortment: string,
     productDescription: string,
+    productImage: string,
     productId: string
   ) => {
     setIsShowEditProduct(true);
@@ -123,7 +131,40 @@ export default function EditMenu() {
     setProductPrice(productPrice);
     setProductPricePetty(productPricePetty);
     setProductId(productId);
+    setProductImage(productImage)
   };
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      if(isChangeImage && productId && businessOwnerId && imageFile){
+        const formData = new FormData()
+        formData.append("productImage" , imageFile)
+        try {
+          const response = await senderFormDataWithId(`${BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT}?productId=${productId}`,businessOwnerId,formData)
+          if(response?.status === 200){
+            queryClient.invalidateQueries(queryKey);
+          setIsShowEditProduct(false);
+          setImageFile(null)
+          setIsChangeImage(false)
+          toast.success("product updated successfully");
+         
+          }
+        } catch (error: any) {
+          if (error?.response.status === 400) {
+            setIsShowEditProduct(false);
+            const errorMessage = error.response.data.message;
+            toast.error(errorMessage);
+          } else {
+            setIsShowEditProduct(false)
+            toast.error("An error occurred while processing your request");
+          }
+        }
+      
+      }
+    }
+   
+    fetchData()
+  },[isChangeImage , productId , businessOwnerId , imageFile])
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
@@ -142,15 +183,22 @@ export default function EditMenu() {
         body
       );
       if (response?.status === 200) {
-        queryClient.invalidateQueries(queryKey);
-        setIsShowEditProduct(false);
-        toast.success("product updated successfully");
+        if(imageFile !== null ){
+         return setIsChangeImage(true)
+        } else {
+          queryClient.invalidateQueries(queryKey);
+          setIsShowEditProduct(false);
+          toast.success("product updated successfully");
+        }
+       
       }
     } catch (error: any) {
       if (error?.response.status === 400) {
+        setIsShowEditProduct(false)
         const errorMessage = error.response.data.message;
         toast.error(errorMessage);
       } else {
+        setIsShowEditProduct(false)
         toast.error("An error occurred while processing your request");
       }
     }
@@ -216,6 +264,9 @@ export default function EditMenu() {
           productPricePetty={productPricePetty}
           productDescription={productDescription}
           productAssortment={productAssortment}
+          productImage={productImage}
+          imageFile={imageFile}
+          setImageFile={setImageFile}
         />
       </ModalDefault>
     </>

@@ -12,8 +12,8 @@ export default function EditMenuMobile({allProducts , processDeleteHandler , des
         <div  className='h-max pt-2 px-2 break-words'>group: <span className='text-zinc-500'>{product.productAssortment}</span></div>
         <div  className='h-max pt-2 px-2 break-words'>amount: <span className='text-zinc-500'>{product.productPrice}.{product.productPricePetty} $</span></div>
         <div  className='h-max pt-1 px-2 break-words'>description: <span className='inline-block '> <button onClick={()=>descriptionHandler(product.productName , product.productDescription)}  className='px-2 bg-fuchsia-400 h-7 mt-0.5 text-sm rounded-lg'>show description</button></span></div>
-        <div  className='h-max pt-1 px-2 break-words'>image: <span className='inline-block '><img className='w-5 h-5 bg-red-200 translate-y-1 object-cover' src={product.product_image_path} alt="" /> </span></div>
-        <div  className='h-10 max-h-max flex items-center px-2'>edit: <span className='ml-2 pt-1'><button  onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product._id)} className=" mr-2">
+        <div  className='h-max pt-1 px-2 break-words'>image: <span className='inline-block '><img className='w-5 h-5 translate-y-1 object-cover' src={product.product_image_path ? product.product_image_path : "/images/default-product.jpg"} alt="" /> </span></div>
+        <div  className='h-10 max-h-max flex items-center px-2'>edit: <span className='ml-2 pt-1'><button  onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product.product_image_path , product._id)} className=" mr-2">
           <svg
           className=" w-5 h-5 fill-zinc-500"
           xmlns="http://www.w3.org/2000/svg"

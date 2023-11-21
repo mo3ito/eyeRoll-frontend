@@ -140,11 +140,11 @@ export default function Information() {
   const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       console.log(event.target.files[0].type);
-      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg"){
+      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png"){
         const selectedFile = event.target.files[0];
         setProfileImage(selectedFile);
       }else{
-        toast.warn("Only photos in jpg and jpeg format are allowed")
+        toast.warn("Only photos in jpg , jpeg and png format are allowed")
       }
      
       

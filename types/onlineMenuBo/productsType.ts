@@ -14,6 +14,7 @@ export interface EditProductsProps {
   setProductPrice: Dispatch<SetStateAction<string | number>>;
   setProductPricePetty: Dispatch<SetStateAction<string | number>>;
   setProductDescription: Dispatch<SetStateAction<string>>;
+  setIsDeleteProductImage: Dispatch<SetStateAction<boolean>>;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 

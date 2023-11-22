@@ -7,7 +7,8 @@ import {
   BUSINESS_OWNER_ONLINE_MENU_UPDATE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_DELETE_PRODUCT,
   BUSINESS_OWNER_ONLINE_MENU_FINDE_PRODUCT,
-  BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT
+  BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT,
+  BUSINESS_OWNER_ONLINE_MENU_DELETE_IMAGE_PRODUCT
 } from "@/routeApi/endpoints";
 import LoadingPage from "@/components/loading/loadingPage";
 import ModalDefault from "@/components/modal/modalDefault";
@@ -22,6 +23,7 @@ import EditMenuScreen from "@/components/online-menu/editMenuScreen";
 import EditMenuMobile from "@/components/online-menu/editMenuMobile";
 import HeaderOnlineMenu from "@/components/online-menu/headerOnlineMenu";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
+
 
 
 export default function EditMenu() {
@@ -41,6 +43,8 @@ export default function EditMenu() {
   const [imageFile , setImageFile]=useState<null | File>(null)
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
   const [isChangeImage , setIsChangeImage]=useState<boolean>(false)
+  const [ isDeleteProductImage ,setIsDeleteProductImage]=useState<boolean>(false)
+  const [isDeleteProductImageRun , setIsDeleteProductImageRun] = useState<boolean>(false)
   const queryClient = useQueryClient();
 
   console.log("productName", productName);
@@ -159,12 +163,42 @@ export default function EditMenu() {
             toast.error("An error occurred while processing your request");
           }
         }
-      
       }
     }
    
     fetchData()
   },[isChangeImage , productId , businessOwnerId , imageFile])
+
+  useEffect(()=>{
+
+    const DeleteProductImage = async ()=>{
+        if(isDeleteProductImageRun && productId && businessOwnerId){
+
+          try {
+            const response = await removal(`${BUSINESS_OWNER_ONLINE_MENU_DELETE_IMAGE_PRODUCT}?productId=${productId}` , businessOwnerId )
+            if(response?.status === 200){
+              queryClient.invalidateQueries(queryKey);
+              setIsShowEditProduct(false)
+              setIsDeleteProductImage(false)
+              setIsDeleteProductImageRun(false)
+              toast.success("product updated successfully");
+            }
+          } catch (error: any) {
+            if (error?.response.status === 400) {
+              setIsShowEditProduct(false);
+              const errorMessage = error.response.data.message;
+              toast.error(errorMessage);
+            } else {
+              setIsShowEditProduct(false)
+              toast.error("An error occurred while processing your request");
+            }
+          }
+      }
+
+     
+    }
+    DeleteProductImage()
+  },[ isDeleteProductImageRun , productId , businessOwnerId ])
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
@@ -185,6 +219,8 @@ export default function EditMenu() {
       if (response?.status === 200) {
         if(imageFile !== null ){
          return setIsChangeImage(true)
+        } else if(isDeleteProductImage){
+          return setIsDeleteProductImageRun(true)
         } else {
           queryClient.invalidateQueries(queryKey);
           setIsShowEditProduct(false);
@@ -203,6 +239,15 @@ export default function EditMenu() {
       }
     }
   };
+
+  useEffect(()=>{
+    if(isDeleteProductImage){
+    return setImageFile(null)
+    }
+    if (imageFile !== null){
+     return setIsDeleteProductImage(false)
+    }
+  },[isDeleteProductImage , imageFile])
 
   if (isLoading) {
     return <LoadingPage />;
@@ -267,6 +312,8 @@ export default function EditMenu() {
           productImage={productImage}
           imageFile={imageFile}
           setImageFile={setImageFile}
+          setIsDeleteProductImage={setIsDeleteProductImage}
+          
         />
       </ModalDefault>
     </>

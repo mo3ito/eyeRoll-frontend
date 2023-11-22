@@ -23,6 +23,7 @@ export default function EditProducts({
   setProductPrice,
   setProductPricePetty,
   setProductDescription,
+  setIsDeleteProductImage,
   setImageFile,
   imageFile,
   onSubmit,
@@ -89,7 +90,7 @@ export default function EditProducts({
   
 
   return (
-    <form onSubmit={onSubmit} className=" py-5 h-full px-2 sm:px-8 ">
+    <form onSubmit={onSubmit} className=" py-5 h-full px-2 sm:px-8 overflow-y-auto ">
       <div className="mb-2">
         <p className="text-center mb-2">edit product</p>
         <p className="mb-2">product group</p>
@@ -99,7 +100,7 @@ export default function EditProducts({
           disabled={false}
           type="text"
           placeholder="for examole: drink"
-          className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+          className="w-full max-xs:h-7 h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
         />
       </div>
       <div className="mb-2">
@@ -114,7 +115,7 @@ export default function EditProducts({
           disabled={false}
           type="text"
           placeholder="for examole: moca"
-          className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+          className="w-full max-xs:h-7 h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
         />
       </div>
 
@@ -127,7 +128,7 @@ export default function EditProducts({
             disabled={false}
             type="text"
             placeholder="for examole: burger"
-            className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+            className="w-full max-xs:h-7 h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
           />
         </div>
         <div className="w-1/2">
@@ -138,7 +139,7 @@ export default function EditProducts({
             disabled={false}
             type="text"
             placeholder="if required"
-            className="w-full h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
+            className="w-full max-xs:h-7 h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
           />
         </div>
       </div>
@@ -150,7 +151,7 @@ export default function EditProducts({
         <div className="   w-full sm:w-2/3 md:w-8/12 lg:w-9/12 ">
           <div className="   flex items-center gap-x-2 justify-center my-2 ">
           <button onClick={changeImageClick} className=" w-1/2  mx-auto   text-sm    h-max px-2 py-1 rounded-lg  bg-fuchsia-400">change image</button>
-        <button className=" w-1/2    mx-auto  text-sm   h-max px-2 py-1 rounded-lg  bg-fuchsia-400">delete image</button>
+        <button onClick={()=>setIsDeleteProductImage(true)} className=" w-1/2    mx-auto  text-sm   h-max px-2 py-1 rounded-lg  bg-fuchsia-400">delete image</button>
           </div>
         
         <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3 w-full"  htmlFor="changImage">
@@ -169,12 +170,12 @@ export default function EditProducts({
         <textarea
           onChange={changeProductDescriptionHandler}
           value={productDescription}
-          className="w-full h-28 border focus:border-2 border-fuchsia-400 p-2 outline-none bg-transparent rounded-lg resize-none overflow-y-auto"
+          className="w-full max-xs:h-14 h-28 border focus:border-2 border-fuchsia-400 p-2 outline-none bg-transparent rounded-lg resize-none overflow-y-auto"
         />
       </div>
       <ButtonDefault
         text="send"
-        className="hoverScale w-full bg-fuchsia-400 h-12 rounded-lg "
+        className="hoverScale w-full bg-fuchsia-400 max-xs:h-7 h-12 rounded-lg "
       />
     </form>
   );

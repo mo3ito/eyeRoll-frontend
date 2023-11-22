@@ -147,7 +147,7 @@ export default function EditProducts({
       <div className="mb-2">
         <p className="mb-2 ">product image</p>
         <div className="border border-fuchsia-400 p-2 flex flex-col sm:flex-row sm:gap-x-2 items-center rounded-lg ">
-        <img className=" w-32 h-28  sm:h-24 sm:w-1/3 md:w-4/12 lg:w-3/12 rounded-lg border border-fuchsia-400 object-cover" src={productImage} alt="product image" />
+        <img className=" w-32 h-28  sm:h-24 sm:w-1/3 md:w-4/12 lg:w-3/12 rounded-lg border border-fuchsia-400 object-cover" src={productImage ? productImage : "/images/default-product.jpg"} alt="product image" />
         <div className="   w-full sm:w-2/3 md:w-8/12 lg:w-9/12 ">
           <div className="   flex items-center gap-x-2 justify-center my-2 ">
           <button onClick={changeImageClick} className=" w-1/2  mx-auto   text-sm    h-max px-2 py-1 rounded-lg  bg-fuchsia-400">change image</button>

@@ -154,7 +154,6 @@ export default function EditProducts({
         <button onClick={()=>setIsDeleteProductImage(true)} className=" w-1/2    mx-auto  text-sm   h-max px-2 py-1 rounded-lg  bg-fuchsia-400">delete image</button>
           </div>
         
-        
         <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3 w-full"  htmlFor="changImage">
         { imageFile?.name &&   <div className="border w-full  text-sm sm:text-base border-fuchsia-400  h-10 flex  justify-start items-center p-1 rounded-lg ">
            <p className="mr-auto sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {imageFile?.name}</p>

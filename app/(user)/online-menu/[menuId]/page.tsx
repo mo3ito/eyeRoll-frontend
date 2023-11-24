@@ -1,14 +1,33 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState , useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import io from "socket.io-client"
 
 
-export default function OnlineMenu() {
+
+export default function Page({ params }: { params: { slug: string } }) {
+  console.log(params);
+  const [socket, setSocket] = useState(null);
+  
+
+
+  useEffect(() => {
+    if (!socket) { // اجرا فقط اگر socket تنظیم نشده باشد
+      const newSocket = io("http://localhost:5001");
+      console.log(newSocket);
+      
+      setSocket(newSocket);
+    }
+  }, [socket]);
+
+  console.log(socket);
+  
+
   return (
     <div className='w-full h-max'>
         <div className='w-full h-44 bg-black/30 '>

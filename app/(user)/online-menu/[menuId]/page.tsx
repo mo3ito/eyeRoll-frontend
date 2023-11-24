@@ -6,18 +6,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import { Socket } from 'socket.io-client';
 import io from "socket.io-client"
 
 
 
 export default function Page({ params }: { params: { slug: string } }) {
   console.log(params);
-  const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
   
 
 
   useEffect(() => {
-    if (!socket) { // اجرا فقط اگر socket تنظیم نشده باشد
+    if (!socket) { 
       const newSocket = io("http://localhost:5001");
       console.log(newSocket);
       

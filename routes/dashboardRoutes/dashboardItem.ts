@@ -31,6 +31,7 @@ const accordionItems = [
     options: [
       { id: uuidv4(), href: "/business-owner-dashboard/online-menu", name: "add new product" , },
       { id: uuidv4(), href: "/business-owner-dashboard/online-menu/edit-menu", name: "edit menu" , },
+      { id: uuidv4(), href: "/business-owner-dashboard/online-menu/qr-code-link", name: "QR Code link" , },
       
     ],
   },

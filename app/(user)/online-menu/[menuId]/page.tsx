@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Socket } from 'socket.io-client';
 import io from "socket.io-client"
+import Searcher from '@/components/searcher/searcher';
 
 
 
@@ -30,17 +31,21 @@ export default function Page({ params }: { params: { slug: string } }) {
   
 
   return (
-    <div className='w-full h-max'>
-        <div className='w-full h-44 bg-black/30 '>
+    <div className='w-full h-max pt-24'>
+        <div className='w-full h-44 bg-black/30 bg-red-200'>
             <img className='w-full h-full object-cover' src="/images/cafe.jpg" alt="" />
-            <div className='w-44 bg-sky-100 shadow-md rounded-md h-20 -translate-y-8 mx-auto'>
-                 <p className='text-center  pt-5 text-2xl'>farhang caffe</p>
+            <div className='w-24 h-24 rounded-full  bg-sky-100 -translate-y-12 mx-auto shadow-md '>
+                 <p className='text-center  pt-8 text-2xl'>logo</p>
             </div>
-       
+            <p className='text-center  -translate-y-12 p-2 text-2xl'>caffe farhang</p>
+        </div>
+        <div className='w-full h-max mt-24 text-lg font-semibold container mx-auto'>
+        <button className='w-1/2  border-b-2 border-fuchsia-700 py-2 '>show menu</button>
+        <button className='w-1/2 border-b border-fuchsia-400  py-2'>show information</button>
         </div>
 
 
-        <div className='w-full h-max  px-6 flex flex-col space-y-1 py-2 '>
+        {/* <div className='w-full h-max  px-6 flex flex-col space-y-1 py-2 '>
         
         <div className=''>
         <svg className='w-8 h-8 fill-black/50 inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path></svg>
@@ -61,17 +66,17 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div>
        
         </div>
-        </div>
+        </div> */}
+        <div className='container mx-auto'>
 
+      
         <Swiper
-        
+        className=" shadow-md h-12 flex items-center justify-center  mt-8 !px-6 !py-1 border border-purple-400"
         slidesPerView={8}
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
-       
-        className=" shadow-md h-12 flex items-center justify-center   !px-6 !py-1 border border-purple-400"
       >
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
@@ -92,6 +97,64 @@ export default function Page({ params }: { params: { slug: string } }) {
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
         <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
       </Swiper>
+
+      {/* <Searcher items={} setAllItems={}/> */}
+      <div className='  my-4   flex items-center h-10 gap-x-2'>
+        <div className='flex  px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
+        <svg className='w-5 h-5 mr-auto fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
+        <input className='w-full bg-transparent outline-none pl-2 text-zinc-400' placeholder='search' type="text" />
+        </div>
+        <div className='w-1/3 ml-auto   h-full flex items-center px-2 '>
+        <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3L23 8H20V20H18V8H15L19 3ZM14 18V20H3V18H14ZM14 11V13H3V11H14ZM12 4V6H3V4H12Z"></path></svg>
+        <p className='pl-2'>filter</p>
+
+         <div className='ml-4'>
+         <button className='border-b-2 border-fuchsia-700 px-2 '>cheapest</button>
+        <button className='border-b border-fuchsia-400 px-2'>most expensive</button>
+         </div>
+      
+        </div>
+      
+      </div>
+
+      <div className='w-full bg-sky-50 rounded-lg h-screen px-4 py-2'>
+
+        {/* <p className='text-red-200'>pizza</p> */}
+        <div className="flex items-center ">
+        <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
+        <p className="text-fuchsia-400 text-lg">pizza</p>
+        <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
+        </div>
+
+        <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
+
+
+
+        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
+
+        </div>
+
+        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
+
+        </div>
+
+        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
+
+</div>
+
+<div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
+
+</div>
+
+
+
+
+
+        </div>
+
+      </div>
+
+      </div>
        
     </div>
   )

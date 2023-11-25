@@ -6,7 +6,7 @@ import MoblilMode from './user/moblilMode'
 
 const HomePageHeader = () => {
   return (
-    <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100   flex items-center justify-center '>
+    <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100  fixed z-50 w-full flex items-center justify-center '>
       <div className='container hidden sm:flex h-full mx-auto   items-center    px-20 '>
       <div className='h-10 w-24 text-3xl text-white '>logo</div>
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>

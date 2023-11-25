@@ -19,13 +19,17 @@ export default function Page({ params }: { params: { slug: string } }) {
 
 
   useEffect(() => {
-    if (!socket) { 
+    
       const newSocket = io("http://localhost:5001");
       console.log(newSocket);
       
       setSocket(newSocket);
-    }
-  }, [socket]);
+    
+      return ()=>{
+        newSocket.disconnect()
+      }
+
+  }, []);
 
   console.log(socket);
   
@@ -122,29 +126,48 @@ export default function Page({ params }: { params: { slug: string } }) {
         {/* <p className='text-red-200'>pizza</p> */}
         <div className="flex items-center ">
         <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-        <p className="text-fuchsia-400 text-lg">pizza</p>
+        <p className="text-fuchsia-400 text-xl">pizza</p>
         <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
         </div>
 
         <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
 
 
-
-        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
-
+        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+          <div className='w-5/12 h-full bg-red-50'>
+          <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
+          </div>
+          <div className='w-8/12 px-2 h-full  pt-8'>
+          <p className='pb-3'>pizza peperoni</p>
+          <p className='pb-3 truncate'> <span>details:</span> meat cow 70% , red-potato</p>
+          <p className='pb-3'>14:5 $</p>
+          </div>
         </div>
 
-        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
-
+        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+          <div className='w-5/12 h-full bg-red-50'>
+          <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
+          </div>
+          <div className='w-8/12 px-2 h-full  pt-8'>
+          <p className='pb-3'>pizza peperoni</p>
+          <p className='pb-3 truncate'> <span>details:</span> meat cow 70% , red-potato</p>
+          <p className='pb-3'>14:5 $</p>
+          </div>
         </div>
 
-        <div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
+        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+          <div className='w-5/12 h-full bg-red-50'>
+          <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
+          </div>
+          <div className='w-8/12 px-2 h-full  pt-8'>
+          <p className='pb-3'>pizza peperoni</p>
+          <p className='pb-3 truncate'> <span>details:</span> meat cow 70% , red-potato</p>
+          <p className='pb-3'>14:5 $</p>
+          </div>
+        </div>
 
-</div>
 
-<div className='w-5/12 h-44 border border-fuchsia-400 rounded-lg'>
 
-</div>
 
 
 

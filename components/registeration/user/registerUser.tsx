@@ -66,7 +66,7 @@ const RegisterUser = () => {
   };
 
   return (
-    <div className="bg-sky-100 w-full  h-max ">
+    <div className="bg-sky-100 w-full  h-max pt-28">
       <div className="container px-4  h-max mx-auto">
         <form autoComplete="off" onSubmit={submitHandler}>
         <div className=" max-xs:w-11/12 w-9/12 sm:w-4/5 lg:w-3/5 xl:w-2/5 h-max mx-auto py-12 sm:pt-32">

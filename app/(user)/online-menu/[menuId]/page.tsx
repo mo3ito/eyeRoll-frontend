@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Pagination  } from 'swiper/modules';
 import { Socket } from 'socket.io-client';
 import io from "socket.io-client"
 import Searcher from '@/components/searcher/searcher';
@@ -15,6 +15,8 @@ import Searcher from '@/components/searcher/searcher';
 export default function Page({ params }: { params: { slug: string } }) {
   console.log(params);
   const [socket, setSocket] = useState<Socket | null>(null);
+  const swiperRef = useRef()
+  
   
 
 
@@ -32,6 +34,18 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, []);
 
   console.log(socket);
+  const prevSlideHandler = ()=>{
+    if(swiperRef.current && swiperRef.current.swiper){
+      swiperRef.current.swiper.slidePrev();
+    }
+    
+  }
+
+  const nextSlideHandler = ()=>{
+    if(swiperRef.current && swiperRef.current.swiper){
+      swiperRef.current.swiper.slideNext();
+    }
+  }
   
 
   return (
@@ -48,63 +62,57 @@ export default function Page({ params }: { params: { slug: string } }) {
         <button className='w-1/2 border-b border-fuchsia-400  py-2'>show information</button>
         </div>
 
-
-        {/* <div className='w-full h-max  px-6 flex flex-col space-y-1 py-2 '>
-        
-        <div className=''>
-        <svg className='w-8 h-8 fill-black/50 inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path></svg>
-        <p className='inline-block text-black/50 text-xl translate-y-0.5 ml-4 '>64</p>
-        </div>
-
-        <div className=''>
-        <svg className='w-8 h-8 fill-black/50 inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM13 12H17V14H11V7H13V12Z"></path></svg>
-        <p className='inline-block text-black/50 text-xl translate-y-0.5 ml-4 '>11:30 - 22:15</p>
-        </div>
-
-        <div className=''>
-        <svg className='w-8 h-8 fill-black/50 inline-block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 23.7279L5.63604 17.364C2.12132 13.8492 2.12132 8.15076 5.63604 4.63604C9.15076 1.12132 14.8492 1.12132 18.364 4.63604C21.8787 8.15076 21.8787 13.8492 18.364 17.364L12 23.7279ZM16.9497 15.9497C19.6834 13.2161 19.6834 8.78392 16.9497 6.05025C14.2161 3.31658 9.78392 3.31658 7.05025 6.05025C4.31658 8.78392 4.31658 13.2161 7.05025 15.9497L12 20.8995L16.9497 15.9497ZM12 13C10.8954 13 10 12.1046 10 11C10 9.89543 10.8954 9 12 9C13.1046 9 14 9.89543 14 11C14 12.1046 13.1046 13 12 13Z"></path></svg>
-        <p className='inline-block text-black/50 text-xl translate-y-0.5 ml-4 '>Arak ghdosi street</p>
-        </div>
-
-        
-        <div>
-       
-        </div>
-        </div> */}
         <div className='container mx-auto'>
 
-      
+        <div className='w-full h-12  bg-sky-50 flex mt-4 rounded-lg '>
+        <button onClick={prevSlideHandler} className='ml-2 mt-1 flex-shrink-0 mr-auto w-10 h-10 rounded-full bg-indigo-300 border border-fuchsia-400 flex items-center justify-center cursor-pointer'>
+        <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        </button>
+
+
+
+        <div className='w-11/12 h-full px-2 py-2'>
         <Swiper
-        className=" shadow-md h-12 flex items-center justify-center  mt-8 !px-6 !py-1 border border-purple-400"
+        ref={swiperRef}
+        className="  h-full  flex items-center justify-center"
         slidesPerView={8}
-        spaceBetween={30}
+        spaceBetween={10}
         pagination={{
           clickable: true,
         }}
       >
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
-        <SwiperSlide className=' bg-blue-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+        <SwiperSlide className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>hot sandwich</SwiperSlide>
+       
       </Swiper>
+        </div>
+
+
+        <button onClick={nextSlideHandler} className=' flex-shrink-0 mt-1 w-10 h-10 bg-indigo-300 border border-fuchsia-400 ml-auto mr-2 rounded-full  flex items-center justify-center cursor-pointer'>
+        <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg>
+        </button>
+
+       
+
+
+
+        </div>
+      
 
       {/* <Searcher items={} setAllItems={}/> */}
       <div className='  my-4   flex items-center h-10 gap-x-2'>
-        <div className='flex  px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
+        <div className='flex bg-sky-50 px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
         <svg className='w-5 h-5 mr-auto fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
         <input className='w-full bg-transparent outline-none pl-2 text-zinc-400' placeholder='search' type="text" />
         </div>
@@ -123,7 +131,6 @@ export default function Page({ params }: { params: { slug: string } }) {
 
       <div className='w-full bg-sky-50 rounded-lg h-screen px-4 py-2'>
 
-        {/* <p className='text-red-200'>pizza</p> */}
         <div className="flex items-center ">
         <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
         <p className="text-fuchsia-400 text-xl">pizza</p>
@@ -133,7 +140,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
 
 
-        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+        <div className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
           <div className='w-5/12 h-full bg-red-50'>
           <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
           </div>
@@ -144,7 +151,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+        <div className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
           <div className='w-5/12 h-full bg-red-50'>
           <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
           </div>
@@ -155,7 +162,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div className='w-[450px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-slate-100'>
+        <div className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
           <div className='w-5/12 h-full bg-red-50'>
           <img src="/images/pizza.jpg" className='w-full h-full object-cover' alt="" />
           </div>

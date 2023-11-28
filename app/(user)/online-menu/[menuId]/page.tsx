@@ -21,6 +21,12 @@ interface informationBusinessType {
   brand_name: string;
 }
 
+interface sortedProduct{
+  id: string;
+  group: string;
+  values: ProductType[]
+}
+
 
 
 export default function Page({ params }: { params: { menuId: string } }) {
@@ -30,10 +36,13 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [businessOwnerId , setBusinessOwnerId] = useState<string>("")
   const swiperRef = useRef< SwiperRef | null>(null)
   const queryClient = useQueryClient();
-  const [allProducts , setAllProducts]=useState([])
+  const [allProducts , setAllProducts]=useState<ProductType[]>([])
   const [productAssortments , setProductAssortments]=useState<AssortmentGrouptype[]>([])
   const [informationBusiness , setInformationBusiness]=useState<informationBusinessType | null>(null)
-  
+  const [sortedProduct , setSortedProduct]=useState<sortedProduct[]>([])
+  const [filteredProduct , setFilteredProduct]=useState<ProductType[]>([])
+  const [products , setProducts]=useState<ProductType[]>([])
+  const [groupName , setGroupName]=useState<string>("")
   
 
 
@@ -68,13 +77,13 @@ export default function Page({ params }: { params: { menuId: string } }) {
   );
 
 
-  console.log(data);
+  console.log(sortedProduct);
   
 
   useEffect(()=>{
-    if(allProducts){
+    if(products){
 
-      const assortments : string[] = allProducts.map((product : ProductType )=> product?.productAssortment)
+      const assortments : string[] = products.map((product : ProductType )=> product?.productAssortment)
     setTimeout(()=>{
       console.log(assortments);
     },1000)   
@@ -84,18 +93,15 @@ export default function Page({ params }: { params: { menuId: string } }) {
      const allAssortment : AssortmentGrouptype[] = allAssortmentArray.map(group=>({id:uuidv4() , group}))
       setProductAssortments(allAssortment)
     }
-  },[allProducts])
+  },[products])
   
   console.log(productAssortments);
 
 
-  
-
-
   useEffect(()=>{
     if(data?.data){
-     
       setAllProducts(data?.data?.products)
+      setProducts(data?.data?.products)
       setInformationBusiness(data?.data.informationBusiness)
 
     }
@@ -120,6 +126,81 @@ export default function Page({ params }: { params: { menuId: string } }) {
       swiperRef.current.swiper.slideNext();
     }
   }
+
+  useEffect(()=>{
+    if(allProducts && productAssortments ){
+      const groupedProducts = productAssortments.map(assortment => {
+        const productsInGroup = allProducts.filter((product : ProductType) => product.productAssortment === assortment.group);
+      
+        return {
+          id: assortment.id,
+          group: assortment.group,
+          values: productsInGroup,
+        };
+      });
+      
+     
+      const sortedGroupedProducts = groupedProducts.sort((a, b) => a.group.localeCompare(b.group));
+      setSortedProduct(sortedGroupedProducts)
+      
+    }
+  },[allProducts , productAssortments])
+
+
+const groupHandler = (groupName : string)=>{
+// setIsLoadingPage(true)  
+const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
+// setIsShowAssortment(false)
+setGroupName(groupName)
+setFilteredProduct(filteredGroup)
+// setIsLoadingPage(false)
+}
+
+console.log(groupName);
+console.log(filteredProduct);
+
+
+  
+
+
+  const mostExpensiveHandler = () => {
+    
+    if(!filteredProduct.length){
+      const mostExpensive = [...allProducts].sort((a, b) => {
+        return Number(b.productPrice ) - Number(a.productPrice) 
+      }
+      );
+    
+      setAllProducts(mostExpensive);
+    
+    }else{
+      const mostExpensive = [...filteredProduct].sort((a, b) => {
+        return Number(b.productPrice ) - Number(a.productPrice) 
+      }
+      );
+    
+      setFilteredProduct(mostExpensive);
+    }
+};
+
+const chipestHandler = ()=>{
+  if(!filteredProduct.length){
+    const cheapest = [...allProducts].sort((a, b) => {
+      return Number(a.productPrice ) - Number(b.productPrice) 
+    }
+    );
+    setAllProducts(cheapest);
+  }else{
+    const cheapest = [...filteredProduct].sort((a, b) => {
+      return Number(a.productPrice ) - Number(b.productPrice) 
+    }
+    );
+  
+    setFilteredProduct(cheapest);
+  }
+}
+
+  
   
   if(isLoading && !productAssortments.length && !allProducts.length){
     return <LoadingPage/>
@@ -160,7 +241,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
       >
 
         {productAssortments.map(productAssortment=>
-           <SwiperSlide  key={productAssortment.id} className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-32 !flex !items-center !justify-center'>{productAssortment.group}</SwiperSlide>
+           <SwiperSlide onClick={()=>groupHandler(productAssortment.group)}  key={productAssortment.id} className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max !px-2 !flex !items-center !justify-center'>{productAssortment.group}</SwiperSlide>
           )}
       </Swiper>
         </div>
@@ -181,46 +262,69 @@ export default function Page({ params }: { params: { menuId: string } }) {
         <p className='pl-2'>filter</p>
 
          <div className='ml-4'>
-         <button className='border-b-2 border-fuchsia-700 px-2 '>cheapest</button>
-        <button className='border-b border-fuchsia-400 px-2'>most expensive</button>
+         <button onClick={chipestHandler} className='border-b-2 border-fuchsia-700 px-2 '>cheapest</button>
+        <button onClick={mostExpensiveHandler} className='border-b border-fuchsia-400 px-2'>most expensive</button>
          </div>
       
         </div>
       
       </div>
 
-      <div className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
 
-        <div className="flex items-center  px-3 ">
+        
+        { !filteredProduct.length ? sortedProduct.map(item=>
+           <div key={item.id} className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
+
+           <div className="flex items-center  px-3 ">
+           <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
+           <p className="text-fuchsia-400 text-xl">{item.group}</p>
+           <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
+           </div>
+   
+           <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
+   
+           {item.values.map((product : ProductType) =>
+               <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
+               <div className='w-5/12 h-full bg-red-50'>
+               <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
+               </div>
+               <div className='w-8/12 px-2 h-full  pt-8'>
+               <p className='pb-3'>{product?.productName}</p>
+               <p className='pb-3 truncate'> <span>details: </span>{product?.productDescription}</p>
+               <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
+               </div>
+             </div>
+             )}
+
+           </div>
+         </div>
+          ) : 
+          <div className='w-full h-max bg-sky-50 mb-3 rounded-lg p-2 '>
+        <div className="flex items-center  pb-4 pt-2 px-1 ">
         <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-        <p className="text-fuchsia-400 text-xl">pizza</p>
-        <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
+        <p className="text-fuchsia-400 text-xl">{groupName}</p>
+       <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
+       </div>
+
+        <div className='w-full h-max flex flex-wrap  justify-around gap-y-3 items-center  pb-5  '>
+        { filteredProduct.map((item : ProductType) =>
+            
+            <div key={item._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
+        <div className='w-5/12 h-full bg-red-50'>
+        <img src={item.product_image_path} className='w-full h-full object-cover' alt="" />
         </div>
-
-        <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
-
-        {allProducts.map((product : ProductType) =>
-            <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
-            <div className='w-5/12 h-full bg-red-50'>
-            <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
-            </div>
-            <div className='w-8/12 px-2 h-full  pt-8'>
-            <p className='pb-3'>{product?.productName}</p>
-            <p className='pb-3 truncate'> <span>details: </span>{product?.productDescription}</p>
-            <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
-            </div>
-          </div>
-          )}
-      
-
-     
-     
-
-     
-
+        <div className='w-8/12 px-2 h-full  pt-8'>
+        <p className='pb-3'>{item?.productName}</p>
+        <p className='pb-3 truncate'> <span>details: </span>{item?.productDescription}</p>
+        <p className='pb-3'>{item.productPrice}{item.productPricePetty && `.${item.productPricePetty}`} $ </p>
         </div>
-
       </div>
+        
+        )}
+        </div>
+        </div>
+          }
+     
       </> :
 
         <div className='w-full h-max  '>

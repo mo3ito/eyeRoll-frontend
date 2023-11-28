@@ -30,6 +30,9 @@ export const AuthContext = createContext<AuthContextProps>({
       username: "",
       postal_code: "",
       work_phone: "",
+      work_place_image_path:"",
+      logo_image_path:"",
+      profile_image_path:""
   },
     login : ()=>{},
     logout : ()=>{},
@@ -52,6 +55,8 @@ export const AuthContext = createContext<AuthContextProps>({
 
 
     const login = useCallback(async(infos: object, newToken: string) => {
+      console.log(infos);
+      
        await setToken(newToken);
         await Cookies.set("eyeRollToken", newToken);
         setInfos(infos);

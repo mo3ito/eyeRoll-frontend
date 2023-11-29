@@ -11,7 +11,7 @@ export default function ContainerFilterMenu({groupName , filteredProduct }) {
    </div>
 
     <div className='w-full h-max flex flex-wrap  justify-around gap-y-3 items-center  pb-5  '>
-    { filteredProduct.map((item : ProductType) =>
+    { filteredProduct.length ? filteredProduct.map((item : ProductType) =>
         
         <div key={item._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
     <div className='w-5/12 h-full bg-red-50'>
@@ -24,7 +24,7 @@ export default function ContainerFilterMenu({groupName , filteredProduct }) {
     </div>
   </div>
     
-    )}
+    ): <p className='  text-lg'>there is no product</p>}
     </div>
     </div>
   )

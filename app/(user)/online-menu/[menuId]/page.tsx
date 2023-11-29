@@ -154,15 +154,18 @@ export default function Page({ params }: { params: { menuId: string } }) {
   },[allProducts , productAssortments])
 
 
-const groupHandler = (groupName : string)=>{
-// setIsLoadingPage(true)  
-const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
+const groupHandler = async (groupName : string)=>{
+// setIsLoadingPage(true)
+ await setInputSearchValue("") 
+ await setIsFilteredSearch(false) 
+  const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
 // setIsShowAssortment(false)
 setIsGroupActive(true)
 setGroupName(groupName)
 setFilteredProduct(filteredGroup)
 // setIsLoadingPage(false)
 }
+
 
 console.log(groupName);
 console.log(filteredProduct);
@@ -239,8 +242,20 @@ useEffect(() => {
 
 
  const clearSearchHandler = ()=>{
-
+  setInputSearchValue("")
  }
+
+  const defaultHandler = ()=>{
+    if(filteredProduct.length>0){
+      setFilteredProduct([])
+      setIsGroupActive(false)
+      setAllProducts(data?.data?.products)
+      
+    }
+    
+      // setProducts(data?.data?.products)
+  }
+  
   
   
   if(isLoading && !productAssortments.length && !allProducts){
@@ -314,6 +329,7 @@ useEffect(() => {
         <p className='pl-2'>filter</p>
 
          <div className='ml-4'>
+         <button onClick={defaultHandler} className='border-b-2 border-fuchsia-700 px-2 '>default</button>
          <button onClick={chipestHandler} className='border-b-2 border-fuchsia-700 px-2 '>cheapest</button>
         <button onClick={mostExpensiveHandler} className='border-b border-fuchsia-400 px-2'>most expensive</button>
          </div>
@@ -340,7 +356,7 @@ useEffect(() => {
 
 <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
 
-{allProducts.map((product : ProductType) =>
+{ allProducts.length ? allProducts.map((product : ProductType) =>
     <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
     <div className='w-5/12 h-full bg-red-50'>
     <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
@@ -351,7 +367,7 @@ useEffect(() => {
     <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
     </div>
   </div>
-  )}
+  ) : <p className='  -translate-y-5 text-lg'>there is no product</p>}
 
 </div>
 </div>

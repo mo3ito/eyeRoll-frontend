@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState , useEffect } from 'react';
+import React, { useRef, useState , useEffect , useCallback , ChangeEvent } from 'react';
 import { Swiper, SwiperSlide , SwiperRef } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -11,6 +11,10 @@ import getterWithAuthId from '@/services/getterWithAuthId';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductType , AssortmentGrouptype  } from '@/types/onlineMenuUser/onlineMenuUser';
 import LoadingPage from '@/components/loading/loadingPage';
+import InputDefault from '@/components/shared/inputs/inputDefault';
+import Searcher from '@/components/searcher/searcher';
+import ContainerOnlineMenu from '@/components/online-menu/containerOnlineMenu';
+import ContainerFilterMenu from '@/components/online-menu/containerFilterMenu';
 
 interface informationBusinessType {
   logo_image : string;
@@ -43,6 +47,9 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [filteredProduct , setFilteredProduct]=useState<ProductType[]>([])
   const [products , setProducts]=useState<ProductType[]>([])
   const [groupName , setGroupName]=useState<string>("")
+  const [inputSearchValue , setInputSearchValue]=useState<string>("")
+  const [isGroupActive , setIsGroupActive]=useState<boolean>(false)
+  const [isFilteredSearch , setIsFilteredSearch]=useState<boolean>(false)
   
 
 
@@ -139,7 +146,6 @@ export default function Page({ params }: { params: { menuId: string } }) {
         };
       });
       
-     
       const sortedGroupedProducts = groupedProducts.sort((a, b) => a.group.localeCompare(b.group));
       setSortedProduct(sortedGroupedProducts)
       
@@ -151,6 +157,7 @@ const groupHandler = (groupName : string)=>{
 // setIsLoadingPage(true)  
 const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
 // setIsShowAssortment(false)
+setIsGroupActive(true)
 setGroupName(groupName)
 setFilteredProduct(filteredGroup)
 // setIsLoadingPage(false)
@@ -161,8 +168,6 @@ console.log(filteredProduct);
 
 
   
-
-
   const mostExpensiveHandler = () => {
     
     if(!filteredProduct.length){
@@ -200,9 +205,44 @@ const chipestHandler = ()=>{
   }
 }
 
+const inputSearchValueHandler =useCallback((event : ChangeEvent<HTMLInputElement>)=>{
+  setInputSearchValue(event.target.value)
+}
+,[]) 
+
+
+useEffect(() => {
+  if (inputSearchValue && data && !isGroupActive) {
+    const searchedValue = data?.data?.products.filter((product : ProductType) =>
+      product.productName.startsWith(inputSearchValue)
+    );
+    setAllProducts(searchedValue);
+    setIsFilteredSearch(true)
+  } else if (!isGroupActive) {
+    setAllProducts(data?.data?.products);
+    setIsFilteredSearch(false)
+  }
+}, [inputSearchValue, data, isGroupActive]);
+
+useEffect(() => {
+  if (isGroupActive && inputSearchValue && data && allProducts && !isFilteredSearch && groupName) {
+    setIsFilteredSearch(false);
+    const searchedValue = allProducts.filter((product : ProductType) =>
+      product.productAssortment === groupName && product.productName.startsWith(inputSearchValue)
+    );
+    setFilteredProduct(searchedValue);
+  } else if (isGroupActive) {
+    setFilteredProduct(allProducts ? allProducts.filter((product : ProductType) => product.productAssortment === groupName ) : [])
+  }
+}, [inputSearchValue, data, isGroupActive, allProducts, isFilteredSearch, groupName]);
+
+
+ const clearSearchHandler = ()=>{
+
+ }
   
   
-  if(isLoading && !productAssortments.length && !allProducts.length){
+  if(isLoading && !productAssortments.length && !allProducts){
     return <LoadingPage/>
   }
 
@@ -253,9 +293,20 @@ const chipestHandler = ()=>{
         </div>
 
       <div className='  my-4   flex items-center h-10 gap-x-2'>
-        <div className='flex bg-sky-50 px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
+        {/* <div className='flex bg-sky-50 px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
         <svg className='w-5 h-5 mr-auto fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
         <input className='w-full bg-transparent outline-none pl-2 text-zinc-400' placeholder='search' type="text" />
+        </div> */}
+        <div className="flex flex-col h-max gap-y-10 items-center w-full container   md:mb-0  py-2 top-32 sticky mx-auto bg-sky-100   ">
+      <div className='w-full  h-max '>
+  <div className=' flex flex-col gap-y-2 sm:gap-y-0 sm:flex-row '>
+        <div className=' w-full sm:w-1/2 md:w-5/12 lg:w-4/12 xl:w-3/12  2xl:w-3/12  border-2 border-fuchsia-300 rounded-lg h-10   flex items-center '>
+        <svg className='w-4 h-4 inline-block mx-1 fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
+          <InputDefault type='text' value={inputSearchValue} onChange={inputSearchValueHandler} placeholder='search product name' className=' text-sm sm:text-base h-full w-11/12  pr-2 outline-none  bg-transparent ' />
+        </div>
+        <button onClick={clearSearchHandler} className=' sm:ml-3 px-4 rounded-lg text-sm sm:text-base h-10 bg-fuchsia-300'>clear search</button>
+        </div> 
+        </div>
         </div>
         <div className='w-1/3 ml-auto   h-full flex items-center px-2 '>
         <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3L23 8H20V20H18V8H15L19 3ZM14 18V20H3V18H14ZM14 11V13H3V11H14ZM12 4V6H3V4H12Z"></path></svg>
@@ -271,59 +322,41 @@ const chipestHandler = ()=>{
       </div>
 
 
-        
-        { !filteredProduct.length ? sortedProduct.map(item=>
-           <div key={item.id} className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
-
-           <div className="flex items-center  px-3 ">
-           <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-           <p className="text-fuchsia-400 text-xl">{item.group}</p>
-           <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-           </div>
-   
-           <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
-   
-           {item.values.map((product : ProductType) =>
-               <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
-               <div className='w-5/12 h-full bg-red-50'>
-               <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
-               </div>
-               <div className='w-8/12 px-2 h-full  pt-8'>
-               <p className='pb-3'>{product?.productName}</p>
-               <p className='pb-3 truncate'> <span>details: </span>{product?.productDescription}</p>
-               <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
-               </div>
-             </div>
-             )}
-
-           </div>
-         </div>
-          ) : 
-          <div className='w-full h-max bg-sky-50 mb-3 rounded-lg p-2 '>
-        <div className="flex items-center  pb-4 pt-2 px-1 ">
-        <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-        <p className="text-fuchsia-400 text-xl">{groupName}</p>
-       <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-       </div>
-
-        <div className='w-full h-max flex flex-wrap  justify-around gap-y-3 items-center  pb-5  '>
-        { filteredProduct.map((item : ProductType) =>
-            
-            <div key={item._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
-        <div className='w-5/12 h-full bg-red-50'>
-        <img src={item.product_image_path} className='w-full h-full object-cover' alt="" />
-        </div>
-        <div className='w-8/12 px-2 h-full  pt-8'>
-        <p className='pb-3'>{item?.productName}</p>
-        <p className='pb-3 truncate'> <span>details: </span>{item?.productDescription}</p>
-        <p className='pb-3'>{item.productPrice}{item.productPricePetty && `.${item.productPricePetty}`} $ </p>
-        </div>
-      </div>
-        
-        )}
-        </div>
-        </div>
+        { !isFilteredSearch ? <>
+        { !isGroupActive ? 
+      <ContainerOnlineMenu sortedProduct={sortedProduct}/> :
+      <ContainerFilterMenu groupName={groupName} filteredProduct={filteredProduct} /> 
+     
           }
+          </> :   
+          <div  className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
+
+<div className="flex items-center  px-3 ">
+<hr className="flex-grow border-t border-fuchsia-400 mr-4" />
+<p className="text-fuchsia-400 text-xl">search results</p>
+<hr className="flex-grow border-t border-fuchsia-400 ml-4" />
+</div>
+
+<div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
+
+{allProducts.map((product : ProductType) =>
+    <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
+    <div className='w-5/12 h-full bg-red-50'>
+    <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
+    </div>
+    <div className='w-8/12 px-2 h-full  pt-8'>
+    <p className='pb-3'>{product?.productName}</p>
+    <p className='pb-3 truncate'> <span>details: </span>{product?.productDescription}</p>
+    <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
+    </div>
+  </div>
+  )}
+
+</div>
+</div>
+
+
+}
      
       </> :
 

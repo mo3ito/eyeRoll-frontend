@@ -1,7 +1,12 @@
 import React from 'react'
 import { ProductType } from '@/types/onlineMenuUser/onlineMenuUser'
 
-export default function ContainerFilterMenu({groupName , filteredProduct }) {
+interface ContainerFilterMenuProps {
+  groupName:string;
+  filteredProduct:ProductType[];
+}
+
+export default function ContainerFilterMenu({groupName , filteredProduct }:ContainerFilterMenuProps) {
   return (
     <div className='w-full h-max bg-sky-50 mb-3 rounded-lg p-2 '>
     <div className="flex items-center  pb-4 pt-2 px-1 ">

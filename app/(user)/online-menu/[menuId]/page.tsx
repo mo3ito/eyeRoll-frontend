@@ -158,7 +158,7 @@ const groupHandler = async (groupName : string)=>{
 // setIsLoadingPage(true)
  await setInputSearchValue("") 
  await setIsFilteredSearch(false) 
-  const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
+ const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
 // setIsShowAssortment(false)
 setIsGroupActive(true)
 setGroupName(groupName)
@@ -251,9 +251,11 @@ useEffect(() => {
       setIsGroupActive(false)
       setAllProducts(data?.data?.products)
       
+    } else{
+      setAllProducts(data?.data?.products)
     }
     
-      // setProducts(data?.data?.products)
+
   }
   
   

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProductType } from '@/types/onlineMenuUser/onlineMenuUser'
+import HeaderMenu from './headerMenu';
 
 
   
@@ -17,15 +18,9 @@ export default function ContainerOnlineMenu({sortedProduct = []}: ContainerOnlin
   return (
     <>
  {sortedProduct.map((item : sortedProduct) =>
-           <div key={item.id} className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
-
-           <div className="flex items-center  px-3 ">
-           <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-           <p className="text-fuchsia-400 text-xl">{item.group}</p>
-           <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-           </div>
-   
-           <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
+           <div key={item.id} className='w-full bg-sky-50 rounded-lg h-max mb-2 px-4 pb-6 pt-2 border border-fuchsia-400'>
+           <HeaderMenu content={item.group}/>
+           <div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-4'>
    
            {item.values.map((product : ProductType) =>
                <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>

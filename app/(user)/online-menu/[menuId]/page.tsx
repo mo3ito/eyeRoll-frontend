@@ -90,12 +90,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
 
   useEffect(()=>{
     if(products){
-
       const assortments : string[] = products.map((product : ProductType )=> product?.productAssortment)
-    setTimeout(()=>{
-      console.log(assortments);
-    },1000)   
-      
       const allAssortmentSeted = new Set(assortments)
       const allAssortmentArray = Array.from(allAssortmentSeted)
      const allAssortment : AssortmentGrouptype[] = allAssortmentArray.map(group=>({id:uuidv4() , group}))
@@ -245,17 +240,15 @@ useEffect(() => {
   setInputSearchValue("")
  }
 
-  const defaultHandler = ()=>{
+  const defaultHandler = async ()=>{
     if(filteredProduct.length>0){
-      setFilteredProduct([])
-      setIsGroupActive(false)
-      setAllProducts(data?.data?.products)
-      
+    await  setInputSearchValue("")
+     await setFilteredProduct([])
+     await setIsGroupActive(false)
+     await setAllProducts(data?.data?.products)
     } else{
       setAllProducts(data?.data?.products)
     }
-    
-
   }
   
   
@@ -265,7 +258,7 @@ useEffect(() => {
   }
 
   return (
-    <div className='w-full h-max pt-24'>
+    <div className='w-full h-max pt-24 pb-6'>
         <div className='w-full h-44 bg-black/30 '>
             <img className='w-full h-full object-cover' src={informationBusiness?.work_place_image} alt="" />
             <div className='w-24 h-24 rounded-full  bg-sky-100 -translate-y-12 mx-auto shadow-md '>
@@ -311,10 +304,6 @@ useEffect(() => {
         </div>
 
       <div className='  my-4   flex items-center h-10 gap-x-2'>
-        {/* <div className='flex bg-sky-50 px-2 items-center border border-fuchsia-400 rounded-lg w-2/3 h-full'>
-        <svg className='w-5 h-5 mr-auto fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-        <input className='w-full bg-transparent outline-none pl-2 text-zinc-400' placeholder='search' type="text" />
-        </div> */}
         <div className="flex flex-col h-max gap-y-10 items-center w-full container   md:mb-0  py-2 top-32 sticky mx-auto bg-sky-100   ">
       <div className='w-full  h-max '>
   <div className=' flex flex-col gap-y-2 sm:gap-y-0 sm:flex-row '>
@@ -345,40 +334,11 @@ useEffect(() => {
         { !isGroupActive ? 
       <ContainerOnlineMenu sortedProduct={sortedProduct}/> :
       <ContainerFilterMenu groupName={groupName} filteredProduct={filteredProduct} /> 
-     
           }
           </> :   
-          <div  className='w-full bg-sky-50 rounded-lg h-max mb-10 px-4 py-2 '>
-
-<div className="flex items-center  px-3 ">
-<hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-<p className="text-fuchsia-400 text-xl">search results</p>
-<hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-</div>
-
-<div className='w-full  h-max flex justify-around flex-wrap gap-y-8 pt-12'>
-
-{ allProducts.length ? allProducts.map((product : ProductType) =>
-    <div key={product._id} className='w-[480px] h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-100'>
-    <div className='w-5/12 h-full bg-red-50'>
-    <img src={product.product_image_path} className='w-full h-full object-cover' alt="" />
-    </div>
-    <div className='w-8/12 px-2 h-full  pt-8'>
-    <p className='pb-3'>{product?.productName}</p>
-    <p className='pb-3 truncate'> <span>details: </span>{product?.productDescription}</p>
-    <p className='pb-3'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`} $ </p>
-    </div>
-  </div>
-  ) : <p className='  -translate-y-5 text-lg'>there is no product</p>}
-
-</div>
-</div>
-
-}
-     
+      <ContainerFilterMenu groupName='search result' filteredProduct={allProducts} />
+        }
       </> :
-
-       
         <InfoBusinesOnlineMenu informationBusiness={informationBusiness}/>
         }
 

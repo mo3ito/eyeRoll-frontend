@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProductType } from '@/types/onlineMenuUser/onlineMenuUser'
+import HeaderMenu from './headerMenu';
 
 interface ContainerFilterMenuProps {
   groupName:string;
@@ -8,12 +9,13 @@ interface ContainerFilterMenuProps {
 
 export default function ContainerFilterMenu({groupName , filteredProduct }:ContainerFilterMenuProps) {
   return (
-    <div className='w-full h-max bg-sky-50 mb-3 rounded-lg p-2 '>
-    <div className="flex items-center  pb-4 pt-2 px-1 ">
+    <div className='w-full h-max bg-sky-50 mb-3 rounded-lg pt-2 pb-6 border border-fuchsia-400'>
+    {/* <div className="flex items-center  pb-4 pt-2 px-1 ">
     <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
     <p className="text-fuchsia-400 text-xl">{groupName}</p>
    <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-   </div>
+   </div> */}
+   <HeaderMenu content={groupName} />
 
     <div className='w-full h-max flex flex-wrap  justify-around gap-y-3 items-center  pb-5  '>
     { filteredProduct.length ? filteredProduct.map((item : ProductType) =>

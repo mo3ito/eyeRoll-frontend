@@ -17,6 +17,7 @@ import ContainerFilterMenu from '@/components/online-menu/containerFilterMenu';
 import InfoBusinesOnlineMenu from '@/components/online-menu/infoBusinesOnlineMenu';
 import { ProductDetailsType } from '@/types/onlineMenuUser/onlineMenuUser';
 import ShowDetailsOnlineMenu from '@/components/online-menu/showDetailsOnlineMenu';
+import FilteringSection from '@/components/online-menu/filteringSection';
 
 interface informationBusinessType {
   logo_image : string;
@@ -262,8 +263,10 @@ useEffect(() => {
      await setIsGroupActive(false)
      await setAllProducts(data?.data?.products)
     } else{
+
       await setIsShowFilterClick(false)
       await setShowFilterCondition("default")
+      await setIsFilteredSearch(false)
       setAllProducts(data?.data?.products)
     }
   }
@@ -284,7 +287,7 @@ useEffect(() => {
             </div>
             <p className='text-center  -translate-y-12 p-2 text-2xl'>{informationBusiness?.brand_name}</p>
         </div>
-        <div className='w-full h-max mt-24 text-lg font-semibold container mx-auto'>
+        <div className='w-full h-max mt-24 text-lg font-semibold container mx-auto px-3'>
         <button onClick={()=>setIsShowMenu(true)} className={`${isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show menu</button>
         <button onClick={()=>setIsShowMenu(false)} className={`${!isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show information</button>
         </div>
@@ -321,47 +324,16 @@ useEffect(() => {
         </button>
         </div>
 
-      <div className='  my-4   flex items-center h-10 gap-x-2'>
-        <div className="flex flex-col h-max gap-y-10 items-center w-full container   md:mb-0  py-2 top-32 sticky mx-auto bg-sky-100   ">
-          
-         <div className=' w-full flex items-center justify-center'>
-         <div className=' w-full  border-2 border-fuchsia-300 rounded-lg h-10   flex items-center  '>
-        <svg className='w-4 h-4 inline-block mx-1 fill-zinc-400' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-          <InputDefault type='text' value={inputSearchValue} onChange={inputSearchValueHandler} placeholder='search product name' className=' text-sm sm:text-base h-full w-11/12  pr-2 outline-none  bg-transparent ' />
-        </div>
-        <button onClick={clearSearchHandler} className=' sm:ml-3 px-4 rounded-lg text-sm sm:text-base h-10 w-36 bg-fuchsia-300 ml-auto'>clear search</button>
-        </div> 
-          </div> 
-      
-      
-        {/* <div className='w-1/3 ml-auto   h-full flex items-center px-2 bg-red-200'>
-        <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3L23 8H20V20H18V8H15L19 3ZM14 18V20H3V18H14ZM14 11V13H3V11H14ZM12 4V6H3V4H12Z"></path></svg>
-        <p className='pl-2'>filter</p>
-
-         <div className='ml-4'>
-         <button onClick={defaultHandler} className='border-b-2 border-fuchsia-700 px-2 '>default</button>
-         <button onClick={chipestHandler} className='border-b-2 border-fuchsia-700 px-2 '>cheapest</button>
-        <button onClick={mostExpensiveHandler} className='border-b border-fuchsia-400 px-2'>most expensive</button>
-         </div>
-      
-        </div> */}
-        <div className='relative w-1/3 h-full '>
-        <div onClick={()=>setIsShowFilterClick(prev=> !prev)} className='  h-full ml-auto bg-sky-50 rounded-lg flex items-center justify-between px-2 cursor-pointer'>
-        <p>filter : {showFilterCondition}</p>
-        { isShowFilterClick ? <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>
-       : <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path></svg>}
-        </div>
-        <ul className={`${isShowFilterClick ? 'absolute' : 'hidden' } w-full border border-fuchsia-400 h-max bg-sky-100 rounded-lg p-1`}>
-        <li onClick={defaultHandler} className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>default</li>
-        <li onClick={cheapestHandler}  className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>cheapest</li>
-        <li onClick={mostExpensiveHandler} className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>most expensive</li>
-        
-        </ul>
-
-        </div>
-      
-      
-      </div>
+      <FilteringSection
+      inputSearchValue={inputSearchValue}
+      inputSearchValueHandler={inputSearchValueHandler}
+      clearSearchHandler={clearSearchHandler}
+      setIsShowFilterClick={setIsShowFilterClick}
+      isShowFilterClick={isShowFilterClick}
+      showFilterCondition={showFilterCondition}
+      defaultHandler={defaultHandler}
+      cheapestHandler={cheapestHandler}
+      mostExpensiveHandler={mostExpensiveHandler}/>
 
 
         { !isFilteredSearch ? <>

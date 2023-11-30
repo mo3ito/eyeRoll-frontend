@@ -16,6 +16,8 @@ import Searcher from '@/components/searcher/searcher';
 import ContainerOnlineMenu from '@/components/online-menu/containerOnlineMenu';
 import ContainerFilterMenu from '@/components/online-menu/containerFilterMenu';
 import InfoBusinesOnlineMenu from '@/components/online-menu/infoBusinesOnlineMenu';
+import ModalDefault from '@/components/modal/modalDefault';
+import { ProductDetails } from '@/types/onlineMenuUser/onlineMenuUser';
 
 interface informationBusinessType {
   logo_image : string;
@@ -51,6 +53,8 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [inputSearchValue , setInputSearchValue]=useState<string>("")
   const [isGroupActive , setIsGroupActive]=useState<boolean>(false)
   const [isFilteredSearch , setIsFilteredSearch]=useState<boolean>(false)
+  const [isShowProduct , setIsShowProduct]=useState<boolean>(false)
+  const [productDetails , setProductDetails]=useState<ProductDetails | null>(null)
   
 
 
@@ -253,12 +257,13 @@ useEffect(() => {
   
   
   
-  if(isLoading && !productAssortments.length && !allProducts){
+  if(isLoading){
     return <LoadingPage/>
   }
 
   return (
-    <div className='w-full h-max pt-24 pb-6'>
+    <>
+    { allProducts && productAssortments.length>0 && allProducts.length>0 ? <div className='w-full h-max pt-24 pb-6'>
         <div className='w-full h-44 bg-black/30 '>
             <img className='w-full h-full object-cover' src={informationBusiness?.work_place_image} alt="" />
             <div className='w-24 h-24 rounded-full  bg-sky-100 -translate-y-12 mx-auto shadow-md '>
@@ -332,7 +337,7 @@ useEffect(() => {
 
         { !isFilteredSearch ? <>
         { !isGroupActive ? 
-      <ContainerOnlineMenu sortedProduct={sortedProduct}/> :
+      <ContainerOnlineMenu setIsShowProduct={setIsShowProduct} setProductDetails={setProductDetails} sortedProduct={sortedProduct}/> :
       <ContainerFilterMenu groupName={groupName} filteredProduct={filteredProduct} /> 
           }
           </> :   
@@ -343,7 +348,31 @@ useEffect(() => {
         }
 
       </div>
+      <ModalDefault
+        closeIconClassName="w-8 h-8 fill-red-400"
+        isShowModal={isShowProduct}
+        setIsShowModal={setIsShowProduct}
+      >
+       <div className='w-full h-max p-2  sm:text-lg'>
+        <p className='text-center mb-4 pt-2  text-fuchsia-400 font-semibold'>Product Specifications</p>
+        <img className='bg-red-200 w-full h-64 object-cover ' src={productDetails?.productImage ? productDetails?.productImage : "/images/default-product.jpg"} alt="" />
+        <div className=' mt-2 text-fuchsia-400 font-semibold'>
+        <p >{productDetails?.producName}</p>
+        <p className='text-red-400'>{productDetails?.productPrice}.{productDetails?.productPricePetty ? productDetails?.productPricePetty : null } $</p>
+        </div >
+        <div className=''>
+          <p className='text-center text-red-400 '>details</p>
+          <div className='w-full h-44 shadow-lg border overflow-y-auto p-2 break-words text-zinc-600'>
+          {productDetails?.productDescription}
+          </div>
+        </div>
+        
+
+
+       </div>
+      </ModalDefault>
        
-    </div>
+    </div> : <LoadingPage/>}
+    </>
   )
 }

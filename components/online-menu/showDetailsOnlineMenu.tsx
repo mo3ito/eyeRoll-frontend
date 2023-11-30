@@ -21,7 +21,7 @@ export default function ShowDetailsOnlineMenu({isShowProduct , setIsShowProduct 
     <img className='bg-red-200 w-full h-64 object-cover hover:scale-105 hover:duration-500' src={productDetails?.productImage ? productDetails?.productImage : "/images/default-product.jpg"} alt="" />
     <div className=' mt-2 text-fuchsia-400 font-semibold'>
     <p className='w-full h-max max-h-[96px]  overflow-y-auto border-b ' > <span className='text-black'>name:</span> {productDetails?.producName}</p>
-    <p className='text-red-400 border-b'> <span className='text-black '>price:</span> {productDetails?.productPrice}.{productDetails?.productPricePetty ? productDetails?.productPricePetty : null } $</p>
+    <p className='text-red-400 border-b'> <span className='text-black '>price:</span> {productDetails?.productPrice}{productDetails?.productPricePetty &&`.${productDetails?.productPricePetty}`} $</p>
     </div >
     <div className=''>
       <p className='text-center text-red-400 font-semibold'>details:</p>

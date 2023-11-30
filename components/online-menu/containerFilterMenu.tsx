@@ -1,20 +1,24 @@
 import React from 'react'
-import { ProductType } from '@/types/onlineMenuUser/onlineMenuUser'
+import { ProductType , ContainerFilterMenuProps } from '@/types/onlineMenuUser/onlineMenuUser'
 import HeaderMenu from './headerMenu';
 
-interface ContainerFilterMenuProps {
-  groupName:string;
-  filteredProduct:ProductType[];
-}
 
-export default function ContainerFilterMenu({groupName , filteredProduct }:ContainerFilterMenuProps) {
+
+export default function ContainerFilterMenu({groupName , filteredProduct , setIsShowProduct , setProductDetails }:ContainerFilterMenuProps) {
+  const detailsHandler = (producName: string , productImage: string , productPrice: string , productPricePetty: string , productDescription:string )=>{
+    setIsShowProduct(true)
+    setProductDetails({
+      producName,
+      productImage,
+      productPrice,
+      productPricePetty,
+      productDescription
+    })
+  }
+
   return (
     <div className='w-full h-max bg-sky-50 mb-3 rounded-lg pt-2 pb-6 border border-fuchsia-400'>
-    {/* <div className="flex items-center  pb-4 pt-2 px-1 ">
-    <hr className="flex-grow border-t border-fuchsia-400 mr-4" />
-    <p className="text-fuchsia-400 text-xl">{groupName}</p>
-   <hr className="flex-grow border-t border-fuchsia-400 ml-4" />
-   </div> */}
+   
    <HeaderMenu content={groupName} />
 
     <div className='w-full h-max flex flex-wrap  justify-around gap-y-3 items-center  pb-5  '>
@@ -26,7 +30,7 @@ export default function ContainerFilterMenu({groupName , filteredProduct }:Conta
     </div>
     <div className='w-8/12 px-2 h-full  pt-8'>
     <p className='pb-3'>{item?.productName}</p>
-    <p className='pb-3 truncate'> <span>details: </span>{item?.productDescription}</p>
+    <button onClick={()=>detailsHandler(item.productName , item.product_image_path , item.productPrice , item.productPricePetty , item.productDescription )} className='pb-3 truncate opacity-40 hover:underline'> <span>details: </span>{item?.productDescription}</button>
     <p className='pb-3'>{item.productPrice}{item.productPricePetty && `.${item.productPricePetty}`} $ </p>
     </div>
   </div>

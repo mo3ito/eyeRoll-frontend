@@ -16,7 +16,7 @@ export  interface AssortmentGrouptype {
     group: string;
   }
 
- export interface ProductDetails{
+ export interface ProductDetailsType{
     producName:string;
     productImage:string;
     productPrice:string;
@@ -31,8 +31,17 @@ export  interface AssortmentGrouptype {
       values: ProductType[]
     }
   export  interface ContainerOnlineMenuProps {
-    setProductDetails: Dispatch<SetStateAction< ProductDetails | null>>
+    setProductDetails: Dispatch<SetStateAction< ProductDetailsType | null>>
       setIsShowProduct:Dispatch<SetStateAction<boolean>>;
       sortedProduct?: sortedProduct[];
     }
+
+   export interface ContainerFilterMenuProps {
+      groupName:string;
+      filteredProduct:ProductType[];
+      setIsShowProduct:Dispatch<SetStateAction<boolean>>;
+      setProductDetails: Dispatch<SetStateAction< ProductDetailsType | null>>
+    }
+
+    
   

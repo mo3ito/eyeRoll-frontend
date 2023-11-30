@@ -281,9 +281,9 @@ useEffect(() => {
     <>
    <div className='w-full h-max pt-24 pb-6'>
         <div className='w-full h-44 bg-black/30 '>
-            <img className='w-full h-full object-cover' src={informationBusiness?.work_place_image} alt="" />
+            <img className='w-full h-full object-cover hover:scale-105 hover:duration-500' src={informationBusiness?.work_place_image} alt="" />
             <div className='w-24 h-24 rounded-full  bg-sky-100 -translate-y-12 mx-auto shadow-md '>
-                 <img src={informationBusiness?.logo_image} className='text-center object-cover w-full h-full rounded-full text-2xl'></img>
+                 <img src={informationBusiness?.logo_image} className='text-center object-cover w-full h-full rounded-full hover:scale-105 hover:duration-500 text-2xl'></img>
             </div>
             <p className='text-center  -translate-y-12 p-2 text-2xl'>{informationBusiness?.brand_name}</p>
         </div>

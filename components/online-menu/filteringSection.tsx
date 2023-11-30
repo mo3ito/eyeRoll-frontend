@@ -15,8 +15,8 @@ export default function FilteringSection({inputSearchValue , inputSearchValueHan
     </div> 
       </div> 
   
-    <div className='relative w-full h-10 lg:w-1/3 lg:h-full border border-fuchsia-400 rounded-lg '>
-    <div onClick={()=>setIsShowFilterClick(prev=> !prev)} className='  h-full ml-auto bg-sky-50 rounded-lg flex items-center justify-between px-2 cursor-pointer'>
+    <div className='relative w-full h-10 lg:w-1/3 lg:h-full border bg-sky-50 border-fuchsia-400 rounded-lg '>
+    <div onClick={()=>setIsShowFilterClick(prev=> !prev)} className='  h-full ml-auto bg rounded-lg flex items-center justify-between px-2 cursor-pointer'>
     <p> filter : <span className='font-semibold'>{showFilterCondition}</span> </p>
     { isShowFilterClick ? <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>
    : <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path></svg>}

@@ -32,7 +32,7 @@ export default function ContainerOnlineMenu({sortedProduct = [] , setIsShowProdu
                </div>
                <div className='w-8/12 px-2 h-full flex flex-col  items-start justify-around'>
                <p className='break-words w-full h-max max-h-[48px]  line-clamp-2 '>{product?.productName}</p>
-               {product.productDescription && <button onClick={()=>detailsHandler(product.productName , product.product_image_path , product.productPrice , product.productPricePetty , product.productDescription )} className='truncate w-full opacity-40 hover:underline'> <span className='truncate'>details: </span>{product?.productDescription}sssssssssssssssssdddsdsdsdsdsdsdsdsdsd</button>}
+               {product.productDescription && <button onClick={()=>detailsHandler(product.productName , product.product_image_path , product.productPrice , product.productPricePetty , product.productDescription )} className='truncate text-start w-full opacity-40 hover:underline'> <span className='truncate'>details: </span>{product?.productDescription}</button>}
                <p className='text-red-400 w-full truncate'> <span className='font-semibold'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`}</span> $ </p>
                </div>
              </div>

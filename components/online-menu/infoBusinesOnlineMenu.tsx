@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function InfoBusinesOnlineMenu({informationBusiness}) {
   return (
-    <div className='w-full h-max  '>
+    <div className='w-full h-max text-sm sm:text-base '>
 
           <div className='divide-y-2 mt-10 border-2 rounded-xl '>
             <div className='py-6 bg-sky-50 px-4 rounded-t-xl'>

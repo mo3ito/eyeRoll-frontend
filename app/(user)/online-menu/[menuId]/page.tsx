@@ -219,10 +219,16 @@ const cheapestHandler = ()=>{
   }
 }
 
-const inputSearchValueHandler =useCallback((event : ChangeEvent<HTMLInputElement>)=>{
+const inputSearchValueHandler =(event : ChangeEvent<HTMLInputElement>)=>{
   setInputSearchValue(event.target.value)
+  if(!isGroupActive){
+    setShowFilterCondition(event.target.value)
+  }
+ 
 }
-,[]) 
+
+
+
 
 
 useEffect(() => {
@@ -257,6 +263,7 @@ useEffect(() => {
 
   const defaultHandler = async ()=>{
     if(filteredProduct.length>0){
+      
     await setIsShowFilterClick(false)
    await setShowFilterCondition("no filter")
     await  setInputSearchValue("")
@@ -264,13 +271,20 @@ useEffect(() => {
      await setIsGroupActive(false)
      await setAllProducts(data?.data?.products)
     } else{
-
+      await  setInputSearchValue("")
       await setIsShowFilterClick(false)
       await setShowFilterCondition("no filter")
       await setIsFilteredSearch(false)
       setAllProducts(data?.data?.products)
     }
   }
+
+
+  useEffect(()=>{
+    if(!isGroupActive && inputSearchValue === ""){
+      setShowFilterCondition("no filter")
+    }
+  },[inputSearchValue , isGroupActive])
 
 
   
@@ -282,46 +296,64 @@ useEffect(() => {
   return (
     <>
    <div className='w-full h-max pt-24 pb-6'>
-        <div className='w-full h-44 bg-black/30 '>
-            <img className='w-full h-full object-cover hoverScale' src={informationBusiness?.work_place_image} alt="" />
-            <div className='w-24 h-24 rounded-full  bg-sky-100 -translate-y-12 mx-auto shadow-md '>
+        <div className='w-full h-32 sm:h-44 bg-black/30 '>
+            <img className='w-full h-full object-cover hoverScale' src={informationBusiness?.work_place_image} alt="work place image" />
+            <button onClick={defaultHandler} className=' w-16 h-16 sm:w-24 sm:h-24 rounded-full block bg-sky-100 -translate-y-8 sm:-translate-y-12 mx-auto shadow-md '>
                  <img src={informationBusiness?.logo_image} className='text-center object-cover w-full h-full rounded-full hoverScale text-2xl'></img>
-            </div>
-            <p className='text-center  -translate-y-12 p-2 text-2xl'>{informationBusiness?.brand_name}</p>
+            </button>
+            <p className='text-center -translate-y-8 sm:-translate-y-12 p-2 text-sm sm:text-2xl'>{informationBusiness?.brand_name}</p>
         </div>
-        <div className='w-full h-max mt-24 text-lg font-semibold container mx-auto px-3'>
+        <div className='w-full h-max mt-16 sm:mt-24 max-xs:text-sm text-base sm:text-lg font-semibold container mx-auto px-3'>
         <button onClick={()=>setIsShowMenu(true)} className={`${isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show menu</button>
-        <button onClick={()=>setIsShowMenu(false)} className={`${!isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show information</button>
+        <button onClick={()=>setIsShowMenu(false)} className={`${!isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2 `}>show information</button>
         </div>
 
         <div className='container mx-auto px-3 '>
         { isShowMenu ? <>
-        <div className='w-full h-12  bg-sky-50 flex mt-4 rounded-lg '>
-        <button onClick={prevSlideHandler} className='ml-2 mt-1 flex-shrink-0 mr-auto w-10 h-10 rounded-full bg-indigo-300 border border-fuchsia-400 flex items-center justify-center cursor-pointer'>
+        <div className='w-full h-12  bg-sky-50 flex mt-4 rounded-lg px-2 '>
+        <button onClick={prevSlideHandler} className='  w-7 h-7 mt-[10px]  sm:mt-1 flex-shrink-0 mr-auto  sm:w-10 sm:h-10 rounded-full bg-indigo-300 border border-fuchsia-400 flex items-center justify-center cursor-pointer'>
         <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
         </button>
 
 
 
-        <div className=' w-9/12 sm:w-10/12 xl:w-11/12 h-full px-2 py-2'>
+        <div className=' w-10/12 sm:w-[87%] md:w-[89%] lg:w-[94%]   h-full px-2 py-2 '>
         <Swiper
         ref={swiperRef}
         className="  h-full  flex items-center justify-center"
-        slidesPerView={8}
+        slidesPerView={2}
         spaceBetween={10}
+        loop={true} 
+        breakpoints={{
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+        }}
         pagination={{
           clickable: true,
         }}
       >
 
         {productAssortments.map(productAssortment=>
-           <SwiperSlide onClick={()=>groupHandler(productAssortment.group)}  key={productAssortment.id} className=' bg-indigo-100 text-fuchsia-700 border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max !px-2 !flex !items-center !justify-center'>{productAssortment.group}</SwiperSlide>
+           <SwiperSlide onClick={()=>groupHandler(productAssortment.group)}  key={productAssortment.id} className='  bg-indigo-100 text-fuchsia-700 text-sm sm:text-base border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max !px-2 !flex !items-center !justify-center'>{productAssortment.group}</SwiperSlide>
           )}
       </Swiper>
         </div>
 
 
-        <button onClick={nextSlideHandler} className=' flex-shrink-0 mt-1 w-10 h-10 bg-indigo-300 border border-fuchsia-400 ml-auto mr-2 rounded-full  flex items-center justify-center cursor-pointer'>
+        <button onClick={nextSlideHandler} className=' flex-shrink-0 sm:mt-1 w-7 h-7 mt-[10px] sm:w-10 sm:h-10  bg-indigo-300 border border-fuchsia-400 ml-auto  rounded-full  flex items-center justify-center cursor-pointer'>
         <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"></path></svg>
         </button>
         </div>

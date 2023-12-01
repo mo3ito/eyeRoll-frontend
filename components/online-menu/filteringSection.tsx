@@ -6,7 +6,7 @@ import { FilteringSectionProps } from '@/types/onlineMenuUser/onlineMenuUser'
 
 export default function FilteringSection({inputSearchValue , inputSearchValueHandler , clearSearchHandler , setIsShowFilterClick , isShowFilterClick , showFilterCondition , defaultHandler , cheapestHandler , mostExpensiveHandler }:FilteringSectionProps) {
   return (
-    <div className='  my-4   flex flex-col lg:flex-row items-center h-max lg:h-10 gap-x-2 max-xs:text-xs text-sm sm:text-base'>
+    <div className='  my-4 flex flex-col lg:flex-row items-center h-max lg:h-10 gap-x-2 max-xs:text-xs text-sm sm:text-base'>
     <div className="flex flex-col h-max gap-y-10 items-center  container w-full lg:w-2/3  md:mb-0  py-2 top-32 sticky mx-auto bg-sky-100   ">
       
      <div className=' w-full flex items-center justify-center'>

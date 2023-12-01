@@ -56,7 +56,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [isShowProduct , setIsShowProduct]=useState<boolean>(false)
   const [productDetails , setProductDetails]=useState<ProductDetailsType | null>(null)
   const [isShowFilterClick , setIsShowFilterClick]=useState<boolean>(false)
-  const [showFilterCondition , setShowFilterCondition]=useState<string>("default")
+  const [showFilterCondition , setShowFilterCondition]=useState<string>("no filter")
   
 
 
@@ -156,15 +156,16 @@ export default function Page({ params }: { params: { menuId: string } }) {
 
 
 const groupHandler = async (groupName : string)=>{
-// setIsLoadingPage(true)
+
  await setInputSearchValue("") 
  await setIsFilteredSearch(false) 
  const filteredGroup = allProducts.filter((product : ProductType) => product.productAssortment === groupName )
-// setIsShowAssortment(false)
+
 setIsGroupActive(true)
 setGroupName(groupName)
 setFilteredProduct(filteredGroup)
-// setIsLoadingPage(false)
+setShowFilterCondition(groupName)
+
 }
 
 
@@ -257,7 +258,7 @@ useEffect(() => {
   const defaultHandler = async ()=>{
     if(filteredProduct.length>0){
     await setIsShowFilterClick(false)
-   await setShowFilterCondition("default")
+   await setShowFilterCondition("no filter")
     await  setInputSearchValue("")
      await setFilteredProduct([])
      await setIsGroupActive(false)
@@ -265,12 +266,13 @@ useEffect(() => {
     } else{
 
       await setIsShowFilterClick(false)
-      await setShowFilterCondition("default")
+      await setShowFilterCondition("no filter")
       await setIsFilteredSearch(false)
       setAllProducts(data?.data?.products)
     }
   }
-  
+
+
   
   
   if(isLoading ){
@@ -333,7 +335,9 @@ useEffect(() => {
       showFilterCondition={showFilterCondition}
       defaultHandler={defaultHandler}
       cheapestHandler={cheapestHandler}
-      mostExpensiveHandler={mostExpensiveHandler}/>
+      mostExpensiveHandler={mostExpensiveHandler}
+     
+      />
 
 
         { !isFilteredSearch ? <>

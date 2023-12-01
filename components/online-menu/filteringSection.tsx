@@ -1,7 +1,10 @@
 import React from 'react'
 import InputDefault from '../shared/inputs/inputDefault'
+import { FilteringSectionProps } from '@/types/onlineMenuUser/onlineMenuUser'
 
-export default function FilteringSection({inputSearchValue , inputSearchValueHandler , clearSearchHandler , setIsShowFilterClick , isShowFilterClick , showFilterCondition , defaultHandler , cheapestHandler , mostExpensiveHandler }) {
+
+
+export default function FilteringSection({inputSearchValue , inputSearchValueHandler , clearSearchHandler , setIsShowFilterClick , isShowFilterClick , showFilterCondition , defaultHandler , cheapestHandler , mostExpensiveHandler }:FilteringSectionProps) {
   return (
     <div className='  my-4   flex flex-col lg:flex-row items-center h-max lg:h-10 gap-x-2'>
     <div className="flex flex-col h-max gap-y-10 items-center w-full container   md:mb-0  py-2 top-32 sticky mx-auto bg-sky-100   ">
@@ -22,7 +25,7 @@ export default function FilteringSection({inputSearchValue , inputSearchValueHan
    : <svg className='w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path></svg>}
     </div>
     <ul className={`${isShowFilterClick ? 'absolute' : 'hidden' } w-full border shadow-md border-fuchsia-400 h-max bg-sky-100 rounded-lg p-1`}>
-    <li onClick={defaultHandler} className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>default</li>
+    <li onClick={defaultHandler} className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>no filter</li>
     <li onClick={cheapestHandler}  className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>cheapest</li>
     <li onClick={mostExpensiveHandler} className='w-full h-10 pt-2 px-2 cursor-pointer hover:bg-fuchsia-400'>most expensive</li>
     

@@ -1,4 +1,5 @@
-import { Dispatch , SetStateAction } from "react";
+import { ChangeEvent, Dispatch , SetStateAction  } from "react";
+
 export interface ProductType {
     _id: string;
     businessOwnerId: string;
@@ -44,4 +45,15 @@ export  interface AssortmentGrouptype {
     }
 
     
-  
+  export  interface FilteringSectionProps {
+      inputSearchValue :string;
+      inputSearchValueHandler: ( event : ChangeEvent<HTMLInputElement>) => void;
+      clearSearchHandler : ()=> void;
+      setIsShowFilterClick : Dispatch<SetStateAction<boolean>>;
+      isShowFilterClick: boolean;
+      showFilterCondition : string;
+      defaultHandler : ()=> void;
+      cheapestHandler : ()=> void;
+      mostExpensiveHandler : ()=> void
+        
+      }

@@ -18,6 +18,7 @@ import senderFormDataWithId from "@/services/senderFormDataWithId";
 import removal from "@/services/removal";
 import Modal from "@/components/modal/modal";
 import useDropDownHandler from "@/hooks/useDropDownHandler";
+import { InfosProps } from "@/types/authentication";
 
 
 export default function Information() {
@@ -40,15 +41,16 @@ export default function Information() {
   const [isLoadingForApi , setIsLosdingForApi]=useState<boolean>(false)
   const [isShowDeleteProfileImageModal , setIsShowDeleteProfileImageModal]=useState<boolean>(false)
   const phoneNumberRef = useRef<null | HTMLDivElement>(null);
-  const { businessOwnerId } = useGetBusinessOwnerId(infos);
+  const { businessOwnerId } = useGetBusinessOwnerId(infos as InfosProps);
   const token = Cookies.get(EYEROLL_TOKEN);
   const router = useRouter();
-  useDropDownHandler(phoneNumberRef , setIsBorderBold)
- 
-
+  useDropDownHandler(phoneNumberRef , setIsBorderBold )
 
   console.log(businessOwnerId);
   console.log(token);
+
+ 
+
   console.log(infos);
 
   useEffect(() => {

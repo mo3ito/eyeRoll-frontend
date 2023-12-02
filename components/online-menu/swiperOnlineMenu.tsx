@@ -47,11 +47,11 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
     <div
       className={`${
         isSticky ? "shadow-md rounded-none" : " rounded-lg"
-      } w-full h-12  sticky top-[92px] z-50 flex mt-4  px-2 bg-sky-50`}
+      } w-full h-10 sm:h-12  sticky top-[92px] z-50 flex mt-4  px-2 bg-sky-50`}
     >
       <button
         onClick={prevSlideHandler}
-        className="  w-7 h-7 mt-[10px]  sm:mt-1 flex-shrink-0 mr-auto  sm:w-10 sm:h-10 rounded-full bg-indigo-300 border border-fuchsia-400 flex items-center justify-center cursor-pointer"
+        className="  w-7 h-7 mt-[6px]  sm:mt-1 flex-shrink-0 mr-auto  sm:w-10 sm:h-10 rounded-full bg-indigo-300 border border-fuchsia-400 flex items-center justify-center cursor-pointer"
       >
         <svg
           className="w-6 h-6"
@@ -103,7 +103,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
 
       <button
         onClick={nextSlideHandler}
-        className=" flex-shrink-0 sm:mt-1 w-7 h-7 mt-[10px] sm:w-10 sm:h-10  bg-indigo-300 border border-fuchsia-400 ml-auto  rounded-full  flex items-center justify-center cursor-pointer"
+        className=" flex-shrink-0 sm:mt-1 w-7 h-7 mt-[6px] sm:w-10 sm:h-10  bg-indigo-300 border border-fuchsia-400 ml-auto  rounded-full  flex items-center justify-center cursor-pointer"
       >
         <svg
           className="w-6 h-6"

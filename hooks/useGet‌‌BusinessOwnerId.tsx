@@ -1,11 +1,12 @@
-import { useState , useEffect } from "react";
-export default function useGetBusinessOwnerId(infos) {
+import { useState, useEffect } from "react";
+import { InfosProps } from "@/types/authentication";
 
-    const [businessOwnerId, setBusinessOwnerId] = useState<string>('');
-     
-    useEffect(() => {
-        infos && setBusinessOwnerId(infos.id);
-    }, [infos]);
+export default function useGetBusinessOwnerId(infos: InfosProps) {
+const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
 
-    return { businessOwnerId };
+  useEffect(() => {
+    infos && setBusinessOwnerId(infos.id);
+  }, [infos]);
+
+  return { businessOwnerId };
 }

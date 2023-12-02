@@ -47,7 +47,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
     <div
       className={`${
         isSticky ? "shadow-md rounded-none" : " rounded-lg"
-      } w-full h-10 sm:h-12  sticky top-[92px] z-50 flex mt-4  px-2 bg-sky-50`}
+      } w-full h-10 sm:h-12  sticky top-[92px]  flex mt-4  px-2 bg-sky-50 z-40`}
     >
       <button
         onClick={prevSlideHandler}

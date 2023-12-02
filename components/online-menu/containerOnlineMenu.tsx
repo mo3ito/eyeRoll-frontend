@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+
 import { ProductType , sortedProduct , ContainerOnlineMenuProps   } from '@/types/onlineMenuUser/onlineMenuUser'
 import HeaderMenu from './headerMenu';
 
@@ -26,12 +26,12 @@ export default function ContainerOnlineMenu({sortedProduct = [] , setIsShowProdu
    
            {item.values.map((product : ProductType) =>
                <div onClick={()=>detailsHandler(product.productName , product.product_image_path , product.productPrice , product.productPricePetty , product.productDescription )} key={product._id} 
-               className=' hoverScale cursor-pointer w-full sm:w-[280px] md:w-[350px] lg:w-[470px] xl:w-[400px] 2xl:w-[480px] h-28 md:h-32 lg:h-44 xl:h-40 2xl:h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-50'>
-               <div className=' w-[100px] sm:w-6/12 md:w-4/12 lg:w-5/12 h-full '>
+               className=' overflow-hidden hoverScale cursor-pointer w-full sm:w-[280px] md:w-[350px] lg:w-[470px] xl:w-[400px] 2xl:w-[480px] h-28 md:h-32 lg:h-44 xl:h-40 2xl:h-44 border border-fuchsia-400 rounded-lg p-2 flex bg-indigo-50'>
+               <div className=' w-[100px] sm:w-6/12 md:w-4/12 lg:w-5/12 h-full flex-shrink-0 '>
                <img src={product.product_image_path ? product.product_image_path : "/images/noImage.jpg"} className=' w-full h-full object-cover' alt="" />
                </div>
                <div className='w-8/12 px-2 h-full flex flex-col  items-start justify-around'>
-               <p className='break-words w-full h-max max-h-[48px]  line-clamp-2 '>{product?.productName}</p>
+               <p className='break-words  w-full   h-max max-h-[48px] line-clamp-2 '>{product?.productName}</p>
                {product.productDescription && <button onClick={()=>detailsHandler(product.productName , product.product_image_path , product.productPrice , product.productPricePetty , product.productDescription )} className='truncate text-start w-full opacity-40 hover:underline'> <span className='truncate'>details: </span>{product?.productDescription}</button>}
                <p className='text-red-400 w-full truncate'> <span className='font-semibold'>{product.productPrice}{product.productPricePetty && `.${product.productPricePetty}`}</span> $ </p>
                </div>

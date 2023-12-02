@@ -57,3 +57,35 @@ export  interface AssortmentGrouptype {
       mostExpensiveHandler : ()=> void
         
       }
+
+
+export interface InformationBusinessType {
+  logo_image : string;
+  phone_number: string;
+  work_phone: string;
+  work_place_image: string;
+  address: string;
+  brand_name: string;
+}
+
+
+ export interface SortedProductType{
+  id: string;
+  group: string;
+  values: ProductType[]
+}
+
+
+
+export interface HeaderOnlineMenuPageProps{
+  setIsShowMenu: Dispatch<SetStateAction<boolean>>;
+  isShowMenu: boolean;
+  defaultHandler:()=>void;
+  informationBusiness: InformationBusinessType | null;
+}
+
+export interface SwiperOnlineMenuProps{
+groupHandler : (groupName : string)=>void;
+productAssortments: AssortmentGrouptype[];
+
+}

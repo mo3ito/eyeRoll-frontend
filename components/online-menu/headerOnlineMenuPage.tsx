@@ -1,6 +1,7 @@
 import React from 'react'
+import { HeaderOnlineMenuPageProps } from '@/types/onlineMenuUser/onlineMenuUser'
 
-export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defaultHandler , informationBusiness}) {
+export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defaultHandler , informationBusiness}: HeaderOnlineMenuPageProps) {
   return (
     <>
     <div className='w-full h-32 sm:h-44 bg-black/30 '>

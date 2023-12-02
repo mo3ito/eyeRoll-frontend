@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { SwiperOnlineMenuProps , AssortmentGrouptype } from "@/types/onlineMenuUser/onlineMenuUser";
 
-export default function SwiperOnlineMenu({ productAssortments, groupHandler }) {
+export default function SwiperOnlineMenu({ productAssortments, groupHandler }: SwiperOnlineMenuProps) {
   const [isSticky, setIsSticky] = useState(false);
   const swiperRef = useRef<SwiperRef | null>(null);
 
@@ -38,6 +39,9 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  console.log(productAssortments);
+  
 
   return (
     <div
@@ -85,7 +89,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }) {
             clickable: true,
           }}
         >
-          {productAssortments.map((productAssortment) => (
+          {productAssortments.map((productAssortment: AssortmentGrouptype) => (
             <SwiperSlide
               onClick={() => groupHandler(productAssortment.group)}
               key={productAssortment.id}

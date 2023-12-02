@@ -10,26 +10,14 @@ import LoadingPage from '@/components/loading/loadingPage';
 import ContainerOnlineMenu from '@/components/online-menu/containerOnlineMenu';
 import ContainerFilterMenu from '@/components/online-menu/containerFilterMenu';
 import InfoBusinesOnlineMenu from '@/components/online-menu/infoBusinesOnlineMenu';
-import { ProductDetailsType } from '@/types/onlineMenuUser/onlineMenuUser';
+import { ProductDetailsType , InformationBusinessType , SortedProductType } from '@/types/onlineMenuUser/onlineMenuUser';
 import ShowDetailsOnlineMenu from '@/components/online-menu/showDetailsOnlineMenu';
 import FilteringSection from '@/components/online-menu/filteringSection';
 import SwiperOnlineMenu from '@/components/online-menu/swiperOnlineMenu';
 import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage';
 
-interface informationBusinessType {
-  logo_image : string;
-  phone_number: string;
-  work_phone: string;
-  work_place_image: string;
-  address: string;
-  brand_name: string;
-}
 
-interface sortedProduct{
-  id: string;
-  group: string;
-  values: ProductType[]
-}
+
 
 
 
@@ -41,8 +29,8 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const queryClient = useQueryClient();
   const [allProducts , setAllProducts]=useState<ProductType[]>([])
   const [productAssortments , setProductAssortments]=useState<AssortmentGrouptype[]>([])
-  const [informationBusiness , setInformationBusiness]=useState<informationBusinessType | null>(null)
-  const [sortedProduct , setSortedProduct]=useState<sortedProduct[]>([])
+  const [informationBusiness , setInformationBusiness]=useState<InformationBusinessType | null>(null)
+  const [sortedProduct , setSortedProduct]=useState<SortedProductType[]>([])
   const [filteredProduct , setFilteredProduct]=useState<ProductType[]>([])
   const [products , setProducts]=useState<ProductType[]>([])
   const [groupName , setGroupName]=useState<string>("")
@@ -53,12 +41,6 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [productDetails , setProductDetails]=useState<ProductDetailsType | null>(null)
   const [isShowFilterClick , setIsShowFilterClick]=useState<boolean>(false)
   const [showFilterCondition , setShowFilterCondition]=useState<string>("no filter")
-
-
-
-
-  
-
 
   useEffect(() => {
       const newSocket = io("http://localhost:5001");
@@ -266,9 +248,11 @@ useEffect(() => {
   return (
     <>
    <div className='w-full h-max pt-24 pb-6'>
-
-    
-        <HeaderOnlineMenuPage setIsShowMenu={setIsShowMenu}  isShowMenu={isShowMenu}  defaultHandler={defaultHandler}  informationBusiness={informationBusiness} />
+        <HeaderOnlineMenuPage
+         setIsShowMenu={setIsShowMenu}
+          isShowMenu={isShowMenu}
+          defaultHandler={defaultHandler}
+          informationBusiness={informationBusiness} />
 
         <div className='container mx-auto px-3 '>
         { isShowMenu ? <>
@@ -288,7 +272,11 @@ useEffect(() => {
       />
         { !isFilteredSearch ? <>
         { !isGroupActive ? 
-      <ContainerOnlineMenu setIsShowProduct={setIsShowProduct} setProductDetails={setProductDetails} sortedProduct={sortedProduct}/> :
+      <ContainerOnlineMenu
+       setIsShowProduct={setIsShowProduct}
+       setProductDetails={setProductDetails}
+       sortedProduct={sortedProduct}
+       /> :
       <ContainerFilterMenu setIsShowProduct={setIsShowProduct} setProductDetails={setProductDetails} groupName={groupName} filteredProduct={filteredProduct} /> 
           }
           </> :   

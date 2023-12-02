@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { InputPasswordProps } from "@/types/InputsType";
 import showPasswordHandler from "@/utils/handleShowPassword";
+import useDropDownHandler from "@/hooks/useDropDownHandler";
 
 const InputPassword = ({
   value,
@@ -17,21 +18,9 @@ const InputPassword = ({
     useState<boolean>(false);
   const containerPasswordRef = useRef<null | HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  useDropDownHandler(containerPasswordRef , setIsBoldBorderInputPassword )
 
-  useEffect(() => {
-    const outClickHandler = (event: MouseEvent) => {
-      if (
-        containerPasswordRef.current &&
-        !containerPasswordRef.current.contains(event.target as Node)
-      ) {
-        setIsBoldBorderInputPassword(false);
-      }
-    };
-
-    document.addEventListener("click", outClickHandler);
-
-    return () => document.removeEventListener("click", outClickHandler);
-  }, []);
+ 
 
   useEffect(()=>{
     if( isFocus && inputRef.current){

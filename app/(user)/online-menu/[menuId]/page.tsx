@@ -17,10 +17,6 @@ import SwiperOnlineMenu from '@/components/online-menu/swiperOnlineMenu';
 import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage';
 
 
-
-
-
-
 export default function Page({ params }: { params: { menuId: string } }) {
   console.log(params);
   const [socket, setSocket] = useState<Socket | null>(null);

@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
 import removal from "@/services/removal";
 import Modal from "@/components/modal/modal";
+import useDropDownHandler from "@/hooks/useDropDownHandler";
 
 
 export default function Information() {
@@ -42,27 +43,12 @@ export default function Information() {
   const { businessOwnerId } = useGetBusinessOwnerId(infos);
   const token = Cookies.get(EYEROLL_TOKEN);
   const router = useRouter();
+  useDropDownHandler(phoneNumberRef , setIsBorderBold)
+ 
+
 
   console.log(businessOwnerId);
   console.log(token);
-
-  useEffect(() => {
-    const handleOutSidePhoneNumberRef = (event: MouseEvent) => {
-      if (
-        phoneNumberRef.current &&
-        !phoneNumberRef.current.contains(event.target as Node)
-      ) {
-        setIsBorderBold(false);
-      }
-    };
-
-    document.addEventListener("click", handleOutSidePhoneNumberRef);
-
-    return () => {
-      document.removeEventListener("click", handleOutSidePhoneNumberRef);
-    };
-  }, []);
-
   console.log(infos);
 
   useEffect(() => {

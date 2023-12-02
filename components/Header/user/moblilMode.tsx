@@ -1,6 +1,7 @@
 'use client'
 import {useState , useRef, useEffect} from 'react'
 import { useRouter } from 'next/navigation'
+import useDropDownHandler from '@/hooks/useDropDownHandler'
 
 export default function MoblilMode() {
     const [isShowMobliMenu , setIsShowMobileMenu]=useState<boolean>(false)
@@ -8,23 +9,10 @@ export default function MoblilMode() {
     const registerLoginRef = useRef<null | HTMLLIElement>(null);
     const menuRef = useRef<null | HTMLDivElement>(null)
     const router = useRouter()
+    useDropDownHandler(menuRef , setIsShowMobileMenu )
 
 
-    useEffect(()=>{
-
-        const dropDownUlHandler = (event : MouseEvent)=>{
-            if(menuRef.current && !menuRef.current.contains(event.target as Node)){
-                setIsShowMobileMenu(false)
-            }
-        }
-
-        document.addEventListener("click", dropDownUlHandler);
-
-        return ()=> document.removeEventListener("click", dropDownUlHandler )
-
-    },[])
-
-
+  
     useEffect(() => {
         const dropDownHandler = (event : MouseEvent) => {
           if (registerLoginRef.current && !registerLoginRef.current.contains(event.target as Node)) {

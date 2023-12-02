@@ -5,7 +5,6 @@ import {
   useContext,
   useCallback,
   useRef,
-  useEffect,
 } from "react";
 import Input from "../../shared/inputs/input";
 import { toast } from "react-toastify";
@@ -19,6 +18,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import InputPassword from "@/components/shared/inputs/inputPassword";
+import useDropDownHandler from "@/hooks/useDropDownHandler";
 
 const RegisterBusinessOwner = () => {
   const [name, setName] = useState<string>("");
@@ -33,23 +33,9 @@ const RegisterBusinessOwner = () => {
   const [isBorderBold, setIsBorderBold] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  useDropDownHandler(phoneNumberRef , setIsBorderBold )
 
-  useEffect(() => {
-    const handleOutSidePhoneNumberRef = (event: MouseEvent) => {
-      if (
-        phoneNumberRef.current &&
-        !phoneNumberRef.current.contains(event.target as Node)
-      ) {
-        setIsBorderBold(false);
-      }
-    };
-
-    document.addEventListener("click", handleOutSidePhoneNumberRef);
-
-    return () => {
-      document.removeEventListener("click", handleOutSidePhoneNumberRef);
-    };
-  }, []);
+ 
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -5,5 +5,6 @@
     pathApiDelete: string;
     fileName : string;
     content?:string;
-    srcImage: string
+    srcImage: string;
+    defaultSrc: string
     }

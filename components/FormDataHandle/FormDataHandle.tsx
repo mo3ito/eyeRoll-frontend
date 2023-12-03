@@ -13,7 +13,7 @@ import { FormDataHandleProps } from '@/types/formDataHandle/formDataHandleProps'
 
 
 
-export default function FormDataHandle({ pathApi , pathApiDelete , fileName , content , srcImage  } : FormDataHandleProps) {
+export default function FormDataHandle({ pathApi , pathApiDelete , fileName , content , srcImage , defaultSrc  } : FormDataHandleProps) {
     
     const{infos , login}=useContext(AuthContext)
     const router = useRouter()
@@ -100,7 +100,7 @@ export default function FormDataHandle({ pathApi , pathApiDelete , fileName , co
       { content && <p className='text-center  my-3'>{content}</p>}
         <label onClick={()=>setIsShowInputForFileName(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
           <div className=" w-24 h-24 sm:w-32 sm:h-32 rounded-full relative">
-            <img src={srcImage ? srcImage : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
+            <img src={srcImage ? srcImage : defaultSrc} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
             <div className=" w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center bg-white absolute bottom-2 -right-1 sm:bottom-3 sm:right-0 ">
             <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
             </div>

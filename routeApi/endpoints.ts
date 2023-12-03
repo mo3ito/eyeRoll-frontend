@@ -14,6 +14,13 @@ export const BUSINESS_OWNER_PROFILE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-im
 export const BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE = `${BASE_URL_BUSINESS_OWNER}/delete-profile-image` 
 export const BUSINESS_OWNER_VALIDATOR_PASSWORD =`${BASE_URL_BUSINESS_OWNER}/validator-password`
 
+export const BUSINESS_OWNER_SEND_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-logo-image`
+export const BUSINESS_OWNER_DELETE_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-logo-image`
+export const BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-work-place-image`
+export const BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-work-place-image`
+
+
+
 
 
 

@@ -2,10 +2,15 @@
 import { useContext } from "react";
 import { AuthContext } from "@/context/authContext";
 import FormDataHandle from "@/components/FormDataHandle/FormDataHandle";
+import {
+  BUSINESS_OWNER_SEND_LOGO_IMAGE,
+  BUSINESS_OWNER_DELETE_LOGO_IMAGE,
+  BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE,
+  BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE,
+} from "@/routeApi/endpoints";
 
 export default function page() {
   const { infos } = useContext(AuthContext);
-  console.log(infos);
 
   return (
     <div className="pt-48 container mx-auto ">
@@ -14,10 +19,8 @@ export default function page() {
           srcImage={infos?.logo_image_path ? infos?.logo_image_path : ""}
           content="import logo"
           fileName="logoImage"
-          pathApi={"http://localhost:5000/business-owner/upload-logo-image"}
-          pathApiDelete={
-            "http://localhost:5000/business-owner/delete-logo-image"
-          }
+          pathApi={BUSINESS_OWNER_SEND_LOGO_IMAGE}
+          pathApiDelete={BUSINESS_OWNER_DELETE_LOGO_IMAGE}
         />
 
         <FormDataHandle
@@ -26,12 +29,8 @@ export default function page() {
           }
           content="import work place image"
           fileName="workPlaceImage"
-          pathApi={
-            "http://localhost:5000/business-owner/upload-work-place-image"
-          }
-          pathApiDelete={
-            "http://localhost:5000/business-owner/delete-work-place-image"
-          }
+          pathApi={BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE}
+          pathApiDelete={BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE}
         />
       </div>
     </div>

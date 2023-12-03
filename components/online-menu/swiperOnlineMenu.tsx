@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
+import { Swiper, SwiperSlide, SwiperRef  } from "swiper/react";
+import {Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/pagination";
 import { SwiperOnlineMenuProps , AssortmentGrouptype } from "@/types/onlineMenuUser/onlineMenuUser";
@@ -93,7 +94,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
             <SwiperSlide
               onClick={() => groupHandler(productAssortment.group)}
               key={productAssortment.id}
-              className="  bg-indigo-100 text-fuchsia-700 text-sm sm:text-base border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max !px-2 !flex !items-center !justify-center"
+              className="  bg-indigo-100 text-fuchsia-700 text-sm sm:text-base border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max lg:!min-w-[200px] lg:!w-max !px-2 !flex !items-center !justify-center"
             >
               {productAssortment.group}
             </SwiperSlide>

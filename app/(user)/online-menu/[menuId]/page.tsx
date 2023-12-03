@@ -15,6 +15,7 @@ import ShowDetailsOnlineMenu from '@/components/online-menu/showDetailsOnlineMen
 import FilteringSection from '@/components/online-menu/filteringSection';
 import SwiperOnlineMenu from '@/components/online-menu/swiperOnlineMenu';
 import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage';
+import { BUSINESS_OWNER_ONLINE_MENU_GET_INFO } from '@/routeApi/endpoints';
 
 
 export default function Page({ params }: { params: { menuId: string } }) {
@@ -22,7 +23,6 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isShowMenu , setIsShowMenu]=useState<boolean>(true)
   const [businessOwnerId , setBusinessOwnerId] = useState<string>("")
-  const queryClient = useQueryClient();
   const [allProducts , setAllProducts]=useState<ProductType[]>([])
   const [productAssortments , setProductAssortments]=useState<AssortmentGrouptype[]>([])
   const [informationBusiness , setInformationBusiness]=useState<InformationBusinessType | null>(null)
@@ -60,7 +60,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
     () => {
       if (businessOwnerId) {
         return getterWithAuthId(
-          "http://localhost:5000/business-owner/online-menu/get-online-menu-info",
+          BUSINESS_OWNER_ONLINE_MENU_GET_INFO,
           businessOwnerId
         );
       }

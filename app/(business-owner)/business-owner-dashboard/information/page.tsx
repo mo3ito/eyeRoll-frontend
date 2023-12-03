@@ -14,11 +14,9 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import EYEROLL_TOKEN from "@/help/tokenName";
 import { useRouter } from "next/navigation";
-import senderFormDataWithId from "@/services/senderFormDataWithId";
-import removal from "@/services/removal";
-import Modal from "@/components/modal/modal";
 import useDropDownHandler from "@/hooks/useDropDownHandler";
 import { InfosProps } from "@/types/authentication";
+import FormDataHandle from "@/components/FormDataHandle/FormDataHandle";
 
 
 export default function Information() {
@@ -36,10 +34,7 @@ export default function Information() {
   const [postalCode, setPostalCode] = useState<string>("");
   const [workPhone, setWorkPhone] = useState<string>("");
   const [isBorderBold, setIsBorderBold] = useState<boolean>(false);
-  const [profileImage , setProfileImage]=useState<File | null>(null)
-  const [isShowInputsForImageProfile , setIsShowInputsForImageProfile]=useState<boolean>(false)
-  const [isLoadingForApi , setIsLosdingForApi]=useState<boolean>(false)
-  const [isShowDeleteProfileImageModal , setIsShowDeleteProfileImageModal]=useState<boolean>(false)
+  // const [isLoadingForApi , setIsLosdingForApi]=useState<boolean>(false)
   const phoneNumberRef = useRef<null | HTMLDivElement>(null);
   const { businessOwnerId } = useGetBusinessOwnerId(infos as InfosProps);
   const token = Cookies.get(EYEROLL_TOKEN);
@@ -125,74 +120,6 @@ export default function Information() {
     }
   };
 
-  const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0].type);
-      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png"){
-        const selectedFile = event.target.files[0];
-        setProfileImage(selectedFile);
-      }else{
-        toast.warn("Only photos in jpg , jpeg and png format are allowed")
-      }
-     
-      
-    }
-  };
-
-  const submitImage = async () => {
-    if (profileImage) {
-      const formData = new FormData();
-      formData.append("profileImage", profileImage);
-      try {
-        setIsLosdingForApi(true)
-        const response = await senderFormDataWithId( BUSINESS_OWNER_PROFILE_IMAGE , businessOwnerId , formData )
-        console.log(response?.data); 
-        if(response?.status === 200){
-          await login(response?.data.userInfos , response?.data.token )
-          router.refresh()
-          toast.success("Avatar updated successfully")
-          setIsLosdingForApi(false)
-          setIsShowInputsForImageProfile(false)
-        
-        }
-      } catch (error : any) {
-        if (error.response?.status === 400) {
-          setIsLosdingForApi(false)
-          setIsShowInputsForImageProfile(false)
-          const errorMessage = error?.response.data.message;
-          toast.error(errorMessage);
-        } else {
-          setIsLosdingForApi(false)
-          setIsShowInputsForImageProfile(false)
-          toast.error("An error occurred while processing your request");
-        }
-      }
-    }
-  };
-
-  const DeleteProfileImageHandler = async ()=>{
-    try {
-      const response = await removal(BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE , businessOwnerId)
-      if(response?.status === 200){
-        await login(response?.data.userInfos , response?.data.token )
-      router.refresh()
-      setIsShowDeleteProfileImageModal(false)
-      toast.success("Avatar deleted successfully")
-      }
-    } catch (error : any) {
-      if (error.response?.status === 400) {
-        const errorMessage = error?.response.data.message;
-        setIsShowDeleteProfileImageModal(false)
-        toast.error(errorMessage);
-      } else {
-        setIsShowDeleteProfileImageModal(false)
-        toast.error("An error occurred while processing your request");
-      }
-    }
-  
-  }
-
-  console.log(profileImage);
   console.log(infos);
   
   if (!infos) {
@@ -201,29 +128,10 @@ export default function Information() {
   return (
     <div className="bg-sky-100 w-full min-h-screen h-max pb-20 pt-28">
       <div className="container px-4  h-max mx-auto">
-        <div  className="max-[350px]:w-11/12  max-w-xs h-max mx-auto mb-5 ">
-        <label onClick={()=>setIsShowInputsForImageProfile(true)} className="cursor-pointer flex items-center justify-center flex-col gap-y-3"  htmlFor="changImage">
-          <div className=" w-24 h-24 sm:w-32 sm:h-32 rounded-full relative">
-            <img src={infos.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" className="w-full h-full rounded-full bg-fuchsia-400  mx-auto object-cover"/>
-            <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white absolute bottom-3 right-0 ">
-            <svg className="w-6 h-6  fill-fuchsia-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 11H7V13H11V17H13V13H17V11H13V7H11V11Z"></path></svg>
-            </div>
-            </div>
-            {isShowInputsForImageProfile && <> <div className="border w-full text-sm sm:text-base border-fuchsia-400 min-h-10 h-max flex  justify-start items-center p-1 rounded-lg ">
-    
-            <p className="mr-auto w-full sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {profileImage?.name}</p>
-           
-            </div>
-            <input  onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" /> </>}
-           
-            </label>
-           <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto  max-[350px]:text-sm  ">
-           { isShowInputsForImageProfile && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  sm:px-2  py-1 rounded-md hoverScale " text="confirm image" />}
-           { infos.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteProfileImageModal(true)} className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />}
-            </div>
-            
+
+        <div className="max-xs:w-10/12 w-7/12 sm:w-7/12 md:w-1/2 lg:w-4/12 xl:w-3/12 2xl:w-3/12 mx-auto">
+        <FormDataHandle srcImage={infos?.profile_image_path ? infos?.profile_image_path : "" } fileName="profileImage"  pathApi={BUSINESS_OWNER_PROFILE_IMAGE } pathApiDelete={BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE}  />
         </div>
-        
         <form onSubmit={informationSubmitHandler}>
           <div className=" max-[450px]:w-11/12 w-8/12 sm:w-10/12  md:w-full  lg:w-10/12  xl:w-7/12 2xl:w-2/4 h-max mx-auto  ">
            
@@ -389,13 +297,6 @@ export default function Information() {
           </div>
         </form>
       </div>
-      <Modal
-        cancelHandler={() => setIsShowDeleteProfileImageModal(false)}
-        text="Are you sure to delete?"
-        isShowModal={isShowDeleteProfileImageModal}
-        setIsShowModal={setIsShowDeleteProfileImageModal}
-        confirmHandler={DeleteProfileImageHandler}
-      />
     </div>
   );
 }

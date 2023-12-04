@@ -23,6 +23,8 @@ import EditMenuScreen from "@/components/online-menu/editMenuScreen";
 import EditMenuMobile from "@/components/online-menu/editMenuMobile";
 import HeaderOnlineMenu from "@/components/online-menu/headerOnlineMenu";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
+import ShowDetailsOnlineMenu from "@/components/online-menu/showDetailsOnlineMenu";
+import { ProductDetailsType } from "@/types/onlineMenuUser/onlineMenuUser";
 
 
 
@@ -45,6 +47,8 @@ export default function EditMenu() {
   const [isChangeImage , setIsChangeImage]=useState<boolean>(false)
   const [ isDeleteProductImage ,setIsDeleteProductImage]=useState<boolean>(false)
   const [isDeleteProductImageRun , setIsDeleteProductImageRun] = useState<boolean>(false)
+  const [isShowProduct , setIsShowProduct]=useState<boolean>(false)
+  const [detailsProduct , setDetailsProduct]=useState<ProductDetailsType | null>(null)
   const queryClient = useQueryClient();
 
   console.log("productName", productName);
@@ -266,12 +270,16 @@ export default function EditMenu() {
             descriptionHandler={descriptionHandler}
             processEditHandler={processEditHandler}
             processDeleteHandler={processDeleteHandler}
+            setDetailsProduct={setDetailsProduct}
+            setIsShowProduct={setIsShowProduct}
           />
           <EditMenuMobile
             allProducts={allProducts}
             descriptionHandler={descriptionHandler}
             processEditHandler={processEditHandler}
             processDeleteHandler={processDeleteHandler}
+            setDetailsProduct={setDetailsProduct}
+            setIsShowProduct={setIsShowProduct}
           />
         </div>
       </div>
@@ -316,6 +324,7 @@ export default function EditMenu() {
           
         />
       </ModalDefault>
+      <ShowDetailsOnlineMenu isShowProduct={isShowProduct} setIsShowProduct={setIsShowProduct} productDetails={detailsProduct}/>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { ProductDetailsType } from "../onlineMenuUser/onlineMenuUser";
 
 export interface EditProductsProps {
   producName: string;
@@ -46,4 +47,7 @@ export interface EditMenuType {
     productId: string
   ) => void;
   processDeleteHandler: (productId: string) => void;
+  setDetailsProduct:Dispatch<SetStateAction<ProductDetailsType | null>>;
+  setIsShowProduct:Dispatch<SetStateAction<boolean>>;
+
 }

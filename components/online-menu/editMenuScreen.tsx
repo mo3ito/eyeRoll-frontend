@@ -2,9 +2,18 @@ import React from 'react'
 import { ProductsType , EditMenuType } from '@/types/onlineMenuBo/productsType'
 
 
-export default function EditMenuScreen({allProducts , descriptionHandler , processEditHandler , processDeleteHandler }:EditMenuType) {
+export default function EditMenuScreen({allProducts , descriptionHandler , processEditHandler , processDeleteHandler , setDetailsProduct , setIsShowProduct }:EditMenuType) {
 
-  console.log(allProducts);
+  const detailsHandler = async (producName:string , productPrice:string , productPricePetty:string , productDescription:string, productImage:string)=>{
+   await setDetailsProduct({
+      productImage,
+      producName,
+      productPrice,
+      productPricePetty,
+      productDescription
+    })
+    setIsShowProduct(true)
+  }
   
   return (
     <>
@@ -34,9 +43,9 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
         <div className="w-[14%] break-words  p-2 text-center translate-x-1 ">
           <button onClick={()=>descriptionHandler(product.productName , product.productDescription)} className="  w-max md:text-xs lg:text-sm px-2 bg-fuchsia-300 py-2 rounded-lg">show description</button>
         </div>
-        <div className="w-[14%] break-words   px-2 text-center translate-x-1 ">
+        <button onClick={()=>detailsHandler(product.productName , product.productPrice , product.productPricePetty , product.productDescription , product.product_image_path)} className="w-[14%] break-words   px-2 text-center translate-x-1 ">
          <img className=' md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-20 xl:h-20 block mx-auto rounded-md object-cover' src={product.product_image_path ? product.product_image_path : "/images/default-product.jpg"} alt="" />
-        </div>
+        </button>
         <div className="w-[14%] mx-auto flex items-center justify-center break-words  p-2  text-center  ">
           <button onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product.product_image_path , product._id)} className="mr-4 pt-2">
             <svg

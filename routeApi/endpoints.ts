@@ -1,6 +1,6 @@
 import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL } from "./baseUrlNextApi";
 
-//--business-owner-routes
+//--business-owner-routes---------------------------------------------------------------------------------------------
 
 //--business-owner-registeration
 export const BUSINESS_OWNER = BASE_URL_BUSINESS_OWNER;
@@ -13,15 +13,10 @@ export const BUSINESS_OWNER_IS_PASSWORD = `${BASE_URL_BUSINESS_OWNER}/is-passwor
 export const BUSINESS_OWNER_PROFILE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-image`  
 export const BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE = `${BASE_URL_BUSINESS_OWNER}/delete-profile-image` 
 export const BUSINESS_OWNER_VALIDATOR_PASSWORD =`${BASE_URL_BUSINESS_OWNER}/validator-password`
-
 export const BUSINESS_OWNER_SEND_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-logo-image`
 export const BUSINESS_OWNER_DELETE_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-logo-image`
 export const BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-work-place-image`
 export const BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-work-place-image`
-
-
-
-
 
 
 //--business-owner-online-menu
@@ -35,15 +30,15 @@ export const BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT = `${BUSINESS_OWNER_ONLINE
 export const BUSINESS_OWNER_ONLINE_MENU_DELETE_IMAGE_PRODUCT = `${BUSINESS_OWNER_ONLINE_MENU}/delete-product-image`
 export const BUSINESS_OWNER_ONLINE_MENU_GET_INFO=`${BUSINESS_OWNER_ONLINE_MENU}/get-online-menu-info`
 
-//--business-owner-routes
+//--business-owner-routes---------------------------------------------------------------------------------------------
 
 
-//--roll-routes
+//--roll-routes-------------------------------------------------------------------------------------------------------
 export const GET_ROLL_INFORMATION = `${BASE_URL_ROLL}/get-roll-algoritm`;
 export const SEND_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-send`
 export const GET_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-get`
 
-//--roll-routes
+//--roll-routes-------------------------------------------------------------------------------------------------------
 
 
 

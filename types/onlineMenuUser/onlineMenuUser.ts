@@ -22,7 +22,8 @@ export  interface AssortmentGrouptype {
     productImage:string;
     productPrice:string;
     productPricePetty:string;
-    productDescription:string
+    productDescription:string;
+    productAssortment:string;
   }
   
     

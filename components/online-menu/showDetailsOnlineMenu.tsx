@@ -18,8 +18,10 @@ export default function ShowDetailsOnlineMenu({isShowProduct , setIsShowProduct 
   >
    <div className='w-full h-max p-2 overflow-x-hidden sm:text-lg text-zinc-500'>
     <p className='text-center mb-4 pt-2   font-semibold'>Product Specifications</p>
+    <div className='border border-fuchsia-400 p-2 shadow-lg overflow-hidden'>
     <img className=' w-full h-64 object-cover hover:scale-105 hover:duration-500' src={productDetails?.productImage ? productDetails?.productImage : "/images/noImage.jpg"} alt="product-image" />
     <div className=' mt-2  font-semibold'>
+    <p className='w-full h-max max-h-[96px]  overflow-y-auto border-b ' > <span className='text-black'>group:</span> {productDetails?.productAssortment}</p>
     <p className='w-full h-max max-h-[96px]  overflow-y-auto border-b ' > <span className='text-black'>name:</span> {productDetails?.producName}</p>
     <p className='text-red-400 border-b'> <span className='text-black '>price:</span> {productDetails?.productPrice}{productDetails?.productPricePetty &&`.${productDetails?.productPricePetty}`} $</p>
     </div >
@@ -31,9 +33,7 @@ export default function ShowDetailsOnlineMenu({isShowProduct , setIsShowProduct 
      : <p className='w-full h-full flex items-center justify-center'>no description</p>}
       </div>
     </div>
-    
-
-
+     </div>
    </div>
   </ModalDefault>
   )

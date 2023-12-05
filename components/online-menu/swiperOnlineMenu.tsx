@@ -69,7 +69,6 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
           className="  h-full  flex items-center justify-center"
           slidesPerView={2}
           spaceBetween={10}
-          loop={true}
           breakpoints={{
             320: {
               slidesPerView: 2,
@@ -85,6 +84,14 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
               slidesPerView: 4,
               spaceBetween: 10,
             },
+            768: {
+              slidesPerView: 5,
+              spaceBetween: 10,
+            },
+            1000:{
+              slidesPerView: 7,
+              spaceBetween: 10,
+            }
           }}
           pagination={{
             clickable: true,
@@ -94,7 +101,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
             <SwiperSlide
               onClick={() => groupHandler(productAssortment.group)}
               key={productAssortment.id}
-              className="  bg-indigo-100 text-fuchsia-700 text-sm sm:text-base border border-purple-500 rounded-lg cursor-pointer !shadow-sm !w-max lg:!min-w-[200px] lg:!w-max !px-2 !flex !items-center !justify-center"
+              className=" truncate text-center pt-[1px]  sm:pt-[3px] px-2  bg-indigo-100 text-fuchsia-700 text-sm sm:text-base border border-purple-500 rounded-lg cursor-pointer !shadow-sm "
             >
               {productAssortment.group}
             </SwiperSlide>

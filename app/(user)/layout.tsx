@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
 import HomePageHeader from "@/components/Header/homePageHeader";
+import ToTop from "@/components/toTop/toTop";
 
 
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         />
         </ReactQueryProvider>
         </AuthContextProvider>
+        <ToTop/>
       </body>
     </html>
   );

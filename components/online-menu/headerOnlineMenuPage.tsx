@@ -11,7 +11,7 @@ export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defau
         <button onClick={defaultHandler} className=' w-16 h-16 sm:w-24 sm:h-24 rounded-full block bg-sky-100 -translate-y-8 sm:-translate-y-12 mx-auto shadow-md '>
              <img src={informationBusiness?.logo_image ? informationBusiness?.logo_image : "/images/logo-design-1.png"} className='text-center object-cover w-full h-full rounded-full hoverScale text-2xl'></img>
         </button>
-        <p className='text-center -translate-y-8 sm:-translate-y-12 p-2 text-sm sm:text-2xl'>{informationBusiness?.brand_name}</p>
+        <p className='text-center -translate-y-8 sm:-translate-y-12 p-2 text-sm sm:text-2xl'>{informationBusiness?.brand_name ? informationBusiness?.brand_name : "your brand name" }</p>
     </div>
     <div className='w-full h-max mt-16 sm:mt-24 max-xs:text-sm text-base sm:text-lg font-semibold container mx-auto px-3'>
     <button onClick={()=>setIsShowMenu(true)} className={`${isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show menu</button>

@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import useWarnInformation from "@/hooks/useWarnInformation";
 import { useRouter } from "next/navigation";
 import LoadingPage from "@/components/loading/loadingPage";
+import { InfosProps } from "@/types/authentication";
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -19,7 +20,7 @@ const DiscountSetting = () => {
   const [token ,setToken]=useState(Cookies.get(EYEROLL_TOKEN))
   const { infos } = useContext(AuthContext);
   const router = useRouter()
-  useWarnInformation(infos)
+  useWarnInformation(infos as InfosProps)
   console.log(infos);
   
 

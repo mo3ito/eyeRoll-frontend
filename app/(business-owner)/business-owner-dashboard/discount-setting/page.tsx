@@ -20,6 +20,7 @@ import { SpecificSpecialProductsType } from "@/types/determinationSpecialProduct
 import { toast } from "react-toastify";
 import LoadingPage from "@/components/loading/loadingPage";
 import { adjustedRollType } from "@/types/rollType/adjustedRollType";
+import { InfosProps } from "@/types/authentication";
 
 
 export default function DeterminingDiscount() {
@@ -51,7 +52,7 @@ export default function DeterminingDiscount() {
   const [lastMinsPeak, setLastMinsPeak] = useState<string>("00");
   const [calendarisValue, setCalendarIsValue] = useState<boolean>(false);
   const {infos}=useContext(AuthContext)
-  const {businessOwnerId}=useGetBusinessOwnerId(infos)
+  const {businessOwnerId}=useGetBusinessOwnerId(infos as InfosProps)
   const router = useRouter()
   const [isLoadingForApi , setIsLoadingForApi]=useState<boolean>(false)
   const [isCheckedWithoutDiscount , setIsCheckedWithoutdiscount]=useState<boolean>(false)

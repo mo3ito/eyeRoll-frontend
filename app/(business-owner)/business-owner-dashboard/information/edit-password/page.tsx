@@ -9,13 +9,14 @@ import useGetBusinessOwnerId from '@/hooks/useGet‌‌BusinessOwnerId'
 import updaterWithPatch from '@/services/updaterWihPatch'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import { InfosProps } from '@/types/authentication'
 
 
 export default function EditPassword() {
     const [password, setPassword] = useState<string>("");
     const [repeatPassword, setRepeatPassword] = useState<string>("");
     const {infos , login} = useContext(AuthContext)
-    const {businessOwnerId} = useGetBusinessOwnerId(infos)
+    const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
     const router = useRouter()
 
 

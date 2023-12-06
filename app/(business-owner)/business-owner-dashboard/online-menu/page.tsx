@@ -10,6 +10,7 @@ import { AuthContext } from "@/context/authContext";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import handleNumberInputChange from "@/utils/handleNumberInputChange";
 import senderFormDataWithId from "@/services/senderFormDataWithId";
+import { InfosProps } from "@/types/authentication";
 
 
 
@@ -23,7 +24,7 @@ export default function Facilities() {
   const [productImage , setProductImage]=useState<File | null>(null)
   const [productId , setProductId]=useState<string>("")
   const {infos}=useContext(AuthContext)
-  const{businessOwnerId}=useGetBusinessOwnerId(infos)
+  const{businessOwnerId}=useGetBusinessOwnerId(infos as InfosProps)
 
 
   const clearStates = ()=>{

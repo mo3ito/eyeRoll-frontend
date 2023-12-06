@@ -5,6 +5,7 @@ import useGetBusinessOwnerId from '@/hooks/useGet‌‌BusinessOwnerId';
 import QRCode from 'qrcode.react';
 import { toast } from 'react-toastify';
 import { InfosProps } from '@/types/authentication';
+import LoadingPage from '@/components/loading/loadingPage';
 
 export default function QRCodeLink() {
 
@@ -43,6 +44,10 @@ export default function QRCodeLink() {
        
       });
     };
+
+    if(!qrCodeData){
+      return <LoadingPage/>
+    }
     
 
   return (

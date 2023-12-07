@@ -3,9 +3,9 @@ import {useState , useEffect , useContext} from 'react'
 import { AuthContext } from '@/context/authContext';
 import useGetBusinessOwnerId from '@/hooks/useGet‌‌BusinessOwnerId';
 import QRCode from 'qrcode.react';
-import { toast } from 'react-toastify';
 import { InfosProps } from '@/types/authentication';
 import LoadingPage from '@/components/loading/loadingPage';
+import handleCopyToClipboard from '@/utils/handleCopyToClipboard';
 
 export default function QRCodeLink() {
 
@@ -19,17 +19,6 @@ export default function QRCodeLink() {
         setQRCodeData(path);
       }
     }, [businessOwnerId]);
-
-    const handleCopyToClipboard = async ()=>{
-      if(navigator.clipboard && qrCodeData){
-        try {
-         await navigator.clipboard.writeText(qrCodeData)
-         toast.success('Link copied!')
-        } catch (error) {
-          console.error('Copy to clipboard failed: ', error);
-        }
-      }
-    }
 
 
     const handleDownload = () => {
@@ -71,7 +60,7 @@ export default function QRCodeLink() {
           }
           <div className='mt-4'>
           <p className='text-center text-xs  sm:text-sm md:text-base font-semibold mb-2'>your link</p>
-          <button title='click to copy' onClick={handleCopyToClipboard} className='border bg-fuchsia-400 border-fuchsia-400 py-1 px-2 rounded-lg cursor-pointer text-[10px] sm:text-sm md:text-base '>{`${process.env.NEXT_PUBLIC_BASE_URL}/online-menu/${businessOwnerId}`}</button>
+          <button title='click to copy' onClick={()=>handleCopyToClipboard(qrCodeData)} className='border bg-fuchsia-400 border-fuchsia-400 py-1 px-2 rounded-lg cursor-pointer text-[10px] sm:text-sm md:text-base '>{`${process.env.NEXT_PUBLIC_BASE_URL}/online-menu/${businessOwnerId}`}</button>
           </div>
     </div>
     </div>

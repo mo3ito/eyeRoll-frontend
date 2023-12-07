@@ -12,7 +12,7 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import ValidatorPassword from "@/components/shared/ValidatorPassword/validatorPassword";
 import { toast } from "react-toastify";
 import { InfosProps } from "@/types/authentication";
-import useLogoutHandler from "@/hooks/useLogoutHandler";
+import logoutHandler from "@/utils/logoutHandler";
 
 const LayoutDashboard = () => {
   const [showAside, setShowAside] = useState<boolean>(false);
@@ -120,7 +120,7 @@ const LayoutDashboard = () => {
               <li className=" px-2 sm:px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">rez</li>
             </ul>
             </li>
-          <li onClick={()=>useLogoutHandler(router , setInfos)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>log out</li>
+          <li onClick={()=>logoutHandler(router , setInfos)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>log out</li>
           </ul>
           </div>
 

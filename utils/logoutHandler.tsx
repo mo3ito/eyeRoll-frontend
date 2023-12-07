@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import EYEROLL_TOKEN from "@/help/tokenName";
 import { InfosProps } from "@/types/authentication";
 
-const useLogoutHandler = async (
+const logoutHandler = async (
   router: any,
   setInfos: (infos: InfosProps | undefined) => void
 ) => {
@@ -11,4 +11,4 @@ const useLogoutHandler = async (
   setInfos(undefined);
 };
 
-export default useLogoutHandler;
+export default logoutHandler;

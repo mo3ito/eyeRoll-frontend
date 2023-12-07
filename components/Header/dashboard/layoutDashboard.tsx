@@ -4,7 +4,7 @@ import LeftMenu from "./leftMenu";
 import { useContext } from "react";
 import { AuthContext } from "@/context/authContext";
 
-import logOutHandler from "@/utils/logOutHandler";
+
 import { useRouter } from "next/navigation";
 import { BUSINESS_OWNER_VALIDATOR_PASSWORD } from "@/routeApi/endpoints";
 import senderWithAuthId from "@/services/senderWithAuthId";
@@ -12,6 +12,7 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import ValidatorPassword from "@/components/shared/ValidatorPassword/validatorPassword";
 import { toast } from "react-toastify";
 import { InfosProps } from "@/types/authentication";
+import useLogoutHandler from "@/hooks/useLogoutHandler";
 
 const LayoutDashboard = () => {
   const [showAside, setShowAside] = useState<boolean>(false);
@@ -20,7 +21,7 @@ const LayoutDashboard = () => {
   const [showSwitchAccount , setShowSwitchAccount]=useState<boolean>(false)
   const [isShowImportPassword , setIsShowImportPassword]=useState<boolean>(false)
   const [passwordInput , setPasswordInput]=useState<string>("")
-  const { infos } = useContext(AuthContext);
+  const { infos , setInfos } = useContext(AuthContext);
   const [isPasswordMatch , setIsPasswordMatch]=useState<boolean>(false)
   const router = useRouter()
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
@@ -119,7 +120,7 @@ const LayoutDashboard = () => {
               <li className=" px-2 sm:px-4 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">rez</li>
             </ul>
             </li>
-          <li onClick={()=>logOutHandler(router)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>log out</li>
+          <li onClick={()=>useLogoutHandler(router , setInfos)} className=' cursor-pointer px-2 sm:px-2 py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>log out</li>
           </ul>
           </div>
 

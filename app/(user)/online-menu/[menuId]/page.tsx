@@ -273,17 +273,28 @@ useEffect(() => {
        setProductDetails={setProductDetails}
        sortedProduct={sortedProduct}
        /> :
-      <ContainerFilterMenu setIsShowProduct={setIsShowProduct} setProductDetails={setProductDetails} groupName={groupName} filteredProduct={filteredProduct} /> 
+      <ContainerFilterMenu
+       setIsShowProduct={setIsShowProduct} 
+       setProductDetails={setProductDetails} 
+       groupName={groupName} 
+       filteredProduct={filteredProduct} /> 
           }
           </> :   
-      <ContainerFilterMenu setIsShowProduct={setIsShowProduct} setProductDetails={setProductDetails}  groupName='search result' filteredProduct={allProducts} />
+      <ContainerFilterMenu 
+      setIsShowProduct={setIsShowProduct} 
+      setProductDetails={setProductDetails}  
+      groupName='search result' 
+      filteredProduct={allProducts} />
         }
       </> :
         <InfoBusinesOnlineMenu informationBusiness={informationBusiness}/>
         }
       </div>
     </div> 
-    <ShowDetailsOnlineMenu isShowProduct={isShowProduct} setIsShowProduct={setIsShowProduct} productDetails={productDetails}/>
+    <ShowDetailsOnlineMenu 
+    isShowProduct={isShowProduct} 
+    setIsShowProduct={setIsShowProduct} 
+    productDetails={productDetails}/>
     </>
   )
 }

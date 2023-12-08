@@ -7,13 +7,13 @@ export default function AccordionBox({ accordions , setShowAside , className , s
   return (
     <div className={className}>
   
-      {accordions.map((accordion) => (
+      {accordions?.map((accordion) => (
         <Accordion
           key={accordion.id}
           title={accordion.title}
           options={...accordion.options}
           setShowAside={setShowAside}
-          setIsShowImportPassword={setIsShowImportPassword}
+          setIsShowImportPassword={setIsShowImportPassword }
         />
       ))}
     </div>

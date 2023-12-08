@@ -20,6 +20,6 @@ export interface AccordionBoxProps {
   }[];
   setShowAside: React.Dispatch<React.SetStateAction<boolean>>;
   className: string;
-  setIsShowImportPassword:Dispatch<React.SetStateAction<boolean>>;
+  setIsShowImportPassword?:Dispatch<React.SetStateAction<boolean>>;
   
 }

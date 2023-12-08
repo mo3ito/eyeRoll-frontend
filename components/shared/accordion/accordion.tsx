@@ -18,7 +18,7 @@ export default function Accordion({title , options , setShowAside , setIsShowImp
       if(childOption){
         setShowAccordionChild(prev=> !prev)
       } else{
-        if(href === "/business-owner-dashboard/information/edit-password"){
+        if(href === "/business-owner-dashboard/information/edit-password" && setIsShowImportPassword){
           setShowAside(false)
           setIsShowImportPassword(true)
           return
@@ -38,11 +38,11 @@ export default function Accordion({title , options , setShowAside , setIsShowImp
 
   return (
   
-      <div className={`w-full  ${!showAccordion ? '  h-12 ' : 'h-max '}  text-neutral-500  border-t-2  `}>
+      <div className={`w-full  ${!showAccordion ? '  h-12 ' : 'h-max '} text-sm sm:text-base text-neutral-500  border-t-2  `}>
            <button onClick={()=>setShowAccordion(prev=> !prev)} className='py-3  flex w-full px-6'>
           <span>{title}</span>
-         {!showAccordion ? <svg className='inline-block fill-neutral-500 w-5 h-5 ml-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path></svg>
-          : <svg className='inline-block fill-neutral-500 w-5 h-5 ml-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>}
+         {!showAccordion ? <svg className='inline-block fill-neutral-500 w-3 h-3 sm:w-5 sm:h-5 ml-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path></svg>
+          : <svg className='inline-block fill-neutral-500 w-3 h-3 sm:w-5 sm:h-5 ml-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg>}
          </button>
          <ul className={` ${showAccordion ? 'visible ' : 'invisible'} last:border-b-2`}>
           {options.map(item=>
@@ -62,9 +62,3 @@ export default function Accordion({title , options , setShowAside , setIsShowImp
 
   )
 }
-
-
-
-
-
-

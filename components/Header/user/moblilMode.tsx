@@ -1,18 +1,16 @@
 'use client'
-import {useState } from 'react'
+import {useState , useRef , useEffect } from 'react'
 
 import Logo from '@/components/logo/logo'
 import RightMenu from '@/components/asideMenu/rightMenu'
+import useDropDownHandler from '@/hooks/useDropDownHandler'
 
 export default function MoblilMode() {
   
-  
-
-
- 
-
     const[showAside, setShowAside] = useState<boolean>(false);
-   
+    const rightMenuRef = useRef<null | HTMLDivElement>(null)
+    useDropDownHandler(rightMenuRef , setShowAside)
+
   return (
     <div className='relative h-max'>
     <div className='w-full flex sm:hidden items-center justify-between px-4 '>
@@ -35,7 +33,7 @@ export default function MoblilMode() {
 
 
     </div>
-   <RightMenu showAside={showAside}  setShowAside={setShowAside} />
+   <RightMenu rightMenuRef={rightMenuRef} showAside={showAside}  setShowAside={setShowAside} />
     </div>
   )
 }

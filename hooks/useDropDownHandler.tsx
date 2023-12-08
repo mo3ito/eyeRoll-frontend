@@ -15,8 +15,8 @@ const useDropDownHandler = <T extends HTMLElement | null>(
       }
     };
 
-    document.addEventListener("click", dropDownHandler);
-    return () => document.removeEventListener("click", dropDownHandler);
+    document.body.addEventListener("click", dropDownHandler);
+    return () => document.body.removeEventListener("click", dropDownHandler);
   }, []);
 };
 

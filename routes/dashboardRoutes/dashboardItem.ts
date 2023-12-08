@@ -1,24 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// interface options {
-//   id: string;
-//   name: string;
-//   href?: string;
-//   childOption?:{id: string , childName:string , href:string}
-  
-// }
-
-// export interface AccordionBoxProps {
-//   accordions: {
-//     id: string;
-//     title: string;
-//     options: any;
-//   }[];
-//   setShowAside: React.Dispatch<React.SetStateAction<boolean>>;
-//   className: string;
-//   setIsShowImportPassword?:Dispatch<React.SetStateAction<boolean>>;
-  
-// }
 
 
 const accordionItems = [

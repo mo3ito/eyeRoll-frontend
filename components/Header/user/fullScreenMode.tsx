@@ -4,6 +4,7 @@ import HeaderTitleLi from '../headerTitleLi'
 import { AuthContext } from '@/context/authContext'
 import { useRouter } from 'next/navigation'
 import logoutHandler from '@/utils/logoutHandler'
+import Logo from '@/components/logo/logo'
 
 export default function FullScreenMode() {
     const {infos , setInfos}=useContext(AuthContext)
@@ -12,8 +13,10 @@ export default function FullScreenMode() {
  
     
   return (
-    <div className='container hidden sm:flex h-full mx-auto   items-center    px-20 '>
-      <div className='h-10 w-24 text-3xl text-white '>logo</div>
+    <div className='container hidden sm:flex h-full mx-auto   items-center    px-4 '>
+    
+      <Logo/>
+
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>
       
         { infos?.username && !infos?.is_businessOwner && <li  className='relative group hover:border-b-4  border-purple-400 h-full flex items-center justify-center cursor-pointer  w-max'>

@@ -2,6 +2,7 @@
 import {useState , useRef, useEffect} from 'react'
 import { useRouter } from 'next/navigation'
 import useDropDownHandler from '@/hooks/useDropDownHandler'
+import Logo from '@/components/logo/logo'
 
 export default function MoblilMode() {
     const [isShowMobliMenu , setIsShowMobileMenu]=useState<boolean>(false)
@@ -18,7 +19,21 @@ export default function MoblilMode() {
       }
 
   return (
-    <div className='w-full flex sm:hidden items-center mx-4 '>
+    <div className='w-full flex sm:hidden items-center justify-between px-4'>
+
+  
+    <div className='w-12  h-12 rounded-full flex items-center justify-center  bg-blue-200 '>
+    <div className=''>
+      <div className='w-max overflow-hidden '>
+        {/* <div className='truncate text-xs px-1 max-w-[40px] inline-block'>mo3iiiiiiiiiiiiitttttttttt</div>
+        <svg className='w-3 h-3 mb-2 inline-block ml-1' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"></path></svg> */}
+      </div>
+
+    </div>
+    </div>
+
+    <Logo/>
+
     <div ref={menuRef}  className=' h-max w-max '>
         <div className='relative'>
     <button onClick={()=>setIsShowMobileMenu(prev=> !prev)} className=''>
@@ -46,6 +61,7 @@ export default function MoblilMode() {
     </ul>
     </div>
     </div>
+   
 
 
     </div>

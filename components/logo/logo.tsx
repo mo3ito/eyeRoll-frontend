@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 export default function Logo() {
   return (
-    <Link href="/" className='h-max pt-2 sm:pt-0 sm:mr-6  w-max   '>
-        <svg className='fill-indigo-400 w-14 sm:w-16 ' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
+    <Link href="/" className='h-max pt-2 sm:pt-0   w-max   '>
+        <svg className='fill-indigo-600 w-14 sm:w-16 ' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
 	 viewBox="0 0 175.33 120.36" >
 
 <g>
@@ -33,7 +33,7 @@ export default function Logo() {
 		c0.8,0.73,1.38,1.7,1.61,2.8l20.58-4.4C113.61,47.55,113.81,49.39,113.81,51.27z"/>
 </g>
 </svg>
-<p className='text-xs sm:text-base text-indigo-400 text-center'>Eye Roll</p>
+<p className='text-xs sm:text-base text-indigo-600 text-center'>Eye Roll</p>
 
       </Link>
   )

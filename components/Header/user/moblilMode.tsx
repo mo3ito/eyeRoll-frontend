@@ -36,7 +36,6 @@ export default function MoblilMode() {
     { !infos?.is_businessOwner && infos?.username && <ul className="   rounded-b-md p-1 border-purple-500 bg-blue-100 z-50 shadow-md  h-max   w-full  px-1 ">
       <li onClick={()=>logoutHandler(router , setInfos)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
-    
     </div>
 
     </div>

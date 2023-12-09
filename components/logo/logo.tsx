@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Logo() {
   return (
-    <Link href="/" className='h-max pt-4 sm:pt-0 sm:mr-6  w-max   '>
+    <Link href="/" className='h-max pt-2 sm:pt-0 sm:mr-6  w-max   '>
         <svg className='fill-indigo-400 w-14 sm:w-16 ' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
 	 viewBox="0 0 175.33 120.36" >
 

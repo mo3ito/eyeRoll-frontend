@@ -113,7 +113,7 @@ const LayoutDashboard = () => {
         </div>
 
     </div>
-    <Logo/>
+    <Logo className='h-max  w-max' href="/business-owner-dashboard"/>
     </div>
   </header>
   <LeftMenu setIsShowImportPassword={setIsShowImportPassword} leftMenuRef={leftMenuRef} setShowAside={setShowAside} showAside={showAside} />

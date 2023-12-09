@@ -38,7 +38,7 @@ export default function FullScreenMode() {
          {id:"12" , name:"login as business owner" , path:"/register-business-owner/login"  }]} />
 
       </ul>
-      <Logo/>
+      <Logo className='h-max trans sm:pt-0  2xl:translate-y-1  w-max   '/>
       </div>
   )
 }

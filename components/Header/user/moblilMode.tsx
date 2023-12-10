@@ -24,7 +24,7 @@ export default function MoblilMode() {
     <div className='w-full flex sm:hidden items-center justify-between px-4 '>
 
     <div className='relative '>
-    <div ref={profileRef} onClick={()=>setShowProfile(prev=> !prev)} className='w-12 mt-2 h-12 rounded-full flex items-center justify-center  bg-indigo-400 '>
+    <div ref={profileRef} onClick={()=>setShowProfile(prev=> !prev)} className='w-12 mt-5 h-12 rounded-full flex items-center justify-center  bg-indigo-400 '>
     <img src="/images/defaultPerson.png" alt="" />
     </div>
     <div  className={`${ showProfile ? 'absolute' : 'hidden'} w-36 h-max bg-blue-100 text-base z-50 shadow-md border border-purple-500 rounded-md`}>
@@ -42,8 +42,8 @@ export default function MoblilMode() {
     
 
 
-    <Logo className='h-max translate-y-2   w-max   '/>
-    <button onClick={()=>setShowAside(true)} className='pt-2'>
+    <Logo className='h-max translate-y-3   w-max   '/>
+    <button onClick={()=>setShowAside(true)} className='pt-3'>
     <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
     </button>
     </div>

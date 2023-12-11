@@ -1,6 +1,6 @@
 
 
-const linkHandler = (path , router)=>{
+const linkHandler = (path : string , router : any)=>{
     if(router){
         router.push(path)
     }

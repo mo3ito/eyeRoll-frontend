@@ -5,6 +5,8 @@ import LoadingPage from '@/components/loading/loadingPage'
 import { AuthContext } from '@/context/authContext'
 import { useContext } from 'react'
 import Logo from '@/components/logo/logo'
+import SearchBarSwiper from '@/components/swiper/searchBarSwiper'
+import ContainerResultSearch from '@/components/containerResultSearch/containerResultSearch'
  
 
 const page = () => {
@@ -17,7 +19,7 @@ const page = () => {
 
     <div className='mt-20 w-full sm:w-10/12 md:w-10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12'>
       <div className='w-max h-max  mx-auto mb-5 md:mb-10'>
-         {/* <p className='text-xl text-center text-indigo-600  '>Eye Roll</p> */}
+
       <svg className='fill-indigo-600 max-xs:w-16  w-20 md:w-28 lg:w-36   ' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
 	 viewBox="0 0 175.33 120.36" >
 
@@ -43,14 +45,15 @@ const page = () => {
 		c0.51-0.17,1.05-0.26,1.61-0.26c0.57,0,1.11,0.09,1.61,0.26l6.48-20.02c3.56,1.15,6.8,3.05,9.51,5.5l-14.1,15.61
 		c0.8,0.73,1.38,1.7,1.61,2.8l20.58-4.4C113.61,47.55,113.81,49.39,113.81,51.27z"/>
 </g>
-</svg>
+	  </svg>
      
       </div>
-  
-    <div className='w-full border border-indigo-600 rounded-lg bg-sky-50 flex items-center max-xs:h-8 h-10 md:h-12 '>
-    <svg className=' w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 mr-auto ml-1 fill-zinc-500' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-     <input placeholder='search' className='w-full h-full outline-none px-2 bg-transparent text-sm md:text-base lg:text-lg  text-zinc-500' type="text" />
-    </div>
+		<ContainerResultSearch/>
+	
+   
+
+
+
     </div>
   
 

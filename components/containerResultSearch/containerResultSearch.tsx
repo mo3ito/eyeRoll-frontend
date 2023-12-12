@@ -2,10 +2,16 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import useDropDownHandler from '@/hooks/useDropDownHandler'
 import getter from '@/services/getter'
+import { BASE_URL_SEARCH_INFORMATION } from '@/routeApi/baseUrlNextApi'
+
+interface resultSearchProps{
+_id:string;
+brand_name:string
+}
 
 export default function ContainerResultSearch() {
     const [inputValue , setInputValue]=useState<string>("")
-    const [resultSearch , setResultSearch]=useState([])
+    const [resultSearch , setResultSearch]=useState<resultSearchProps[]|[]>([])
     const [isShowResultBox , setIsShowResultBox]=useState<boolean>(false)
     const boxSearchRef = useRef<HTMLDivElement | null>(null)
     useDropDownHandler(boxSearchRef , setIsShowResultBox)
@@ -18,10 +24,10 @@ export default function ContainerResultSearch() {
         const searcher = async ()=>{
             if(inputValue.trim() !== ""){
                 try {
-                 const response =  await getter(`http://localhost:5000/eyeRoll/search-information/?input_value=${inputValue}`)
+                 const response =  await getter(`${BASE_URL_SEARCH_INFORMATION}/?input_value=${inputValue}`)
                  console.log(response);
-                 if(response?.status === 200){
-                    setIsShowResultBox(true)
+                 if(response?.status === 200 ){
+                    
                     setResultSearch(response.data)
                  }
                  
@@ -36,6 +42,15 @@ export default function ContainerResultSearch() {
         }
         searcher()
     },[inputValue])
+
+
+    useEffect(()=>{
+        if(resultSearch.length >0){
+            setIsShowResultBox(true)
+        }else{
+            setIsShowResultBox(false)
+        }
+    },[resultSearch])
     console.log(inputValue);
     console.log(resultSearch);
     

@@ -34,19 +34,24 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal }) {
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}
     >
-      <div className="w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex items-center justify-center">
+      <div className=" w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex items-center justify-center ">
         {typeof window !== 'undefined' && isSpinerRun && (
           <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
+            // outerBorderColor={"#e879f9"}
+            // radiusLineColor={"#e879f9"}
+            radiusLineWidth={4}
+            outerBorderWidth={4}
             data={data}
             onStopSpinning={() => {
               setMustSpin(false);
             }}
           />
         )}
-        <button onClick={handleSpinClick}>SPIN</button>
+       
       </div>
+      <button className='bg-indigo-400 block mx-auto px-6 py-2 mb-4 rounded-lg ' onClick={handleSpinClick}>try your luck</button>
     </ModalDefault>
   );
 }

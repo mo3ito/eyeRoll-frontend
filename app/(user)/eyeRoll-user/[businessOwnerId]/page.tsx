@@ -15,15 +15,15 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
     
   return (
     <>
-    <div className='pt-36  container mx-auto '>
+    <div className='pt-36  container mx-auto px-4 '>
       <div className='w-full h-max rounded-lg  py-2 border border-fuchsia-400 text-center mx-auto shadow-lg text-2xl'>
       mo3i
       </div>
 
-      <ul className='mx-auto  w-max gap-x-6 flex mt-20'>
+      <ul className='mx-auto  w-max gap-x-2 sm:gap-x-6 flex mt-20 text-sm sm:text-base md:text-lg lg:text-xl'>
        
-      <li className='w-64 h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
-      <svg className='w-20 h-20 !fill-blue-400' version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+      <li className='max-xs:w-20 max-xs:h-20 w-28 h-28 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+      <svg className=' w-10 h-10 sm:w-20 sm:h-20 !fill-blue-400 flex-shrink-0' version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
 	 width="800px" height="800px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" >
 <g>
 	<path fill="#231F20" d="M63.934,31.645c-0.015-0.037-0.256-0.646-0.74-1.648C60.597,24.627,51.02,8.004,32,8.004
@@ -39,11 +39,11 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		C36,29.795,34.209,28.004,32,28.004z"/>
 </g>
       </svg>
-      <p className='text-xl'>Eye</p>
+      <p className=''>Eye</p>
         </li>
 
-        <li onClick={()=>setIsShowDeterminationRoll(true)} className='w-64 h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
-        <svg className='w-20 h-20  fill-indigo-400' version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" 
+        <li onClick={()=>setIsShowDeterminationRoll(true)} className='max-xs:w-20 max-xs:h-20 w-28 h-28 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+        <svg className=' w-10 h-10 sm:w-20 sm:h-20  fill-indigo-400 flex-shrink-0' version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" 
 	 viewBox="0 0 512 512"  >
 
 <g>
@@ -93,17 +93,17 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		c-6.204,0-11.228,5.028-11.228,11.224C213.699,143.688,218.723,148.715,224.927,148.715z"/>
 </g>
         </svg>
-        <p className='pt-2 text-xl'>Roll</p>
+        <p className='pt-2 '>Roll</p>
       
         </li>
-        <li onClick={()=>linkHandler(`/online-menu/${businessOwnerId}`,router)} className='w-64 h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
-           <svg className='w-20 h-20' viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect fill="#ffffff" height="60" rx="10" width="60"/><rect fill="#f1f3f4" height="44" width="36" x="12" y="8"/><path d="M48,53.5H12A1.5,1.5,0,0,1,10.5,52V8A1.5,1.5,0,0,1,12,6.5H48A1.5,1.5,0,0,1,49.5,8V52A1.5,1.5,0,0,1,48,53.5Zm-34.5-3h33V9.5h-33Z" fill="#aaadbf"/><circle cx="22" cy="18" fill="#ffe1a0" r="4"/><path d="M22,23.5A5.5,5.5,0,1,1,27.5,18,5.507,5.507,0,0,1,22,23.5Zm0-8A2.5,2.5,0,1,0,24.5,18,2.5,2.5,0,0,0,22,15.5Z" fill="#f29580"/><circle cx="22" cy="30" fill="#bec6f4" r="4"/><path d="M22,35.5A5.5,5.5,0,1,1,27.5,30,5.507,5.507,0,0,1,22,35.5Zm0-8A2.5,2.5,0,1,0,24.5,30,2.5,2.5,0,0,0,22,27.5Z" fill="#8d9cf4"/><circle cx="22" cy="42" fill="#c1f7fd" r="4"/><path d="M22,47.5A5.5,5.5,0,1,1,27.5,42,5.507,5.507,0,0,1,22,47.5Zm0-8A2.5,2.5,0,1,0,24.5,42,2.5,2.5,0,0,0,22,39.5Z" fill="#7bcdd1"/><path d="M42,19.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M42,31.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M42,43.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M12,53.5A1.5,1.5,0,0,1,10.5,52V8A1.5,1.5,0,0,1,12,6.5H48a1.5,1.5,0,0,1,0,3H13.5V52A1.5,1.5,0,0,1,12,53.5Z" fill="#eac8c9"/></svg>
-          <p className='pt-2 text-xl'>Online menu</p>
+        <li onClick={()=>linkHandler(`/online-menu/${businessOwnerId}`,router)} className=' max-xs:w-20 max-xs:h-20 w-28 h-28 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+           <svg className=' w-10 h-10 sm:w-20 sm:h-20 flex-shrink-0' viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect fill="#ffffff" height="60" rx="10" width="60"/><rect fill="#f1f3f4" height="44" width="36" x="12" y="8"/><path d="M48,53.5H12A1.5,1.5,0,0,1,10.5,52V8A1.5,1.5,0,0,1,12,6.5H48A1.5,1.5,0,0,1,49.5,8V52A1.5,1.5,0,0,1,48,53.5Zm-34.5-3h33V9.5h-33Z" fill="#aaadbf"/><circle cx="22" cy="18" fill="#ffe1a0" r="4"/><path d="M22,23.5A5.5,5.5,0,1,1,27.5,18,5.507,5.507,0,0,1,22,23.5Zm0-8A2.5,2.5,0,1,0,24.5,18,2.5,2.5,0,0,0,22,15.5Z" fill="#f29580"/><circle cx="22" cy="30" fill="#bec6f4" r="4"/><path d="M22,35.5A5.5,5.5,0,1,1,27.5,30,5.507,5.507,0,0,1,22,35.5Zm0-8A2.5,2.5,0,1,0,24.5,30,2.5,2.5,0,0,0,22,27.5Z" fill="#8d9cf4"/><circle cx="22" cy="42" fill="#c1f7fd" r="4"/><path d="M22,47.5A5.5,5.5,0,1,1,27.5,42,5.507,5.507,0,0,1,22,47.5Zm0-8A2.5,2.5,0,1,0,24.5,42,2.5,2.5,0,0,0,22,39.5Z" fill="#7bcdd1"/><path d="M42,19.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M42,31.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M42,43.5H32a1.5,1.5,0,0,1,0-3H42a1.5,1.5,0,0,1,0,3Z" fill="#aaadbf"/><path d="M12,53.5A1.5,1.5,0,0,1,10.5,52V8A1.5,1.5,0,0,1,12,6.5H48a1.5,1.5,0,0,1,0,3H13.5V52A1.5,1.5,0,0,1,12,53.5Z" fill="#eac8c9"/></svg>
+          <p className='pt-2 '>Online menu</p>
             </li>
       </ul>
-      
+	  <DeterminationRoll isShowModal={isShowDeterminationRoll} setIsShowModal={setIsShowDeterminationRoll}/>
     </div>
-    <DeterminationRoll isShowModal={isShowDeterminationRoll} setIsShowModal={setIsShowDeterminationRoll}/>
+   
     </>
   )
 }

@@ -21,7 +21,7 @@
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
-    "next": "^13.5.2",
+    "next": "^14.0.4",
     "postcss": "8.4.29",
     "qrcode.react": "^3.1.0",
     "react-custom-roulette": "^1.4.1",

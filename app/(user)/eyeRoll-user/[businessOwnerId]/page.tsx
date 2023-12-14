@@ -1,16 +1,27 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import linkHandler from '@/utils/linkHandler';
 import { useRouter } from 'next/navigation';
 import DeterminationRoll from '@/components/determinationRoll/determinationRoll';
+import { AuthContext } from '@/context/authContext';
+import useGetUserId from '@/hooks/useGetUserId';
+import { InfosProps } from '@/types/authentication';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
-    const[isShowDeterminationRoll , setIsShowDeterminationRoll]=useState<boolean>(false)
+    const[isShowGetRoll , setIsShowGetRoll]=useState<boolean>(false)
     const businessOwnerId = params.businessOwnerId
-    console.log(businessOwnerId);
     const router = useRouter()
+	const {infos} = useContext(AuthContext)
+	const {userId} = useGetUserId(infos as InfosProps)
     
+	const getRollHandler = ()=>{
+		if(!userId){
+			router.push("/register-user/login")
+		}else{
+			setIsShowGetRoll(true)
+		}
+	}
     
     
   return (
@@ -42,7 +53,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
       <p className=''>Eye</p>
         </li>
 
-        <li onClick={()=>setIsShowDeterminationRoll(true)} className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+        <li onClick={getRollHandler} className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
         <svg className=' w-10 h-10 sm:w-20 sm:h-20  fill-indigo-400 flex-shrink-0' version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" 
 	 viewBox="0 0 512 512"  >
 
@@ -101,7 +112,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll isShowModal={isShowDeterminationRoll} setIsShowModal={setIsShowDeterminationRoll}/>
+	  <DeterminationRoll isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} />
     </div>
    
     </>

@@ -16,9 +16,6 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal }) {
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isSpinerRun, setIsSpinerRun] = useState(false);
 
-  useEffect(() => {
-    setIsSpinerRun(true);
-  }, []);
 
   const handleSpinClick = () => {
     if (!mustSpin) {
@@ -35,7 +32,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal }) {
       setIsShowModal={setIsShowModal}
     >
       <div className=" w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex items-center justify-center ">
-        {typeof window !== 'undefined' && isSpinerRun && (
+        
           <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
@@ -48,7 +45,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal }) {
               setMustSpin(false);
             }}
           />
-        )}
+        
        
       </div>
       <button className='bg-indigo-400 block mx-auto px-6 py-2 mb-4 rounded-lg ' onClick={handleSpinClick}>try your luck</button>

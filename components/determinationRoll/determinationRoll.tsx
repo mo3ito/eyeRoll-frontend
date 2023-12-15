@@ -19,6 +19,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [discount , setDiscount]=useState(0)
   const [fixedDiscount , setFixedDiscount]=useState(false)
   const {infos} = useContext(AuthContext)
+  const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
   console.log(userId);
@@ -76,6 +77,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   
   const handleSpinClick = async () => {
     if (!mustSpin) {
+      setIsCloseOutModalClick(false)
       const random = await Math.floor(Math.random() * (maxPercentageDiscount - minPercentageDiscount + 1)) + minPercentageDiscount;;
      await setPrizeNumber(random - minPercentageDiscount)
      await setMustSpin(true);
@@ -83,6 +85,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
     }
   };
   
+  useEffect(()=>{
+    if(!isShowModal){
+      setMustSpin(false)
+    }
+  },[isShowModal])
 
   console.log("discount" , discount);
   
@@ -92,27 +99,32 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
   return (
     <ModalDefault
-      closeIconClassName="w-8 h-8 fill-red-400"
+      isCloseIcon={false}
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}
+      isClosOuteModalClick={isCloseOutModalClick}
     >
-      <div className=" w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
+      <div className=" w-full h-max overflow-y-hidden p-2  overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
            
-          { !fixedDiscount ?  <> <Wheel
+          { !fixedDiscount ?  <>
+          
+          <p className='py-3 px-1 w-full text-center border  block bg-green-400 text-white font-bold shadow-md '>Roulette chance discount</p>
+
+           <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
             // outerBorderColor={"#e879f9"}
             // radiusLineColor={"#e879f9"}
-            
             radiusLineWidth={4}
             outerBorderWidth={4}
             textDistance={70}
             data={dataArray}
             onStopSpinning={() => {
               setMustSpin(false);
+              setIsCloseOutModalClick(true)
             }}
           /> 
-          <button className='bg-indigo-400 block mx-auto px-6 py-2 mb-4 rounded-lg ' onClick={handleSpinClick}>try your luck</button>  </> :
+          <button className='bg-fuchsia-400 w-full block mx-auto px-6 py-3  rounded-lg text-white font-bold  ' onClick={handleSpinClick}>try your luck</button>  </> :
           <div className=''>
             <p className='text-center text-xl font-semibold '>congratulation</p>
             <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>

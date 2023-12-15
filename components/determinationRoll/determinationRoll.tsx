@@ -6,8 +6,9 @@ import { AuthContext } from '@/context/authContext';
 import { InfosProps } from '@/types/authentication';
 import senderWithAuthId from '@/services/senderWithAuthId';
 import LoadingPage from '../loading/loadingPage';
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { v4 as uuid } from 'uuid';
+import { useQuery} from "@tanstack/react-query";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId }) {
   const [mustSpin, setMustSpin] = useState(false);
@@ -22,6 +23,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
+  const [inoformationDiscount , setInformationDiscount ]=useState([])
   console.log(userId);
 
   const {data:getRollData , isLoading}=useQuery(businessOwnerId && userId ? queryKey : [],()=>{
@@ -78,10 +80,15 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const handleSpinClick = async () => {
     if (!mustSpin) {
       setIsCloseOutModalClick(false)
-      const random = await Math.floor(Math.random() * (maxPercentageDiscount - minPercentageDiscount + 1)) + minPercentageDiscount;;
-     await setPrizeNumber(random - minPercentageDiscount)
+      const randomDiscount = await Math.floor(Math.random() * (maxPercentageDiscount - minPercentageDiscount + 1)) + minPercentageDiscount;;
+     await setPrizeNumber(randomDiscount - minPercentageDiscount)
      await setMustSpin(true);
-     setDiscount(random)
+     setDiscount(randomDiscount)
+    //  setInformationDiscount({
+    //   id: uuidv4(),
+    //   discount: randomDiscount,
+
+    //  })
     }
   };
   
@@ -93,7 +100,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
   console.log("discount" , discount);
   
-  if(!userId && !businessOwnerId ){
+  if(!userId && !businessOwnerId && isLoading ){
     return <LoadingPage/>
   }
 

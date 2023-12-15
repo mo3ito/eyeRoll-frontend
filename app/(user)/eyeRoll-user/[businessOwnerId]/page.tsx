@@ -8,6 +8,9 @@ import useGetUserId from '@/hooks/useGetUserId';
 import { InfosProps } from '@/types/authentication';
 import { Socket } from 'socket.io-client';
 import io from "socket.io-client"
+import { useQuery} from "@tanstack/react-query";
+import getter from '@/services/getter';
+import LoadingPage from '@/components/loading/loadingPage';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
@@ -17,6 +20,18 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
     const router = useRouter()
 	const {infos} = useContext(AuthContext)
 	const {userId} = useGetUserId(infos as InfosProps)
+	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
+
+	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
+		if (businessOwnerId ) {
+			
+			return getter(`http://localhost:5000/get-businessOwner-infos-searched/?businessOwnerId=${businessOwnerId}`)
+		  }
+		  return null
+	})
+
+	console.log(businessOwnerInfos);
+	
 
 	  useEffect(() => {
       const newSocket = io("http://localhost:5002");
@@ -38,15 +53,26 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		}
 	}
     
+	if(!businessOwnerInfos){
+		return <LoadingPage/>
+	}
     
   return (
     <>
-    <div className='pt-36  container mx-auto px-4 flex justify-center'>
-      {/* <div className='w-full h-max rounded-lg  py-2 border border-fuchsia-400 text-center mx-auto shadow-lg text-2xl'>
-      mo3i
-      </div> */}
+    <div className=' translate-y-36   container mx-auto p-4 flex flex-col gap-y-20 justify-center border border-fuchsia-400 rounded-lg'>
 
-      <ul className='mx-auto w-max max-xs:gap-x-1 gap-x-2 sm:gap-x-6 flex mt-20  text-sm sm:text-base md:text-lg lg:text-xl'>
+      <div className='w-full rounded-lg h-max border bg-sky-50 border-fuchsia-400 p-2 text-lg leading-10'>
+		<h1 className='w-full bg-fuchsia-400 py-3 text-center font-bold text-xl '>{businessOwnerInfos?.data?.brand_name}</h1>
+		<p>management : <span className='font-semibold text-base'>{businessOwnerInfos?.data?.name} {businessOwnerInfos?.data?.last_name}</span> </p>
+		<p>country: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.country_name}</span> </p>
+		<p>state: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.state_name}</span> </p>
+		<p>city: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.city_name}</span> </p>
+		<p>work phone: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.work_phone}</span> </p>
+		<p>address: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.address}</span> </p>
+		
+	  </div>
+
+      <ul className='mx-auto w-max max-xs:gap-x-1 gap-x-2 sm:gap-x-6 flex mb-20  text-sm sm:text-base md:text-lg lg:text-xl'>
        
       <li className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
       <svg className=' w-10 h-10 sm:w-20 sm:h-20 !fill-blue-400 flex-shrink-0' version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"

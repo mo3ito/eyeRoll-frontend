@@ -58,17 +58,17 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	}
     
   return (
-    <>
-    <div className=' translate-y-36   container mx-auto p-4 flex flex-col gap-y-20 justify-center border border-fuchsia-400 rounded-lg'>
+    <div className='translate-y-36  flex justify-center  container mx-auto '>
+    <div className=' w-full h-full mx-2 sm:mx-6 p-4 flex flex-col gap-y-20 justify-center  border border-fuchsia-400 rounded-lg'>
 
-      <div className='w-full rounded-lg h-max border bg-sky-50 border-fuchsia-400 p-2 text-lg leading-10'>
-		<h1 className='w-full bg-fuchsia-400 py-3 text-center font-bold text-xl '>{businessOwnerInfos?.data?.brand_name}</h1>
-		<p>management : <span className='font-semibold text-base'>{businessOwnerInfos?.data?.name} {businessOwnerInfos?.data?.last_name}</span> </p>
-		<p>country: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.country_name}</span> </p>
-		<p>state: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.state_name}</span> </p>
-		<p>city: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.city_name}</span> </p>
-		<p>work phone: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.work_phone}</span> </p>
-		<p>address: <span className='font-semibold text-base'>{businessOwnerInfos?.data?.address}</span> </p>
+      <div className='w-full rounded-lg h-max border bg-sky-50 border-fuchsia-400  p-2 text-sm md:text-base lg:text-lg leading-10'>
+		<h1 className='w-full bg-fuchsia-400 py-3 text-center font-bold text-sm sm:text-base lg:text-xl  '>{businessOwnerInfos?.data?.brand_name}</h1>
+		<p>management : <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.name} {businessOwnerInfos?.data?.last_name}</span> </p>
+		<p>country: <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.country_name}</span> </p>
+		<p>state: <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.state_name}</span> </p>
+		<p>city: <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.city_name}</span> </p>
+		<p>work phone: <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.work_phone}</span> </p>
+		<p>address: <span className='font-semibold  text-sm md:text-base '>{businessOwnerInfos?.data?.address}</span> </p>
 		
 	  </div>
 
@@ -156,6 +156,6 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	  <DeterminationRoll isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} />
     </div>
    
-    </>
+    </div>
   )
 }

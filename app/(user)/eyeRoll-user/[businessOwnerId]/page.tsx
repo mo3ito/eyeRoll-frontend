@@ -1,19 +1,34 @@
 'use client'
-import React, { useState , useContext } from 'react'
+import React, { useState , useContext , useEffect } from 'react'
 import linkHandler from '@/utils/linkHandler';
 import { useRouter } from 'next/navigation';
 import DeterminationRoll from '@/components/determinationRoll/determinationRoll';
 import { AuthContext } from '@/context/authContext';
 import useGetUserId from '@/hooks/useGetUserId';
 import { InfosProps } from '@/types/authentication';
+import { Socket } from 'socket.io-client';
+import io from "socket.io-client"
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
+	const [socket, setSocket] = useState<Socket | null>(null);
     const[isShowGetRoll , setIsShowGetRoll]=useState<boolean>(false)
     const businessOwnerId = params.businessOwnerId
     const router = useRouter()
 	const {infos} = useContext(AuthContext)
 	const {userId} = useGetUserId(infos as InfosProps)
+
+	  useEffect(() => {
+      const newSocket = io("http://localhost:5002");
+      console.log(newSocket);
+      setSocket(newSocket);
+      return ()=>{
+        newSocket.disconnect()
+      }
+  }, []);
+
+  console.log("eyeRoll seen",socket);
+  
     
 	const getRollHandler = ()=>{
 		if(!userId){

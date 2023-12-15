@@ -96,9 +96,9 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}
     >
-      <div className=" w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex items-center justify-center ">
-        
-          { !fixedDiscount ? <Wheel
+      <div className=" w-full h-max overflow-y-hidden p-2 overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
+           
+          { !fixedDiscount ?  <> <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
             // outerBorderColor={"#e879f9"}
@@ -111,13 +111,19 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
             onStopSpinning={() => {
               setMustSpin(false);
             }}
-          /> :
-          <p className='pt-10'>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
+          /> 
+          <button className='bg-indigo-400 block mx-auto px-6 py-2 mb-4 rounded-lg ' onClick={handleSpinClick}>try your luck</button>  </> :
+          <div className=''>
+            <p className='text-center text-xl font-semibold '>congratulation</p>
+            <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
+          </div>
+         
+          
           }
-        
+         
        
       </div>
-      <button className='bg-indigo-400 block mx-auto px-6 py-2 mb-4 rounded-lg ' onClick={handleSpinClick}>try your luck</button>
+     
     </ModalDefault>
   );
 }

@@ -8,6 +8,7 @@ import senderWithAuthId from '@/services/senderWithAuthId';
 import LoadingPage from '../loading/loadingPage';
 import { useQuery} from "@tanstack/react-query";
 import { v4 as uuidv4 } from 'uuid';
+import updaterWithId from '@/services/updaterWithId';
 
 
 export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId }) {
@@ -19,7 +20,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [dataArray , setDataArray]=useState([])
   const [discount , setDiscount]=useState(0)
   const [fixedDiscount , setFixedDiscount]=useState(false)
-  const {infos} = useContext(AuthContext)
+  const {infos , login} = useContext(AuthContext)
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
@@ -37,6 +38,9 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
     return null
  
   })
+
+  console.log(getRollData);
+  
 
   useEffect(()=>{
     if(getRollData?.data ){
@@ -84,14 +88,35 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
      await setPrizeNumber(randomDiscount - minPercentageDiscount)
      await setMustSpin(true);
      setDiscount(randomDiscount)
-    //  setInformationDiscount({
-    //   id: uuidv4(),
-    //   discount: randomDiscount,
+     const informationDiscount = {
+      id: uuidv4(),
+      discount: `${randomDiscount}%`,
+      startTime:getRollData?.data.first_time,
+      endTime:getRollData?.data.last_time,
+      address:getRollData?.data.address,
+      brandName:getRollData?.data.brand_name,
+      workPhone:getRollData?.data.work_phone
+     }
+    await setInformationDiscount(informationDiscount)
+     
+     try {
+      const response = await updaterWithId("http://localhost:5000/users/get-discount-eyeRoll" , userId , informationDiscount )
+      console.log(response);
+     await login(response?.data.userInfos , response?.data.token)
+      
+     } catch (error) {
+      
+     }
 
-    //  })
     }
   };
   
+  console.log(inoformationDiscount);
+  
+
+  console.log(infos);
+  
+
   useEffect(()=>{
     if(!isShowModal){
       setMustSpin(false)

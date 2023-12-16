@@ -64,7 +64,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
       <div className='w-full rounded-lg h-max border bg-sky-50 border-fuchsia-400  p-2 text-sm md:text-base lg:text-lg '>
 		<h1 className='w-full bg-fuchsia-400 py-3 text-center font-bold max-xs:text-xs text-sm sm:text-base lg:text-xl  '>{businessOwnerInfos?.data?.brand_name}</h1>
 		<p className='py-1'>management : <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.name} {businessOwnerInfos?.data?.last_name}</span> </p>
-		<p className='py-1'>country: <span className='font- max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.country_name}</span> </p>
+		<p className='py-1'>country: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.country_name}</span> </p>
 		<p className='py-1'>state: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.state_name}</span> </p>
 		<p className='py-1'>city: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.city_name}</span> </p>
 		<p className='py-1'>work phone: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.work_phone}</span> </p>

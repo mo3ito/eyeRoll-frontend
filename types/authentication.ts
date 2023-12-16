@@ -24,6 +24,7 @@ export interface InfosProps {
   profile_image_path:string;
   work_place_image_path: string,
   logo_image_path: string,
+  discounts_eyeRoll:{}[]
   
 
  

@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import Logo from '@/components/logo/logo'
 import SearchBarSwiper from '@/components/swiper/searchBarSwiper'
 import ContainerResultSearch from '@/components/containerResultSearch/containerResultSearch'
+import useExpireDiscount from '@/hooks/useExpireDiscount'
  
 
 const page = () => {
@@ -14,6 +15,8 @@ const page = () => {
   const {infos} = useContext(AuthContext)
   console.log(infos);
   
+  useExpireDiscount()
+
   return (
    <div className=' pt-16 sm:pt-28 md:pt-36 lg:pt-40 xl:pt-44 container mx-auto flex items-center justify-center px-4'>
 

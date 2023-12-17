@@ -96,7 +96,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
       endTime:getRollData?.data.last_time,
       address:getRollData?.data.address,
       brandName:getRollData?.data.brand_name,
-      workPhone:getRollData?.data.work_phone
+      workPhone:getRollData?.data.work_phone,
+      validDate:getRollData?.data.validDate
      }
     await setInformationDiscount(informationDiscount)
      

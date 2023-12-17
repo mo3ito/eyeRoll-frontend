@@ -24,25 +24,45 @@ const useExpireDiscount = () => {
 
   console.log(discounts);
 
+
   useEffect(() => {
     const findExpiredDiscounts = async () => {
       if (isDiscountHasValue) {
         const now = new Date();
         const currentHour = now.getHours();
         const currentMinute = now.getMinutes();
-
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+        const currentDay = now.getDate();
+        const nowDate = new Date(currentYear, currentMonth - 1, currentDay, currentHour, currentMinute);
+  
+        console.log("nowDate:", nowDate);
+  
         const expiredDiscounts = await discounts.filter((item) => {
           const endTimeArray = item.endTime.split(":");
+          const validDate = item.validDate;
           const endHour = parseInt(endTimeArray[0]);
           const endMinute = parseInt(endTimeArray[1]);
-          return currentHour >= endHour && currentMinute >= endMinute;
+  
+       
+          const validDateWithTime = new Date(validDate);
+          validDateWithTime.setHours(endHour, endMinute, 0, 0);
+  
+          console.log("validDateWithTime:", validDateWithTime);
+          console.log("item:", item);
+  
+          return nowDate >= validDateWithTime;
         });
+  
+        console.log("expiredDiscounts:", expiredDiscounts);
+  
         setExpiredDiscounts(expiredDiscounts);
       }
     };
-
+  
     findExpiredDiscounts();
   }, [isDiscountHasValue]);
+  
 
   useEffect(() => {
     if (expiredDiscounts) {
@@ -76,8 +96,6 @@ const useExpireDiscount = () => {
     removeDiscountExpire();
   }, [isExpireDiscountIdsHasValue, userId, expireDiscountIds]);
 
-  console.log(expiredDiscounts);
-  console.log(expireDiscountIds);
   console.log(infos);
 };
 

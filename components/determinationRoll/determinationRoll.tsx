@@ -18,20 +18,37 @@ import { toast } from 'react-toastify';
     setIsGrabRollToday : Dispatch<SetStateAction<boolean>>
   }
 
+  interface dataArrayType{
+    option: string;
+    style:{backgroundColor : string}
+  }
+
+ interface informationDiscountType {
+    id: string;
+    businessOwnerId: string;
+    discount: string;
+    startTime: string;
+    endTime: string;
+    address: string;
+    brandName: string;
+    workPhone: string;
+    validDate: Date;
+ }
+
 export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);
   const [maxPercentageDiscount , setMaxPercentageDiscount]=useState(0)
   const [numberSlice , setNumberSlice]=useState(0)
-  const [dataArray , setDataArray]=useState([])
+  const [dataArray , setDataArray]=useState<dataArrayType[]>([])
   const [discount , setDiscount]=useState(0)
   const [fixedDiscount , setFixedDiscount]=useState(false)
   const {infos , login} = useContext(AuthContext)
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
-  const [inoformationDiscount , setInformationDiscount ]=useState([])
+  const [inoformationDiscount , setInformationDiscount ]=useState<informationDiscountType | {}>({})
   console.log(userId);
 
   const {data:getRollData , isLoading}=useQuery(businessOwnerId && userId ? queryKey : [],()=>{
@@ -74,7 +91,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
   useEffect(()=>{
     if(numberSlice > 0){
-      const data = Array.from({ length: numberSlice+1 }).map((item, index) => ({
+      const data : dataArrayType[] = Array.from({ length: numberSlice+1 }).map((item, index) => ({
         option: `${minPercentageDiscount + index}%`,
         style: { backgroundColor: getRandomLightColor() },
       }));
@@ -95,7 +112,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
      await setPrizeNumber(randomDiscount - minPercentageDiscount)
      await setMustSpin(true);
      setDiscount(randomDiscount)
-     const informationDiscount = {
+     const informationDiscount : informationDiscountType = {
       id: uuidv4(),
       businessOwnerId:getRollData?.data.businessOwnerId,
       discount: `${randomDiscount}%`,

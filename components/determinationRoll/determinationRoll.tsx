@@ -16,6 +16,8 @@ import { toast } from 'react-toastify';
     setIsShowModal : Dispatch<SetStateAction<boolean>>;
     businessOwnerId : string;
     setIsGrabRollToday : Dispatch<SetStateAction<boolean>>
+    isActiveRoulette: boolean;
+    setIsActiveRoulette: Dispatch<SetStateAction<boolean>>
   }
 
   interface dataArrayType{
@@ -35,7 +37,7 @@ import { toast } from 'react-toastify';
     validDate: Date;
  }
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday }: DeterminationRollProps) {
+export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday , isActiveRoulette , setIsActiveRoulette }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);
@@ -68,8 +70,13 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
   useEffect(()=>{
     if(getRollData?.data ){
-      setMinPercentageDiscount(Number(getRollData.data?.minPercentageDiscount) )
-      setMaxPercentageDiscount(Number(getRollData.data?.maxPercentageDiscount) )
+      if(getRollData?.data?.minPercentageDiscount === null && getRollData?.data?.maxPercentageDiscount === null){
+        setIsActiveRoulette(false)
+      }else{
+        setMinPercentageDiscount(Number(getRollData?.data?.minPercentageDiscount) )
+        setMaxPercentageDiscount(Number(getRollData?.data?.maxPercentageDiscount) )
+        setIsActiveRoulette(true)
+      }
     }
   },[getRollData])
 
@@ -165,7 +172,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   }
 
   return (
-    <ModalDefault
+    <>
+    { isActiveRoulette && <ModalDefault
       isCloseIcon={false}
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}
@@ -203,6 +211,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
        
       </div>
      
-    </ModalDefault>
+    </ModalDefault>}
+    </>
   );
 }

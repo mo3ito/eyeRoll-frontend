@@ -23,6 +23,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const {userId} = useGetUserId(infos as InfosProps)
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
 	const [isGrabRollToday , setIsGrabRollToday]=useState<boolean>(false)
+	const [isActiveRoulette , setIsActiveRoulette]=useState<boolean>(true)
 
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
@@ -33,6 +34,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	})
 
 	console.log(businessOwnerInfos);
+	
 	
 		useEffect(()=>{
 
@@ -66,7 +68,9 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		}else{
 
 			if(isGrabRollToday){
-				toast("You have taken your chance today")
+			return	toast("You have taken your chance today")
+			} else if(!isActiveRoulette){
+			return	toast("The chance has expired or the business owner has not offered a discount")
 			}else{
 				setIsShowGetRoll(true)
 			}
@@ -173,7 +177,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
+	  <DeterminationRoll isActiveRoulette={isActiveRoulette} setIsActiveRoulette={setIsActiveRoulette} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
     </div>
    
     </div>

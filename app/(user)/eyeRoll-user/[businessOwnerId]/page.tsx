@@ -35,19 +35,14 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 
 	console.log(businessOwnerInfos);
 	
-	
 		useEffect(()=>{
-
 			const isGrabRoll = async ()=>{
 				if(infos && infos.discounts_eyeRoll){
 					const isGrabRollToday = await infos.discounts_eyeRoll.some(item=>item.businessOwnerId === businessOwnerId )
 					setIsGrabRollToday(isGrabRollToday)
 				}
 			}
-			
-
 			isGrabRoll()
-			
 		},[infos])
 
 	  useEffect(() => {
@@ -69,12 +64,11 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 
 			if(isGrabRollToday){
 			return	toast("You have taken your chance today")
-			} else if(!isActiveRoulette){
+			}else if(!isActiveRoulette){
 			return	toast("The chance has expired or the business owner has not offered a discount")
 			}else{
 				setIsShowGetRoll(true)
 			}
-			
 		}
 	}
     

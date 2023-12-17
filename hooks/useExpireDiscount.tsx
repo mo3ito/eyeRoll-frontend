@@ -35,6 +35,7 @@ const useExpireDiscount = () => {
         const currentMonth = now.getMonth() + 1;
         const currentDay = now.getDate();
         const nowDate = new Date(currentYear, currentMonth - 1, currentDay, currentHour, currentMinute);
+        nowDate.setSeconds(0, 0);
   
         console.log("nowDate:", nowDate);
   
@@ -47,6 +48,7 @@ const useExpireDiscount = () => {
        
           const validDateWithTime = new Date(validDate);
           validDateWithTime.setHours(endHour, endMinute, 0, 0);
+          validDateWithTime.setMinutes(validDateWithTime.getMinutes() + 1);
   
           console.log("validDateWithTime:", validDateWithTime);
           console.log("item:", item);

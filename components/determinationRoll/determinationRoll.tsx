@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react';
 import ModalDefault from '../modal/modalDefault';
 import { Wheel } from 'react-custom-roulette';
 import useGetUserId from '@/hooks/useGetUserId';
@@ -11,8 +11,14 @@ import { v4 as uuidv4 } from 'uuid';
 import updaterWithId from '@/services/updaterWithId';
 import { toast } from 'react-toastify';
 
+  interface DeterminationRollProps{
+    isShowModal: boolean;
+    setIsShowModal : Dispatch<SetStateAction<boolean>>;
+    businessOwnerId : string;
+    setIsGrabRollToday : Dispatch<SetStateAction<boolean>>
+  }
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday }) {
+export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);

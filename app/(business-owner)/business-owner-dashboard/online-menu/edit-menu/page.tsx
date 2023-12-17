@@ -284,7 +284,6 @@ export default function EditMenu() {
         </div>
       </div>
       <ModalDefault
-        closeIconClassName="w-8 h-8 fill-red-400"
         isShowModal={isShowModalDescription}
         setIsShowModal={setIsShowModalDescription}
       >
@@ -301,7 +300,6 @@ export default function EditMenu() {
         confirmHandler={deleteProductHandler}
       />
       <ModalDefault
-        closeIconClassName="w-8 h-8 fill-red-400"
         isShowModal={isShowEditProdct}
         setIsShowModal={setIsShowEditProduct}
       >

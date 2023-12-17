@@ -198,7 +198,7 @@ const DiscountSetting = () => {
               
       </section>
       <ModalDefault
-        closeIconClassName="w-8 h-8 fill-red-400"
+        
         isShowModal={isShowModalCalculator}
         setIsShowModal={setIsShowModalCalculator}
       >

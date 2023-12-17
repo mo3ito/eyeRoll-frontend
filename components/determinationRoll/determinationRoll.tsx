@@ -9,10 +9,10 @@ import LoadingPage from '../loading/loadingPage';
 import { useQuery} from "@tanstack/react-query";
 import { v4 as uuidv4 } from 'uuid';
 import updaterWithId from '@/services/updaterWithId';
-import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId }) {
+export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday }) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);
@@ -91,6 +91,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
      setDiscount(randomDiscount)
      const informationDiscount = {
       id: uuidv4(),
+      businessOwnerId:getRollData?.data.businessOwnerId,
       discount: `${randomDiscount}%`,
       startTime:getRollData?.data.first_time,
       endTime:getRollData?.data.last_time,
@@ -103,11 +104,20 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
      
      try {
       const response = await updaterWithId("http://localhost:5000/users/get-discount-eyeRoll" , userId , informationDiscount )
-      console.log(response);
-     await login(response?.data.userInfos , response?.data.token)
+      if(response?.status === 200){
+        console.log(response);
+        await login(response?.data.userInfos , response?.data.token)
+       await setIsGrabRollToday(true)
+      }
+     
       
-     } catch (error) {
-      
+     } catch (error : any) {
+          if (error?.response.status === 400) {
+            const errorMessage = error.response.data.message;
+            toast.error(errorMessage);
+          } else {
+            toast.error("An error occurred while processing your request");
+          }
      }
 
     }

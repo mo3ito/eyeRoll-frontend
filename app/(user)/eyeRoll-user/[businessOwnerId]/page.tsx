@@ -11,6 +11,7 @@ import io from "socket.io-client"
 import { useQuery} from "@tanstack/react-query";
 import getter from '@/services/getter';
 import LoadingPage from '@/components/loading/loadingPage';
+import { toast } from 'react-toastify';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
@@ -21,6 +22,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const {infos} = useContext(AuthContext)
 	const {userId} = useGetUserId(infos as InfosProps)
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
+	const [isGrabRollToday , setIsGrabRollToday]=useState<boolean>(false)
 
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
@@ -32,6 +34,19 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 
 	console.log(businessOwnerInfos);
 	
+		useEffect(()=>{
+
+			const isGrabRoll = async ()=>{
+				if(infos && infos.discounts_eyeRoll){
+					const isGrabRollToday = await infos.discounts_eyeRoll.some(item=>item.businessOwnerId === businessOwnerId )
+					setIsGrabRollToday(isGrabRollToday)
+				}
+			}
+			
+
+			isGrabRoll()
+			
+		},[infos])
 
 	  useEffect(() => {
       const newSocket = io("http://localhost:5002");
@@ -49,11 +64,17 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		if(!userId){
 			router.push("/register-user/login")
 		}else{
-			setIsShowGetRoll(true)
+
+			if(isGrabRollToday){
+				toast("You have taken your chance today")
+			}else{
+				setIsShowGetRoll(true)
+			}
+			
 		}
 	}
     
-	if(!businessOwnerInfos){
+	if(!businessOwnerInfos && isLoading && !infos){
 		return <LoadingPage/>
 	}
     
@@ -153,7 +174,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} />
+	  <DeterminationRoll isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
     </div>
    
     </div>

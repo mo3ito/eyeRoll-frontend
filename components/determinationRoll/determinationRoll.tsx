@@ -51,6 +51,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
   const [inoformationDiscount , setInformationDiscount ]=useState<informationDiscountType | {}>({})
+  const [isShowWheelBox , setIsShowWheelBox]=useState<boolean>(true)
+  const [isShowReward , setIsShowReward]=useState<boolean>(false)
   console.log(userId);
 
   const {data:getRollData , isLoading}=useQuery(businessOwnerId && userId ? queryKey : [],()=>{
@@ -179,9 +181,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
       setIsShowModal={setIsShowModal}
       isClosOuteModalClick={isCloseOutModalClick}
     >
-      <div className=" w-full h-max overflow-y-hidden p-2  overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
+      {isShowWheelBox && <div className=" w-full h-max overflow-y-hidden p-2  overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
            
-          { !fixedDiscount ?  <>
+          { !fixedDiscount ?  
+          
+          <>
           
           <p className='py-3 px-1 w-full text-center border  block bg-green-400 text-white font-bold shadow-md '>Roulette chance discount</p>
 
@@ -197,9 +201,18 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
             onStopSpinning={() => {
               setMustSpin(false);
               setIsCloseOutModalClick(true)
+              setTimeout(()=>{
+                setIsShowWheelBox(false)
+                setIsShowReward(true)
+              },1000)
+            
+              
+
             }}
           /> 
           <button className='bg-fuchsia-400 w-full block mx-auto px-6 py-3  rounded-lg text-white font-bold  ' onClick={handleSpinClick}>try your luck</button>  </> :
+
+
           <div className=''>
             <p className='text-center text-xl font-semibold '>congratulation</p>
             <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
@@ -209,7 +222,16 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
           }
          
        
+      </div>}
+
+      { isShowReward && <div className='w-full h-max p-5'>
+        <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
+        <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
+      <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
+      <p className='text-center text-xl'>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{inoformationDiscount?.discount}</span>  discount from <span className='text-red-600'>{inoformationDiscount?.brandName}</span> </p>
+      <p className='text-xl text-center' >Deadline to use until <span className='text-yellow-600 text-2xl '>{inoformationDiscount?.endTime}</span> today</p>
       </div>
+      </div>}
      
     </ModalDefault>}
     </>

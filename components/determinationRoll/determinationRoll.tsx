@@ -200,10 +200,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
             data={dataArray}
             onStopSpinning={() => {
               setMustSpin(false);
-              setIsCloseOutModalClick(true)
               setTimeout(()=>{
                 setIsShowWheelBox(false)
                 setIsShowReward(true)
+              setIsCloseOutModalClick(true)
+
               },1000)
             
               
@@ -213,13 +214,21 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
           <button className='bg-fuchsia-400 w-full block mx-auto px-6 py-3  rounded-lg text-white font-bold  ' onClick={handleSpinClick}>try your luck</button>  </> :
 
 
-          <div className=''>
-            <p className='text-center text-xl font-semibold '>congratulation</p>
-            <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
-          </div>
+          // <div className=''>
+          //   <p className='text-center text-xl font-semibold '>congratulation</p>
+          //   <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
+          // </div>
+          <div className='w-full h-max p-5 text-sm sm:text-base'>
+          <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
+          <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
+        <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
+        <p className='text-center text-base sm:text-lg md:text-xl px-2 leading-10 '>From<span className='text-yellow-600 text-base sm:text-lg md:text-xl  '> {getRollData?.data.first_time}</span> to <span className='text-yellow-600 text-base sm:text-lg md:text-xl  '>{getRollData?.data.last_time}</span>  today, all <span className='text-red-600 text-base sm:text-lg md:text-xl '>{getRollData?.data.brand_name}</span> products include a <span className='text-yellow-600 text-base sm:text-lg md:text-xl  animate-bounce inline-block'>{minPercentageDiscount}%</span> fixed discount</p>
+     
+        </div>
+        </div>}
          
           
-          }
+          
          
        
       </div>}

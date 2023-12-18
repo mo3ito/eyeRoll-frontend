@@ -37,7 +37,7 @@ import { toast } from 'react-toastify';
     validDate: Date;
  }
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday , isActiveRoulette , setIsActiveRoulette }: DeterminationRollProps) {
+export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday , isActiveRoulette , setIsActiveRoulette , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);
@@ -45,7 +45,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [numberSlice , setNumberSlice]=useState(0)
   const [dataArray , setDataArray]=useState<dataArrayType[]>([])
   const [discount , setDiscount]=useState(0)
-  const [fixedDiscount , setFixedDiscount]=useState(false)
+  // const [fixedDiscount , setFixedDiscount]=useState(false)
   const {infos , login} = useContext(AuthContext)
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
@@ -154,6 +154,49 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
     }
   };
+
+  useEffect(()=>{
+
+    const sendInformation = async ()=>{
+      if(isFixedDiscountToSave && getRollData?.data){
+        const informationDiscount : informationDiscountType = {
+          id: uuidv4(),
+          businessOwnerId:getRollData?.data.businessOwnerId,
+          discount: `${getRollData?.data.minPercentageDiscount}%`,
+          startTime:getRollData?.data.first_time,
+          endTime:getRollData?.data.last_time,
+          address:getRollData?.data.address,
+          brandName:getRollData?.data.brand_name,
+          workPhone:getRollData?.data.work_phone,
+          validDate:getRollData?.data.validDate
+         }
+        await setInformationDiscount(informationDiscount)
+
+        try {
+          const response = await updaterWithId("http://localhost:5000/users/get-discount-eyeRoll" , userId , informationDiscount )
+          if(response?.status === 200){
+            console.log(response);
+            await login(response?.data.userInfos , response?.data.token)
+           await setIsGrabRollToday(true)
+          }
+         
+          
+         } catch (error : any) {
+              if (error?.response.status === 400) {
+                const errorMessage = error.response.data.message;
+                toast.error(errorMessage);
+              } else {
+                toast.error("An error occurred while processing your request");
+              }
+         }
+    }
+  
+    }
+
+    sendInformation()
+
+  },[isFixedDiscountToSave , getRollData])
+  
   
   console.log(inoformationDiscount);
   
@@ -183,7 +226,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
     >
       {isShowWheelBox && <div className=" w-full h-max overflow-y-hidden p-2  overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
            
-          { !fixedDiscount ?  
+          { !fixedDiscount && getRollData?.data ?  
           
           <>
           
@@ -221,8 +264,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
           <div className='w-full h-max p-5 text-sm sm:text-base'>
           <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
           <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
-        <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
-        <p className='text-center text-base sm:text-lg md:text-xl px-2 leading-10 '>From<span className='text-yellow-600 text-base sm:text-lg md:text-xl  '> {getRollData?.data.first_time}</span> to <span className='text-yellow-600 text-base sm:text-lg md:text-xl  '>{getRollData?.data.last_time}</span>  today, all <span className='text-red-600 text-base sm:text-lg md:text-xl '>{getRollData?.data.brand_name}</span> products include a <span className='text-yellow-600 text-base sm:text-lg md:text-xl  animate-bounce inline-block'>{minPercentageDiscount}%</span> fixed discount</p>
+        <img src="/images/dollar.png" className=' w-16 sm:w-20 block mx-auto mb-6 ' />
+        <p className='text-center text-base sm:text-lg md:text-xl px-2 leading-10 '>From<span className='text-yellow-600'> {getRollData?.data.first_time}</span> to <span className='text-yellow-600 '>{getRollData?.data.last_time}</span>  today, all <span className='text-red-600 text-base sm:text-lg md:text-xl '>{getRollData?.data.brand_name}</span> products include a <span className='text-yellow-600 animate-bounce inline-block'>{minPercentageDiscount}%</span> fixed discount</p>
      
         </div>
         </div>}
@@ -237,8 +280,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
         <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
         <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
       <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
-      <p className='text-center text-xl'>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{inoformationDiscount?.discount}</span>  discount from <span className='text-red-600'>{inoformationDiscount?.brandName}</span> </p>
-      <p className='text-xl text-center' >Deadline to use until <span className='text-yellow-600 text-2xl '>{inoformationDiscount?.endTime}</span> today</p>
+      <div className=' text-base sm:text-lg md:text-xl'>
+      <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{inoformationDiscount?.discount}</span>  discount from <span className='text-red-600'>{inoformationDiscount?.brandName}</span> </p>
+      <p className='text-center' >Deadline to use until <span className='text-yellow-600  '>{inoformationDiscount?.endTime}</span> today</p>
+      </div>
+      
       </div>
       </div>}
      

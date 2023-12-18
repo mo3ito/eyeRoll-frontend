@@ -24,7 +24,8 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
 	const [isGrabRollToday , setIsGrabRollToday]=useState<boolean>(false)
 	const [isActiveRoulette , setIsActiveRoulette]=useState<boolean>(true)
-
+	const [fixedDiscount , setFixedDiscount]=useState(false)
+	const [ isFixedDiscountToSave ,setIsFixedDiscountToSave]=useState(false)
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
 			
@@ -63,13 +64,30 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		}else{
 
 			if(isGrabRollToday){
-			return	toast("You have taken your chance today")
+			return	toast("You have tryed your chance today")
 			}else if(!isActiveRoulette){
 			return	toast("The chance has expired or the business owner has not offered a discount")
 			}else{
 				setIsShowGetRoll(true)
 			}
 		}
+	}
+
+	const sendDiscoutToSave = async ()=>{
+	if(!userId){
+		router.push("/register-user/login")
+	}else{
+
+		if(isGrabRollToday){
+			return	toast("You have tryed your chance today")
+			}else if(!isActiveRoulette){
+				return	toast("The chance has expired or the business owner has not offered a discount")
+				}else{
+				await setIsFixedDiscountToSave(true)
+				setIsShowGetRoll(true)
+			}
+	}	
+	
 	}
     
 	if(!businessOwnerInfos && isLoading && !infos){
@@ -113,7 +131,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
       <p className=''>Eye</p>
         </li>
 
-        <li onClick={getRollHandler} className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+        <li onClick={ !fixedDiscount ? getRollHandler : sendDiscoutToSave} className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
         <svg className=' w-10 h-10 sm:w-20 sm:h-20  fill-indigo-400 flex-shrink-0' version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" 
 	 viewBox="0 0 512 512"  >
 		<g>
@@ -171,7 +189,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll isActiveRoulette={isActiveRoulette} setIsActiveRoulette={setIsActiveRoulette} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
+	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveRoulette={isActiveRoulette} setIsActiveRoulette={setIsActiveRoulette} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
     </div>
    
     </div>

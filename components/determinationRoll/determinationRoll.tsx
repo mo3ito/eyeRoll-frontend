@@ -50,7 +50,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
-  const [inoformationDiscount , setInformationDiscount ]=useState<informationDiscountType | {}>({})
+  const [informationDiscount , setInformationDiscount ]=useState<informationDiscountType | {}>({})
   const [isShowWheelBox , setIsShowWheelBox]=useState<boolean>(true)
   const [isShowReward , setIsShowReward]=useState<boolean>(false)
   console.log(userId);
@@ -198,7 +198,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   },[isFixedDiscountToSave , getRollData])
   
   
-  console.log(inoformationDiscount);
+  console.log(informationDiscount);
   
 
   console.log(infos);
@@ -281,8 +281,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
         <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
       <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
       <div className=' text-base sm:text-lg md:text-xl'>
-      <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{inoformationDiscount?.discount}</span>  discount from <span className='text-red-600'>{inoformationDiscount?.brandName}</span> </p>
-      <p className='text-center' >Deadline to use until <span className='text-yellow-600  '>{inoformationDiscount?.endTime}</span> today</p>
+      <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{informationDiscount?.discount}</span>  discount from <span className='text-red-600'>{informationDiscount?.brandName}</span> </p>
+      <p className='text-center' >Deadline to use until <span className='text-yellow-600  '>{informationDiscount?.endTime}</span> today</p>
       </div>
       
       </div>

@@ -13,11 +13,12 @@ import getter from '@/services/getter';
 import LoadingPage from '@/components/loading/loadingPage';
 import { toast } from 'react-toastify';
 import useExpireDiscount from '@/hooks/useExpireDiscount';
+import { BUSINESSOWNER_SHEARCHED_INFOS } from '@/routeApi/endpoints';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
 	const [socket, setSocket] = useState<Socket | null>(null);
-    const[isShowGetRoll , setIsShowGetRoll]=useState<boolean>(false)
+    const[isShowGetDiscount , setIsShowGetDiscount]=useState<boolean>(false)
     const businessOwnerId = params.businessOwnerId
     const router = useRouter()
 	const {infos} = useContext(AuthContext)
@@ -31,7 +32,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
 			
-			return getter(`http://localhost:5000/get-businessOwner-infos-searched/?businessOwnerId=${businessOwnerId}`)
+			return getter(`${BUSINESSOWNER_SHEARCHED_INFOS}/?businessOwnerId=${businessOwnerId}`)
 		  }
 		  return null
 	})
@@ -71,10 +72,10 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 			return	toast("The chance has expired or the business owner has not offered a discount")
 			} else if(fixedDiscount && !isGrabDiscountToday){
 				await setIsFixedDiscountToSave(true)
-				setIsShowGetRoll(true)
+				setIsShowGetDiscount(true)
 			}
 			else{
-				setIsShowGetRoll(true)
+				setIsShowGetDiscount(true)
 			}
 		}
 	}
@@ -180,7 +181,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveDiscount={isActiveDiscount} setIsActiveDiscount={setIsActiveDiscount} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabDiscountToday={setIsGrabDiscountToday} />
+	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveDiscount={isActiveDiscount} setIsActiveDiscount={setIsActiveDiscount} isShowModal={isShowGetDiscount} setIsShowModal={setIsShowGetDiscount} businessOwnerId={businessOwnerId} setIsGrabDiscountToday={setIsGrabDiscountToday} />
     </div>
    
     </div>

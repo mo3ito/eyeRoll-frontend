@@ -1,4 +1,4 @@
-import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION } from "./baseUrlNextApi";
+import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION , BASE_URL_BUSINESS_OWNER_INFO_SEARCHED } from "./baseUrlNextApi";
 
 //--business-owner-routes---------------------------------------------------------------------------------------------
 
@@ -37,6 +37,9 @@ export const BUSINESS_OWNER_ONLINE_MENU_GET_INFO=`${BUSINESS_OWNER_ONLINE_MENU}/
 export const GET_ROLL_INFORMATION = `${BASE_URL_ROLL}/get-roll-algoritm`;
 export const SEND_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-send`
 export const GET_ROLL_ADJUSTED = `${BASE_URL_ROLL}/roll-adjusted-get`
+export const GET_ROLL_USER = `${BASE_URL_ROLL}/get-roll`
+
+
 
 //--roll-routes-------------------------------------------------------------------------------------------------------
 
@@ -50,6 +53,11 @@ export const USERS_RESEND_EMAIL_VERIFICATION = `${BASE_URL_USERS}/resend-email-v
 export const USERS_VERIFY_EMAIL_TOKEN = `${BASE_URL_USERS}/verify-email`;
 export const USERS_UPDATE_INFORMATION = `${BASE_URL_USERS}/update-information`;
 export const USERS_IS_PASSWORD = `${BASE_URL_USERS}/is-password`;
+export const USERS_GET_DISCOUNT_EYEROLL = `${BASE_URL_USERS}/get-discount-eyeRoll`
 
 //--search-information
 export const SEARCH_INFORMATION = BASE_URL_SEARCH_INFORMATION
+
+//--get-businessOwner-infos-searched
+
+export const BUSINESSOWNER_SHEARCHED_INFOS = BASE_URL_BUSINESS_OWNER_INFO_SEARCHED

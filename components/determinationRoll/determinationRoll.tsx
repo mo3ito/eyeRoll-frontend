@@ -10,6 +10,7 @@ import { useQuery} from "@tanstack/react-query";
 import { v4 as uuidv4 } from 'uuid';
 import updaterWithId from '@/services/updaterWithId';
 import { toast } from 'react-toastify';
+import { USERS_GET_DISCOUNT_EYEROLL , GET_ROLL_USER } from '@/routeApi/endpoints';
 
   interface DeterminationRollProps{
     isShowModal: boolean;
@@ -45,7 +46,6 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   const [numberSlice , setNumberSlice]=useState(0)
   const [dataArray , setDataArray]=useState<dataArrayType[]>([])
   const [discount , setDiscount]=useState(0)
-  // const [fixedDiscount , setFixedDiscount]=useState(false)
   const {infos , login} = useContext(AuthContext)
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
@@ -61,14 +61,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
         user_id:userId,
         businessOwner_id: businessOwnerId
         }
-      return senderWithAuthId("http://localhost:5000/roll/get-roll",body,userId)
+      return senderWithAuthId( GET_ROLL_USER ,body,userId)
     }
     return null
  
   })
-
-  console.log(getRollData);
-  
 
   useEffect(()=>{
     if(getRollData?.data ){
@@ -83,7 +80,6 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   },[getRollData])
 
   useEffect(()=>{
-    
     if(minPercentageDiscount && maxPercentageDiscount && maxPercentageDiscount > minPercentageDiscount){
      return setNumberSlice(maxPercentageDiscount - minPercentageDiscount)
     } else if(minPercentageDiscount && maxPercentageDiscount && minPercentageDiscount === maxPercentageDiscount){
@@ -92,11 +88,17 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   },[minPercentageDiscount , maxPercentageDiscount])
 
     
-  function getRandomLightColor() {
-    const minColorValue = 240; // مقدار حداقل برای رنگهای روشن
-    const randomColor = Math.floor(Math.random() * (16777215 - minColorValue) + minColorValue).toString(16);
-    return "#" + randomColor;
-  }
+  // const getRandomLightColor = ()=>{
+  //   const minColorValue = 240; // مقدار حداقل برای رنگهای روشن
+  //   const randomColor = Math.floor(Math.random() * (16777215 - minColorValue) + minColorValue).toString(16);
+  //   return "#" + randomColor;
+  // }
+  const getRandomLightColor = () => {
+    const customColors = ["#fcd34d", "#bef264", "#6ee7b7", "#7dd3fc", "#a5b4fc", "#f9a8d4" , "#d8b4fe" , "#fda4af" , "#fca5a5" , "#fcd34d" , "#86efac" , "#5eead4"];
+    const randomIndex = Math.floor(Math.random() * customColors.length);
+    return customColors[randomIndex];
+  };
+  
 
   useEffect(()=>{
     if(numberSlice > 0){
@@ -135,14 +137,12 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
     await setInformationDiscount(informationDiscount)
      
      try {
-      const response = await updaterWithId("http://localhost:5000/users/get-discount-eyeRoll" , userId , informationDiscount )
+      const response = await updaterWithId( USERS_GET_DISCOUNT_EYEROLL , userId , informationDiscount )
       if(response?.status === 200){
         console.log(response);
         await login(response?.data.userInfos , response?.data.token)
        await setIsGrabDiscountToday(true)
       }
-     
-      
      } catch (error : any) {
           if (error?.response.status === 400) {
             const errorMessage = error.response.data.message;
@@ -151,12 +151,10 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
             toast.error("An error occurred while processing your request");
           }
      }
-
     }
   };
 
   useEffect(()=>{
-
     const sendInformation = async ()=>{
       if(isFixedDiscountToSave && getRollData?.data){
         const informationDiscount : informationDiscountType = {
@@ -173,15 +171,13 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
         await setInformationDiscount(informationDiscount)
 
         try {
-          const response = await updaterWithId("http://localhost:5000/users/get-discount-eyeRoll" , userId , informationDiscount )
+          const response = await updaterWithId( USERS_GET_DISCOUNT_EYEROLL , userId , informationDiscount )
           if(response?.status === 200){
             console.log(response);
             await login(response?.data.userInfos , response?.data.token)
            await setIsGrabDiscountToday(true)
            await setIsFixedDiscountToSave(false)
           }
-         
-          
          } catch (error : any) {
               if (error?.response.status === 400) {
                 const errorMessage = error.response.data.message;
@@ -248,20 +244,10 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
                 setIsShowWheelBox(false)
                 setIsShowReward(true)
               setIsCloseOutModalClick(true)
-
               },1000)
-            
-              
-
             }}
           /> 
           <button className='bg-fuchsia-400 w-full block mx-auto px-6 py-3  rounded-lg text-white font-bold  ' onClick={handleSpinClick}>try your luck</button>  </> :
-
-
-          // <div className=''>
-          //   <p className='text-center text-xl font-semibold '>congratulation</p>
-          //   <p className='py-10 my-2 rounded-lg shadow-lg px-4 border  '>‍‍‍‍From {getRollData?.data.first_time} to {getRollData?.data.last_time} today, all products include a {minPercentageDiscount}% fixed discount.</p>
-          // </div>
           <div className='w-full h-max p-5 text-sm sm:text-base'>
           <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
           <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
@@ -270,13 +256,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
      
         </div>
         </div>}
-         
-          
-          
-         
-       
       </div>}
-
       { isShowReward && <div className='w-full h-max p-5'>
         <div className='w-full h-full  shadow-lg border border-yellow-400 rounded-lg pb-4'>
         <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
@@ -285,7 +265,6 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
       <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{informationDiscount?.discount}</span>  discount from <span className='text-red-600'>{informationDiscount?.brandName}</span> </p>
       <p className='text-center' >Deadline to use until <span className='text-yellow-600  '>{informationDiscount?.endTime}</span> today</p>
       </div>
-      
       </div>
       </div>}
      

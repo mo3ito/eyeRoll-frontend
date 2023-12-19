@@ -14,6 +14,7 @@ import LoadingPage from '@/components/loading/loadingPage';
 import { toast } from 'react-toastify';
 import useExpireDiscount from '@/hooks/useExpireDiscount';
 import { BUSINESSOWNER_SHEARCHED_INFOS } from '@/routeApi/endpoints';
+import { discountEyeRollType } from '@/types/authentication';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
@@ -38,11 +39,13 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	})
 
 	console.log(businessOwnerInfos);
+	console.log(infos?.discounts_eyeRoll);
+	
 	
 		useEffect(()=>{
 			const isGrabRoll = async ()=>{
 				if(infos && infos.discounts_eyeRoll){
-					const isGrabDiscountToday = await infos.discounts_eyeRoll.some(item=>item.businessOwnerId === businessOwnerId )
+					const isGrabDiscountToday : boolean = await infos?.discounts_eyeRoll.some((item : discountEyeRollType )=>item.businessOwnerId === businessOwnerId )
 					setIsGrabDiscountToday(isGrabDiscountToday)
 				}
 			}

@@ -7,7 +7,6 @@ import jwt_decode from "jwt-decode";
 
 
 
-
 export const AuthContext = createContext<AuthContextProps>({
     isLoggedIn : false ,
     isVerified : false,
@@ -33,7 +32,7 @@ export const AuthContext = createContext<AuthContextProps>({
       work_place_image_path:"",
       logo_image_path:"",
       profile_image_path:"",
-      discounts_eyeRoll:[]
+      discounts_eyeRoll: undefined
   },
     login : ()=>{},
     logout : ()=>{},

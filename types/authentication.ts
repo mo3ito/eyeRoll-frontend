@@ -1,6 +1,20 @@
 import  {  Dispatch, SetStateAction } from "react";
 
 
+export interface discountEyeRollType {
+  address: string;
+  brandName:string;
+  businessOwnerId:string;
+  discount:string;
+  endTime:string;
+  id:string;
+  startTime:string;
+  validDate: Date;
+  workPhone:string
+
+}
+
+
 
 export interface InfosProps {
   address: string;
@@ -24,7 +38,7 @@ export interface InfosProps {
   profile_image_path:string;
   work_place_image_path: string,
   logo_image_path: string,
-  discounts_eyeRoll:{}[]
+  discounts_eyeRoll:discountEyeRollType[] | undefined
   
 
  

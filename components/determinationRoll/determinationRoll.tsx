@@ -11,36 +11,9 @@ import { v4 as uuidv4 } from 'uuid';
 import updaterWithId from '@/services/updaterWithId';
 import { toast } from 'react-toastify';
 import { USERS_GET_DISCOUNT_EYEROLL , GET_ROLL_USER } from '@/routeApi/endpoints';
+import { DeterminationRollProps , dataArrayType , informationDiscountType  } from '@/types/rollType/determinationRoll';
 
-  interface DeterminationRollProps{
-    isShowModal: boolean;
-    setIsShowModal : Dispatch<SetStateAction<boolean>>;
-    businessOwnerId : string;
-    setIsGrabDiscountToday : Dispatch<SetStateAction<boolean>>
-    isActiveDiscount: boolean;
-    setIsActiveDiscount: Dispatch<SetStateAction<boolean>>;
-    fixedDiscount: boolean;
-    setFixedDiscount: Dispatch<SetStateAction<boolean>>;
-    isFixedDiscountToSave: boolean;
-    setIsFixedDiscountToSave: Dispatch<SetStateAction<boolean>>;
-  }
 
-  interface dataArrayType{
-    option: string;
-    style:{backgroundColor : string}
-  }
-
- interface informationDiscountType {
-    id: string;
-    businessOwnerId: string;
-    discount: string;
-    startTime: string;
-    endTime: string;
-    address: string;
-    brandName: string;
-    workPhone: string;
-    validDate: Date;
- }
 
 export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabDiscountToday , isActiveDiscount , setIsActiveDiscount , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave  }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
@@ -238,6 +211,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
             prizeNumber={prizeNumber}
             // outerBorderColor={"#e879f9"}
             // radiusLineColor={"#e879f9"}
+            
             radiusLineWidth={4}
             outerBorderWidth={4}
             textDistance={70}

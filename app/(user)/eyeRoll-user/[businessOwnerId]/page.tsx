@@ -23,8 +23,8 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const {infos} = useContext(AuthContext)
 	const {userId} = useGetUserId(infos as InfosProps)
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
-	const [isGrabRollToday , setIsGrabRollToday]=useState<boolean>(false)
-	const [isActiveRoulette , setIsActiveRoulette]=useState<boolean>(true)
+	const [isGrabDiscountToday , setIsGrabDiscountToday]=useState<boolean>(true)
+	const [isActiveDiscount , setIsActiveDiscount]=useState<boolean>(true)
 	const [fixedDiscount , setFixedDiscount]=useState(false)
 	const [ isFixedDiscountToSave ,setIsFixedDiscountToSave]=useState(false)
 	useExpireDiscount()
@@ -41,8 +41,8 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		useEffect(()=>{
 			const isGrabRoll = async ()=>{
 				if(infos && infos.discounts_eyeRoll){
-					const isGrabRollToday = await infos.discounts_eyeRoll.some(item=>item.businessOwnerId === businessOwnerId )
-					setIsGrabRollToday(isGrabRollToday)
+					const isGrabDiscountToday = await infos.discounts_eyeRoll.some(item=>item.businessOwnerId === businessOwnerId )
+					setIsGrabDiscountToday(isGrabDiscountToday)
 				}
 			}
 			isGrabRoll()
@@ -65,11 +65,11 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 			router.push("/register-user/login")
 		}else{
 
-			if(isGrabRollToday){
+			if(isGrabDiscountToday){
 			return	toast("You have tryed your chance today")
-			}else if(!isActiveRoulette){
+			}else if(!isActiveDiscount){
 			return	toast("The chance has expired or the business owner has not offered a discount")
-			} else if(fixedDiscount && !isGrabRollToday){
+			} else if(fixedDiscount && !isGrabDiscountToday){
 				await setIsFixedDiscountToSave(true)
 				setIsShowGetRoll(true)
 			}
@@ -79,22 +79,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		}
 	}
 
-	// const sendDiscoutToSave = async ()=>{
-	// if(!userId){
-	// 	router.push("/register-user/login")
-	// }else{
 
-	// 	if(isGrabRollToday){
-	// 		return	toast("You have tryed your chance today")
-	// 		}else if(!isActiveRoulette){
-	// 			return	toast("The chance has expired or the business owner has not offered a discount")
-	// 			}else{
-	// 			await setIsFixedDiscountToSave(true)
-	// 			setIsShowGetRoll(true)
-	// 		}
-	// }	
-	
-	// }
     
 	if(!businessOwnerInfos && isLoading && !infos){
 		return <LoadingPage/>
@@ -195,7 +180,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveRoulette={isActiveRoulette} setIsActiveRoulette={setIsActiveRoulette} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabRollToday={setIsGrabRollToday} />
+	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveDiscount={isActiveDiscount} setIsActiveDiscount={setIsActiveDiscount} isShowModal={isShowGetRoll} setIsShowModal={setIsShowGetRoll} businessOwnerId={businessOwnerId} setIsGrabDiscountToday={setIsGrabDiscountToday} />
     </div>
    
     </div>

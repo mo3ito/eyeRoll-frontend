@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
     isShowModal: boolean;
     setIsShowModal : Dispatch<SetStateAction<boolean>>;
     businessOwnerId : string;
-    setIsGrabRollToday : Dispatch<SetStateAction<boolean>>
+    setIsGrabDiscountToday : Dispatch<SetStateAction<boolean>>
     isActiveRoulette: boolean;
     setIsActiveRoulette: Dispatch<SetStateAction<boolean>>
   }
@@ -37,7 +37,7 @@ import { toast } from 'react-toastify';
     validDate: Date;
  }
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabRollToday , isActiveRoulette , setIsActiveRoulette , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave }: DeterminationRollProps) {
+export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabDiscountToday , isActiveDiscount , setIsActiveDiscount , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave  }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);
@@ -73,11 +73,11 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
   useEffect(()=>{
     if(getRollData?.data ){
       if(getRollData?.data?.minPercentageDiscount === null && getRollData?.data?.maxPercentageDiscount === null){
-        setIsActiveRoulette(false)
+        setIsActiveDiscount(false)
       }else{
         setMinPercentageDiscount(Number(getRollData?.data?.minPercentageDiscount) )
         setMaxPercentageDiscount(Number(getRollData?.data?.maxPercentageDiscount) )
-        setIsActiveRoulette(true)
+        setIsActiveDiscount(true)
       }
     }
   },[getRollData])
@@ -139,7 +139,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
       if(response?.status === 200){
         console.log(response);
         await login(response?.data.userInfos , response?.data.token)
-       await setIsGrabRollToday(true)
+       await setIsGrabDiscountToday(true)
       }
      
       
@@ -177,7 +177,8 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
           if(response?.status === 200){
             console.log(response);
             await login(response?.data.userInfos , response?.data.token)
-           await setIsGrabRollToday(true)
+           await setIsGrabDiscountToday(true)
+           await setIsFixedDiscountToSave(false)
           }
          
           
@@ -218,7 +219,7 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
 
   return (
     <>
-    { isActiveRoulette && <ModalDefault
+    { isActiveDiscount && <ModalDefault
       isCloseIcon={false}
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}

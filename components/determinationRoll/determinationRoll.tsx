@@ -17,8 +17,12 @@ import { USERS_GET_DISCOUNT_EYEROLL , GET_ROLL_USER } from '@/routeApi/endpoints
     setIsShowModal : Dispatch<SetStateAction<boolean>>;
     businessOwnerId : string;
     setIsGrabDiscountToday : Dispatch<SetStateAction<boolean>>
-    isActiveRoulette: boolean;
-    setIsActiveRoulette: Dispatch<SetStateAction<boolean>>
+    isActiveDiscount: boolean;
+    setIsActiveDiscount: Dispatch<SetStateAction<boolean>>;
+    fixedDiscount: boolean;
+    setFixedDiscount: Dispatch<SetStateAction<boolean>>;
+    isFixedDiscountToSave: boolean;
+    setIsFixedDiscountToSave: Dispatch<SetStateAction<boolean>>;
   }
 
   interface dataArrayType{
@@ -262,8 +266,12 @@ export default function DeterminationRoll({ isShowModal, setIsShowModal , busine
         <img src="/images/congratulations.png" className='w-48 block mx-auto   ' />
       <img src="/images/dollar.png" className='w-20 block mx-auto mb-6 ' />
       <div className=' text-base sm:text-lg md:text-xl'>
-      <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{informationDiscount?.discount}</span>  discount from <span className='text-red-600'>{informationDiscount?.brandName}</span> </p>
-      <p className='text-center' >Deadline to use until <span className='text-yellow-600  '>{informationDiscount?.endTime}</span> today</p>
+      <p className='text-center '>You got a <span className='text-yellow-600 text-2xl animate-bounce inline-block'>{ typeof informationDiscount === "object" && "discount" in informationDiscount ? informationDiscount?.discount : ""}</span>  discount from <span className='text-red-600'>{ typeof informationDiscount === "object" && "brandName" in informationDiscount ? informationDiscount?.brandName : ""}</span> </p>
+      <p className='text-center' >Deadline to use until   <span className='text-yellow-600'>
+    {typeof informationDiscount === 'object' && 'endTime' in informationDiscount
+      ? informationDiscount.endTime
+      : ''}
+  </span> today</p>
       </div>
       </div>
       </div>}

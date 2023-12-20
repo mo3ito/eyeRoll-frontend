@@ -6,6 +6,7 @@ import RollSvg from '../svg/rollSvg';
 export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defaultHandler , informationBusiness}: HeaderOnlineMenuPageProps) {
   console.log(informationBusiness);
   
+  
   return (
     <>
     <div className='w-full h-32 sm:h-44 bg-black/30 '>

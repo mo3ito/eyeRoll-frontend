@@ -1,34 +1,24 @@
 'use client'
-import React, { useState , useContext , useEffect } from 'react'
+import React, { useState , useEffect } from 'react'
 import linkHandler from '@/utils/linkHandler';
 import { useRouter } from 'next/navigation';
-import DeterminationRoll from '@/components/determinationRoll/determinationRoll';
-import { AuthContext } from '@/context/authContext';
-import useGetUserId from '@/hooks/useGetUserId';
-import { InfosProps } from '@/types/authentication';
 import { Socket } from 'socket.io-client';
 import io from "socket.io-client"
 import { useQuery} from "@tanstack/react-query";
 import getter from '@/services/getter';
 import LoadingPage from '@/components/loading/loadingPage';
-import { toast } from 'react-toastify';
 import useExpireDiscount from '@/hooks/useExpireDiscount';
 import { BUSINESSOWNER_SHEARCHED_INFOS } from '@/routeApi/endpoints';
-import { discountEyeRollType } from '@/types/authentication';
+import GetDiscountFromUser from '@/components/determinationRoll/getDiscountFromUser';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
 	const [socket, setSocket] = useState<Socket | null>(null);
-    const[isShowGetDiscount , setIsShowGetDiscount]=useState<boolean>(false)
     const businessOwnerId = params.businessOwnerId
     const router = useRouter()
-	const {infos} = useContext(AuthContext)
-	const {userId} = useGetUserId(infos as InfosProps)
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
-	const [isGrabDiscountToday , setIsGrabDiscountToday]=useState<boolean>(true)
-	const [isActiveDiscount , setIsActiveDiscount]=useState<boolean>(true)
-	const [fixedDiscount , setFixedDiscount]=useState(false)
-	const [ isFixedDiscountToSave ,setIsFixedDiscountToSave]=useState(false)
+	const [isGetDiscount , setIsGetDiscount]=useState(false)
+
 	useExpireDiscount()
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
@@ -37,20 +27,6 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		  }
 		  return null
 	})
-
-	console.log(businessOwnerInfos);
-	console.log(infos?.discounts_eyeRoll);
-	
-	
-		useEffect(()=>{
-			const isGrabRoll = async ()=>{
-				if(infos && infos.discounts_eyeRoll){
-					const isGrabDiscountToday : boolean = await infos?.discounts_eyeRoll.some((item : discountEyeRollType )=>item.businessOwnerId === businessOwnerId )
-					setIsGrabDiscountToday(isGrabDiscountToday)
-				}
-			}
-			isGrabRoll()
-		},[infos])
 
 	  useEffect(() => {
       const newSocket = io("http://localhost:5002");
@@ -62,30 +38,8 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
   }, []);
 
   console.log("eyeRoll seen",socket);
-  
-    
-	const getRollHandler = async ()=>{
-		if(!userId){
-			router.push("/register-user/login")
-		}else{
-
-			if(isGrabDiscountToday){
-			return	toast("You have tryed your chance today")
-			}else if(!isActiveDiscount){
-			return	toast("The chance has expired or the business owner has not offered a discount")
-			} else if(fixedDiscount && !isGrabDiscountToday){
-				await setIsFixedDiscountToSave(true)
-				setIsShowGetDiscount(true)
-			}
-			else{
-				setIsShowGetDiscount(true)
-			}
-		}
-	}
-
-
-    
-	if(!businessOwnerInfos && isLoading && !infos){
+      
+	if(!businessOwnerInfos && isLoading ){
 		return <LoadingPage/>
 	}
     
@@ -101,7 +55,6 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		<p className='py-1'>city: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.city_name}</span> </p>
 		<p className='py-1'>work phone: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.work_phone}</span> </p>
 		<p className='py-1'>address: <span className='font-semibold max-xs:text-xs  text-xs md:text-base '>{businessOwnerInfos?.data?.address}</span> </p>
-		
 	  </div>
 
       <ul className='mx-auto w-max max-xs:gap-x-1 gap-x-2 sm:gap-x-6 flex mb-20  text-sm sm:text-base md:text-lg lg:text-xl'>
@@ -126,7 +79,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
       <p className=''>Eye</p>
         </li>
 
-        <li onClick={getRollHandler } className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
+        <li onClick={()=>setIsGetDiscount(true) } className='max-[350px]:w-20 max-[350px]:h-20 w-[112px] h-[112px] sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-60 xl:h-60 2xl:w-64 2xl:h-64 text-center py-10 bg-sky-50 border border-fuchsia-400 cursor-pointer mb-2 rounded-full hoverScale flex flex-col items-center justify-center'>
         <svg className=' w-10 h-10 sm:w-20 sm:h-20  fill-indigo-400 flex-shrink-0' version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" 
 	 viewBox="0 0 512 512"  >
 		<g>
@@ -184,7 +137,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
           <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <DeterminationRoll setIsFixedDiscountToSave={setIsFixedDiscountToSave} isFixedDiscountToSave={isFixedDiscountToSave} fixedDiscount={fixedDiscount} setFixedDiscount={setFixedDiscount} isActiveDiscount={isActiveDiscount} setIsActiveDiscount={setIsActiveDiscount} isShowModal={isShowGetDiscount} setIsShowModal={setIsShowGetDiscount} businessOwnerId={businessOwnerId} setIsGrabDiscountToday={setIsGrabDiscountToday} />
+	  <GetDiscountFromUser businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount} />
     </div>
    
     </div>

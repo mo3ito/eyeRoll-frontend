@@ -29,3 +29,9 @@ export interface DeterminationRollProps{
     workPhone: string;
     validDate: Date;
  }
+
+ export interface GetDiscountFromUserPropsType{
+  businessOwnerId: string;
+  isGetDiscount:boolean;
+  setIsGetDiscount: Dispatch<SetStateAction<boolean>>;
+  }

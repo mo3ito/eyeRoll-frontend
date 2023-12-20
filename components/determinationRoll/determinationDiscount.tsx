@@ -15,7 +15,7 @@ import { DeterminationRollProps , dataArrayType , informationDiscountType  } fro
 
 
 
-export default function DeterminationRoll({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabDiscountToday , isActiveDiscount , setIsActiveDiscount , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave  }: DeterminationRollProps) {
+export default function DeterminationDiscount({ isShowModal, setIsShowModal , businessOwnerId , setIsGrabDiscountToday , isActiveDiscount , setIsActiveDiscount , fixedDiscount , setFixedDiscount , isFixedDiscountToSave , setIsFixedDiscountToSave  }: DeterminationRollProps) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [minPercentageDiscount, setMinPercentageDiscount] =useState(0);

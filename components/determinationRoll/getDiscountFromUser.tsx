@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { InfosProps } from "@/types/authentication";
 import { GetDiscountFromUserPropsType } from "@/types/rollType/determinationRoll";
+import useExpireDiscount from "@/hooks/useExpireDiscount";
 
 export default function GetDiscountFromUser({
   businessOwnerId,
@@ -17,12 +18,13 @@ export default function GetDiscountFromUser({
   const [isFixedDiscountToSave, setIsFixedDiscountToSave] =
     useState<boolean>(false);
   const [fixedDiscount, setFixedDiscount] = useState<boolean>(false);
-  const [isActiveDiscount, setIsActiveDiscount] = useState<boolean>(true);
+  const [isActiveDiscount, setIsActiveDiscount] = useState<boolean>(false);
   const [isShowGetDiscount, setIsShowGetDiscount] = useState<boolean>(false);
   const [isGrabDiscountToday, setIsGrabDiscountToday] = useState<boolean>(true);
   const { infos } = useContext(AuthContext);
   const { userId } = useGetUserId(infos as InfosProps);
   const router = useRouter();
+  useExpireDiscount()
 
   useEffect(() => {
     const getDiscount = async () => {

@@ -248,7 +248,9 @@ useEffect(() => {
          setIsShowMenu={setIsShowMenu}
           isShowMenu={isShowMenu}
           defaultHandler={defaultHandler}
-          informationBusiness={informationBusiness} />
+          informationBusiness={informationBusiness}
+          businessOwnerId={businessOwnerId}
+           />
 
         <div className='container mx-auto px-3 '>
         { isShowMenu ? <>

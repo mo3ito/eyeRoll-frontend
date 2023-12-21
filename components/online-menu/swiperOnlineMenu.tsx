@@ -67,7 +67,7 @@ export default function SwiperOnlineMenu({ productAssortments, groupHandler }: S
         <Swiper
           ref={swiperRef}
           className="  h-full  flex items-center justify-center"
-          slidesPerView={2}
+          slidesPerView={1}
           spaceBetween={10}
           breakpoints={{
             320: {

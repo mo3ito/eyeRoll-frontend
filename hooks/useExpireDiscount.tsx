@@ -4,16 +4,17 @@ import { AuthContext } from "@/context/authContext";
 import updaterWithId from "@/services/updaterWithId";
 import useGetUserId from "./useGetUserId";
 import { InfosProps } from "@/types/authentication";
+import { discountEyeRollType } from "@/types/authentication";
 
 const useExpireDiscount = () => {
-  const [discounts, setDiscounts] = useState([]);
+  const [discounts, setDiscounts] = useState<discountEyeRollType[]|[]>([]);
   const { infos, login } = useContext(AuthContext);
-  const [expiredDiscounts, setExpiredDiscounts] = useState([]);
+  const [expiredDiscounts, setExpiredDiscounts] = useState<discountEyeRollType[]|[]>([]);
   const { userId } = useGetUserId(infos as InfosProps);
   const [isDiscountHasValue, setIsDiscountHasValue] = useState(false);
-  const [expireDiscountIds, setExpireDiscountIds] = useState([]);
-  const [isExpireDiscountIdsHasValue, setIsExpireDiscountIdsHasValue] =
-    useState(false);
+  const [expireDiscountIds, setExpireDiscountIds] = useState<string[]|[]>([]);
+  const [isExpireDiscountIdsHasValue, setIsExpireDiscountIdsHasValue] =useState(false);
+
 
   useEffect(() => {
     if (infos && infos.discounts_eyeRoll) {
@@ -39,7 +40,7 @@ const useExpireDiscount = () => {
   
         console.log("nowDate:", nowDate);
   
-        const expiredDiscounts = await discounts.filter((item) => {
+        const expiredDiscounts : discountEyeRollType[]  = await discounts?.filter((item) => {
           const endTimeArray = item.endTime.split(":");
           const validDate = item.validDate;
           const endHour = parseInt(endTimeArray[0]);

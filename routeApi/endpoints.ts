@@ -54,6 +54,9 @@ export const USERS_VERIFY_EMAIL_TOKEN = `${BASE_URL_USERS}/verify-email`;
 export const USERS_UPDATE_INFORMATION = `${BASE_URL_USERS}/update-information`;
 export const USERS_IS_PASSWORD = `${BASE_URL_USERS}/is-password`;
 export const USERS_GET_DISCOUNT_EYEROLL = `${BASE_URL_USERS}/get-discount-eyeRoll`
+export const USERS_REMOVE_EXPIRE_DISCOUNT_EYEROLL=`${BASE_URL_USERS}/remove-expire-discount-eyeRoll`
+
+
 
 //--search-information
 export const SEARCH_INFORMATION = BASE_URL_SEARCH_INFORMATION

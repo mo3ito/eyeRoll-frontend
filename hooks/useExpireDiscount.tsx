@@ -3,15 +3,15 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "@/context/authContext";
 import updaterWithId from "@/services/updaterWithId";
 import useGetUserId from "./useGetUserId";
-import { InfosProps } from "@/types/authentication";
-import { discountEyeRollType } from "@/types/authentication";
+import { InfosProps , discountEyeRollType } from "@/types/authentication";
+import { USERS_REMOVE_EXPIRE_DISCOUNT_EYEROLL } from "@/routeApi/endpoints";
 
 const useExpireDiscount = () => {
   const [discounts, setDiscounts] = useState<discountEyeRollType[]|[]>([]);
   const { infos, login } = useContext(AuthContext);
   const [expiredDiscounts, setExpiredDiscounts] = useState<discountEyeRollType[]|[]>([]);
   const { userId } = useGetUserId(infos as InfosProps);
-  const [isDiscountHasValue, setIsDiscountHasValue] = useState(false);
+  const [isDiscountHasValue, setIsDiscountHasValue] = useState<boolean>(false);
   const [expireDiscountIds, setExpireDiscountIds] = useState<string[]|[]>([]);
   const [isExpireDiscountIdsHasValue, setIsExpireDiscountIdsHasValue] =useState(false);
 
@@ -84,7 +84,7 @@ const useExpireDiscount = () => {
           dicountIds: expireDiscountIds,
         };
         const response = await updaterWithId(
-          "http://localhost:5000/users/remove-expire-discount-eyeRoll",
+          USERS_REMOVE_EXPIRE_DISCOUNT_EYEROLL,
           userId,
           body
         );

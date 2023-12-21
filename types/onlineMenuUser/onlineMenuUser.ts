@@ -80,6 +80,7 @@ export interface InformationBusinessType {
 
 export interface HeaderOnlineMenuPageProps{
   setIsShowMenu: Dispatch<SetStateAction<boolean>>;
+  businessOwnerId:string;
   isShowMenu: boolean;
   defaultHandler:()=>void;
   informationBusiness: InformationBusinessType | null;

@@ -47,9 +47,9 @@ export default function QRCodeLink() {
         <div className=' max-xs:!w-28  !w-36  md:!w-40  lg:!w-44  xl:!w-48  2xl:!w-52 '>
             <div id='qrcode'>
         <QRCode className='  max-xs:!h-28 !w-full !h-36  md:!h-40  lg:!h-44  xl:!h-48  2xl:!h-52' size={300} value={qrCodeData}  imageSettings={{
-            src:  "/images/mo3ito.jpg",
-            height: 30, 
-            width: 30, 
+            src:  "/images/Fill.png",
+            height: 40, 
+            width: 70, 
             excavate: true,
           }}/>
           </div>

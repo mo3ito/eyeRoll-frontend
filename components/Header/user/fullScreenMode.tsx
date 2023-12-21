@@ -18,8 +18,9 @@ export default function FullScreenMode() {
     
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>
      <li onMouseEnter={()=>setShowProfile(true)} onMouseLeave={()=>setShowProfile(false)} className='relative cursor-pointer '>
-    <div   className='w-16  h-16 rounded-full flex items-center justify-center  bg-indigo-400 '>
+    <div   className='w-16  h-16 rounded-full flex items-center justify-center  bg-indigo-400 relative '>
     <img src="/images/defaultPerson.png" alt="" />
+    { typeof infos?.discounts_eyeRoll === "object" && infos?.discounts_eyeRoll?.length> 0 && <div className='w-5 h-5 bg-yellow-400 border border-black rounded-full flex-shrink-0 text-center absolute -right-2 bottom-2 text-sm '>{infos?.discounts_eyeRoll?.length}</div>}
     </div>
     <div  className={`${ showProfile ? 'absolute' : 'hidden'} w-52 h-max bg-blue-100 absolute text-base z-50 shadow-md border border-purple-500 rounded-md`}>
       <div className='flex items-center  px-1 border-b border-purple-500 py-2'>
@@ -28,6 +29,10 @@ export default function FullScreenMode() {
       </div>
      
     { infos?.username && !infos.is_businessOwner && infos.is_verified &&  <ul className="   rounded-b-md p-1 border-purple-500 bg-blue-100 z-50 shadow-md  h-max text-lg  w-full  px-1 ">
+    <li  className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
+      discounts
+      <span className='w-6 h-6 pt-0.5 bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-0.5 float-right text-center text-sm'>{infos?.discounts_eyeRoll?.length}</span>
+      </li>
       <li onClick={()=>logoutHandler(router , setInfos)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
     

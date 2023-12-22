@@ -5,6 +5,7 @@ import { AuthContext } from '@/context/authContext'
 import { useRouter } from 'next/navigation'
 import logoutHandler from '@/utils/logoutHandler'
 import Logo from '@/components/logo/logo'
+import linkHandler from '@/utils/linkHandler'
 
 export default function FullScreenMode() {
     const {infos , setInfos}=useContext(AuthContext)
@@ -29,15 +30,13 @@ export default function FullScreenMode() {
       </div>
      
     { infos?.username && !infos.is_businessOwner && infos.is_verified &&  <ul className="   rounded-b-md p-1 border-purple-500 bg-blue-100 z-50 shadow-md  h-max text-lg  w-full  px-1 ">
-    <li  className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
+    <li onClick={()=>linkHandler("/discount-eyeRoll" , router)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-6 h-6 pt-0.5 bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-0.5 float-right text-center text-sm text-fuchsia-700 '>{infos?.discounts_eyeRoll?.length}</span>}
       </li>
       <li onClick={()=>logoutHandler(router , setInfos)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
-    
     </div>
-
     </li>
         <HeaderTitleLi title="Register/Login" options={[{id:"5" , name:"register as customer",path:"/register-user"  }, {id:"6" , name:"login as customer" , path:"/register-user/login"  } , {id:"4" , name:"register as business owner" , path:"/register-business-owner"  } ,
          {id:"12" , name:"login as business owner" , path:"/register-business-owner/login"  }]} />

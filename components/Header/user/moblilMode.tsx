@@ -7,6 +7,7 @@ import useDropDownHandler from '@/hooks/useDropDownHandler'
 import logoutHandler from '@/utils/logoutHandler'
 import { useRouter } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
+import linkHandler from '@/utils/linkHandler'
 
 export default function MoblilMode() {
   
@@ -35,7 +36,7 @@ export default function MoblilMode() {
       </div>
      
     { !infos?.is_businessOwner && infos?.username && infos?.is_verified && <ul className="   rounded-b-md p-1 border-purple-500 bg-blue-100 z-50 shadow-md  h-max   w-full  px-1 ">
-    <li className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
+    <li onClick={()=>linkHandler("/discount-eyeRoll" , router)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-5 h-5  bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-[3px] float-right text-center text-sm'>{infos?.discounts_eyeRoll?.length}</span>}
       </li>

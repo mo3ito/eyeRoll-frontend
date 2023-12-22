@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDetails}) {
   return (
-    <div className='block lg:hidden translate-y-32 container  h-96 mx-auto px-2'>
-          <div className="w-full bg-sky-100 pt-10 sticky top-0 ">
+    <>
+    { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-96 mx-auto px-2 '>
+    <div className="w-full bg-sky-100 pt-16 pb-2 sticky inset-0 z-50 ">
     <div className='w-full  flex justify-center bg-sky-50 max-[350px]:text-[10px] max-xs:text-[12px] sm:text-sm max-xs:py-2 py-3  text-xs items-center text-center border border-fuchsia-400  rounded-lg font-semibold '>
     
     <p className='w-1/4 '>brand name</p>
@@ -15,7 +16,7 @@ export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDe
 
     { allDiscounts.map(item=>
 
-    <div className='bg-sky-50 border border-fuchsia-400 rounded-lg my-2 '>
+    <div className='bg-sky-50 border border-fuchsia-400 rounded-lg mb-4 first:mt-1  '>
          <div className='w-full flex  justify-center items-center text-center font-semibold max-xs:text-[10px] text-xs sm:text-sm  mt-1 '>
   
 
@@ -29,7 +30,7 @@ export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDe
  <p className='w-1/4 truncate px-2 text-red-400'>{item.endTime}</p>
    </div>
    <div className='w-full p-1'>
-   <button className='w-full bg-green-400 text-xs sm:text-sm rounded-md py-1 '>i am here</button>
+   <button className='w-full bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>use discount</button>
     </div> 
    
     </div>
@@ -38,6 +39,9 @@ export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDe
   
   
   ) }
-    </div>
+
+
+    </div> : <p className='text-center pt-44 text-lg block lg:hidden'>there is no discount</p>}
+    </>
   )
 }

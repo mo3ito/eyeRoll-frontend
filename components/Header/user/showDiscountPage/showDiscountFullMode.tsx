@@ -2,8 +2,9 @@ import React from 'react'
 
 export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}) {
   return (
+    <>
     <div className=' container translate-y-24 mx-auto px-6 hidden lg:block'>
-    <div className='w-full  h-max  rounded-lg'>
+    { allDiscounts.length>0 ? <div className='w-full  h-max  rounded-lg'>
     <div className="w-full bg-sky-100 pt-10 sticky top-0">
     <div className='w-full  flex justify-center bg-sky-50   items-center text-center border border-fuchsia-400 py-4 rounded-lg font-semibold '>
     <p className='w-2/12  px-4'>brand name</p>
@@ -27,7 +28,7 @@ export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}
 
   <p className='w-2/12 truncate px-4'>{item.workPhone}</p>
   <div className='w-2/12 px-4 '>
-  <button className="bg-green-400 py-1 px-2 rounded-md" >i am here</button>
+  <button className="bg-green-400 py-1 w-max px-6 rounded-md" >use discount</button>
   </div>
   
   </div>
@@ -35,8 +36,12 @@ export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}
    
  
 
-</div>
+</div> : <p className='text-center pt-20 text-xl'>there is no discount</p>}
   
-  </div>)
+  </div> 
+  
+  
+  </>
+  )
 }
  

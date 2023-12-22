@@ -7,6 +7,7 @@ import logoutHandler from '@/utils/logoutHandler'
 import Logo from '@/components/logo/logo'
 import linkHandler from '@/utils/linkHandler'
 
+
 export default function FullScreenMode() {
     const {infos , setInfos}=useContext(AuthContext)
     const [showProfile , setShowProfile]=useState<boolean>(false)
@@ -30,7 +31,7 @@ export default function FullScreenMode() {
       </div>
      
     { infos?.username && !infos.is_businessOwner && infos.is_verified &&  <ul className="   rounded-b-md p-1 border-purple-500 bg-blue-100 z-50 shadow-md  h-max text-lg  w-full  px-1 ">
-    <li onClick={()=>linkHandler("/discount-eyeRoll" , router)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
+    <li onClick={()=>linkHandler("/discount-eyeRoll" , router , setShowProfile)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-6 h-6 pt-0.5 bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-0.5 float-right text-center text-sm text-fuchsia-700 '>{infos?.discounts_eyeRoll?.length}</span>}
       </li>

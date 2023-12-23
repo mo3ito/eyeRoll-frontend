@@ -1,6 +1,7 @@
 import React from 'react'
+import { ShowDiscountFullModePropsType } from '@/types/rollType/determinationRoll'
 
-export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDetails}) {
+export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDetails}:ShowDiscountFullModePropsType) {
   return (
     <>
     { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-96 mx-auto px-2 '>
@@ -16,7 +17,7 @@ export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDe
 
     { allDiscounts.map(item=>
 
-    <div className='bg-sky-50 border border-fuchsia-400 rounded-lg mb-4 first:mt-1  '>
+    <div key={item.id} className='bg-sky-50 border border-fuchsia-400 rounded-lg mb-4 first:mt-1  '>
          <div className='w-full flex  justify-center items-center text-center font-semibold max-xs:text-[10px] text-xs sm:text-sm  mt-1 '>
   
 
@@ -32,12 +33,7 @@ export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDe
    <div className='w-full p-1'>
    <button className='w-full bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>use discount</button>
     </div> 
-   
     </div>
- 
- 
-  
-  
   ) }
 
 

@@ -35,3 +35,8 @@ export interface DeterminationRollProps{
   isGetDiscount:boolean;
   setIsGetDiscount: Dispatch<SetStateAction<boolean>>;
   }
+
+ export interface ShowDiscountFullModePropsType{
+    allDiscounts: informationDiscountType[];
+    onClickshowDetails:(brandName:string,discount:string,startTime:string,endTime:string,address:string,workPhone:string)=>void;
+  }

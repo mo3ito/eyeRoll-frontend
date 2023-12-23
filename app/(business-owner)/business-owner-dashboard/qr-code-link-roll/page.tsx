@@ -6,7 +6,7 @@ import { InfosProps } from "@/types/authentication";
 import LoadingPage from "@/components/loading/loadingPage";
 import QRCodeLinkShower from "@/components/qrCodeLink/qrCodeLinkShower";
 
-export default function QRCodeLink() {
+export default function QRCodeLinkRoll() {
   const { infos } = useContext(AuthContext);
   const { businessOwnerId } = useGetBusinessOwnerId(infos as InfosProps);
   if (!businessOwnerId) {
@@ -15,7 +15,7 @@ export default function QRCodeLink() {
 
   return (
     <QRCodeLinkShower
-      QRCodePath={`${process.env.NEXT_PUBLIC_BASE_URL}/online-menu/${businessOwnerId}`}
+      QRCodePath={`${process.env.NEXT_PUBLIC_BASE_URL}/get-roll/${businessOwnerId}`}
     />
   );
 }

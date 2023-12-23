@@ -1,16 +1,13 @@
 'use client'
 import {useContext, useEffect, useState} from 'react'
 import GetDiscountFromUser from '@/components/determinationRoll/getDiscountFromUser'
-
-import { AuthContext } from '@/context/authContext'
+'use client'
 import LoadingPage from '@/components/loading/loadingPage'
-
 
 export default function page({params}:{params : {businessOwnerId : string}}) {
     const [isGetDiscount , setIsGetDiscount]=useState<boolean>(true)
     const [businessOwnerId , setBusinessOwnerId]=useState<string>("")
-    const{infos}=useContext(AuthContext)
-    // const{businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
+
     console.log(params?.businessOwnerId);
 
     useEffect(()=>{
@@ -27,7 +24,7 @@ export default function page({params}:{params : {businessOwnerId : string}}) {
     }
   return (
     <>
-    <p>llg</p>
+    <p className='pt-44'>llg</p>
    <GetDiscountFromUser businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount}  setIsGetDiscount={setIsGetDiscount} />
    </>
   )

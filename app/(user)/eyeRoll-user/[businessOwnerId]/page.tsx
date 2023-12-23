@@ -8,7 +8,7 @@ import { useQuery} from "@tanstack/react-query";
 import getter from '@/services/getter';
 import LoadingPage from '@/components/loading/loadingPage';
 import useExpireDiscount from '@/hooks/useExpireDiscount';
-import { BUSINESSOWNER_SHEARCHED_INFOS } from '@/routeApi/endpoints';
+import { BUSINESSOWNER_SEARCHED_INFOS } from '@/routeApi/endpoints';
 import GetDiscountFromUser from '@/components/determinationRoll/getDiscountFromUser';
 import EyeSvg from '@/components/svg/eyeSvg';
 import RollSvg from '@/components/svg/rollSvg';
@@ -26,7 +26,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
 		if (businessOwnerId ) {
 			
-			return getter(`${BUSINESSOWNER_SHEARCHED_INFOS}/?businessOwnerId=${businessOwnerId}`)
+			return getter(`${BUSINESSOWNER_SEARCHED_INFOS}/?businessOwnerId=${businessOwnerId}`)
 		  }
 		  return null
 	})

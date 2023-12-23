@@ -1,7 +1,7 @@
 import React from 'react'
 import { ShowDiscountFullModePropsType } from '@/types/rollType/determinationRoll'
 
-export default function ShowDiscountPageMobileMode({allDiscounts , onClickshowDetails}:ShowDiscountFullModePropsType) {
+export default function ShowDiscountMobileMode({allDiscounts , onClickshowDetails}:ShowDiscountFullModePropsType) {
   return (
     <>
     { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-96 mx-auto px-2 '>

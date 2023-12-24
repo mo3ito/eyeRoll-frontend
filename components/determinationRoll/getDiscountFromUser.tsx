@@ -53,7 +53,7 @@ export default function GetDiscountFromUser({
     };
 
     getDiscount();
-  }, [isGetDiscount]);
+  }, [isGetDiscount , isGrabDiscountToday , isActiveDiscount , fixedDiscount , userId]);
 
   useEffect(() => {
     const isGrabRoll = async () => {

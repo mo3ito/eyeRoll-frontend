@@ -37,8 +37,8 @@ export default function page({params}:{params : {businessOwnerId : string}}) {
  
   return (
     <>
-    <div>
-
+    <div className=' translate-y-44 flex items-center justify-center w-full container mx-auto px-4'>
+    { !isLoading && <p className='text-center border text-sm sm:text-base  border-fuchsia-400 w-max p-3 rounded-lg shadow-lg '>You can see your discounts in the discounts section of your user profile</p>}
    <GetDiscountFromUser businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount}  setIsGetDiscount={setIsGetDiscount} />
    </div>
    { isLoading &&

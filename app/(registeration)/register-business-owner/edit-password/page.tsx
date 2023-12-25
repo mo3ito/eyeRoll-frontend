@@ -1,8 +1,12 @@
-import React from 'react'
-import EditPasswordPage from '@/components/editPasswordPage/editPasswordPage'
+import React from "react";
+import EditPasswordPage from "@/components/editPasswordPage/editPasswordPage";
+import { BUSINESS_OWNER_CHANGE_PASSWORD_FORGOT } from "@/routeApi/endpoints";
 
 export default function EditPassword() {
   return (
-    <EditPasswordPage pathApi={"http://localhost:5000/business-owner/change-password-forgot"} pathRedirect="/register-business-owner/login"/>
-  )
+    <EditPasswordPage
+      pathApi={BUSINESS_OWNER_CHANGE_PASSWORD_FORGOT}
+      pathRedirect="/register-business-owner/login"
+    />
+  );
 }

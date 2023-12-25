@@ -17,6 +17,7 @@ export const BUSINESS_OWNER_SEND_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-
 export const BUSINESS_OWNER_DELETE_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-logo-image`
 export const BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-work-place-image`
 export const BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-work-place-image`
+export const BUSINESS_OWNER_CHANGE_PASSWORD_FORGOT = `${BASE_URL_BUSINESS_OWNER}/change-password-forgot`
 
 
 //--business-owner-online-menu
@@ -55,6 +56,7 @@ export const USERS_UPDATE_INFORMATION = `${BASE_URL_USERS}/update-information`;
 export const USERS_IS_PASSWORD = `${BASE_URL_USERS}/is-password`;
 export const USERS_GET_DISCOUNT_EYEROLL = `${BASE_URL_USERS}/get-discount-eyeRoll`
 export const USERS_REMOVE_EXPIRE_DISCOUNT_EYEROLL=`${BASE_URL_USERS}/remove-expire-discount-eyeRoll`
+export const USERS_CHANGE_PASSWORD_FORGOT=`${BASE_URL_USERS}/change-password-forgot`
 
 
 

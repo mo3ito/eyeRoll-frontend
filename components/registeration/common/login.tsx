@@ -23,6 +23,7 @@ import  handleInputChange  from "@/utils/handleInputChange";
 import ButtonDefault from "@/components/shared/button/buttonDefault";
 import InputPassword from "@/components/shared/inputs/inputPassword";
 import LoadingPage from "@/components/loading/loadingPage";
+import linkHandler from "@/utils/linkHandler";
 
 interface LoginPropsType {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
@@ -43,9 +44,10 @@ const Login = ({
   const [isResendEmail, setIsResendEmail] = useState<boolean>(false);
   const [pathResendEmailApi, setPathResendEmailApi] = useState<string>("");
   const [pathLoginApi, setPathLoginApi] = useState<string>("");
-  const { login } = useContext(AuthContext);
+  const { login , infos } = useContext(AuthContext);
   const [pathVerifyEmail, setPathVerifyEmail] = useState<any>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isChangePassword , setIsChangePassword]=useState<boolean>(false)
   const router = useRouter();
 
   useEffect(() => {
@@ -123,6 +125,15 @@ const Login = ({
     }
   };
 
+  const isNewPasswordPermission = (event : FormEvent)=>{
+    event.preventDefault()
+    if(isBusinessOwner){
+     linkHandler("/register-business-owner/edit-password" , router)
+    }else{
+      linkHandler("/register-user/edit-password" , router)
+    }
+  }
+
   if (!pathLoginApi && !pathResendEmailApi && !pathVerifyEmail) {
     return <LoadingPage />;
   }
@@ -171,14 +182,22 @@ const Login = ({
                   onClick={resendEmailHandler}
                 />
               )}
-              <div className="flex items-center justify-center  space-x-1 mt-3">
-                <p className="text-sm sm:text-base ">Don't you have an account? </p>
+              <div className="flex flex-col items-center justify-center  space-x-1 mt-3">
+                <div>
+                <p className="text-sm sm:text-base inline-block">Don't you have an account? </p>
                 <Link
                   href={link}
-                  className="text-fuchsia-500 underline text-sm sm:text-xl"
+                  className="text-fuchsia-500 underline text-sm sm:text-lg ml-1"
                 >
                   register
                 </Link>
+                </div>
+                <div>
+                  <p className="text-sm sm:text-base inline-block">forget your password?</p>
+                  <button onClick={isNewPasswordPermission} className="text-fuchsia-500 underline text-sm sm:text-lg ml-1">click here</button>
+                </div>
+                
+            
               </div>
             </div>
           </div>

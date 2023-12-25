@@ -3,13 +3,14 @@ import {useCallback , useState , useContext} from 'react'
 import InputPassword from '@/components/shared/inputs/inputPassword'
 import handleInputChange from '@/utils/handleInputChange'
 import ButtonDefault from '@/components/shared/button/buttonDefault'
-import { BUSINESS_OWNER_UPDATE_INFORMATION } from '@/routeApi/endpoints'
+import { BUSINESS_OWNER_CHANGE_PASSWORD } from '@/routeApi/endpoints'
 import { AuthContext } from '@/context/authContext'
 import useGetBusinessOwnerId from '@/hooks/useGet‌‌BusinessOwnerId'
 import updaterWithPatch from '@/services/updaterWihPatch'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { InfosProps } from '@/types/authentication'
+
 
 
 export default function EditPassword() {
@@ -22,7 +23,10 @@ export default function EditPassword() {
 
     const changePassword = async ()=>{
         
-        const body = {password}
+        const body = {
+          password:password,
+          repeat_password:repeatPassword
+        }
         if(password.trim() === "" || repeatPassword.trim() === ""){
            return toast.warn("please fill password or repeat password")
         }
@@ -35,12 +39,12 @@ export default function EditPassword() {
 
         try {
             const response = await updaterWithPatch(
-              BUSINESS_OWNER_UPDATE_INFORMATION,
+              BUSINESS_OWNER_CHANGE_PASSWORD,
               businessOwnerId,
               body
             );
             if (response?.status === 200) {
-              await login(response.data.userInfos, response.data.token);
+              await login(response.data.businessOwnerInfos, response.data.token);
               toast.success("password updated successfully");
                 router.push("/business-owner-dashboard")
             }

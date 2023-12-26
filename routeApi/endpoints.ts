@@ -18,6 +18,7 @@ export const BUSINESS_OWNER_DELETE_LOGO_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delet
 export const BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/upload-work-place-image`
 export const BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE= `${BASE_URL_BUSINESS_OWNER}/delete-work-place-image`
 export const BUSINESS_OWNER_CHANGE_PASSWORD_FORGOT = `${BASE_URL_BUSINESS_OWNER}/change-password-forgot`
+export const BUSINESS_OWNER_UPDATE_INFORMATION = `${BASE_URL_BUSINESS_OWNER}/update-information`
 
 
 //--business-owner-online-menu

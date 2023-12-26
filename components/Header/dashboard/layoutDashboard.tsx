@@ -90,7 +90,7 @@ const LayoutDashboard = () => {
         <div onMouseLeave={()=>setShowBox(false)} onMouseEnter={()=>setShowBox(true)} className="w-max max-w-[200px] h-max relative bg-indigo-200 pr-2 py-1 mt-1 sm:mt-0 rounded-lg">
           <div onClick={()=>setShowBox(prev=> !prev)} className="w-max flex items-center justify-center cursor-pointer ">
             <img className=" w-10 h-10 sm:w-12 sm:h-12 object-cover border bg-sky-100  rounded-full inline-block" src={infos?.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" />
-            <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm sm:text-base md:text-lg sm:max-w-[150px] pr-2">{infos?.username}dddddddddddddddddddd</p>
+            <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm sm:text-base md:text-lg sm:max-w-[150px] pr-2">{infos?.username}</p>
           </div>
           <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60 sm:w-[272px] h-max top-10 sm:top-14 border rounded-lg border-purple-400`}>
           <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1 shadow-md">

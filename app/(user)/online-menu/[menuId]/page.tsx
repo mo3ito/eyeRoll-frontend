@@ -1,8 +1,7 @@
 'use client'
 import React, { useState , useEffect , useCallback , ChangeEvent } from 'react';
 import { Socket } from 'socket.io-client';
-import io from "socket.io-client"
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery} from "@tanstack/react-query";
 import getterWithAuthId from '@/services/getterWithAuthId';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductType , AssortmentGrouptype  } from '@/types/onlineMenuUser/onlineMenuUser';
@@ -16,11 +15,12 @@ import FilteringSection from '@/components/online-menu/filteringSection';
 import SwiperOnlineMenu from '@/components/online-menu/swiperOnlineMenu';
 import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage';
 import { BUSINESS_OWNER_ONLINE_MENU_GET_INFO } from '@/routeApi/endpoints';
+import useSeenPage from '@/hooks/useSeenPage';
 
 
 export default function Page({ params }: { params: { menuId: string } }) {
   console.log(params);
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [onlineMenusocket, setOnlineMenuSocket] = useState<Socket | null>(null);
   const [isShowMenu , setIsShowMenu]=useState<boolean>(true)
   const [businessOwnerId , setBusinessOwnerId] = useState<string>("")
   const [allProducts , setAllProducts]=useState<ProductType[]>([])
@@ -37,15 +37,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [productDetails , setProductDetails]=useState<ProductDetailsType | null>(null)
   const [isShowFilterClick , setIsShowFilterClick]=useState<boolean>(false)
   const [showFilterCondition , setShowFilterCondition]=useState<string>("no filter")
-
-  useEffect(() => {
-      const newSocket = io("http://localhost:5001");
-      console.log(newSocket);
-      setSocket(newSocket);
-      return ()=>{
-        newSocket.disconnect()
-      }
-  }, []);
+  useSeenPage(businessOwnerId , setOnlineMenuSocket , "http://localhost:5001" )
 
   useEffect(()=>{
     if(params){
@@ -68,10 +60,6 @@ export default function Page({ params }: { params: { menuId: string } }) {
     }
   );
 
-
-  console.log(sortedProduct);
-  
-
   useEffect(()=>{
     if(products){
       const assortments : string[] = products.map((product : ProductType )=> product?.productAssortment)
@@ -82,26 +70,15 @@ export default function Page({ params }: { params: { menuId: string } }) {
     }
   },[products])
   
-  console.log(productAssortments);
-
-
   useEffect(()=>{
     if(data?.data){
       setAllProducts(data?.data?.products)
       setProducts(data?.data?.products)
       setInformationBusiness(data?.data.informationBusiness)
-
     }
    
   },[data])
   
-  console.log(allProducts);
-  console.log(informationBusiness);
-  
-  
-
-  console.log(socket);
-
   useEffect(()=>{
     if(allProducts && productAssortments ){
       const groupedProducts = productAssortments.map(assortment => {
@@ -234,9 +211,6 @@ useEffect(() => {
     }
   },[inputSearchValue , isGroupActive])
 
-
-  
-  
   if(isLoading ){
     return <LoadingPage/>
   }

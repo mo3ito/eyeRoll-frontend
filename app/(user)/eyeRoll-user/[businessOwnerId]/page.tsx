@@ -3,7 +3,6 @@ import React, { useState , useEffect } from 'react'
 import linkHandler from '@/utils/linkHandler';
 import { useRouter } from 'next/navigation';
 import { Socket } from 'socket.io-client';
-import io from "socket.io-client"
 import { useQuery} from "@tanstack/react-query";
 import getter from '@/services/getter';
 import LoadingPage from '@/components/loading/loadingPage';
@@ -13,10 +12,11 @@ import GetDiscountFromUser from '@/components/determinationRoll/getDiscountFromU
 import EyeSvg from '@/components/svg/eyeSvg';
 import RollSvg from '@/components/svg/rollSvg';
 import OnlineMenuSvg from '@/components/svg/onlineMenuSvg';
+import useSeenPage from '@/hooks/useSeenPage';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
-	const [socket, setSocket] = useState<Socket | null>(null);
+	const [eyeRollPagesocket, setEyeRollPageSocket] = useState<Socket | null>(null);
     const businessOwnerId = params.businessOwnerId
     const router = useRouter()
 	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
@@ -30,18 +30,8 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		  }
 		  return null
 	})
+	useSeenPage(businessOwnerId , setEyeRollPageSocket , "http://localhost:5002" )
 
-	  useEffect(() => {
-      const newSocket = io("http://localhost:5002");
-      console.log(newSocket);
-      setSocket(newSocket);
-      return ()=>{
-        newSocket.disconnect()
-      }
-  }, []);
-
-  console.log("eyeRoll seen",socket);
-      
 	if(!businessOwnerInfos && isLoading ){
 		return <LoadingPage/>
 	}

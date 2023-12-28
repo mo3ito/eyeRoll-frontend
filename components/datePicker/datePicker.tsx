@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format, startOfDay } from "date-fns";
 import { DatesPickerProps } from "@/types/datesPickerType/datesPickerType";
+import ButtonDefault from "../shared/button/buttonDefault";
 
 export default function DatesPicker({
   isInline = true,
@@ -15,10 +16,13 @@ export default function DatesPicker({
   setStartDateWithoutTime,
   setEndDateWithoutTime,
   isWithTime,
+  getReportsClick,
+  isLoadingButton
 }: DatesPickerProps) {
   const changeHandler = (update: any) => {
     setDateRange(update);
   };
+
 
   useEffect(() => {
     if (startDate || (endDate && isWithTime)) {
@@ -52,9 +56,9 @@ export default function DatesPicker({
       />
 
       {isButton && (
-        <button className="bg-indigo-400 w-full h-10 hover:bg-indigo-500 text-white rounded-md -translate-y-2 hover:font-semibold ">
-          confirmation
-        </button>
+        <ButtonDefault loading={isLoadingButton} text="confirmation" onClick={getReportsClick} className="bg-indigo-400 w-full h-10 hover:bg-indigo-500 text-white rounded-md -translate-y-2 hover:font-semibold "/>
+          
+        
       )}
     </>
   );

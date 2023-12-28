@@ -10,4 +10,6 @@ export interface DatesPickerProps {
     setEndDateWithoutTime?: Dispatch<SetStateAction<string | undefined>> 
     disabled? : boolean;
     isWithTime? : boolean;
+    getReportsClick:()=>void
+    isLoadingButton: boolean
     }

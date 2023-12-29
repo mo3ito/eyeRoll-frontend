@@ -65,6 +65,7 @@ export default function Timer({ timeMinutes, className, classNameTime }: TimerPr
     return `${formattedDays}${formattedHours}${formattedMinutes}${formattedSeconds}`;
   };
 
+  
   return (
     <div className={`${className} `}>
       <div className={classNameTime}>{formatTime(countdown)}</div>

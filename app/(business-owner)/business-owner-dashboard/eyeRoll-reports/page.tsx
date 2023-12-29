@@ -5,7 +5,7 @@ import DatesPicker from "@/components/datePicker/datePicker";
 import Rate from "@/components/shared/rate/rate";
 import "react-datepicker/dist/react-datepicker.css";
 import Rechart from "@/components/rechart/rechart";
-import ShowDynamicReports from "@/components/reports/showDynamicReports";
+import ShowDynamicReports from "@/components/rollReports/showDynamicReports";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { InfosProps } from "@/types/authentication";
@@ -86,7 +86,7 @@ export default function RollReports() {
     <>
     <div className="w-screen h-max md:h-screen pt-24  bg-sky-100 flex flex-col-reverse md:flex-row items-center gap-x-5 justify-center ">
       <div className="container flex flex-col-reverse items-center justify-center md:flex-row gap-x-3 mx-auto w-screen h-full  px-2 pt-10 md:pt-0  sm:px-4 md:px-6">
-        
+
       <ShowDynamicReports
       onlineMenuPageSeen={onlineMenuPageSeen}
       eyeRollPageSeen={eyeRollPageSeen}  />

@@ -27,6 +27,7 @@ const accordionItems = [
       { id: uuidv4(), href: "/business-owner-dashboard/eyeRoll-reports", name: "all reports" },
     ],
   },
+
   {
     id: uuidv4(),
     title: "online menu",
@@ -35,8 +36,6 @@ const accordionItems = [
       { id: uuidv4(), href: "/business-owner-dashboard/online-menu/edit-menu", name: "edit menu" , },
       { id: uuidv4(), href: "/business-owner-dashboard/online-menu/logo-workplace-image", name: "import logo & work place image"},
       { id: uuidv4(), href: "/business-owner-dashboard/online-menu/qr-code-link", name: "online menu QR Code link" , },
-      ,
-      
     ],
   },
   {

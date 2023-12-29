@@ -1,4 +1,4 @@
-import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION , BASE_URL_BUSINESS_OWNER_INFO_SEARCHED } from "./baseUrlNextApi";
+import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION , BASE_URL_BUSINESS_OWNER_INFO_SEARCHED , BASE_URL_REPORTS } from "./baseUrlNextApi";
 
 //--business-owner-routes---------------------------------------------------------------------------------------------
 
@@ -65,5 +65,8 @@ export const USERS_CHANGE_PASSWORD_FORGOT=`${BASE_URL_USERS}/change-password-for
 export const SEARCH_INFORMATION = BASE_URL_SEARCH_INFORMATION
 
 //--get-businessOwner-infos-searched
-
 export const BUSINESSOWNER_SEARCHED_INFOS = BASE_URL_BUSINESS_OWNER_INFO_SEARCHED
+
+
+//--reports
+export const GET_REPORTS_FOR_BUSINESS_OWNER =`${BASE_URL_REPORTS}/seen-users` 

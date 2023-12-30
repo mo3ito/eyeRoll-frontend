@@ -2,7 +2,7 @@ import React from 'react'
 import { ShowDiscountFullModePropsType } from '@/types/rollType/determinationRoll';
 
 
-export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}:ShowDiscountFullModePropsType) {
+export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails , getDiscountOnClick}:ShowDiscountFullModePropsType) {
 
   console.log(allDiscounts);
   
@@ -20,8 +20,8 @@ export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}
     <p className="w-2/12 px-4 ">use discount</p>
     </div>
     </div>
-    
 
+  
   { allDiscounts.map(item=>
   <div key={item.id} className='w-full flex justify-center items-center text-center border border-fuchsia-400 py-4 my-2 rounded-lg bg-sky-50 '>
   <p className='w-2/12 truncate px-4 '>{item.brandName}</p>
@@ -33,7 +33,7 @@ export default function ShowDiscountFullMode({allDiscounts , onClickshowDetails}
 
   <p className='w-2/12 truncate px-4'>{item.workPhone}</p>
   <div className='w-2/12 px-4 '>
-  <button className="bg-green-400 py-1 w-max px-6 rounded-md" >use discount</button>
+  <button onClick={()=>getDiscountOnClick(item.businessOwnerId , item.id , item.discount)} className="bg-green-400 py-1 w-max px-6 rounded-md" >use discount</button>
   </div>
   </div>
   ) }

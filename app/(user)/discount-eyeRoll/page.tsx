@@ -7,12 +7,22 @@ import ShowDiscountFullMode from "@/components/Header/user/showDiscountPage/show
 import ShowDiscountMobileMode from "@/components/Header/user/showDiscountPage/showDiscountMobileMode";
 import { informationDiscountType } from "@/types/rollType/determinationRoll";
 import DetailsDiscountContents from "@/components/detailsDiscountContents/detailsDiscountContents";
+import useGetUserId from "@/hooks/useGetUserId";
+import { InfosProps } from "@/types/authentication";
+import senderWithAuthId from "@/services/senderWithAuthId";
+import { toast } from "react-toastify";
+import { GET_REQUEST_FOR_DISCOUNT } from "@/routeApi/endpoints";
 
 export default function DiscountEyeRoll() {
   const { infos } = useContext(AuthContext);
-  const [allDiscounts, setAllDiscounts] = useState<informationDiscountType[] | []>([]);
+  const [allDiscounts, setAllDiscounts] = useState<
+    informationDiscountType[] | []
+  >([]);
   const [isShowDetails, setIsShowDetails] = useState(false);
-  const [detailsDiscount, setDetailsDiscount] = useState<informationDiscountType | {}>({});
+  const [detailsDiscount, setDetailsDiscount] = useState<
+    informationDiscountType | {}
+  >({});
+  const { userId } = useGetUserId(infos as InfosProps);
   useExpireDiscount();
 
   useEffect(() => {
@@ -40,7 +50,38 @@ export default function DiscountEyeRoll() {
     await setIsShowDetails(true);
   };
 
-  if (!infos) {
+  const getDiscountHandler = async (
+    businessOwnerId: string,
+    discountId: string,
+    discount: string
+  ) => {
+    if (userId && businessOwnerId && discountId && discount) {
+      const body = {
+        discountId,
+        businessOwnerId,
+        discount,
+      };
+      try {
+        const response = await senderWithAuthId(
+          GET_REQUEST_FOR_DISCOUNT,
+          body,
+          userId
+        );
+        if (response?.status === 200) {
+          toast.success(response.data.message);
+        }
+      } catch (error: any) {
+        if (error.response.status === 400) {
+          const errorMessage = error.response.data.message;
+          toast.warn(errorMessage);
+        } else {
+          toast.error("An error occurred while processing your request");
+        }
+      }
+    }
+  };
+
+  if (!infos && !userId) {
     return <LoadingPage />;
   }
   return (
@@ -48,10 +89,12 @@ export default function DiscountEyeRoll() {
       <ShowDiscountFullMode
         allDiscounts={allDiscounts}
         onClickshowDetails={showDetailsHandler}
+        getDiscountOnClick={getDiscountHandler}
       />
       <ShowDiscountMobileMode
         allDiscounts={allDiscounts}
         onClickshowDetails={showDetailsHandler}
+        getDiscountOnClick={getDiscountHandler}
       />
       <DetailsDiscountContents
         isShowDetails={isShowDetails}

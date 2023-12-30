@@ -1,7 +1,7 @@
 import React from 'react'
 import { ShowDiscountFullModePropsType } from '@/types/rollType/determinationRoll'
 
-export default function ShowDiscountMobileMode({allDiscounts , onClickshowDetails}:ShowDiscountFullModePropsType) {
+export default function ShowDiscountMobileMode({allDiscounts , onClickshowDetails , getDiscountOnClick}:ShowDiscountFullModePropsType) {
   return (
     <>
     { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-96 mx-auto px-2 '>
@@ -31,7 +31,7 @@ export default function ShowDiscountMobileMode({allDiscounts , onClickshowDetail
  <p className='w-1/4 truncate px-2 text-red-400'>{item.endTime}</p>
    </div>
    <div className='w-full p-1'>
-   <button className='w-full bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>use discount</button>
+   <button onClick={()=>getDiscountOnClick(item.businessOwnerId , item.id , item.discount)} className='w-full bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>use discount</button>
     </div> 
     </div>
   ) }

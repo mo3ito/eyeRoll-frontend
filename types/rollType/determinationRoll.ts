@@ -39,4 +39,5 @@ export interface DeterminationRollProps{
  export interface ShowDiscountFullModePropsType{
     allDiscounts: informationDiscountType[];
     onClickshowDetails:(brandName:string,discount:string,startTime:string,endTime:string,address:string,workPhone:string)=>void;
+    getDiscountOnClick:(businessOwnerId : string ,discountId: string ,discount: string)=>void
   }

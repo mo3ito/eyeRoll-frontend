@@ -43,6 +43,7 @@ const DiscountSetting = () => {
       <button className="h-10 bg-fuchsia-400 w-full mt-2 sm:mt-0 sm:w-44 ml-auto rounded-lg">clear search</button>
       </div>
       </div>
+      
     
     <div className="container  h-max   p-4 mx-auto translate-y-20   ">
         <ShowPresenceUser setIsShowModalCalculator={setIsShowModalCalculator}  setIsShowCancelModal={setIsShowCancelModal}/>

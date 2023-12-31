@@ -257,9 +257,9 @@ export default function EditMenu() {
     return <LoadingPage />;
   }
   return (
-    <>
-      <div className="w-full min-h-screen h-max  pb-40 bg-sky-100 px-2 sm:px-8 ">
-        <div className="container mx-auto ">
+    <div className="h-max">
+      <div className="w-full min-h-screen h-max  pb-40 bg-sky-100  ">
+        
           <HeaderOnlineMenu
             allProducts={allProducts}
             setAllProducts={setAllProducts}
@@ -281,7 +281,7 @@ export default function EditMenu() {
             setDetailsProduct={setDetailsProduct}
             setIsShowProduct={setIsShowProduct}
           />
-        </div>
+       
       </div>
       <ModalDefault
         isShowModal={isShowModalDescription}
@@ -323,6 +323,6 @@ export default function EditMenu() {
         />
       </ModalDefault>
       <ShowDetailsOnlineMenu isShowProduct={isShowProduct} setIsShowProduct={setIsShowProduct} productDetails={detailsProduct}/>
-    </>
+    </div>
   );
 }

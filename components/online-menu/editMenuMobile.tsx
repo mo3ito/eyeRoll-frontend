@@ -16,9 +16,9 @@ export default function EditMenuMobile({allProducts , processDeleteHandler , des
 
   return (
    
-    <div className='w-full  h-max py-8 block mt-16 lg:hidden'>
-      { allProducts && allProducts.map((product: ProductsType , index : number)=>
-        <div key={product._id} className='flex gap-y-2 flex-col divide-y divide-fuchsia-400 border border-fuchsia-400 rounded-lg mb-8 '>
+    <div className='w-full  h-max pb-8 block translate-y-60  sm:translate-y-48 lg:hidden  px-2 sm:px-6'>
+      { allProducts && allProducts.length>0 ? allProducts.map((product: ProductsType , index : number)=>
+        <div key={product._id} className='flex gap-y-2 flex-col container  mx-auto divide-y divide-fuchsia-400 border border-fuchsia-400 rounded-lg mb-8 '>
         <div className='h-8 pt-2 px-2 break-words '>number: <span className='text-zinc-500'>{index+1}</span></div>
         <div  className='h-max pt-2 px-2  break-words '>name: <span className='text-zinc-500'>{product.productName}</span></div>
         <div  className='h-max pt-2 px-2 break-words'>group: <span className='text-zinc-500'>{product.productAssortment}</span></div>
@@ -43,10 +43,8 @@ export default function EditMenuMobile({allProducts , processDeleteHandler , des
           <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM13.4142 13.9997L15.182 15.7675L13.7678 17.1817L12 15.4139L10.2322 17.1817L8.81802 15.7675L10.5858 13.9997L8.81802 12.232L10.2322 10.8178L12 12.5855L13.7678 10.8178L15.182 12.232L13.4142 13.9997ZM9 4V6H15V4H9Z"></path>
         </svg>
         </button></span></div>
-
           </div>
-            )
-            }
+            ) : <p className='text-center pt-20'>there is no product</p> }
           </div>
         
   )

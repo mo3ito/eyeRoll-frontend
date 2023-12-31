@@ -17,9 +17,10 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
   }
   
   return (
-    <>
+    <div className='h-max'>
     
-     {allProducts && allProducts.length > 0 && <div className=" hidden lg:flex  items-center text-center container sticky top-52 z-40 bg-sky-100 h-20 w-full font-semibold pt-4">
+     {allProducts && allProducts.length > 0 && <div className='w-full h-max fixed top-48 z-40 hidden  bg-sky-100 lg:block px-2 sm:px-6'>
+     <div className="  flex items-center text-center z-40 h-max container mx-auto  font-semibold py-5">
             <div className="w-[14%] rounded-l-lg ">number</div>
             <div className="w-[14%] break-words  ">name</div>
             <div className="w-[14%] break-words  ">group</div>
@@ -27,9 +28,12 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
             <div className="w-[14%] break-words ">description</div>
             <div className="w-[14%] break-words ">image product</div>
             <div className="w-[14%] break-words rounded-r-lg pl-4 ">edit product</div>
-          </div>}
+          </div>
+     </div>
+     }
         
-    {allProducts && allProducts.length > 0 ? <div className=" hidden lg:flex flex-col mt-16 h-max items-center overflow-y-auto ">
+     <div className='w-full bg-sky-100  translate-y-64 hidden lg:block px-6'>
+     {allProducts && allProducts.length > 0 ? <div className=" flex flex-col container mx-auto  h-full items-center pb-8 ">
     {allProducts?.map((product: ProductsType , index : number)=>
       <div key={product._id} className="flex  md:text-sm  xl:text-base border border-fuchsia-300 bg-blue-100 text-center items-center h-max py-4 max-h-max w-full rounded-lg mb-4">
       <div className="w-[14%] break-words  p-2 text-center ">{index+1}</div>
@@ -69,8 +73,13 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
         </div>
       </div>
       )}
-  </div> : <p className='text-center mt-28 text-xl '>there is no product </p> }
+  </div> : <p className='text-center  text-xl '>there is no product </p> }
+
+
+     </div>
+
+
  
-  </>
+  </div>
   )
 }

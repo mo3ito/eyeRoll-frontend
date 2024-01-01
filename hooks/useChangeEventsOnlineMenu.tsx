@@ -1,6 +1,7 @@
-import { useRef , ChangeEvent , FormEvent } from "react"
+import { useRef , ChangeEvent , FormEvent, Dispatch, SetStateAction } from "react"
 import { toast } from "react-toastify"
-const useChangeEventsOnlineMenu = (setDetailsProduct , setIsShowProduct , setProductId , setIsDeleteProductImageModal , setImageFile , setIsChangeImage  )=>{
+import { ProductDetailsType } from "@/types/onlineMenuUser/onlineMenuUser"
+const useChangeEventsOnlineMenu = (setDetailsProduct:Dispatch<SetStateAction<ProductDetailsType|null>>  , setIsShowProduct:Dispatch<SetStateAction<boolean>> , setProductId:Dispatch<SetStateAction<string>> , setIsDeleteProductImageModal:Dispatch<SetStateAction<boolean>> , setImageFile:Dispatch<SetStateAction<File | null>> , setIsChangeImage:Dispatch<SetStateAction<boolean>>  )=>{
     const fileInputRef = useRef<null | HTMLInputElement>(null)
 
     const detailsHandler = async (producName:string , productPrice:string , productPricePetty:string , productDescription:string, productImage:string , productAssortment:string)=>{
@@ -28,7 +29,6 @@ const useChangeEventsOnlineMenu = (setDetailsProduct , setIsShowProduct , setPro
           const selectedFile = event.target.files[0];
          await setImageFile(selectedFile);
          await setIsChangeImage(true)
-         await setProductId()
         }else{
           toast.warn("Only photos in jpg , jpeg and png format are allowed")
         }

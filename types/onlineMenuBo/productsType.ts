@@ -42,7 +42,6 @@ export interface EditMenuType {
     productPricePetty: string,
     productAssortment: string,
     productDescription: string,
-    productImage:string,
     productId: string
   ) => void;
   processDeleteHandler: (productId: string) => void;

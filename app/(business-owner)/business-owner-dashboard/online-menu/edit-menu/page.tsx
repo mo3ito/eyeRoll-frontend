@@ -129,7 +129,6 @@ export default function EditMenu() {
     productPricePetty: string,
     productAssortment: string,
     productDescription: string,
-    productImage: string,
     productId: string
   ) => {
     setIsShowEditProduct(true);
@@ -139,7 +138,7 @@ export default function EditMenu() {
     setProductPrice(productPrice);
     setProductPricePetty(productPricePetty);
     setProductId(productId);
-    setProductImage(productImage)
+    // setProductImage(productImage)
   };
 
   useEffect(()=>{
@@ -151,19 +150,19 @@ export default function EditMenu() {
           const response = await senderFormDataWithId(`${BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT}?productId=${productId}`,businessOwnerId,formData)
           if(response?.status === 200){
             queryClient.invalidateQueries(queryKey);
-         await setIsShowEditProduct(false);
+         
          await setImageFile(null)
          await setIsChangeImage(false)
-          toast.success("product updated successfully");
+          toast.success("product image updated successfully");
          
           }
         } catch (error: any) {
           if (error?.response.status === 400) {
-            setIsShowEditProduct(false);
+            
             const errorMessage = error.response.data.message;
             toast.error(errorMessage);
           } else {
-            setIsShowEditProduct(false)
+            
             toast.error("An error occurred while processing your request");
           }
         }
@@ -215,14 +214,9 @@ const deleteProductImage = async ()=>{
         body
       );
       if (response?.status === 200) {
-        if(imageFile !== null ){
-         return setIsChangeImage(true)
-        }else {
           queryClient.invalidateQueries(queryKey);
           setIsShowEditProduct(false);
           toast.success("product updated successfully");
-        }
-       
       }
     } catch (error: any) {
       if (error?.response.status === 400) {

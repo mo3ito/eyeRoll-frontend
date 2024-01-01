@@ -55,7 +55,7 @@ export default function EditMenuScreen({allProducts , descriptionHandler , proce
         </div>
        
         <div className="w-[14%] mx-auto flex items-center justify-center break-words  p-2  text-center  ">
-          <button onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product.product_image_path , product._id)} className="mr-4 pt-2">
+          <button onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription , product._id)} className="mr-4 pt-2">
             <svg
               className=" w-6 h-6 mb-1 xl:w-6 xl:h-6"
               xmlns="http://www.w3.org/2000/svg"

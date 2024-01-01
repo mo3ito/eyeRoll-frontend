@@ -1,21 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
 import { ProductDetailsType } from "../onlineMenuUser/onlineMenuUser";
 
+
+
 export interface EditProductsProps {
   producName: string;
   productPrice: string | number;
   productAssortment: string;
   productDescription: string;
   productPricePetty: string | number;
-  productImage:string;
   imageFile: null | File;
-  setImageFile: Dispatch<SetStateAction<null | File>>;
   setProductName: Dispatch<SetStateAction<string>>;
   setProductAssortment: Dispatch<SetStateAction<string>>;
   setProductPrice: Dispatch<SetStateAction<string | number>>;
   setProductPricePetty: Dispatch<SetStateAction<string | number>>;
   setProductDescription: Dispatch<SetStateAction<string>>;
-  setIsDeleteProductImage: Dispatch<SetStateAction<boolean>>;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
@@ -49,5 +48,9 @@ export interface EditMenuType {
   processDeleteHandler: (productId: string) => void;
   setDetailsProduct:Dispatch<SetStateAction<ProductDetailsType | null>>;
   setIsShowProduct:Dispatch<SetStateAction<boolean>>;
+  setIsDeleteProductImageModal:Dispatch<SetStateAction<boolean>>;
+  setProductId:Dispatch<SetStateAction<string>>;
+  setImageFile:Dispatch<SetStateAction<File | null>>;
+  setIsChangeImage:Dispatch<SetStateAction<boolean>>; 
 
 }

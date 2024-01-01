@@ -46,7 +46,7 @@ export default function EditMenu() {
   const [allProducts, setAllProducts] = useState<ProductsType[]>([]);
   const [isChangeImage , setIsChangeImage]=useState<boolean>(false)
   const [ isDeleteProductImage ,setIsDeleteProductImage]=useState<boolean>(false)
-  const [isDeleteProductImageRun , setIsDeleteProductImageRun] = useState<boolean>(false)
+  const [isDeleteProductImageModal , setIsDeleteProductImageModal] = useState<boolean>(false)
   const [isShowProduct , setIsShowProduct]=useState<boolean>(false)
   const [detailsProduct , setDetailsProduct]=useState<ProductDetailsType | null>(null)
   const queryClient = useQueryClient();
@@ -151,9 +151,9 @@ export default function EditMenu() {
           const response = await senderFormDataWithId(`${BUSINESS_OWNER_ONLINE_MENU_IMAGE_PRODUCT}?productId=${productId}`,businessOwnerId,formData)
           if(response?.status === 200){
             queryClient.invalidateQueries(queryKey);
-          setIsShowEditProduct(false);
-          setImageFile(null)
-          setIsChangeImage(false)
+         await setIsShowEditProduct(false);
+         await setImageFile(null)
+         await setIsChangeImage(false)
           toast.success("product updated successfully");
          
           }
@@ -173,36 +173,30 @@ export default function EditMenu() {
     fetchData()
   },[isChangeImage , productId , businessOwnerId , imageFile])
 
-  useEffect(()=>{
+const deleteProductImage = async ()=>{
+  if( productId && businessOwnerId){
 
-    const DeleteProductImage = async ()=>{
-        if(isDeleteProductImageRun && productId && businessOwnerId){
-
-          try {
-            const response = await removal(`${BUSINESS_OWNER_ONLINE_MENU_DELETE_IMAGE_PRODUCT}?productId=${productId}` , businessOwnerId )
-            if(response?.status === 200){
-              queryClient.invalidateQueries(queryKey);
-              setIsShowEditProduct(false)
-              setIsDeleteProductImage(false)
-              setIsDeleteProductImageRun(false)
-              toast.success("product updated successfully");
-            }
-          } catch (error: any) {
-            if (error?.response.status === 400) {
-              setIsShowEditProduct(false);
-              const errorMessage = error.response.data.message;
-              toast.error(errorMessage);
-            } else {
-              setIsShowEditProduct(false)
-              toast.error("An error occurred while processing your request");
-            }
-          }
+    try {
+      const response = await removal(`${BUSINESS_OWNER_ONLINE_MENU_DELETE_IMAGE_PRODUCT}?productId=${productId}` , businessOwnerId )
+      if(response?.status === 200){
+        setIsDeleteProductImageModal(false)
+        queryClient.invalidateQueries(queryKey);
+        toast.success("product image deleted successfully");
       }
-
-     
+    } catch (error: any) {
+      if (error?.response.status === 400) {
+        setIsDeleteProductImageModal(false)
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+      } else {
+        setIsDeleteProductImageModal(false)
+        toast.error("An error occurred while processing your request");
+      }
     }
-    DeleteProductImage()
-  },[ isDeleteProductImageRun , productId , businessOwnerId ])
+}
+
+
+}
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
@@ -223,9 +217,7 @@ export default function EditMenu() {
       if (response?.status === 200) {
         if(imageFile !== null ){
          return setIsChangeImage(true)
-        } else if(isDeleteProductImage){
-          return setIsDeleteProductImageRun(true)
-        } else {
+        }else {
           queryClient.invalidateQueries(queryKey);
           setIsShowEditProduct(false);
           toast.success("product updated successfully");
@@ -244,6 +236,8 @@ export default function EditMenu() {
     }
   };
 
+  console.log("productid" , productId);
+
   useEffect(()=>{
     if(isDeleteProductImage){
     return setImageFile(null)
@@ -260,6 +254,7 @@ export default function EditMenu() {
     <div className="h-max">
       <div className="w-full min-h-screen h-max  pb-40 bg-sky-100  ">
         
+
           <HeaderOnlineMenu
             allProducts={allProducts}
             setAllProducts={setAllProducts}
@@ -272,6 +267,10 @@ export default function EditMenu() {
             processDeleteHandler={processDeleteHandler}
             setDetailsProduct={setDetailsProduct}
             setIsShowProduct={setIsShowProduct}
+            setIsDeleteProductImageModal={setIsDeleteProductImageModal}
+            setProductId={setProductId}
+            setImageFile={setImageFile}
+            setIsChangeImage={setIsChangeImage}
           />
           <EditMenuMobile
             allProducts={allProducts}
@@ -280,6 +279,10 @@ export default function EditMenu() {
             processDeleteHandler={processDeleteHandler}
             setDetailsProduct={setDetailsProduct}
             setIsShowProduct={setIsShowProduct}
+            setProductId={setProductId}
+            setIsDeleteProductImageModal={setIsDeleteProductImageModal} 
+            setImageFile={setImageFile}
+            setIsChangeImage={setIsChangeImage}
           />
        
       </div>
@@ -299,6 +302,13 @@ export default function EditMenu() {
         setIsShowModal={setIsShowDeleteProduct}
         confirmHandler={deleteProductHandler}
       />
+        <Modal
+        cancelHandler={() => setIsDeleteProductImageModal(false)}
+        text="Are you sure to delete image?"
+        isShowModal={isDeleteProductImageModal}
+        setIsShowModal={setIsDeleteProductImageModal}
+        confirmHandler={deleteProductImage}
+      />
       <ModalDefault
         isShowModal={isShowEditProdct}
         setIsShowModal={setIsShowEditProduct}
@@ -315,11 +325,7 @@ export default function EditMenu() {
           productPricePetty={productPricePetty}
           productDescription={productDescription}
           productAssortment={productAssortment}
-          productImage={productImage}
           imageFile={imageFile}
-          setImageFile={setImageFile}
-          setIsDeleteProductImage={setIsDeleteProductImage}
-          
         />
       </ModalDefault>
       <ShowDetailsOnlineMenu isShowProduct={isShowProduct} setIsShowProduct={setIsShowProduct} productDetails={detailsProduct}/>

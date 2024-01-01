@@ -2,14 +2,12 @@
 import React, {
   useCallback,
   ChangeEvent,
-  useRef,
-  FormEvent
 } from "react";
 import InputDefault from "../shared/inputs/inputDefault";
 import ButtonDefault from "../shared/button/buttonDefault";
 import  handleInputChange  from "@/utils/handleInputChange";
 import { EditProductsProps } from "@/types/onlineMenuBo/productsType";
-import { toast } from "react-toastify";
+
 
 export default function EditProducts({
   producName,
@@ -18,13 +16,10 @@ export default function EditProducts({
   productDescription,
   productPricePetty,
   setProductName,
-  productImage,
   setProductAssortment,
   setProductPrice,
   setProductPricePetty,
   setProductDescription,
-  setIsDeleteProductImage,
-  setImageFile,
   imageFile,
   onSubmit,
 }: EditProductsProps) {
@@ -35,8 +30,7 @@ export default function EditProducts({
     []
   );
 
-  const fileInputRef = useRef<null | HTMLInputElement>(null)
-  console.log(productPrice);
+
 
   const changeProductPriceHandler = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,28 +58,7 @@ export default function EditProducts({
     []
   );
 
-  const onInputChange = (event : ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0].type);
-      if(event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/png"){
-        const selectedFile = event.target.files[0];
-        setImageFile(selectedFile);
-      }else{
-        toast.warn("Only photos in jpg , jpeg and png format are allowed")
-      }
-     
-      
-    }
-  };
 
-  const changeImageClick = (event:FormEvent)=>{
-    event.preventDefault()
-    if(fileInputRef && fileInputRef.current){
-      fileInputRef.current.click()
-    }
-   
-    
-  }
   console.log(imageFile);
   
 
@@ -142,29 +115,7 @@ export default function EditProducts({
             className="w-full max-xs:h-7 h-10 border focus:border-2 border-fuchsia-400 px-2 outline-none bg-transparent rounded-lg"
           />
         </div>
-      </div>
-      
-      <div className="mb-2">
-        <p className="mb-2 ">product image</p>
-        <div className="border border-fuchsia-400 p-2 flex flex-col sm:flex-row sm:gap-x-2 items-center rounded-lg ">
-        <img className=" w-32 h-28  sm:h-24 sm:w-1/3 md:w-4/12 lg:w-3/12 rounded-lg border border-fuchsia-400 object-cover" src={productImage ? productImage : "/images/default-product.jpg"} alt="product image" />
-        <div className="   w-full sm:w-2/3 md:w-8/12 lg:w-9/12 ">
-          <div className="   flex items-center gap-x-2 justify-center my-2 ">
-          <button onClick={changeImageClick} className=" w-1/2  mx-auto   text-sm    h-max px-2 py-1 rounded-lg  bg-fuchsia-400">change image</button>
-        <button onClick={()=>setIsDeleteProductImage(true)} className=" w-1/2    mx-auto  text-sm   h-max px-2 py-1 rounded-lg  bg-fuchsia-400">delete image</button>
-          </div>
-        
-        <label  className="cursor-pointer flex items-center justify-center flex-col gap-y-3 w-full"  htmlFor="changImage">
-        { imageFile?.name &&   <div className="border w-full  text-sm sm:text-base border-fuchsia-400  h-10 flex  justify-start items-center p-1 rounded-lg ">
-           <p className="mr-auto sm:w-max truncate px-1"> <span className="font-semibold">file name:</span> {imageFile?.name}</p>
-            </div>}
-            <input ref={fileInputRef} onChange={onInputChange} className=" bg-transparent border border-fuchsia-400 rounded-lg invisible hidden" id="changImage" type="file" />
-            </label>
-        </div>
-        
-        </div>
-      </div>
-        
+      </div>    
       <div className="mb-1">
         <p className="mb-3">product description</p>
         <textarea

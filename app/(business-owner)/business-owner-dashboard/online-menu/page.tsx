@@ -61,19 +61,6 @@ const DiscountSetting = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   // console.log(infos);
   // const queryKey = ["allRequest"]
 

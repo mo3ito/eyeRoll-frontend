@@ -30,7 +30,7 @@ export default function EditMenuMobile({allProducts , processDeleteHandler , des
           </div>
         
         </div>
-        <div  className='h-10 max-h-max flex items-center px-2'>edit: <span className='ml-2 pt-1'><button  onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product.product_image_path , product._id)} className=" mr-2">
+        <div  className='h-10 max-h-max flex items-center px-2'>edit: <span className='ml-2 pt-1'><button  onClick={()=>processEditHandler(product.productName , product.productPrice , product.productPricePetty , product.productAssortment , product.productDescription, product._id)} className=" mr-2">
           <svg
           className=" w-5 h-5 fill-zinc-500"
           xmlns="http://www.w3.org/2000/svg"

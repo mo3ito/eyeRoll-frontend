@@ -17,7 +17,6 @@ export default function ValidatorPassword({onClick , isShowModal , setIsShowModa
 
   return (
     <ModalDefault
-        closeIconClassName="w-8 h-8 fill-red-400"
         isShowModal={isShowModal}
         setIsShowModal={setIsShowModal}
       >

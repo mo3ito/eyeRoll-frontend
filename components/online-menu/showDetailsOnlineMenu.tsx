@@ -12,7 +12,7 @@ interface ShowDetailsOnlineMenuProps{
 export default function ShowDetailsOnlineMenu({isShowProduct , setIsShowProduct , productDetails }: ShowDetailsOnlineMenuProps) {
   return (
     <ModalDefault
-    closeIconClassName="w-8 h-8 fill-red-400"
+   
     isShowModal={isShowProduct}
     setIsShowModal={setIsShowProduct}
   >

@@ -56,10 +56,17 @@ export default function DiscountEyeRoll() {
     discount: string
   ) => {
     if (userId && businessOwnerId && discountId && discount) {
+      const currentDateTime = new Date();
+    await currentDateTime.setMinutes(currentDateTime.getMinutes() + 20);
+      
+      const expirationTime = currentDateTime.toISOString();
+
       const body = {
         discountId,
         businessOwnerId,
         discount,
+        expiration_time:expirationTime
+        
       };
       try {
         const response = await senderWithAuthId(

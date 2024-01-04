@@ -17,6 +17,7 @@ import getterWithAuthId from "@/services/getterWithAuthId";
 import { useQuery } from "@tanstack/react-query";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { io, Socket } from "socket.io-client";
+import removal from "@/services/removal";
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -27,64 +28,76 @@ const DiscountSetting = () => {
   const [allRequest , setAllRequest]=useState([])
   useWarnInformation(infos as InfosProps)
   const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
+  const [discountValue , setDiscountValue]=useState(0)
 
-   useEffect(() => {
-    const newSocket = io("http://localhost:5003");
-    setAwaitingRequestSocket(newSocket);
+  console.log(discountValue);
+  
 
-    // Cleanup the socket connection when the component unmounts
-    return () => {
-      if (newSocket) {
-        newSocket.disconnect();
-      }
-    };
-  }, [businessOwnerId]);
+  //  useEffect(() => {
+  //   const newSocket = io("http://localhost:5003");
+  //   setAwaitingRequestSocket(newSocket);
 
-  useEffect(() => {
-    // Check if the socket and businessOwnerId are available
-    if (awaitingRequestSocket && businessOwnerId) {
-      // Emit the "getBusinessOwnerId" event to request data
-      awaitingRequestSocket.emit("getBusinessOwnerId", businessOwnerId);
+  //   // Cleanup the socket connection when the component unmounts
+  //   return () => {
+  //     if (newSocket) {
+  //       newSocket.disconnect();
+  //     }
+  //   };
+  // }, [businessOwnerId]);
 
-      // Listen for the "awaitingData" event to receive data
-      awaitingRequestSocket.on("awaitingData", (data) => {
-        setAllRequest(data);
-      });
+  // useEffect(() => {
+  //   // Check if the socket and businessOwnerId are available
+  //   if (awaitingRequestSocket && businessOwnerId) {
+  //     // Emit the "getBusinessOwnerId" event to request data
+  //     awaitingRequestSocket.emit("getBusinessOwnerId", businessOwnerId);
 
-      // Cleanup event listeners when the component unmounts
-      return () => {
-        awaitingRequestSocket.off("awaitingData");
-      };
-    }
-  }, [awaitingRequestSocket, businessOwnerId]);
+  //     // Listen for the "awaitingData" event to receive data
+  //     awaitingRequestSocket.on("awaitingData", (data) => {
+  //       setAllRequest(data);
+  //     });
+
+  //     // Cleanup event listeners when the component unmounts
+  //     return () => {
+  //       awaitingRequestSocket.off("awaitingData");
+  //     };
+  //   }
+  // }, [awaitingRequestSocket, businessOwnerId]);
 
 
 
 
-  // console.log(infos);
-  // const queryKey = ["allRequest"]
+  console.log(infos);
+  const queryKey = ["allRequest"]
 
-  // const {data : allAwaitingRequest , isLoading} = useQuery(businessOwnerId ? queryKey : [] , async()=>{
-  //   if(businessOwnerId){
-  //    return await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
+  const {data : allAwaitingRequest , isLoading} = useQuery(businessOwnerId ? queryKey : [] , async()=>{
+    if(businessOwnerId){
+     return await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
      
-  //   }
-  //   return null
-  // })
+    }
+    return null
+  })
   
-  // useEffect(()=>{
-  //   if(allAwaitingRequest){
-  //     setAllRequest(allAwaitingRequest.data)
-  //   }
-  // },[allAwaitingRequest])
+  useEffect(()=>{
+    if(allAwaitingRequest){
+      setAllRequest(allAwaitingRequest.data)
+    }
+  },[allAwaitingRequest])
   
-// console.log(allAwaitingRequest);
+console.log(allAwaitingRequest);
 
 // useEffect(()=>{
 //   const requestUpdate = async()=>{
 //     if(allRequest && businessOwnerId){
 
 //       try {
+//         // const responseRemoveExpire = await removal("http://localhost:5000/reports/remove-expire-awaiting-request" , businessOwnerId)
+
+//         // if(responseRemoveExpire?.status === 200 ){
+//         //   console.log(responseRemoveExpire);
+//         //  await setAllRequest(responseRemoveExpire.data)
+          
+//         // }
+
 //         const response = await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
 //         if(response?.status === 200){
 //           setAllRequest(response.data)
@@ -105,6 +118,7 @@ const DiscountSetting = () => {
  
 
 // },[allRequest , businessOwnerId])
+
 
 console.log(allRequest);
 
@@ -134,14 +148,19 @@ console.log(allRequest);
     
     <div className="container  h-max  mx-auto translate-y-64 sm:translate-y-52  px-4 ">
       {allRequest.length>0 && allRequest.map(request=>
-        <ShowPresenceUser key={request.discountId} setIsShowModalCalculator={setIsShowModalCalculator}  setIsShowCancelModal={setIsShowCancelModal}/>
+        <ShowPresenceUser
+        discountId={request.discountId}
+        username={request.username}
+        discount={request.discount}
+          key={request.discountId} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
         )}  
     </div>
     <ModalDefault
         isShowModal={isShowModalCalculator}
         setIsShowModal={setIsShowModalCalculator}
       >
-        <DiscountCalculator />
+        
+        <DiscountCalculator discountValue={discountValue}  />
       </ModalDefault>
       <Modal
         cancelHandler={() => setIsShowCancelModal(false)}

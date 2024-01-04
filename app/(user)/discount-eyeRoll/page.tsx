@@ -31,6 +31,9 @@ export default function DiscountEyeRoll() {
     }
   }, [infos, infos?.discounts_eyeRoll]);
 
+
+ 
+
   const showDetailsHandler = async (
     brandName: string,
     discount: string,
@@ -56,35 +59,43 @@ export default function DiscountEyeRoll() {
     discount: string
   ) => {
     if (userId && businessOwnerId && discountId && discount) {
+     
       const currentDateTime = new Date();
-    await currentDateTime.setMinutes(currentDateTime.getMinutes() + 20);
+      const beLatedTime = new Date(currentDateTime.getTime());
+      beLatedTime.setMinutes(currentDateTime.getMinutes() + 10);
       
-      const expirationTime = currentDateTime.toISOString();
+      console.log("current", currentDateTime.toISOString());
+      console.log("delay", beLatedTime.toISOString());
 
-      const body = {
-        discountId,
-        businessOwnerId,
-        discount,
-        expiration_time:expirationTime
-        
-      };
-      try {
-        const response = await senderWithAuthId(
-          GET_REQUEST_FOR_DISCOUNT,
-          body,
-          userId
-        );
-        if (response?.status === 200) {
-          toast.success(response.data.message);
-        }
-      } catch (error: any) {
-        if (error.response.status === 400) {
-          const errorMessage = error.response.data.message;
-          toast.warn(errorMessage);
-        } else {
-          toast.error("An error occurred while processing your request");
+   
+      if(beLatedTime){
+        const body = {
+          discountId,
+          businessOwnerId,
+          discount,
+          expiration_time:beLatedTime
+          
+        };
+        try {
+          const response = await senderWithAuthId(
+            GET_REQUEST_FOR_DISCOUNT,
+            body,
+            userId
+          );
+          if (response?.status === 200) {
+            toast.success(response.data.message);
+          }
+        } catch (error: any) {
+          if (error.response.status === 400) {
+            const errorMessage = error.response.data.message;
+            toast.warn(errorMessage);
+          } else {
+            toast.error("An error occurred while processing your request");
+          }
         }
       }
+      
+ 
     }
   };
 

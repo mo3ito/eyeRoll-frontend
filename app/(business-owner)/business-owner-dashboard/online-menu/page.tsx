@@ -18,6 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { io, Socket } from "socket.io-client";
 import removal from "@/services/removal";
+import senderWithAuthId from "@/services/senderWithAuthId";
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -29,11 +30,13 @@ const DiscountSetting = () => {
   useWarnInformation(infos as InfosProps)
   const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
   const [discountValue , setDiscountValue]=useState(0)
-  const [isChecked , setIsChecked]= useState(false)
+  const [singleIdForDelete , setSingleIdForDelete]= useState(false)
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
 
   console.log(discountValue);
   console.log(idsForDelete);
+  console.log(singleIdForDelete);
+  
   
   
 
@@ -127,6 +130,34 @@ console.log(allAwaitingRequest);
 console.log(allRequest);
 
 
+  const deleteSingleRequest = async ()=>{
+    const body ={
+      awaiting_request_ids_for_delete: [singleIdForDelete] 
+    } 
+    if(businessOwnerId && singleIdForDelete && body){
+      
+      try {
+       const response = await senderWithAuthId("http://localhost:5000/reports/remove-request-by-businessOwner" , body ,businessOwnerId)
+       if(response?.status === 200){
+       await setAllRequest(response?.data.remainingDiscounts)
+       setIsShowCancelModal(false)
+       toast.success("request deleted successfully")
+       }
+
+      } catch (error : any) {
+        if (error.response.status === 400) {
+          const errorMessage = error.response.data.message;
+          toast.error(errorMessage);
+        } else {
+          toast.error("An error occurred while processing your request");
+        }
+      }
+      
+    }
+  
+  }
+
+
 
   if(!infos){
     return <LoadingPage/>
@@ -156,7 +187,7 @@ console.log(allRequest);
         discountId={request.discountId}
         username={request.username}
         discount={request.discount}
-          key={request.discountId} idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
+          key={request.discountId} setSingleIdForDelete={setSingleIdForDelete} idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
         )}  
     </div>
     <ModalDefault
@@ -168,10 +199,10 @@ console.log(allRequest);
       </ModalDefault>
       <Modal
         cancelHandler={() => setIsShowCancelModal(false)}
-        text="Are you sure to cancel?"
+        text="Are you sure to delete the request?"
         isShowModal={isShowCancelModal}
         setIsShowModal={setIsShowCancelModal}
-        confirmHandler={()=>toast("hhg")}
+        confirmHandler={deleteSingleRequest}
       />
     </div>
       

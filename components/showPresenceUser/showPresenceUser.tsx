@@ -4,7 +4,7 @@ import { CheckBoxType } from '@/types/radioButtonType/checkBoxType'
 
 export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCancelModal , discountId,
   username,
-  discount , setDiscountValue, setIdsForDelete , idsForDelete}) {
+  discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete ,  }) {
 
 
    const calculatorHandler = async ()=>{
@@ -20,6 +20,11 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
       setIdsForDelete((prev) => prev.filter((prevId) => prevId !== discountId));
     }
   };
+
+  const deleteRequest = async ()=>{
+   await setSingleIdForDelete(discountId)
+     setIsShowCancelModal(true)
+  }
 
   console.log(idsForDelete);
   
@@ -73,7 +78,7 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
         </svg>
       </button>
       <button
-        onClick={() => setIsShowCancelModal(true)}
+        onClick={ deleteRequest}
         className=" hoverToUp text-lg   text-white font-semibold "
       >
         <svg

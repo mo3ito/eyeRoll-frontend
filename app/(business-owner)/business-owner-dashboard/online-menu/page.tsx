@@ -29,8 +29,12 @@ const DiscountSetting = () => {
   useWarnInformation(infos as InfosProps)
   const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
   const [discountValue , setDiscountValue]=useState(0)
+  const [isChecked , setIsChecked]= useState(false)
+  const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
 
   console.log(discountValue);
+  console.log(idsForDelete);
+  
   
 
   //  useEffect(() => {
@@ -152,7 +156,7 @@ console.log(allRequest);
         discountId={request.discountId}
         username={request.username}
         discount={request.discount}
-          key={request.discountId} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
+          key={request.discountId} idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
         )}  
     </div>
     <ModalDefault
@@ -167,6 +171,7 @@ console.log(allRequest);
         text="Are you sure to cancel?"
         isShowModal={isShowCancelModal}
         setIsShowModal={setIsShowCancelModal}
+        confirmHandler={()=>toast("hhg")}
       />
     </div>
       

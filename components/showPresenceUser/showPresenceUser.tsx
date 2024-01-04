@@ -1,20 +1,30 @@
-import React from 'react'
+import {useState} from 'react'
 import Timer from '../timer/timer'
+import { CheckBoxType } from '@/types/radioButtonType/checkBoxType'
 
 export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCancelModal , discountId,
   username,
-  discount , setDiscountValue}) {
-
-
-
-
+  discount , setDiscountValue, setIdsForDelete , idsForDelete}) {
 
 
    const calculatorHandler = async ()=>{
    await setDiscountValue(discount)
     setIsShowModalCalculator(true)
    }
+   
+   const handleCheckboxChange = async ( discountId : string) => {
+   const isIdInList = idsForDelete && await idsForDelete.includes(discountId)
+    if ( discountId && !isIdInList) {
+      setIdsForDelete(prev=> [...prev , discountId])
+    } else {
+      setIdsForDelete((prev) => prev.filter((prevId) => prevId !== discountId));
+    }
+  };
 
+  console.log(idsForDelete);
+  
+  
+  
 
   return (
     <div className="w-full h-max gap-y-2 py-2 md:gap-y-0 md:py-0 md:h-20 bg-green-300 rounded-xl flex flex-col md:flex-row items-center max-xs:px-2 px-4 sm:px-10 mb-4">
@@ -95,6 +105,10 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
           />
         </svg>
       </button>
+
+      <label htmlFor={discountId}  className=" overflow-hidden   font-semibold  size-10   flex items-center justify-center translate-y-2 ">
+      <input  onChange={(event) => handleCheckboxChange(discountId)} id={discountId} className='size-10 cursor-pointer ' type="checkbox" />
+      </label>
 
       </div>
 

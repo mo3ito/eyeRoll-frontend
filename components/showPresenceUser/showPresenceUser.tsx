@@ -7,6 +7,8 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
   discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete ,  }) {
 
 
+    
+
    const calculatorHandler = async ()=>{
    await setDiscountValue(discount)
     setIsShowModalCalculator(true)
@@ -34,7 +36,7 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
   return (
     <div className="w-full h-max gap-y-2 py-2 md:gap-y-0 md:py-0 md:h-20 bg-green-300 rounded-xl flex flex-col md:flex-row items-center max-xs:px-2 px-4 sm:px-10 mb-4">
 
-    <div className="flex items-center justify-center w-max">
+    <div className="flex items-center justify-center w-max  px-2 rounded-md">
     <svg
       className=" size-4 sm:size-5  fill-zinc-500 stroke-2"
       xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +113,8 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
         </svg>
       </button>
 
-      <label htmlFor={discountId}  className=" overflow-hidden   font-semibold  size-10   flex items-center justify-center translate-y-2 ">
-      <input  onChange={(event) => handleCheckboxChange(discountId)} id={discountId} className='size-10 cursor-pointer ' type="checkbox" />
+      <label htmlFor={discountId}  className=" overflow-hidden   font-semibold size-6 sm:size-10   flex items-center justify-center translate-y-2 ">
+      <input checked={idsForDelete.includes(discountId) ? true : false}  onChange={() => handleCheckboxChange(discountId)} id={discountId} className='size-full cursor-pointer ' type="checkbox" />
       </label>
 
       </div>

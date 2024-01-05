@@ -43,7 +43,7 @@ export default function Modal({text , isShowModal , setIsShowModal , confirmHand
           classNameSvg= "w-5 h-5 fill-red-400 sm:w-6 sm:h-6 lg:w-8 lg:h-8 "
         />
         <div className="w-full h-full flex flex-col items-center justify-center">
-       <p className="mb-6 ">{text}</p>
+       <p className="mb-6 text-center ">{text}</p>
        <div className=" w-full text-center">
        <button onClick={cancelHandler}  className="inline-block bg-rose-300 hover:bg-rose-400 h-8  sm:h-10 rounded-lg mr-2 w-1/3" >No</button>
        <button onClick={confirmHandler}  className="inline-block  bg-green-300 hover:bg-green-400 h-8 sm:h-10 rounded-lg ml-2 w-1/3" >Yes</button>

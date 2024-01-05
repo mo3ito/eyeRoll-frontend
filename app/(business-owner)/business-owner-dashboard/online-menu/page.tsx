@@ -151,22 +151,31 @@ console.log(allRequest);
 //  },[inputSearch , allRequest , allAwaitingRequest])
 
 const inputSearchHandler = async (event)=>{
-const inputSearch = event.target.value.toLowerCase()
+  
+const inputSearched = event.target.value.toLowerCase()
+await setInputSearch(inputSearched)
 
-  if(inputSearch && allRequest && allAwaitingRequest){
-    const requests = [...allRequest]
-    const searchedValue = await allRequest.filter(request=> request.username.startsWith(inputSearch))
+  if(inputSearched && allRequest && allAwaitingRequest){
+    const searchedValue = await allAwaitingRequest.data.filter(request=> request.username.startsWith(inputSearched))
 
     if(searchedValue){
       setAllRequest(searchedValue)
     }else{
       setAllRequest(allAwaitingRequest.data)
+
     }
-
-
+    if(inputSearched === ""){
+      setAllRequest(allAwaitingRequest.data)
+    }
   }
 
 }
+
+const eraserHandler = ()=>{
+  setAllRequest(allAwaitingRequest?.data)
+  setInputSearch("")
+}
+
 
   const deleteReguests = async (body , setState, text )=>{
     if(body){
@@ -232,6 +241,7 @@ const inputSearch = event.target.value.toLowerCase()
 
 
 
+
   if(!infos){
     return <LoadingPage/>
   }
@@ -245,10 +255,10 @@ const inputSearch = event.target.value.toLowerCase()
       <div className="flex flex-col sm:flex-row items-center mt-2 gap-x-3">
       <div className="border bg-sky-50 border-fuchsia-400 flex rounded-lg items-center justify-center px-1  shadow-lg w-full">
       <svg className="w-5 h-5 opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z" fill="currentColor"></path></svg>
-      <input onChange={(event)=>inputSearchHandler(event)} className="w-full h-8 sm:h-10  outline-none pl-2 bg-transparent" type="text" placeholder="search username" />
+      <input value={inputSearch} onChange={(event)=>inputSearchHandler(event)} className="w-full h-8 sm:h-10  outline-none pl-2 bg-transparent" type="text" placeholder="search username" />
       </div>
       <div className="flex items-center h-8 sm:h-10 p-1 rounded-lg shadow-md justify-around w-full sm:w-44 border border-fuchsia-400 bg-sky-50 mt-2 sm:mt-0  ">
-      <button onClick={()=>setAllRequest(allAwaitingRequest?.data)} className=" w-max h-max rounded-lg  flex items-center justify-center">
+      <button onClick={ eraserHandler } className=" w-max h-max rounded-lg  flex items-center justify-center">
       <svg className=" size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.58564 8.85449L3.63589 13.8042L8.83021 18.9985L9.99985 18.9978V18.9966H11.1714L14.9496 15.2184L8.58564 8.85449ZM9.99985 7.44027L16.3638 13.8042L19.1922 10.9758L12.8283 4.61185L9.99985 7.44027ZM13.9999 18.9966H20.9999V20.9966H11.9999L8.00229 20.9991L1.51457 14.5113C1.12405 14.1208 1.12405 13.4877 1.51457 13.0971L12.1212 2.49053C12.5117 2.1 13.1449 2.1 13.5354 2.49053L21.3136 10.2687C21.7041 10.6592 21.7041 11.2924 21.3136 11.6829L13.9999 18.9966Z" ></path></svg>
       </button>
       <button onClick={allCheckeHandler} className=" w-max h-max rounded-lg flex items-center justify-center">
@@ -268,7 +278,7 @@ const inputSearch = event.target.value.toLowerCase()
       </div>
       
     
-    <div className="container  h-max  mx-auto translate-y-60 sm:translate-y-52  px-4 ">
+    { allRequest.length > 0 ? <div className="container  h-max  mx-auto translate-y-60 sm:translate-y-52  px-4 ">
       {allRequest.length>0 && allRequest.map(request=>
         <ShowPresenceUser
         allRequestLength={allRequest.length}
@@ -277,7 +287,7 @@ const inputSearch = event.target.value.toLowerCase()
         discount={request.discount}
           key={request.discountId} setSingleIdForDelete={setSingleIdForDelete} idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
         )}  
-    </div>
+    </div> : <p className="translate-y-72 text-xl sm:text-2xl text-center">there is no request </p> }
     <ModalDefault
         isShowModal={isShowModalCalculator}
         setIsShowModal={setIsShowModalCalculator}

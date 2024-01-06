@@ -1,13 +1,12 @@
-import {useState} from 'react'
 import Timer from '../timer/timer'
-import { CheckBoxType } from '@/types/radioButtonType/checkBoxType'
+import { ShowPresenceUserPropsType } from '@/types/onlineMenuBo/productsType'
+
+
+
 
 export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCancelModal , discountId,
   username,
-  discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete ,  }) {
-
-
-    
+  discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete ,  }:ShowPresenceUserPropsType) {
 
    const calculatorHandler = async ()=>{
    await setDiscountValue(discount)
@@ -27,11 +26,6 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
    await setSingleIdForDelete(discountId)
      setIsShowCancelModal(true)
   }
-
-  console.log(idsForDelete);
-  
-  
-  
 
   return (
     <div className="w-full h-max gap-y-2 py-2 md:gap-y-0 md:py-0 md:h-20 bg-green-300 rounded-xl flex flex-col md:flex-row items-center max-xs:px-2 px-4 sm:px-10 mb-4">

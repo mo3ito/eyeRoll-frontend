@@ -53,3 +53,24 @@ export interface EditMenuType {
   setIsChangeImage:Dispatch<SetStateAction<boolean>>; 
 
 }
+
+export interface allRequestType{
+  discount: string;
+  discountId:string;
+  expiration_time: string;
+  username:string;
+  _id:string;
+}
+
+export interface ShowPresenceUserPropsType{
+  setIsShowModalCalculator: Dispatch<SetStateAction<boolean>>;
+  setIsShowCancelModal:Dispatch<SetStateAction<boolean>>;
+  discountId:string;
+  username:string;
+  discount:string;
+  setDiscountValue:Dispatch<SetStateAction<string>>;
+  setIdsForDelete:Dispatch<SetStateAction<string[]|[]>>;
+  idsForDelete:string[];
+  setSingleIdForDelete:Dispatch<SetStateAction<string>>
+  }
+  

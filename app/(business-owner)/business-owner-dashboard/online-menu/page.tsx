@@ -1,15 +1,11 @@
 "use client";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, Dispatch, SetStateAction, ChangeEvent } from "react";
 import Modal from "@/components/modal/modal";
 import DiscountCalculator from "@/components/discountCalculator/discountCalculator";
 import ModalDefault from "@/components/modal/modalDefault";
-import Timer from "@/components/timer/timer";
 import { AuthContext } from "@/context/authContext";
 import { toast } from "react-toastify";
-import EYEROLL_TOKEN from "@/help/tokenName";
-import Cookies from "js-cookie";
 import useWarnInformation from "@/hooks/useWarnInformation";
-import { useRouter } from "next/navigation";
 import LoadingPage from "@/components/loading/loadingPage";
 import { InfosProps } from "@/types/authentication";
 import ShowPresenceUser from "@/components/showPresenceUser/showPresenceUser";
@@ -17,8 +13,11 @@ import getterWithAuthId from "@/services/getterWithAuthId";
 import { useQuery } from "@tanstack/react-query";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { io, Socket } from "socket.io-client";
-import removal from "@/services/removal";
 import senderWithAuthId from "@/services/senderWithAuthId";
+import { allRequestType } from "@/types/onlineMenuBo/productsType";
+
+
+
 
 const DiscountSetting = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -26,11 +25,11 @@ const DiscountSetting = () => {
   const [isShowCancelModal, setIsShowCancelModal] = useState<boolean>(false);
   const { infos } = useContext(AuthContext);
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
-  const [allRequest , setAllRequest]=useState([])
+  const [allRequest , setAllRequest]=useState<allRequestType[]|[]>([])
   useWarnInformation(infos as InfosProps)
   const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
-  const [discountValue , setDiscountValue]=useState(0)
-  const [singleIdForDelete , setSingleIdForDelete]= useState(false)
+  const [discountValue , setDiscountValue]=useState("")
+  const [singleIdForDelete , setSingleIdForDelete]= useState("")
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
   const [isDeleteSelectedRequest , setIsDeleteSelectedRequest]=useState<boolean>(false)
   const [inputSearch , setInputSearch]=useState<string>("")
@@ -150,13 +149,13 @@ console.log(allRequest);
 
 //  },[inputSearch , allRequest , allAwaitingRequest])
 
-const inputSearchHandler = async (event)=>{
+const inputSearchHandler = async (event : ChangeEvent<HTMLInputElement>)=>{
   
 const inputSearched = event.target.value.toLowerCase()
 await setInputSearch(inputSearched)
 
   if(inputSearched && allRequest && allAwaitingRequest){
-    const searchedValue = await allAwaitingRequest.data.filter(request=> request.username.startsWith(inputSearched))
+    const searchedValue = await allAwaitingRequest.data.filter((request : allRequestType)=> request.username.startsWith(inputSearched))
 
     if(searchedValue){
       setAllRequest(searchedValue)
@@ -177,7 +176,7 @@ const eraserHandler = ()=>{
 }
 
 
-  const deleteReguests = async (body , setState, text )=>{
+  const deleteReguests = async (body : object , setState : Dispatch<SetStateAction<boolean>>, text : string )=>{
     if(body){
       try {
         const response = await senderWithAuthId("http://localhost:5000/reports/remove-request-by-businessOwner" , body ,businessOwnerId)
@@ -270,18 +269,14 @@ const eraserHandler = ()=>{
       <svg className=" size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z" ></path></svg>
       </button>
       </div>
-
-
       </div>
         </div>
-   
       </div>
       
     
     { allRequest.length > 0 ? <div className="container  h-max  mx-auto translate-y-60 sm:translate-y-52  px-4 ">
       {allRequest.length>0 && allRequest.map(request=>
         <ShowPresenceUser
-        allRequestLength={allRequest.length}
         discountId={request.discountId}
         username={request.username}
         discount={request.discount}

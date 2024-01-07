@@ -62,10 +62,10 @@ export default function DiscountEyeRoll() {
      
       const currentDateTime = new Date();
       const beLatedTime = new Date(currentDateTime.getTime());
-      beLatedTime.setMinutes(currentDateTime.getMinutes() + 10);
+      beLatedTime.setMinutes(currentDateTime.getMinutes() + 2);
       
-      console.log("current", currentDateTime.toISOString());
-      console.log("delay", beLatedTime.toISOString());
+      // console.log("current", currentDateTime.toISOString());
+      // console.log("delay", beLatedTime.toISOString());
 
    
       if(beLatedTime){

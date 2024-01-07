@@ -19,7 +19,8 @@ import { allRequestType } from "@/types/onlineMenuBo/productsType";
 
 
 
-const DiscountSetting = () => {
+
+const OnlineMenu = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
     useState<boolean>(false);
   const [isShowCancelModal, setIsShowCancelModal] = useState<boolean>(false);
@@ -41,57 +42,76 @@ const DiscountSetting = () => {
   
   
 
-  //  useEffect(() => {
-  //   const newSocket = io("http://localhost:5003");
-  //   setAwaitingRequestSocket(newSocket);
+   useEffect(() => {
+    const newSocket = io("http://localhost:5003");
+    setAwaitingRequestSocket(newSocket);
 
-  //   // Cleanup the socket connection when the component unmounts
-  //   return () => {
-  //     if (newSocket) {
-  //       newSocket.disconnect();
-  //     }
-  //   };
-  // }, [businessOwnerId]);
+    return () => {
+      if (newSocket) {
+        newSocket.disconnect();
+      }
+    };
+  }, [businessOwnerId]);
 
-  // useEffect(() => {
-  //   // Check if the socket and businessOwnerId are available
-  //   if (awaitingRequestSocket && businessOwnerId) {
-  //     // Emit the "getBusinessOwnerId" event to request data
-  //     awaitingRequestSocket.emit("getBusinessOwnerId", businessOwnerId);
+  useEffect(() => {
 
-  //     // Listen for the "awaitingData" event to receive data
-  //     awaitingRequestSocket.on("awaitingData", (data) => {
-  //       setAllRequest(data);
-  //     });
-
-  //     // Cleanup event listeners when the component unmounts
-  //     return () => {
-  //       awaitingRequestSocket.off("awaitingData");
-  //     };
-  //   }
-  // }, [awaitingRequestSocket, businessOwnerId]);
-
-
-
-
-  console.log(infos);
-  const queryKey = ["allRequest"]
-
-  const {data : allAwaitingRequest , isLoading} = useQuery(businessOwnerId ? queryKey : [] , async()=>{
-    if(businessOwnerId){
-     return await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
+    if (awaitingRequestSocket && businessOwnerId) {
      
+      awaitingRequestSocket.emit("getBusinessOwnerId", businessOwnerId);
+
+      awaitingRequestSocket.on("awaitingData", (data) => {
+        setAllRequest(data);
+      });
+
+      return () => {
+        awaitingRequestSocket.off("awaitingData");
+      };
     }
-    return null
-  })
+  }, [awaitingRequestSocket, businessOwnerId]);
+
+
   
-  useEffect(()=>{
-    if(allAwaitingRequest){
-      setAllRequest(allAwaitingRequest.data)
-    }
-  },[allAwaitingRequest])
+
+
+
+//   console.log(infos);
+//   const queryKey = ["allRequest"]
+
+//   const {data : allAwaitingRequest , isLoading} = useQuery(businessOwnerId ? queryKey : [] , async()=>{
+//     if(businessOwnerId){
+//      return await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
+     
+//     }
+//     return null
+//   })
   
-console.log(allAwaitingRequest);
+//   useEffect(()=>{
+//     if(allAwaitingRequest){
+//       setAllRequest(allAwaitingRequest.data)
+//     }
+//   },[allAwaitingRequest])
+  
+// console.log(allAwaitingRequest);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // useEffect(()=>{
 //   const requestUpdate = async()=>{
@@ -156,25 +176,21 @@ await setInputSearch(inputSearched)
 
   if(inputSearched && allRequest && allAwaitingRequest){
     const searchedValue = await allAwaitingRequest.data.filter((request : allRequestType)=> request.username.startsWith(inputSearched))
-
     if(searchedValue){
       setAllRequest(searchedValue)
     }else{
       setAllRequest(allAwaitingRequest.data)
-
     }
     if(inputSearched === ""){
       setAllRequest(allAwaitingRequest.data)
     }
   }
-
 }
 
 const eraserHandler = ()=>{
   setAllRequest(allAwaitingRequest?.data)
   setInputSearch("")
 }
-
 
   const deleteReguests = async (body : object , setState : Dispatch<SetStateAction<boolean>>, text : string )=>{
     if(body){
@@ -190,6 +206,7 @@ const eraserHandler = ()=>{
        } catch (error : any) {
          if (error.response.status === 400) {
            const errorMessage = error.response.data.message;
+           setState(false)
            toast.error(errorMessage);
          } else {
            toast.error("An error occurred while processing your request");
@@ -216,10 +233,6 @@ const eraserHandler = ()=>{
     }
   }
 
-  console.log(idsForDelete);
-  console.log(allRequest);
-  
-
   const proccesseDeleteSelectedRequest = ()=>{
     if(!idsForDelete.length){
       toast.warn("There are no selected requests to remove")
@@ -229,7 +242,6 @@ const eraserHandler = ()=>{
   }
   
   const deleteSelectedRequests = async ()=>{
-
     const body ={
       awaiting_request_ids_for_delete: idsForDelete
     } 
@@ -238,14 +250,9 @@ const eraserHandler = ()=>{
     }
   }
 
-
-
-
   if(!infos){
     return <LoadingPage/>
   }
-  
-
   return (
     <div className="">
       <div className=" w-full fixed top-24  z-40 bg-sky-100 h-max  ">
@@ -309,4 +316,4 @@ const eraserHandler = ()=>{
   );
 };
 
-export default DiscountSetting;
+export default OnlineMenu;

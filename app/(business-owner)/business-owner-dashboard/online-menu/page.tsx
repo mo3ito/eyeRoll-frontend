@@ -38,6 +38,7 @@ const OnlineMenu = () => {
   console.log(discountValue);
   console.log(idsForDelete);
   console.log(singleIdForDelete);
+  console.log(singleIdForDelete);
   
   
   

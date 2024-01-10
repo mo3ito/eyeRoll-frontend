@@ -6,7 +6,7 @@ import { ShowPresenceUserPropsType } from '@/types/onlineMenuBo/productsType'
 
 export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCancelModal , discountId,
   username,
-  discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete ,  }:ShowPresenceUserPropsType) {
+  discount , setDiscountValue, setIdsForDelete , idsForDelete , setSingleIdForDelete , setIsRegisterTakenDiscount  }:ShowPresenceUserPropsType) {
 
    const calculatorHandler = async ()=>{
    await setDiscountValue(discount)
@@ -25,6 +25,12 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
   const deleteRequest = async ()=>{
    await setSingleIdForDelete(discountId)
      setIsShowCancelModal(true)
+  }
+
+  const proccessTakenDiscountRegister = async ()=>{
+   await setSingleIdForDelete(discountId)
+    setIsRegisterTakenDiscount(true)
+    
   }
 
   return (
@@ -91,7 +97,7 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
           />
         </svg>
       </button>
-      <button className=" hoverToUp text-lg  rounded-lg text-white font-semibold   ">
+      <button onClick={proccessTakenDiscountRegister} className=" hoverToUp text-lg  rounded-lg text-white font-semibold   ">
         <svg
           className=" fill-orange-200  size-10 sm:size-14"
           xmlns="http://www.w3.org/2000/svg"

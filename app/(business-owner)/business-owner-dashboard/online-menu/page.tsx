@@ -33,6 +33,7 @@ const OnlineMenu = () => {
   const [singleIdForDelete , setSingleIdForDelete]= useState("")
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
   const [isDeleteSelectedRequest , setIsDeleteSelectedRequest]=useState<boolean>(false)
+  const [isRegisterTakenDiscount , setIsRegisterTakenDiscount]=useState<boolean>(false)
   const [inputSearch , setInputSearch]=useState<string>("")
 
   console.log(discountValue);
@@ -251,6 +252,34 @@ const eraserHandler = ()=>{
     }
   }
 
+  const registerTakenDiscountHandler = async ()=>{
+    const momentNow = new Date()
+    const body = {
+      count : 1,
+      registerDate : momentNow.toISOString()
+    }
+    try {
+      if(body && businessOwnerId){
+        const response = await senderWithAuthId("http://localhost:5000/reports/registeration-discount-taken" , body , businessOwnerId)
+
+        if(response?.status === 200){
+          const body ={
+            awaiting_request_ids_for_delete: [singleIdForDelete] 
+          } 
+         await deleteReguests(body ,setIsRegisterTakenDiscount, "The registration request was successfully registered")
+        }
+      }
+    } catch (error : any) {
+      if (error.response.status === 400) {
+        const errorMessage = error.response.data.message;
+        setIsRegisterTakenDiscount(false)
+        toast.error(errorMessage);
+      } else {
+        toast.error("An error occurred while processing your request");
+      }
+    }
+  }
+
   if(!infos){
     return <LoadingPage/>
   }
@@ -288,7 +317,15 @@ const eraserHandler = ()=>{
         discountId={request.discountId}
         username={request.username}
         discount={request.discount}
-          key={request.discountId} setSingleIdForDelete={setSingleIdForDelete} idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} setIsShowModalCalculator={setIsShowModalCalculator} setDiscountValue={setDiscountValue}  setIsShowCancelModal={setIsShowCancelModal}/>
+        key={request.discountId}
+        setSingleIdForDelete={setSingleIdForDelete} 
+        idsForDelete={idsForDelete} 
+        setIdsForDelete={setIdsForDelete} 
+        setIsShowModalCalculator={setIsShowModalCalculator} 
+        setDiscountValue={setDiscountValue}  
+        setIsShowCancelModal={setIsShowCancelModal}
+        setIsRegisterTakenDiscount={setIsRegisterTakenDiscount}
+        />
         )}  
     </div> : <p className="translate-y-72 text-xl sm:text-2xl text-center">there is no request </p> }
     <ModalDefault
@@ -311,6 +348,13 @@ const eraserHandler = ()=>{
         isShowModal={isDeleteSelectedRequest}
         setIsShowModal={setIsDeleteSelectedRequest}
         confirmHandler={deleteSelectedRequests}
+      />
+        <Modal
+        cancelHandler={() => setIsRegisterTakenDiscount(false)}
+        text="Was the discount used?"
+        isShowModal={isRegisterTakenDiscount}
+        setIsShowModal={setIsRegisterTakenDiscount}
+        confirmHandler={registerTakenDiscountHandler}
       />
     </div>
       

@@ -228,7 +228,7 @@ useEffect(() => {
 
         <div className='container mx-auto px-3 '>
         { isShowMenu ? <>
-       
+      {products.length >0 ? <>
       <SwiperOnlineMenu groupHandler={groupHandler} productAssortments={productAssortments} />
       <FilteringSection
       inputSearchValue={inputSearchValue}
@@ -262,6 +262,7 @@ useEffect(() => {
       groupName='search result' 
       filteredProduct={allProducts} />
         }
+        </> : <p className=' text-center translate-y-12 text-base  sm:text-xl'>there is no product</p> }
       </> :
         <InfoBusinesOnlineMenu informationBusiness={informationBusiness}/>
         }

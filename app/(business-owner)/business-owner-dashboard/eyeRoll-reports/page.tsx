@@ -19,6 +19,7 @@ export default function RollReports() {
   const [startDate, endDate] = dateRange;
   const [eyeRollPageSeen , setEyeRollPageSeen] = useState<string>("")
   const [onlineMenuPageSeen , setOnlineMenuPageSeen]=useState<string>("")
+  const [discountTaken , setDiscountTaken]=useState<string>("")
   const {infos} = useContext(AuthContext)
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
   const [isLoading , setIsLoading]=useState<boolean>(false)
@@ -37,6 +38,7 @@ export default function RollReports() {
       if(response?.status === 200){
        await setEyeRollPageSeen(response.data.eye_roll_seen)
        await setOnlineMenuPageSeen(response.data.online_menu_seen)
+       await setDiscountTaken(response.data.discounts_taken)
        setIsLoading(false)
       }
       }
@@ -69,6 +71,7 @@ export default function RollReports() {
       if(reports){
         await setEyeRollPageSeen(reports.data.eye_roll_seen)
         await setOnlineMenuPageSeen(reports.data.online_menu_seen)
+        await setDiscountTaken(reports.data.discounts_taken)
       }
     }
      getReports()
@@ -89,7 +92,9 @@ export default function RollReports() {
 
       <ShowDynamicReports
       onlineMenuPageSeen={onlineMenuPageSeen}
-      eyeRollPageSeen={eyeRollPageSeen}  />
+      eyeRollPageSeen={eyeRollPageSeen}
+      discountTaken={discountTaken}
+      />
 
       <section className=" w-full sm:w-9/12 md:w-5/12 xl:w-4/12 2xl:4/12 md:bg-sky-50 rounded-3xl overflow-y-auto -translate-y-9 h-5/6 ">
         <DatesPicker
@@ -103,7 +108,11 @@ export default function RollReports() {
           getReportsClick={getReportsHandler}
           isLoadingButton={isLoading}
         />
-        <Rechart />
+        <Rechart
+          onlineMenuPageSeen={onlineMenuPageSeen}
+          eyeRollPageSeen={eyeRollPageSeen}
+          discountTaken={discountTaken}
+        />
         <Rate />
       </section> 
 

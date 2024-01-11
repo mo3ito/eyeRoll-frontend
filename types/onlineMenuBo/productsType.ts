@@ -72,5 +72,6 @@ export interface ShowPresenceUserPropsType{
   setIdsForDelete:Dispatch<SetStateAction<string[]|[]>>;
   idsForDelete:string[];
   setSingleIdForDelete:Dispatch<SetStateAction<string>>
+  setIsRegisterTakenDiscount:Dispatch<SetStateAction<boolean>>
   }
   

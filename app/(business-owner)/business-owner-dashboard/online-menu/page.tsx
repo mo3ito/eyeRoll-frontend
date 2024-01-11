@@ -28,13 +28,15 @@ const OnlineMenu = () => {
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
   const [allRequest , setAllRequest]=useState<allRequestType[]|[]>([])
   useWarnInformation(infos as InfosProps)
-  const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
+  // const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
   const [discountValue , setDiscountValue]=useState("")
   const [singleIdForDelete , setSingleIdForDelete]= useState("")
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
   const [isDeleteSelectedRequest , setIsDeleteSelectedRequest]=useState<boolean>(false)
   const [isRegisterTakenDiscount , setIsRegisterTakenDiscount]=useState<boolean>(false)
+  const [socketId , setSocketId]=useState("")
   const [inputSearch , setInputSearch]=useState<string>("")
+  const [socket , setSocket]=useState<Socket | null>(null)
 
   console.log(discountValue);
   console.log(idsForDelete);
@@ -44,35 +46,45 @@ const OnlineMenu = () => {
   
   
 
-   useEffect(() => {
-    const newSocket = io("http://localhost:5003");
-    setAwaitingRequestSocket(newSocket);
 
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:5003");
+  
+    // newSocket.on("connect", () => {
+    //   console.log("Socket connected with id:", newSocket.id);
+    //   setSocket(newSocket);
+    // });
+    setSocket(newSocket)
+  
     return () => {
       if (newSocket) {
         newSocket.disconnect();
       }
     };
-  }, [businessOwnerId]);
+  }, []);
 
-  useEffect(() => {
 
-    if (awaitingRequestSocket && businessOwnerId) {
-     
-      awaitingRequestSocket.emit("getBusinessOwnerId", businessOwnerId);
+  useEffect(()=>{
 
-      awaitingRequestSocket.on("awaitingData", (data) => {
+    if(socket && businessOwnerId){
+
+      socket.on("connect", () => {
+        socket.emit("newBusinessOwner", businessOwnerId);
+
+        socket.on("awaitingData", (data) => {
+          console.log("Received data:", data);
         setAllRequest(data);
       });
-
-      return () => {
-        awaitingRequestSocket.off("awaitingData");
-      };
+      });
     }
-  }, [awaitingRequestSocket, businessOwnerId]);
+
+  },[socket , businessOwnerId])
+  
 
 
   
+
 
 
 
@@ -94,26 +106,6 @@ const OnlineMenu = () => {
 //   },[allAwaitingRequest])
   
 // console.log(allAwaitingRequest);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // useEffect(()=>{
 //   const requestUpdate = async()=>{
@@ -150,7 +142,7 @@ const OnlineMenu = () => {
 // },[allRequest , businessOwnerId])
 
 
-console.log(allRequest);
+
 
 //  useEffect(()=>{
 

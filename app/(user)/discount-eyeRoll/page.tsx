@@ -12,6 +12,7 @@ import { InfosProps } from "@/types/authentication";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { toast } from "react-toastify";
 import { GET_REQUEST_FOR_DISCOUNT } from "@/routeApi/endpoints";
+import {io , Socket} from "socket.io-client"
 
 export default function DiscountEyeRoll() {
   const { infos } = useContext(AuthContext);
@@ -22,6 +23,9 @@ export default function DiscountEyeRoll() {
   const [detailsDiscount, setDetailsDiscount] = useState<
     informationDiscountType | {}
   >({});
+
+  const [socket , setSocket]=useState<Socket| null>(null)
+
   const { userId } = useGetUserId(infos as InfosProps);
   useExpireDiscount();
 
@@ -31,6 +35,19 @@ export default function DiscountEyeRoll() {
     }
   }, [infos, infos?.discounts_eyeRoll]);
 
+  useEffect(()=>{
+    const newSocket = io("http://localhost:5003");
+    setSocket(newSocket)
+
+    return ()=>{
+      if(newSocket){
+        newSocket.disconnect();
+      }
+    }
+  },[userId])
+
+  console.log(socket);
+  
 
  
 
@@ -64,10 +81,6 @@ export default function DiscountEyeRoll() {
       const beLatedTime = new Date(currentDateTime.getTime());
       beLatedTime.setMinutes(currentDateTime.getMinutes() + 2);
       
-      // console.log("current", currentDateTime.toISOString());
-      // console.log("delay", beLatedTime.toISOString());
-
-   
       if(beLatedTime){
         const body = {
           discountId,
@@ -84,6 +97,10 @@ export default function DiscountEyeRoll() {
           );
           if (response?.status === 200) {
             toast.success(response.data.message);
+            if(socket){
+              socket.emit("sendNewRequest" ,{businessOwnerId , body})
+            }
+            
           }
         } catch (error: any) {
           if (error.response.status === 400) {

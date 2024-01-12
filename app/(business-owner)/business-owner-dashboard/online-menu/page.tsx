@@ -34,7 +34,7 @@ const OnlineMenu = () => {
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
   const [isDeleteSelectedRequest , setIsDeleteSelectedRequest]=useState<boolean>(false)
   const [isRegisterTakenDiscount , setIsRegisterTakenDiscount]=useState<boolean>(false)
-  const [socketId , setSocketId]=useState("")
+  const [requestForFilter , setRequestForFilter]=useState([])
   const [inputSearch , setInputSearch]=useState<string>("")
   const [socket , setSocket]=useState<Socket | null>(null)
 
@@ -50,11 +50,6 @@ const OnlineMenu = () => {
 
   useEffect(() => {
     const newSocket = io("http://localhost:5003");
-  
-    // newSocket.on("connect", () => {
-    //   console.log("Socket connected with id:", newSocket.id);
-    //   setSocket(newSocket);
-    // });
     setSocket(newSocket)
   
     return () => {
@@ -69,15 +64,20 @@ const OnlineMenu = () => {
 
     if(socket && businessOwnerId){
 
-      socket.on("connect", () => {
-        socket.emit("newBusinessOwner", businessOwnerId);
+      socket.on("connect",async () => {
 
-        socket.on("awaitingData", (data) => {
+        await socket.emit("newBusinessOwner", businessOwnerId);
+       await socket.emit("sendAllRequest" , {businessOwnerId})
+       
+        socket.on("awaitingData", async (data) => {
           console.log("Received data:", data);
-        setAllRequest(data);
+       await setAllRequest(data);
+        setRequestForFilter(data)
       });
       });
     }
+
+    
 
   },[socket , businessOwnerId])
   
@@ -168,23 +168,39 @@ const inputSearchHandler = async (event : ChangeEvent<HTMLInputElement>)=>{
 const inputSearched = event.target.value.toLowerCase()
 await setInputSearch(inputSearched)
 
-  if(inputSearched && allRequest && allAwaitingRequest){
-    const searchedValue = await allAwaitingRequest.data.filter((request : allRequestType)=> request.username.startsWith(inputSearched))
+  if(inputSearched && allRequest && requestForFilter){
+    const searchedValue = await requestForFilter.filter((request : allRequestType)=> request.username.startsWith(inputSearched))
     if(searchedValue){
       setAllRequest(searchedValue)
     }else{
-      setAllRequest(allAwaitingRequest.data)
+      setAllRequest(requestForFilter)
     }
-    if(inputSearched === ""){
-      setAllRequest(allAwaitingRequest.data)
-    }
+  
   }
 }
 
-const eraserHandler = ()=>{
-  setAllRequest(allAwaitingRequest?.data)
+useEffect(()=>{
+  if(inputSearch === ""){
+    setAllRequest(requestForFilter)
+  }
+},[inputSearch])
+
+const eraserHandler = async ()=>{
+
+  if(socket && businessOwnerId ){
+    await socket.emit("sendAllRequest" , {businessOwnerId})
   setInputSearch("")
+  }
+
+  
 }
+
+console.log("allRequest", allRequest);
+console.log("request for filter" , requestForFilter);
+
+console.log("input search",inputSearch);
+
+
 
   const deleteReguests = async (body : object , setState : Dispatch<SetStateAction<boolean>>, text : string )=>{
     if(body){

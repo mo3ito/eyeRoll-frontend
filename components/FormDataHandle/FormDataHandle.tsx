@@ -13,7 +13,7 @@ import { FormDataHandleProps } from '@/types/formDataHandle/formDataHandleProps'
 
 
 
-export default function FormDataHandle({ pathApi , pathApiDelete , fileName , content , srcImage , defaultSrc  } : FormDataHandleProps) {
+export default function FormDataHandle({ pathApi , pathApiDelete , fileName , content , srcImage , defaultSrc , targetImage  } : FormDataHandleProps) {
     
     const{infos , login}=useContext(AuthContext)
     const router = useRouter()
@@ -112,7 +112,7 @@ export default function FormDataHandle({ pathApi , pathApiDelete , fileName , co
             </label>
            <div className=" w-full h-max mt-4 flex items-center justify-center gap-x-5 mx-auto text-sm ">
            { isShowInputForFileName && <ButtonDefault onClick={submitImage} loading={isLoadingForApi} className="bg-fuchsia-400  sm:px-2  py-1 rounded-md hoverScale " text="confirm image" />}
-           { infos?.profile_image_path && <ButtonDefault onClick={()=>setIsShowDeleteFileModal(true)} className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />}
+           { targetImage && <ButtonDefault onClick={()=>setIsShowDeleteFileModal(true)} className="bg-fuchsia-400  sm:px-2 py-1  rounded-md hoverScale " text="delete image" />}
             </div>
             </div>
        

@@ -130,7 +130,7 @@ export default function Information() {
       <div className="container px-4  h-max mx-auto">
 
         <div className="max-xs:w-10/12 w-7/12 sm:w-7/12 md:w-1/2 lg:w-4/12 xl:w-3/12 2xl:w-3/12 mx-auto">
-        <FormDataHandle defaultSrc="" srcImage={infos?.profile_image_path ? infos?.profile_image_path : "/images/defaultPerson.png" } fileName="profileImage"  pathApi={BUSINESS_OWNER_PROFILE_IMAGE } pathApiDelete={BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE}  />
+        <FormDataHandle targetImage={infos?.profile_image_path} defaultSrc="/images/defaultPerson.png" srcImage={infos?.profile_image_path && infos?.profile_image_path  } fileName="profileImage"  pathApi={BUSINESS_OWNER_PROFILE_IMAGE } pathApiDelete={BUSINESS_OWNER_IS_PASSWORD_DELETE_PROFILE_IMAGE}  />
         </div>
         <form onSubmit={informationSubmitHandler}>
           <div className=" max-[450px]:w-11/12 w-8/12 sm:w-10/12  md:w-full  lg:w-10/12  xl:w-7/12 2xl:w-2/4 h-max mx-auto  ">
@@ -189,7 +189,7 @@ export default function Information() {
               </div>
             </div>
 
-            <div className="w-full   flex flex-col md:flex-row justify-around gap-x-5">
+            {/* <div className="w-full   flex flex-col md:flex-row justify-around gap-x-5">
               <div className="mb-4 w-full  ">
                 <p className="mb-3 starBefore">email</p>
                 <InputDefault
@@ -200,7 +200,7 @@ export default function Information() {
                   className="inputInformationForm"
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="w-full flex flex-col md:flex-row justify-around gap-x-5">
             <div className="mb-4 w-full md:w-1/3 ">

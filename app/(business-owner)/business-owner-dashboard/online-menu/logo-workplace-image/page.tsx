@@ -13,6 +13,9 @@ import {
 export default function page() {
   const { infos } = useContext(AuthContext);
 
+  console.log(infos);
+  
+
   if(!infos){
     return <LoadingPage/>
   }
@@ -27,6 +30,7 @@ export default function page() {
           fileName="logoImage"
           pathApi={BUSINESS_OWNER_SEND_LOGO_IMAGE}
           pathApiDelete={BUSINESS_OWNER_DELETE_LOGO_IMAGE}
+          targetImage={infos?.logo_image_path}
         />
 
         <FormDataHandle
@@ -38,6 +42,7 @@ export default function page() {
           fileName="workPlaceImage"
           pathApi={BUSINESS_OWNER_SEND_WORK_PLACE_IMAGE}
           pathApiDelete={BUSINESS_OWNER_DELETE_WORK_PLACE_IMAGE}
+          targetImage={infos?.work_place_image_path}
         />
       </div>
     </div>

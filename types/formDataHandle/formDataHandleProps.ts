@@ -6,5 +6,6 @@
     fileName : string;
     content?:string;
     srcImage: string;
-    defaultSrc: string
+    defaultSrc: string;
+    targetImage:string
     }

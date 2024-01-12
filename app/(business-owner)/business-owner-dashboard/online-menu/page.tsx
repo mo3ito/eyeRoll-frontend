@@ -9,15 +9,11 @@ import useWarnInformation from "@/hooks/useWarnInformation";
 import LoadingPage from "@/components/loading/loadingPage";
 import { InfosProps } from "@/types/authentication";
 import ShowPresenceUser from "@/components/showPresenceUser/showPresenceUser";
-import getterWithAuthId from "@/services/getterWithAuthId";
-import { useQuery } from "@tanstack/react-query";
 import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import { io, Socket } from "socket.io-client";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { allRequestType } from "@/types/onlineMenuBo/productsType";
-
-
-
+import { REMOVE_REQUEST_BY_BUSINESSOWNER , REGISTERATION_DISCOUNT_TAKEN } from "@/routeApi/endpoints";
 
 
 const OnlineMenu = () => {
@@ -28,13 +24,12 @@ const OnlineMenu = () => {
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
   const [allRequest , setAllRequest]=useState<allRequestType[]|[]>([])
   useWarnInformation(infos as InfosProps)
-  // const [awaitingRequestSocket , setAwaitingRequestSocket]=useState<Socket | null>(null)
   const [discountValue , setDiscountValue]=useState("")
   const [singleIdForDelete , setSingleIdForDelete]= useState("")
   const [idsForDelete , setIdsForDelete]=useState<string[]|[]>([])
+  const [requestForFilter , setRequestForFilter]=useState<allRequestType[]|[]>([])
   const [isDeleteSelectedRequest , setIsDeleteSelectedRequest]=useState<boolean>(false)
   const [isRegisterTakenDiscount , setIsRegisterTakenDiscount]=useState<boolean>(false)
-  const [requestForFilter , setRequestForFilter]=useState([])
   const [inputSearch , setInputSearch]=useState<string>("")
   const [socket , setSocket]=useState<Socket | null>(null)
 
@@ -42,16 +37,9 @@ const OnlineMenu = () => {
   console.log(idsForDelete);
   console.log(singleIdForDelete);
 
-  
-  
-  
-
-
-
   useEffect(() => {
     const newSocket = io("http://localhost:5003");
     setSocket(newSocket)
-  
     return () => {
       if (newSocket) {
         newSocket.disconnect();
@@ -63,47 +51,18 @@ const OnlineMenu = () => {
   useEffect(()=>{
 
     if(socket && businessOwnerId){
-
       socket.on("connect",async () => {
-
-        await socket.emit("newBusinessOwner", businessOwnerId);
-       await socket.emit("sendAllRequest" , {businessOwnerId})
-       
-        socket.on("awaitingData", async (data) => {
-          console.log("Received data:", data);
-       await setAllRequest(data);
-        setRequestForFilter(data)
+      await socket.emit("newBusinessOwner", businessOwnerId);
+      await socket.emit("sendAllRequest" , {businessOwnerId})
+      socket.on("awaitingData", async (data) => {
+      console.log("Received data:", data);
+      await setAllRequest(data);
+      setRequestForFilter(data)
       });
       });
     }
 
-    
-
   },[socket , businessOwnerId])
-  
-
-
-  
-
-
-
-
-//   console.log(infos);
-//   const queryKey = ["allRequest"]
-
-//   const {data : allAwaitingRequest , isLoading} = useQuery(businessOwnerId ? queryKey : [] , async()=>{
-//     if(businessOwnerId){
-//      return await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
-     
-//     }
-//     return null
-//   })
-  
-//   useEffect(()=>{
-//     if(allAwaitingRequest){
-//       setAllRequest(allAwaitingRequest.data)
-//     }
-//   },[allAwaitingRequest])
   
 // console.log(allAwaitingRequest);
 
@@ -140,28 +99,6 @@ const OnlineMenu = () => {
  
 
 // },[allRequest , businessOwnerId])
-
-
-
-
-//  useEffect(()=>{
-
-//   // const searchedValue = items?.data.filter((product : ProductsType)=> product.productName.startsWith(inputSearchValue))
-//   // setAllItems(searchedValue)
-
-//   if(inputSearch && allRequest && allAwaitingRequest){
-    
-//     const requests = allRequest
-//     const searchedValue = requests.filter(request=> request.username.startsWith(inputSearch))
-//     setAllRequest(searchedValue)
-
-//     if(inputSearch === ""){
-//       setAllRequest(all)
-//     }
-//   }
- 
-
-//  },[inputSearch , allRequest , allAwaitingRequest])
 
 const inputSearchHandler = async (event : ChangeEvent<HTMLInputElement>)=>{
   
@@ -202,10 +139,11 @@ console.log("input search",inputSearch);
 
 
 
+
   const deleteReguests = async (body : object , setState : Dispatch<SetStateAction<boolean>>, text : string )=>{
     if(body){
       try {
-        const response = await senderWithAuthId("http://localhost:5000/reports/remove-request-by-businessOwner" , body ,businessOwnerId)
+        const response = await senderWithAuthId(REMOVE_REQUEST_BY_BUSINESSOWNER , body ,businessOwnerId)
         if(response?.status === 200){
         await setAllRequest(response?.data.remainingDiscounts)
         setState(false)
@@ -268,7 +206,7 @@ console.log("input search",inputSearch);
     }
     try {
       if(body && businessOwnerId){
-        const response = await senderWithAuthId("http://localhost:5000/reports/registeration-discount-taken" , body , businessOwnerId)
+        const response = await senderWithAuthId( REGISTERATION_DISCOUNT_TAKEN , body , businessOwnerId)
 
         if(response?.status === 200){
           const body ={

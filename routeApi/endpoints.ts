@@ -71,4 +71,7 @@ export const BUSINESSOWNER_SEARCHED_INFOS = BASE_URL_BUSINESS_OWNER_INFO_SEARCHE
 //--reports
 export const GET_REPORTS_FOR_BUSINESS_OWNER =`${BASE_URL_REPORTS}/seen-users` 
 export const GET_REQUEST_FOR_DISCOUNT= `${BASE_URL_REPORTS}/request-for-discount`
+export const REMOVE_REQUEST_BY_BUSINESSOWNER = `${BASE_URL_REPORTS}/remove-request-by-businessOwner`
+export const REGISTERATION_DISCOUNT_TAKEN = `${BASE_URL_REPORTS}/registeration-discount-taken`
+
 

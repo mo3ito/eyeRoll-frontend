@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import updaterWithId from '@/services/updaterWithId';
 import { toast } from 'react-toastify';
 import { USERS_GET_DISCOUNT_EYEROLL , GET_ROLL_USER } from '@/routeApi/endpoints';
-import { DeterminationRollProps , dataArrayType , informationDiscountType  } from '@/types/rollType/determinationRoll';
+import { DeterminationRollProps , dataArrayType , InformationDiscountType  } from '@/types/rollType/determinationRoll';
 
 
 
@@ -27,7 +27,7 @@ export default function DeterminationDiscount({ isShowModal, setIsShowModal , bu
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
   const queryKey = ['getRollUser', [businessOwnerId && userId]];
-  const [informationDiscount , setInformationDiscount ]=useState<informationDiscountType | {}>({})
+  const [informationDiscount , setInformationDiscount ]=useState<InformationDiscountType | {}>({})
   const [isShowWheelBox , setIsShowWheelBox]=useState<boolean>(true)
   const [isShowReward , setIsShowReward]=useState<boolean>(false)
   console.log(userId);
@@ -100,7 +100,7 @@ export default function DeterminationDiscount({ isShowModal, setIsShowModal , bu
      await setPrizeNumber(randomDiscount - minPercentageDiscount)
      await setMustSpin(true);
      setDiscount(randomDiscount)
-     const informationDiscount : informationDiscountType = {
+     const informationDiscount : InformationDiscountType = {
       id: uuidv4(),
       businessOwnerId:getRollData?.data.businessOwnerId,
       discount: `${randomDiscount}%`,
@@ -134,7 +134,7 @@ export default function DeterminationDiscount({ isShowModal, setIsShowModal , bu
   useEffect(()=>{
     const sendInformation = async ()=>{
       if(isFixedDiscountToSave && getRollData?.data){
-        const informationDiscount : informationDiscountType = {
+        const informationDiscount : InformationDiscountType = {
           id: uuidv4(),
           businessOwnerId:getRollData?.data.businessOwnerId,
           discount: `${getRollData?.data.minPercentageDiscount}%`,

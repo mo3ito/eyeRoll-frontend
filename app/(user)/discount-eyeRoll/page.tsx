@@ -5,7 +5,7 @@ import LoadingPage from "@/components/loading/loadingPage";
 import useExpireDiscount from "@/hooks/useExpireDiscount";
 import ShowDiscountFullMode from "@/components/Header/user/showDiscountPage/showDiscountFullMode";
 import ShowDiscountMobileMode from "@/components/Header/user/showDiscountPage/showDiscountMobileMode";
-import { informationDiscountType } from "@/types/rollType/determinationRoll";
+import { InformationDiscountType } from "@/types/rollType/determinationRoll";
 import DetailsDiscountContents from "@/components/detailsDiscountContents/detailsDiscountContents";
 import useGetUserId from "@/hooks/useGetUserId";
 import { InfosProps } from "@/types/authentication";
@@ -16,9 +16,9 @@ import {io , Socket} from "socket.io-client"
 
 export default function DiscountEyeRoll() {
   const { infos } = useContext(AuthContext);
-  const [allDiscounts, setAllDiscounts] = useState<informationDiscountType[] | []>([]);
+  const [allDiscounts, setAllDiscounts] = useState<InformationDiscountType[] | []>([]);
   const [isShowDetails, setIsShowDetails] = useState(false);
-  const [detailsDiscount, setDetailsDiscount] = useState<informationDiscountType | {}>({});
+  const [detailsDiscount, setDetailsDiscount] = useState<InformationDiscountType | {}>({});
   const [socket , setSocket]=useState<Socket| null>(null)
   const { userId } = useGetUserId(infos as InfosProps);
   useExpireDiscount();

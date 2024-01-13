@@ -18,7 +18,7 @@ export interface DeterminationRollProps{
     style:{backgroundColor : string}
   }
 
- export interface informationDiscountType {
+ export interface InformationDiscountType {
     id: string;
     businessOwnerId: string;
     discount: string;
@@ -37,7 +37,7 @@ export interface DeterminationRollProps{
   }
 
  export interface ShowDiscountFullModePropsType{
-    allDiscounts: informationDiscountType[];
+    allDiscounts: InformationDiscountType[];
     onClickshowDetails:(brandName:string,discount:string,startTime:string,endTime:string,address:string,workPhone:string)=>void;
     getDiscountOnClick:(businessOwnerId : string ,discountId: string ,discount: string)=>void
   }

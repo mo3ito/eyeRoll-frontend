@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import ModalDefault from "../modal/modalDefault";
-import { informationDiscountType } from "@/types/rollType/determinationRoll";
+import { InformationDiscountType } from "@/types/rollType/determinationRoll";
 
 interface DetailsDiscountContentsPropsType {
-  detailsDiscount: informationDiscountType | {};
+  detailsDiscount: InformationDiscountType | {};
   isShowDetails: boolean;
   setIsShowDetails: Dispatch<SetStateAction<boolean>>;
 }

@@ -16,16 +16,10 @@ import {io , Socket} from "socket.io-client"
 
 export default function DiscountEyeRoll() {
   const { infos } = useContext(AuthContext);
-  const [allDiscounts, setAllDiscounts] = useState<
-    informationDiscountType[] | []
-  >([]);
+  const [allDiscounts, setAllDiscounts] = useState<informationDiscountType[] | []>([]);
   const [isShowDetails, setIsShowDetails] = useState(false);
-  const [detailsDiscount, setDetailsDiscount] = useState<
-    informationDiscountType | {}
-  >({});
-
+  const [detailsDiscount, setDetailsDiscount] = useState<informationDiscountType | {}>({});
   const [socket , setSocket]=useState<Socket| null>(null)
-
   const { userId } = useGetUserId(infos as InfosProps);
   useExpireDiscount();
 

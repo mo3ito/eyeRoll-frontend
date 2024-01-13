@@ -54,11 +54,11 @@ export default function ShowPresenceUser({setIsShowModalCalculator , setIsShowCa
           {discount}
         </div>
 
-        <Timer
+        {/* <Timer
           className=" size-10 sm:size-14 bg-indigo-300 rounded-full flex items-center justify-center  border-4 border-white hoverToUp"
           classNameTime="flex items-center justify-center text-[7px] sm:text-[11px] text-white font-semibold"
           timeMinutes={20}
-        />
+        /> */}
       
 
       <button

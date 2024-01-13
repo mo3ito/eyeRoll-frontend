@@ -79,7 +79,7 @@ export default function DiscountEyeRoll() {
      
       const currentDateTime = new Date();
       const beLatedTime = new Date(currentDateTime.getTime());
-      beLatedTime.setMinutes(currentDateTime.getMinutes() + 2);
+      beLatedTime.setMinutes(currentDateTime.getMinutes() + 20);
       
       if(beLatedTime){
         const body = {

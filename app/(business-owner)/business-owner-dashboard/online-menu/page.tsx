@@ -14,6 +14,7 @@ import { io, Socket } from "socket.io-client";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { allRequestType } from "@/types/onlineMenuBo/productsType";
 import { REMOVE_REQUEST_BY_BUSINESSOWNER , REGISTERATION_DISCOUNT_TAKEN } from "@/routeApi/endpoints";
+import removal from "@/services/removal";
 
 
 const OnlineMenu = () => {
@@ -64,42 +65,8 @@ const OnlineMenu = () => {
 
   },[socket , businessOwnerId])
   
-// console.log(allAwaitingRequest);
-
-// useEffect(()=>{
-//   const requestUpdate = async()=>{
-//     if(allRequest && businessOwnerId){
-
-//       try {
-//         // const responseRemoveExpire = await removal("http://localhost:5000/reports/remove-expire-awaiting-request" , businessOwnerId)
-
-//         // if(responseRemoveExpire?.status === 200 ){
-//         //   console.log(responseRemoveExpire);
-//         //  await setAllRequest(responseRemoveExpire.data)
-          
-//         // }
-
-//         const response = await getterWithAuthId("http://localhost:5000/reports/get-all-discount-request" , businessOwnerId)
-//         if(response?.status === 200){
-//           setAllRequest(response.data)
-//         }
-//       } catch (error : any) {
-//         if (error.response?.status === 400) {
-//           const errorMessage = error?.response.data.message;
-//           toast.error(errorMessage);
-//         } else {
-//           toast.error("An error occurred while processing your request");
-//         }
-//       }
-//     }
-//   }
-//   setInterval(()=>{
-//     requestUpdate()
-//   },4000)
- 
-
-// },[allRequest , businessOwnerId])
-
+  console.log("socket" , socket);
+  
 const inputSearchHandler = async (event : ChangeEvent<HTMLInputElement>)=>{
   
 const inputSearched = event.target.value.toLowerCase()
@@ -226,7 +193,7 @@ console.log("input search",inputSearch);
     }
   }
 
-  if(!infos){
+  if(!infos && !socket?.id){
     return <LoadingPage/>
   }
   return (

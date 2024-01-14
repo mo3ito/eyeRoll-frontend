@@ -2,8 +2,9 @@ import React from 'react'
 import linkHandler from '@/utils/linkHandler'
 import Logo from '@/components/logo/logo'
 import logoutHandler from '@/utils/logoutHandler'
+import { BoxMenuPropsType } from '@/types/businessOwnerDashboard/businessOwnerDashboard'
 
-export default function BoxMenuScreenMode({setShowAside , setShowBox , setShowRoll , showBox , showRoll , router , setInfos , infos , showOnlineMenu , setShowOnlineMenu}) {
+export default function BoxMenuScreenMode({setShowAside , setShowBox , setShowRoll , showBox , showRoll , router , setInfos , infos , showOnlineMenu , setShowOnlineMenu}:BoxMenuPropsType) {
   return (
     <header className='h-24 bg-gradient-to-b from-indigo-300 to-sky-100 w-full fixed top-0 z-50  flex items-center justify-center '>
     <div className=' hidden  sm:flex w-full h-full  mx-auto  items-center justify-between  sm:px-10 '>

@@ -1,14 +1,17 @@
 
+'use client'
 import {useRef} from 'react'
 import linkHandler from '@/utils/linkHandler'
 import logoutHandler from '@/utils/logoutHandler'
 import Logo from '@/components/logo/logo'
 import useDropDownHandler from '@/hooks/useDropDownHandler'
+import { BoxMenuPropsType } from '@/types/businessOwnerDashboard/businessOwnerDashboard'
 
-export default function BoxMenuMoblieMode({setShowAside , setShowBox , setShowRoll , showBox , showRoll , router , setInfos , infos , showOnlineMenu , setShowOnlineMenu}) {
+
+
+export default function BoxMenuMoblieMode({setShowAside , setShowBox , setShowRoll , showBox , showRoll , router , setInfos , infos , showOnlineMenu , setShowOnlineMenu}:BoxMenuPropsType) {
 
   const menuBoxRef = useRef<HTMLDivElement | null>(null)
-
   useDropDownHandler(menuBoxRef , setShowBox)
 
 

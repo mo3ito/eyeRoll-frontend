@@ -42,8 +42,8 @@ export default function BoxMenuMoblieMode({setShowAside , setShowBox , setShowRo
           <li onClick={()=>setShowRoll(prev=>!prev)}  className=' cursor-pointer px-2  py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             <span className="">
             roll
-            { !showRoll ? <svg className=" w-4 h-4    ml-4  fill-fuchsia-700 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z"></path></svg>
-           : <svg className="w-4 h-4   ml-4  fill-white inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.1717 12.0005L9.34326 9.17203L10.7575 7.75781L15.0001 12.0005L10.7575 16.2431L9.34326 14.8289L12.1717 12.0005Z"></path></svg>}
+            { !showRoll ? <svg className=" w-4 h-4 float-right  fill-fuchsia-700 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z"></path></svg>
+           : <svg className="size-4  float-right  fill-white inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>}
              </span>
             <ul className={` ${showRoll ? 'absolute' : 'hidden'} left-[9px] z-40 w-11/12 rounded-lg  h-max bg-blue-100 border border-fuchsia-400 p-1`}>
             <li onClick={()=>linkHandler("/business-owner-dashboard/discount-setting",router,setShowBox)} className=" px-2  py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">set roll</li>
@@ -55,8 +55,8 @@ export default function BoxMenuMoblieMode({setShowAside , setShowBox , setShowRo
           <li onClick={()=>setShowOnlineMenu(prev=>!prev)}  className=' cursor-pointer px-2  py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
             <span className="">
             online menu
-            { !showOnlineMenu ? <svg className=" w-4 h-4  ml-4  fill-fuchsia-700 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z"></path></svg>
-           : <svg className="w-4 h-4  ml-4  fill-white inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.1717 12.0005L9.34326 9.17203L10.7575 7.75781L15.0001 12.0005L10.7575 16.2431L9.34326 14.8289L12.1717 12.0005Z"></path></svg>}
+            { !showOnlineMenu ? <svg className=" w-4 h-4 float-right fill-fuchsia-700 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.8284L9.17154 14.6569L7.75732 13.2426L12 9L16.2426 13.2426L14.8284 14.6569L12 11.8284Z"></path></svg>
+           : <svg className="size-4  float-right  fill-white inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ><path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z"></path></svg>}
              </span>
             <ul className={` ${showOnlineMenu ? 'absolute' : 'hidden'} left-[9px] z-40 w-11/12   rounded-lg  h-max bg-blue-100 border border-fuchsia-400 p-1`}>
             <li onClick={()=>linkHandler("/business-owner-dashboard/online-menu/add-product",router,setShowBox)} className=" px-2  py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white truncate">add new product</li>

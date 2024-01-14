@@ -14,8 +14,6 @@ import { io, Socket } from "socket.io-client";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { allRequestType } from "@/types/onlineMenuBo/productsType";
 import { REMOVE_REQUEST_BY_BUSINESSOWNER , REGISTERATION_DISCOUNT_TAKEN } from "@/routeApi/endpoints";
-import removal from "@/services/removal";
-
 
 const OnlineMenu = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =

@@ -16,6 +16,7 @@ export default function QRCodeLinkRoll() {
   return (
     <QRCodeLinkShower
       QRCodePath={`${process.env.NEXT_PUBLIC_BASE_URL}/get-roll/${businessOwnerId}`}
+      content="roll Qr code & link"
     />
   );
 }

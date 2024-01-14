@@ -15,24 +15,14 @@ import { InfosProps } from "@/types/authentication";
 import linkHandler from "@/utils/linkHandler";
 
 const DiscountSetting = () => {
-  const [isShowModalCalculator, setIsShowModalCalculator] =
-    useState<boolean>(false);
-  const [isShowCancelModal, setIsShowCancelModal] = useState<boolean>(false);
-  const [token ,setToken]=useState(Cookies.get(EYEROLL_TOKEN))
   const { infos } = useContext(AuthContext);
   const router = useRouter()
   useWarnInformation(infos as InfosProps)
-  console.log(infos);
-  // const [statusAccount , setStatusAccount]=useState<string>("Incomplete information")
-  
-
 
   if(!infos){
     return <LoadingPage/>
   }
   
-
-
   return (
    <div className="mt-28 container  mx-auto px-4">
     <p className="text-center text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-10">dashboard</p>

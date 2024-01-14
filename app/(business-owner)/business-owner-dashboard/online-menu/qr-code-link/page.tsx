@@ -16,6 +16,7 @@ export default function QRCodeLink() {
   return (
     <QRCodeLinkShower
       QRCodePath={`${process.env.NEXT_PUBLIC_BASE_URL}/online-menu/${businessOwnerId}`}
+      content="online menu Qr code & link"
     />
   );
 }

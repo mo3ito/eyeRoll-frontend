@@ -7,7 +7,7 @@ import { InfosProps } from '@/types/authentication';
 import LoadingPage from '@/components/loading/loadingPage';
 import handleCopyToClipboard from '@/utils/handleCopyToClipboard';
 
-export default function QRCodeLinkShower({QRCodePath}:{QRCodePath:string}) {
+export default function QRCodeLinkShower({QRCodePath , content}:{QRCodePath:string , content:string}) {
 
     const [qrCodeData, setQRCodeData] = useState('');
     const {infos}= useContext(AuthContext)
@@ -40,6 +40,7 @@ export default function QRCodeLinkShower({QRCodePath}:{QRCodePath:string}) {
 
   return (
     <div className='container mx-auto'>
+      <p className='translate-y-48 font-semibold text-center max-xs:text-sm text-base md:text-lg lg:text-xl xl:text-2xl'>{content}</p>
     <div className='mt-52  px-6 mx-auto border flex items-center justify-center flex-col gap-y-3 py-12 shadow-lg rounded-lg border-fuchsia-400 w-11/12 sm:w-8/12 md:w-8/12 lg:w-7/12   xl:w-6/12 2xl:w-5/12'>
        
         { qrCodeData && 

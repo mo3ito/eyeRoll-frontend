@@ -7,17 +7,17 @@ interface ModalProps {
     children : any ;
     isShowModal : boolean ;
     isCloseIcon?: boolean ;
-    isClosOuteModalClick?:boolean;
+    isClosOutModalClick?:boolean;
     setIsShowModal : Dispatch<SetStateAction<boolean>>
     isSpinner?:boolean
 }
 
-export default function ModalDefault({children , isShowModal , setIsShowModal , isCloseIcon = true , isClosOuteModalClick = true , isSpinner = false}: ModalProps) {
+export default function ModalDefault({children , isShowModal , setIsShowModal , isCloseIcon = true , isClosOutModalClick = true , isSpinner = false}: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
   const closeModal = () => {
-    if(isClosOuteModalClick){
+    if(isClosOutModalClick){
       setIsShowModal(false);
     }
     

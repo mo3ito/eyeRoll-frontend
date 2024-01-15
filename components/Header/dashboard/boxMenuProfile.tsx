@@ -37,7 +37,7 @@ export default function BoxMenuProfile({setShowAside , setShowBox , setShowRoll 
             <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm  md:text-lg  pr-2">{infos?.username}dddddddddddddddddd</p>
           </div>
           <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60  h-max top-12 sm:top-14  border rounded-lg border-purple-400`}>
-          <ul className="w-full h-max  max-xs:text-xs text-sm lg:text-base p-1 shadow-md">
+          <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1 shadow-md">
  
           <li onClick={()=>setShowRoll(prev=>!prev)}  className={` ${showRoll && 'bg-pink-300'} cursor-pointer px-2  py-2  relative hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white `}>
             <span className="">

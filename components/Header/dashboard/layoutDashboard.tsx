@@ -11,8 +11,8 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import ValidatorPassword from "@/components/shared/ValidatorPassword/validatorPassword";
 import { toast } from "react-toastify";
 import { InfosProps } from "@/types/authentication";
-import BoxMenuMoblieMode from "./boxMenuMoblieMode";
-import BoxMenuScreenMode from "./boxMenuScreenMode";
+import BoxMenuProfile from "./boxMenuProfile";
+
 
 const LayoutDashboard = () => {
   const [showAside, setShowAside] = useState<boolean>(false);
@@ -70,20 +70,7 @@ const LayoutDashboard = () => {
  
   return (
       <>
-      <BoxMenuScreenMode
-      setShowAside={setShowAside}
-      setShowBox={setShowBox}
-      setShowRoll={setShowRoll}
-      showBox={showBox}
-      showRoll={showRoll}
-      router={router}
-      setInfos={setInfos}
-      infos={infos}
-      showOnlineMenu={showOnlineMenu}
-      setShowOnlineMenu={setShowOnlineMenu}
-      />
-
-      <BoxMenuMoblieMode
+      <BoxMenuProfile
       setShowAside={setShowAside}
       setShowBox={setShowBox}
       setShowRoll={setShowRoll}

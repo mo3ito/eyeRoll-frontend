@@ -197,6 +197,7 @@ export default function DeterminationDiscount({ isShowModal, setIsShowModal , bu
       isShowModal={isShowModal}
       setIsShowModal={setIsShowModal}
       isClosOuteModalClick={isCloseOutModalClick}
+      isSpinner={true}
     >
       {isShowWheelBox && <div className=" w-full h-max overflow-y-hidden p-2  overflow-x-hidden sm:text-lg text-zinc-500 flex flex-col items-center justify-center ">
            

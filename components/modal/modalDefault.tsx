@@ -9,9 +9,10 @@ interface ModalProps {
     isCloseIcon?: boolean ;
     isClosOuteModalClick?:boolean;
     setIsShowModal : Dispatch<SetStateAction<boolean>>
+    isSpinner?:boolean
 }
 
-export default function ModalDefault({children , isShowModal , setIsShowModal , isCloseIcon = true , isClosOuteModalClick = true}: ModalProps) {
+export default function ModalDefault({children , isShowModal , setIsShowModal , isCloseIcon = true , isClosOuteModalClick = true , isSpinner = false}: ModalProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -38,12 +39,12 @@ export default function ModalDefault({children , isShowModal , setIsShowModal , 
      
       <div
         ref={modalRef}
-        className=" relative bg-white -translate-y-5 text-sm sm:text-base max-xs:w-full w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 h-2/4   flex justify-center items-center rounded-lg"
+        className={` relative bg-white -translate-y-5 text-sm sm:text-base max-xs:w-full ${isSpinner ? 'w-full' : 'w-11/12'} sm:w-8/12 md:w-7/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12 h-2/4   flex justify-center items-center rounded-lg`}
       >
         { isCloseIcon && <CloseIcon
           onClick={() => setIsShowModal(false)}
           classNameButton="absolute top-2 right-2 "
-          classNameSvg= "w-5 h-5 fill-red-400 sm:w-6 sm:h-6 lg:w-8 lg:h-8 "
+          classNameSvg= "size-5 fill-red-400 sm:w-6 sm:h-6 lg:w-8 lg:h-8 "
         /> }
        <div className="w-full h-full" >{children}</div>
        </div>

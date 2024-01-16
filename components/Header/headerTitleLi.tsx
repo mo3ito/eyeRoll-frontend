@@ -17,7 +17,7 @@ const HeaderTitleLi = ({title , options } : HeaderTitleLiProps) => {
           </div>
           <ul className={`hidden ${ showBox && 'group-hover:block'} text-lg absolute border p-1 border-purple-500 bg-blue-100 z-50 shadow-md  top-24 left-0 h-max  min-w-[176px] w-max  rounded-xl `}>
             {options.map(option=>
-            <li onTouchEnd={()=>linkHandler(option.path,router , setShowBox)} onClick={()=>linkHandler(option.path,router , setShowBox)} key={option.id} className='px-6 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
+            <li onTouchEnd={()=>linkHandler(option.path, router , setShowBox)} onClick={()=>linkHandler(option.path, router , setShowBox)} key={option.id} className='px-6 py-2  hover:bg-pink-300 rounded-lg text-fuchsia-700 hover:font-semibold hover:text-white '>
               {option.name}
               </li>
               )}

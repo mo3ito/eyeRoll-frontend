@@ -31,10 +31,10 @@ export default function BoxMenuProfile({setShowAside , setShowBox , setShowRoll 
             <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
           </svg>
         </button>
-        <div ref={menuBoxRef} className="w-max max-w-[200px] h-max relative bg-indigo-200 p-1 mt-1  rounded-md">
-          <div onClick={()=>setShowBox(prev=> !prev)} className="w-max flex items-center justify-center cursor-pointer ">
+        <div ref={menuBoxRef} className="w-max max-w-[200px] h-max relative bg-indigo-200  mt-1  rounded-md">
+          <div onClick={()=>setShowBox(prev=> !prev)} className=" flex size-full items-center justify-center p-1 cursor-pointer ">
             <img className=" w-10 h-10 sm:w-12 sm:h-12 object-cover border bg-sky-100  rounded-full inline-block" src={infos?.profile_image_path ? infos.profile_image_path : "/images/defaultPerson.png"} alt="" />
-            <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm  md:text-lg  pr-2">{infos?.username}dddddddddddddddddd</p>
+            <p className="inline-block ml-2 truncate w-max text-stone-600 max-w-[110px] text-sm  md:text-lg  pr-2">{infos?.username}</p>
           </div>
           <div className={` ${showBox ? 'absolute' : 'hidden'}  bg-blue-100 max-xs:w-52 w-60  h-max top-12 sm:top-14  border rounded-lg border-purple-400`}>
           <ul className="w-full h-max  max-xs:text-xs text-sm sm:text-base p-1 shadow-md">

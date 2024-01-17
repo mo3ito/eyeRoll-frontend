@@ -73,14 +73,14 @@ const LayouAdmintDashboard = () => {
       <BoxMenuProfile
       setShowAside={setShowAside}
       setShowBox={setShowBox}
-      setShowRoll={setShowRoll}
-      showBox={showBox}
-      showRoll={showRoll}
-      router={router}
-      setInfos={setInfos}
-      infos={infos}
-      showOnlineMenu={showOnlineMenu}
-      setShowOnlineMenu={setShowOnlineMenu}
+    //   setShowRoll={setShowRoll}
+    //   showBox={showBox}
+    //   showRoll={showRoll}
+    //   router={router}
+    //   setInfos={setInfos}
+    //   infos={infos}
+    //   showOnlineMenu={showOnlineMenu}
+    //   setShowOnlineMenu={setShowOnlineMenu}
       />
       <LeftMenuAdmin
       setIsShowImportPassword={setIsShowImportPassword} 

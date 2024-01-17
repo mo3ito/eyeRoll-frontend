@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
-import LayoutDashboard from "@/components/Header/dashboard/layoutDashboard";
+import LayouAdmintDashboard from "@/components/Header/admin/layoutAdminDashboard";
 
 export const metadata: Metadata = {
   title: "admin",
@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden min-h-screen h-max inset-0 bg-sky-100">
         <AuthContextProvider>
           <ReactQueryProvider>
-            <LayoutDashboard />
+          <LayouAdmintDashboard/>
             {children}
             <ToastContainer
               position="top-center"

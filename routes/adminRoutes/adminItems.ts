@@ -11,6 +11,14 @@ const accordionAdminItems = [
       { id: uuidv4(), href: "/", name: "number of business owners" },
     ],
   },
+  {
+    id:uuidv4(),
+    title:"requests",
+    options: [
+      { id: uuidv4(), href: "/", name: "business owner requests" },
+      { id: uuidv4(), href: "/", name: "admin requests" },
+    ],
+  },
 
 ];
 

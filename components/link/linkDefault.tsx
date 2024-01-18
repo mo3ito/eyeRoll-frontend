@@ -5,7 +5,7 @@ import Link from 'next/link'
 interface LinkDefaultProps {
   text: string;
   className: string;
-  href: string;
+  href: any;
 }
 
 export default function LinkDefault({

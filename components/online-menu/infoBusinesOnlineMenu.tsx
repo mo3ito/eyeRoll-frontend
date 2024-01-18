@@ -1,6 +1,21 @@
 import React from 'react'
 
-export default function InfoBusinesOnlineMenu({informationBusiness}) {
+interface InfoBusinesOnlineMenuType {
+  address: string;
+  brand_name: string;
+  logo_image: string;
+  phone_number: string;
+  work_phone: string;
+  work_place_image: string;
+}
+
+interface InfoBusinesOnlineMenuPropsُType {
+  informationBusiness: InfoBusinesOnlineMenuType | null;
+}
+
+export default function InfoBusinesOnlineMenu({informationBusiness}: InfoBusinesOnlineMenuPropsُType) {
+  console.log("informationBusiness" , informationBusiness);
+  
   return (
     <div className='w-full h-max text-sm sm:text-base '>
 

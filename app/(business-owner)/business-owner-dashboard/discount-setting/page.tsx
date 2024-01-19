@@ -272,7 +272,10 @@ export default function DeterminingDiscount() {
       if(!infos?.is_complete_information){
       return  router.push("/business-owner-dashboard/information")
       
-      }else{
+      }else if(!infos?.is_approvedـbyـadmin){
+        return toast.warn("The information provided by the admin has not been confirmed yet")
+      }
+      else{
   
         if(!calendarisValue && isCheckedDiscountTime){
          return toast.warn("Please enter the date")

@@ -11,14 +11,13 @@ import useGetBusinessOwnerId from "@/hooks/useGet‌‌BusinessOwnerId";
 import ValidatorPassword from "@/components/shared/ValidatorPassword/validatorPassword";
 import { toast } from "react-toastify";
 import { InfosProps } from "@/types/authentication";
-import BoxMenuProfile from "../dashboard/boxMenuProfile";
+import BoxMenuProfileAdmin from "./boxMenuProfileAdmin";
 
 
 const LayouAdmintDashboard = () => {
   const [showAside, setShowAside] = useState<boolean>(false);
   const leftMenuRef = useRef<HTMLDivElement | null>(null);
   const [showBox , setShowBox] = useState<boolean>(false)
-  const [showOnlineMenu , setShowOnlineMenu]=useState<boolean>(false)
   const [isShowImportPassword , setIsShowImportPassword]=useState<boolean>(false)
   const [passwordInput , setPasswordInput]=useState<string>("")
   const { infos , setInfos } = useContext(AuthContext);
@@ -26,7 +25,6 @@ const LayouAdmintDashboard = () => {
   const router = useRouter()
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
   useDropDownHandler(leftMenuRef , setShowAside)
-  const [showRoll , setShowRoll]=useState(false)
 
 
 
@@ -70,17 +68,13 @@ const LayouAdmintDashboard = () => {
  
   return (
       <>
-      <BoxMenuProfile
+      <BoxMenuProfileAdmin
       setShowAside={setShowAside}
       setShowBox={setShowBox}
-    //   setShowRoll={setShowRoll}
-    //   showBox={showBox}
-    //   showRoll={showRoll}
-    //   router={router}
-    //   setInfos={setInfos}
-    //   infos={infos}
-    //   showOnlineMenu={showOnlineMenu}
-    //   setShowOnlineMenu={setShowOnlineMenu}
+      showBox={showBox}
+      router={router}
+      setInfos={setInfos}
+      infos={infos}
       />
       <LeftMenuAdmin
       setIsShowImportPassword={setIsShowImportPassword} 

@@ -12,7 +12,7 @@ import sender from "@/services/sender";
 import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { BUSINESS_OWNER_REGISTER } from "@/routeApi/endpoints";
+import { ADMIN_REGISTER } from "@/routeApi/endpoints";
 import  handleInputChange  from "@/utils/handleInputChange";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -36,20 +36,9 @@ const RegisterAdmin = () => {
   const router = useRouter();
   useDropDownHandler(phoneNumberRef , setIsBorderBold )
 
-//   {
-//     "name": "mostafa",
-//      "last_name":"entezami",
-//      "phone_number": "09389200933",
-//      "username":"mosito",
-//      "password":"mostafa8188",
-//      "email":"mostafa.tar90@gmail.com",
-//      "admin_key":"eyeRoll9919022106eyeRoll"
-// }
- 
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("submit");
     const body = {
       name,
       last_name: lastName,
@@ -58,6 +47,7 @@ const RegisterAdmin = () => {
       password,
       repeat_password: repeatPassword,
       email: email.toLowerCase(),
+      admin_key:adminKey
     };
     try {
       if (
@@ -69,24 +59,27 @@ const RegisterAdmin = () => {
         !password.length ||
         !repeatPassword.length
       ) {
-        toast.warn("Please Fill in the empty inputs");
-        return;
+       return toast.warn("Please Fill in the empty inputs");
+        
       } else if (password !== repeatPassword) {
-        toast.warn("Repeating the password is not the same as the password");
-        return;
+       return toast.warn("Repeating the password is not the same as the password");
+        
       } else if (isNaN(+phoneNumber)) {
-        toast.warn("the phoneNumber must be number");
-        return;
-      } else if (password.length < 8) {
-        toast.warn("the password must be at least 8 characters long");
-        return;
+       return toast.warn("the phoneNumber must be number");
+        
+      }else if(adminKey.trim().length === 0){
+       return toast.warn("please fill admin key")
+      }
+       else if (password.length < 8) {
+       return toast.warn("the password must be at least 8 characters long");
+        
       }
       setIsLoading(true);
-      const response = await sender(BUSINESS_OWNER_REGISTER, body);
+      const response = await sender( ADMIN_REGISTER, body);
       if (response?.status === 200) {
-        await login(response?.data.userInfos, response?.data.token);
+        await login(response?.data.adminInfos, response?.data.token);
         setIsLoading(false);
-        router.push("/business-owner-verify-email");
+        router.push("/admin-eyeRoll");
       }
     } catch (error: any) {
       if (error.response.status === 400) {
@@ -187,9 +180,9 @@ const RegisterAdmin = () => {
                 className="mb-4 w-full "
                 label="admin key"
                 labelClassName="mb-3 starBefore"
-                value={password}
+                value={adminKey}
                 onChange={useCallback(
-                  (event) => handleInputChange(event, setPassword),
+                  (event) => handleInputChange(event, setAdminKey),
                   []
                 )}
                 disabled={false}

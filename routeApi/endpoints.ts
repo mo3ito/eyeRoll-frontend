@@ -1,4 +1,4 @@
-import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION , BASE_URL_BUSINESS_OWNER_INFO_SEARCHED , BASE_URL_REPORTS } from "./baseUrlNextApi";
+import { BASE_URL_BUSINESS_OWNER, BASE_URL_USERS , BASE_URL_ROLL , BASE_URL_SEARCH_INFORMATION , BASE_URL_BUSINESS_OWNER_INFO_SEARCHED , BASE_URL_REPORTS , BASE_URL_ADMIN} from "./baseUrlNextApi";
 
 //--business-owner-routes---------------------------------------------------------------------------------------------
 
@@ -73,5 +73,9 @@ export const GET_REPORTS_FOR_BUSINESS_OWNER =`${BASE_URL_REPORTS}/seen-users`
 export const GET_REQUEST_FOR_DISCOUNT= `${BASE_URL_REPORTS}/request-for-discount`
 export const REMOVE_REQUEST_BY_BUSINESSOWNER = `${BASE_URL_REPORTS}/remove-request-by-businessOwner`
 export const REGISTERATION_DISCOUNT_TAKEN = `${BASE_URL_REPORTS}/registeration-discount-taken`
+
+
+//--admin
+export const ADMIN_REGISTER= `${BASE_URL_ADMIN}/register`
 
 

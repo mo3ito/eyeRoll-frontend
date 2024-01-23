@@ -33,7 +33,8 @@ export const AuthContext = createContext<AuthContextProps>({
       logo_image_path:"",
       profile_image_path:"",
       discounts_eyeRoll: undefined,
-      is_approvedـbyـadmin:false
+      is_approvedـbyـadmin:false,
+      is_admin:false
   },
     login : ()=>{},
     logout : ()=>{},

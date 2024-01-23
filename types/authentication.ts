@@ -39,7 +39,8 @@ export interface InfosProps {
   work_place_image_path: string,
   logo_image_path: string,
   discounts_eyeRoll:discountEyeRollType[] | undefined;
-  is_approvedـbyـadmin:boolean
+  is_approvedـbyـadmin:boolean;
+  is_admin:boolean
   
 
  

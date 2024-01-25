@@ -57,7 +57,8 @@ const RegisterAdmin = () => {
         !phoneNumber ||
         !username.length ||
         !password.length ||
-        !repeatPassword.length
+        !repeatPassword.length ||
+        !adminKey.length
       ) {
        return toast.warn("Please Fill in the empty inputs");
         
@@ -224,7 +225,7 @@ const RegisterAdmin = () => {
             <div className="flex items-center justify-center  space-x-1 mt-3">
               <p className="text-sm sm:text-base ">Do you have an account? </p>
               <Link
-                href="/register-business-owner/login"
+                href="/register-admin/login"
                 className="text-fuchsia-500 underline text-sm sm:text-xl"
               >
                 login

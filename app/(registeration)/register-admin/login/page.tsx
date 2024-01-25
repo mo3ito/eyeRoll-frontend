@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import sender from '@/services/sender'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ADMIN_LOGIN } from '@/routeApi/endpoints'
 
 export default function page() {
 
@@ -19,10 +20,8 @@ export default function page() {
     const{login} = useContext(AuthContext)
     const router = useRouter()
 
-
     const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
         const body = {
           email: email.toLowerCase(),
           password,
@@ -41,7 +40,7 @@ export default function page() {
             return toast.warn("please fill admin key") 
           }
           setIsLoading(true);
-          const response = await sender("http://localhost:5000/admin/login", body);
+          const response = await sender(ADMIN_LOGIN, body);
           if (response?.status === 200) {
             await login(response?.data.userInfos, response?.data.token);
             setIsLoading(false);
@@ -67,7 +66,6 @@ export default function page() {
           <h2 className="mb-12 text-center text-lg font-semibold">
             login as admin
           </h2>
-
           <div className="w-full flex flex-wrap sm:flex-nowrap justify-around gap-x-5">
             <Input
               className="mb-4 w-full "
@@ -114,7 +112,7 @@ export default function page() {
             className="hoverScale w-full mt-4 bg-fuchsia-400 h-12 rounded-lg"
           />
           <div className="flex items-center justify-center  space-x-1 mt-3">
-            <p className="text-sm sm:text-base ">Do'nt you have an account? </p>
+            <p className="text-sm sm:text-base ">Don't you have an account? </p>
             <Link
               href="/register-admin"
               className="text-fuchsia-500 underline text-sm sm:text-xl"

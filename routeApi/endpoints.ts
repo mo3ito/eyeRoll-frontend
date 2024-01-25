@@ -77,5 +77,7 @@ export const REGISTERATION_DISCOUNT_TAKEN = `${BASE_URL_REPORTS}/registeration-d
 
 //--admin
 export const ADMIN_REGISTER= `${BASE_URL_ADMIN}/register`
+export const ADMIN_LOGIN= `${BASE_URL_ADMIN}/login`
+
 
 

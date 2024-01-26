@@ -8,6 +8,8 @@ import logoutHandler from '@/utils/logoutHandler'
 import { useRouter } from 'next/navigation'
 import { AuthContext } from '@/context/authContext'
 import linkHandler from '@/utils/linkHandler'
+import useSetFirstWordUsername from '@/hooks/useSetFirstWordUsername'
+import { InfosProps } from '@/types/authentication'
 
 
 export default function MoblilMode() {
@@ -17,6 +19,7 @@ export default function MoblilMode() {
     const rightMenuRef = useRef<null | HTMLDivElement>(null)
     const profileRef = useRef<null | HTMLDivElement>(null)
     const{infos , setInfos} = useContext(AuthContext)
+    const {firstWordUsername , setFirstWordUsername} = useSetFirstWordUsername(infos as InfosProps)
     const router = useRouter()
     useDropDownHandler(rightMenuRef , setShowAside)
     useDropDownHandler(profileRef , setShowProfile)
@@ -28,7 +31,9 @@ export default function MoblilMode() {
 
     <div className='relative '>
     <div ref={profileRef} onClick={()=>setShowProfile(prev=> !prev)} className='w-12 mt-5 h-12 rounded-full flex items-center justify-center  bg-indigo-400 '>
-    <img src="/images/defaultPerson.png" alt="" />
+    { !firstWordUsername ? <img src="/images/defaultPerson.png" alt="" />
+    : <p>{firstWordUsername}</p>
+  }
     { typeof infos?.discounts_eyeRoll === "object" && infos?.discounts_eyeRoll?.length> 0 && <div className='w-5 h-5 bg-yellow-400 border border-black rounded-full flex-shrink-0 text-center absolute -right-2 bottom-1 text-sm '>{infos?.discounts_eyeRoll?.length}</div>}
     </div>
     <div  className={`${ showProfile ? 'absolute' : 'hidden'} w-36 h-max bg-blue-100 text-base z-50 shadow-md border border-purple-500 rounded-md`}>
@@ -42,7 +47,7 @@ export default function MoblilMode() {
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-5 h-5  bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-[3px] float-right text-center text-sm'>{infos?.discounts_eyeRoll?.length}</span>}
       </li>
-      <li onClick={()=>logoutHandler(router , setInfos)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
+      <li onClick={()=>logoutHandler(router , setInfos , setFirstWordUsername)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
     </div>
 

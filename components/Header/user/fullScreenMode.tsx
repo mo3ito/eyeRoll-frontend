@@ -6,29 +6,26 @@ import { useRouter } from 'next/navigation'
 import logoutHandler from '@/utils/logoutHandler'
 import Logo from '@/components/logo/logo'
 import linkHandler from '@/utils/linkHandler'
+import useSetFirstWordUsername from '@/hooks/useSetFirstWordUsername'
+import { InfosProps } from '@/types/authentication'
+
 
 
 export default function FullScreenMode() {
     const {infos , setInfos}=useContext(AuthContext)
     const [showProfile , setShowProfile]=useState<boolean>(false)
-    const[firstWord , setFirstWord]=useState<string>("")
     const router = useRouter()
+    const {firstWordUsername , setFirstWordUsername} = useSetFirstWordUsername(infos as InfosProps)
 
-    useEffect(()=>{
-      if(infos && infos.username){
-        const firstWord = infos.username[0].toUpperCase()
-        setFirstWord(firstWord)
-      }
-    },[infos])
-  
+
   return (
     <div className='container hidden sm:flex h-full mx-auto   justify-between items-center    px-4 '>
     
       <ul className='flex items-center   text-xl h-full space-x-12 w-full '>
      <li onMouseEnter={()=>setShowProfile(true)} onMouseLeave={()=>setShowProfile(false)} className='relative cursor-pointer '>
     <div   className='w-16  h-16 rounded-full flex items-center justify-center  bg-indigo-400 relative '>
-    { !firstWord ? <img src="/images/defaultPerson.png" alt="" />
-   : <p>{firstWord}</p>}
+    { !firstWordUsername ? <img src="/images/defaultPerson.png" alt="" />
+   : <p>{firstWordUsername}</p>}
     { typeof infos?.discounts_eyeRoll === "object" && infos?.discounts_eyeRoll?.length> 0 && <div className='w-5 h-5 bg-yellow-400 border border-black rounded-full flex-shrink-0 text-center absolute -right-2 bottom-2 text-sm '>{infos?.discounts_eyeRoll?.length}</div>}
     </div>
     <div  className={`${ showProfile ? 'absolute' : 'hidden'} w-52 h-max bg-blue-100 absolute text-base z-50 shadow-md border border-purple-500 rounded-md`}>
@@ -42,7 +39,7 @@ export default function FullScreenMode() {
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-6 h-6 pt-0.5 bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-0.5 float-right text-center text-sm text-fuchsia-700 '>{infos?.discounts_eyeRoll?.length}</span>}
       </li>
-      <li onClick={()=>logoutHandler(router , setInfos , setFirstWord)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
+      <li onClick={()=>logoutHandler(router , setInfos , setFirstWordUsername)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
     </div>
     </li>

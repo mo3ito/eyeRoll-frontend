@@ -18,17 +18,9 @@ export default function FullScreenMode() {
       if(infos && infos.username){
         const firstWord = infos.username[0].toUpperCase()
         setFirstWord(firstWord)
-        
       }
     },[infos])
   
-    const handleLogout = ()=>{
-      logoutHandler(router , setInfos)
-      setFirstWord("")
-    }
-
- 
-    
   return (
     <div className='container hidden sm:flex h-full mx-auto   justify-between items-center    px-4 '>
     
@@ -50,7 +42,7 @@ export default function FullScreenMode() {
       discounts
       { typeof infos.discounts_eyeRoll === "object" && infos.discounts_eyeRoll.length>0 && <span className='w-6 h-6 pt-0.5 bg-yellow-400 border border-fuchsia-700  rounded-full inline-block translate-y-0.5 float-right text-center text-sm text-fuchsia-700 '>{infos?.discounts_eyeRoll?.length}</span>}
       </li>
-      <li onClick={handleLogout} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
+      <li onClick={()=>logoutHandler(router , setInfos , setFirstWord)} className='w-full py-1 truncate cursor-pointer hover:bg-pink-300 rounded-md text-fuchsia-700 hover:font-semibold hover:text-white px-1'>log out</li>
     </ul>}
     </div>
     </li>

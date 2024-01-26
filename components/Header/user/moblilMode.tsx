@@ -20,6 +20,7 @@ export default function MoblilMode() {
     const router = useRouter()
     useDropDownHandler(rightMenuRef , setShowAside)
     useDropDownHandler(profileRef , setShowProfile)
+    
 
   return (
     <div className='relative h-max'>

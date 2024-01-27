@@ -6,16 +6,14 @@ import { Dispatch, SetStateAction } from "react";
 const logoutHandler = async (
   router: any,
   setInfos: (infos: InfosProps | undefined) => void,
-  setFirstWordUsername?:Dispatch<SetStateAction<string>>
+  setFirstWordUsername?: Dispatch<SetStateAction<string>>
 ) => {
   await Cookies.remove(EYEROLL_TOKEN);
   await router.push("/");
-  setInfos(undefined);
-  if (setFirstWordUsername){
-    setFirstWordUsername("")
+  await setInfos(undefined);
+  if (setFirstWordUsername) {
+    setFirstWordUsername("");
   }
 };
 
 export default logoutHandler;
-
-

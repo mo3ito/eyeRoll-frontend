@@ -1,7 +1,12 @@
 import React from 'react'
-import { RequestedRegisterationType } from '@/types/admin/adminTypes'
+import { RequestedRegisterationType , RequestsPagePropsType} from '@/types/admin/adminTypes'
 
-export default function RequestsPageScreenMode({requests , showInfosHandler}) {
+export default function RequestsPageScreenMode({requests , showInfosHandler  , setBusinessOwnerId , setIsShowModalConfirm}:RequestsPagePropsType) {
+
+    const confirmRegister =  async (businessOwnerId : string)=>{
+       await setBusinessOwnerId(businessOwnerId)
+       setIsShowModalConfirm(true)
+    }
   return (
     <>
     <div className=" w-full fixed top-28  z-40 bg-sky-100 h-max  ">
@@ -24,17 +29,17 @@ export default function RequestsPageScreenMode({requests , showInfosHandler}) {
 </div>
 
 
-{ requests && requests.data.map((item : RequestedRegisterationType , index : number)=>
+{ requests && requests?.data.map((item : RequestedRegisterationType , index : number)=>
 <div key={item._id} className='w-full flex justify-center items-center text-center border border-fuchsia-400 py-4 my-2 rounded-lg bg-sky-50 '>
 <p className='w-2/12 truncate px-4 '>{index +1}</p>
 <p className='w-3/12 truncate px-4  text-lg '>{item.name} {item.last_name}</p>
 <p className='w-2/12 truncate px-4'>{item.registration_date}</p>
 <div className='w-2/12 px-4 '>
-<button onClick={()=>showInfosHandler(item.name , item.last_name , item.username , item.email , item.phone_number , item.country_name , item.state_name , item.city_name , item.address , item.brand_name , item.postal_code , item.work_phone , item.registration_date )} className="bg-indigo-200 py-1 w-max px-2  rounded-md" >show information</button>
+<button onClick={()=>showInfosHandler(item._id ,item.name , item.last_name , item.username , item.email , item.phone_number , item.country_name , item.state_name , item.city_name , item.address , item.brand_name , item.postal_code , item.work_phone , item.registration_date )} className="bg-indigo-200 py-1 w-max px-2  rounded-md" >show information</button>
 </div>
 <div className='w-3/12 h-8 '>
 <button className='w-2/6  bg-red-300 mr-2  h-full rounded-md'>reject</button>
-<button className='w-2/6  bg-green-400 ml-2 h-full rounded-md'>confirm</button>
+<button onClick={()=>confirmRegister(item._id)} className='w-2/6  bg-green-400 ml-2 h-full rounded-md'>confirm</button>
 </div>
 </div>
 ) }

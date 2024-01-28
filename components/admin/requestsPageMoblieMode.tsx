@@ -1,7 +1,18 @@
 import React from 'react'
-import { RequestedRegisterationType } from '@/types/admin/adminTypes'
+import { RequestedRegisterationType , RequestsPagePropsType} from '@/types/admin/adminTypes'
 
-export default function RequestsPageMoblieMode({requests , showInfosHandler }) {
+
+
+
+
+
+export default function RequestsPageMoblieMode({requests , showInfosHandler  , setBusinessOwnerId , setIsShowModalConfirm}:RequestsPagePropsType) {
+
+    const confirmRegister =  async (businessOwnerId : string)=>{
+        await setBusinessOwnerId(businessOwnerId)
+        setIsShowModalConfirm(true)
+     }
+
   return (
     <>
     { requests?.data.length >0 ? 
@@ -26,13 +37,13 @@ export default function RequestsPageMoblieMode({requests , showInfosHandler }) {
      <p className='w-4/12 truncate  text-yellow-500 '>{item.registration_date}</p>
      
      <div className="w-4/12">
-     <button onClick={()=>showInfosHandler(item.name , item.last_name , item.username , item.email , item.phone_number , item.country_name , item.state_name , item.city_name , item.address , item.brand_name , item.postal_code , item.work_phone , item.registration_date )} className=' truncate ml-1 bg-indigo-300 py-1 px-2 rounded-md opacity-70 '>show infos</button>
+     <button onClick={()=>showInfosHandler(item._id,item.name , item.last_name , item.username , item.email , item.phone_number , item.country_name , item.state_name , item.city_name , item.address , item.brand_name , item.postal_code , item.work_phone , item.registration_date )} className=' truncate ml-1 bg-indigo-300 py-1 px-2 rounded-md opacity-70 '>show infos</button>
      </div>
     
        </div>
        <div className='w-full p-1 flex gap-x-4 mt-2'>
        <button  className='w-1/2 bg-red-300 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>reject</button>
-       <button  className='w-1/2 bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>confirm</button>
+       <button onClick={()=>confirmRegister(item._id)}  className='w-1/2 bg-green-400 text-xs sm:text-sm rounded-md py-1 border border-zinc-500'>confirm</button>
         </div> 
         </div>
       ) } 

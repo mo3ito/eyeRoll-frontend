@@ -26,7 +26,7 @@ export default function DeterminationDiscount({ isShowModal, setIsShowModal , bu
   const {infos , login} = useContext(AuthContext)
   const [isCloseOutModalClick , setIsCloseOutModalClick]=useState(true)
   const {userId} = useGetUserId(infos as InfosProps)
-  const queryKey = ['getRollUser', [businessOwnerId && userId]];
+  const queryKey = ['getRollUser'];
   const [informationDiscount , setInformationDiscount ]=useState<InformationDiscountType | {}>({})
   const [isShowWheelBox , setIsShowWheelBox]=useState<boolean>(true)
   const [isShowReward , setIsShowReward]=useState<boolean>(false)

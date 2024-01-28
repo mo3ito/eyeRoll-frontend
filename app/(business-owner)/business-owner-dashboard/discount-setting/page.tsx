@@ -68,7 +68,7 @@ export default function DeterminingDiscount() {
   const [startDayPeakTime , setStartDayPeakTime]=useState<string>("")
   const [endDayPeakTime , setEndDayPeakTime]=useState<string>("")
   const [adjustedRoll , setAdjustedRoll]=useState<adjustedRollType>()
-  const queryKey = ['all roll setting', businessOwnerId];
+  const queryKey = ['all roll setting'];
   
 
   useEffect(()=>{

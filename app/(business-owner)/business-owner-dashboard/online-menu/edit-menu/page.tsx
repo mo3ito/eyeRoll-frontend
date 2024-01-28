@@ -65,7 +65,7 @@ export default function EditMenu() {
     }
   }, [infos]);
 
-  const queryKey = ["all products", businessOwnerId];
+  const queryKey = ["all products"];
 
   const { data: products, isLoading } = useQuery(
     businessOwnerId ? queryKey : [],

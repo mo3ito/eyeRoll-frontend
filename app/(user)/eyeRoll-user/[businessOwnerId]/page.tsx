@@ -19,7 +19,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const [eyeRollPagesocket, setEyeRollPageSocket] = useState<Socket | null>(null);
     const businessOwnerId = params.businessOwnerId
     const router = useRouter()
-	const queryKey = ['businessOwnerInformaton', [businessOwnerId]];
+	const queryKey = ['businessOwnerInformaton'];
 	const [isGetDiscount , setIsGetDiscount]=useState(false)
 
 	useExpireDiscount()

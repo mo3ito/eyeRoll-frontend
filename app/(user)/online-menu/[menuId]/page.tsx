@@ -45,7 +45,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
     }
   },[params])
  
-  const queryKey = ["all products", businessOwnerId];
+  const queryKey = ["all products"];
 
   const { data, isLoading } = useQuery(
     businessOwnerId ? queryKey : [],

@@ -4,7 +4,7 @@ import { ShowDiscountFullModePropsType } from '@/types/rollType/determinationRol
 export default function ShowDiscountMobileMode({allDiscounts , onClickshowDetails , getDiscountOnClick}:ShowDiscountFullModePropsType) {
   return (
     <>
-    { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-96 mx-auto px-2 '>
+    { allDiscounts.length >0 ? <div className='block lg:hidden translate-y-14 container  h-max mx-auto px-2 '>
     <div className="w-full bg-sky-100 pt-16 pb-2 sticky inset-0 z-50 ">
     <div className='w-full  flex justify-center bg-sky-50 max-[350px]:text-[10px] max-xs:text-[12px] sm:text-sm max-xs:py-2 py-3  text-xs items-center text-center border border-fuchsia-400  rounded-lg font-semibold '>
     

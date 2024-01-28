@@ -23,7 +23,7 @@ export default function RollReports() {
   const {infos} = useContext(AuthContext)
   const {businessOwnerId} = useGetBusinessOwnerId(infos as InfosProps)
   const [isLoading , setIsLoading]=useState<boolean>(false)
-  const queryKey = ['getReports', [businessOwnerId]];
+  const queryKey = ['getReports'];
 
   const getReports = async ()=>{
     const body = {

@@ -13,11 +13,11 @@ import RequestsPageMoblieMode from "@/components/admin/requestsPageMoblieMode";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { toast } from "react-toastify";
 import Modal from "@/components/modal/modal";
+import { ADMIN_CONFIRM_REGISTERATION_REQUEST , ADMIN_GET_REGISTERATION_REQUESTS } from "@/routeApi/endpoints";
 
 export default function Requests() {
   const [isShowInfos, setIsShowInfos] = useState<boolean>(false);
-  const [allInfosRequested, setAllInfosRequested] =
-    useState<null | RequestedRegisterationType>(null);
+  const [allInfosRequested, setAllInfosRequested] = useState<null | RequestedRegisterationType>(null);
   const [isShowModalConfirm, setIsShowModalConfirm] = useState<boolean>(false);
   const [businessOwnerId, setBusinessOwnerId] = useState<string>("");
   const { infos } = useContext(AuthContext);
@@ -29,7 +29,7 @@ export default function Requests() {
     () => {
       if (adminId) {
         return getterWithAuthId(
-          "http://localhost:5000/admin/registeration-requests",
+          ADMIN_GET_REGISTERATION_REQUESTS,
           adminId
         );
       }
@@ -81,7 +81,7 @@ export default function Requests() {
     try {
       if (adminId && businessOwnerId) {
         const response = await senderWithAuthId(
-          "http://localhost:5000/admin/confirm-registeration-request",
+          ADMIN_CONFIRM_REGISTERATION_REQUEST,
           body,
           adminId
         );

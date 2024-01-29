@@ -10,7 +10,7 @@ export default function RequestsPageScreenMode({requests , showInfosHandler  , s
   return (
     <>
     <div className=" w-full fixed top-24  z-40 bg-sky-100 h-16 hidden lg:block  ">
-    <div className="container bg-red-300 h-max mx-auto pb-1 px-2 lg:px-4 pt-3">
+    <div className="container  h-max mx-auto pb-1 lg:px-4 pt-3">
     <p className=" border border-fuchsia-400 bg-sky-50 shadow-lg  w-full text-center max-xs:text-sm text-base sm:text-lg md:text-xl lg:text-2xl h-10 sm:h-12 flex items-center justify-center rounded-lg float-bottom">Requests</p>
     </div>
   </div>

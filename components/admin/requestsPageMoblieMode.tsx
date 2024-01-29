@@ -1,11 +1,6 @@
 import React from 'react'
 import { RequestedRegisterationType , RequestsPagePropsType} from '@/types/admin/adminTypes'
 
-
-
-
-
-
 export default function RequestsPageMoblieMode({requests , showInfosHandler  , setBusinessOwnerId , setIsShowModalConfirm}:RequestsPagePropsType) {
 
     const confirmRegister =  async (businessOwnerId : string)=>{

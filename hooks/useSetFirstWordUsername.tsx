@@ -5,7 +5,7 @@ const useSetFirstWordUsername = (infos: InfosProps) => {
   const [firstWordUsername, setFirstWordUsername] = useState<string>("");
 
   useEffect(() => {
-    if (infos && infos.username) {
+    if (infos && infos.username && !infos.is_admin && !infos.is_businessOwner) {
       const firstWordUsername = infos.username[0].toUpperCase();
       setFirstWordUsername(firstWordUsername);
     }

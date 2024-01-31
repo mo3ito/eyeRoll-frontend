@@ -9,6 +9,6 @@ export default function AdminEyeRoll() {
   
 
   return (
-    <div>page</div>
+    <div>admin page</div>
   )
 }

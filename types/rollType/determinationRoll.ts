@@ -34,6 +34,7 @@ export interface DeterminationRollProps{
   businessOwnerId: string;
   isGetDiscount:boolean;
   setIsGetDiscount: Dispatch<SetStateAction<boolean>>;
+  isAdmin: boolean | undefined
   }
 
  export interface ShowDiscountFullModePropsType{

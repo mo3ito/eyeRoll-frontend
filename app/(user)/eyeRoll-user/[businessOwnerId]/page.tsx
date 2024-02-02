@@ -25,6 +25,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 	const {infos} = useContext(AuthContext)
 
 
+	console.log(infos?.is_admin);
 	
 
 	useExpireDiscount()

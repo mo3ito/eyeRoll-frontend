@@ -1,5 +1,5 @@
 'use client'
-import React, { useState , useEffect } from 'react'
+import React, { useState , useContext } from 'react'
 import linkHandler from '@/utils/linkHandler';
 import { useRouter } from 'next/navigation';
 import { Socket } from 'socket.io-client';
@@ -13,6 +13,7 @@ import EyeSvg from '@/components/svg/eyeSvg';
 import RollSvg from '@/components/svg/rollSvg';
 import OnlineMenuSvg from '@/components/svg/onlineMenuSvg';
 import useSeenPage from '@/hooks/useSeenPage';
+import { AuthContext } from '@/context/authContext';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
@@ -21,6 +22,10 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
     const router = useRouter()
 	const queryKey = ['businessOwnerInformaton'];
 	const [isGetDiscount , setIsGetDiscount]=useState(false)
+	const {infos} = useContext(AuthContext)
+
+
+	
 
 	useExpireDiscount()
 	const{data : businessOwnerInfos , isLoading}=useQuery(businessOwnerId ? queryKey : [] , ()=>{
@@ -64,7 +69,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
         <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <GetDiscountFromUser businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount} />
+	  <GetDiscountFromUser isAdmin={infos?.is_admin} businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount} />
     </div>
    
     </div>

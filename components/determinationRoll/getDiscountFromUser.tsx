@@ -14,6 +14,7 @@ export default function GetDiscountFromUser({
   businessOwnerId,
   isGetDiscount,
   setIsGetDiscount,
+  isAdmin
 }: GetDiscountFromUserPropsType) {
   const [isFixedDiscountToSave, setIsFixedDiscountToSave] =
     useState<boolean>(false);
@@ -29,7 +30,7 @@ export default function GetDiscountFromUser({
   useEffect(() => {
     const getDiscount = async () => {
       if (isGetDiscount) {
-        if (!userId) {
+        if (!userId || isAdmin) {
           router.push("/register-user/login");
         } else {
           if (isGrabDiscountToday) {
@@ -53,7 +54,7 @@ export default function GetDiscountFromUser({
     };
 
     getDiscount();
-  }, [isGetDiscount , isGrabDiscountToday , isActiveDiscount , fixedDiscount , userId]);
+  }, [isGetDiscount , isGrabDiscountToday , isActiveDiscount , fixedDiscount , userId , isAdmin]);
 
   useEffect(() => {
     const isGrabRoll = async () => {

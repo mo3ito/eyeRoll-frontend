@@ -20,7 +20,7 @@ export default function GetDiscountFromUser({
   const [fixedDiscount, setFixedDiscount] = useState<boolean>(false);
   const [isActiveDiscount, setIsActiveDiscount] = useState<boolean>(false);
   const [isShowGetDiscount, setIsShowGetDiscount] = useState<boolean>(false);
-  const [isGrabDiscountToday, setIsGrabDiscountToday] = useState<boolean>(true);
+  const [isGrabDiscountToday, setIsGrabDiscountToday] = useState<boolean>(false);
   const { infos } = useContext(AuthContext);
   const { userId } = useGetUserId(infos as InfosProps);
   const router = useRouter();

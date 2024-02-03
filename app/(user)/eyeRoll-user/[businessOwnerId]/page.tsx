@@ -70,7 +70,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
         <p className='pt-2  '>Online menu</p>
             </li>
       </ul>
-	  <GetDiscountFromUser isAdmin={infos?.is_admin} businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount} />
+	  <GetDiscountFromUser isAdmin={infos?.is_admin} isBusinessOwner={infos?.is_businessOwner} businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount} />
     </div>
    
     </div>

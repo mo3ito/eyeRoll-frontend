@@ -5,11 +5,12 @@ import EyeSvg from '../svg/eyeSvg';
 import RollSvg from '../svg/rollSvg';
 import GetDiscountFromUser from '../determinationRoll/getDiscountFromUser';
 
-export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defaultHandler , informationBusiness , businessOwnerId}: HeaderOnlineMenuPageProps) {
+export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defaultHandler , informationBusiness , businessOwnerId , isBusinessOwner , isAdmin}: HeaderOnlineMenuPageProps) {
   console.log(informationBusiness);
   const [isGetDiscount , setIsGetDiscount]=useState<boolean>(false)
   
   
+
   return (
     <>
     <div className='w-full h-32 sm:h-44 bg-black/30 '>
@@ -33,7 +34,7 @@ export default function HeaderOnlineMenuPage({setIsShowMenu , isShowMenu , defau
     <button onClick={()=>setIsShowMenu(true)} className={`${isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2`}>show menu</button>
     <button onClick={()=>setIsShowMenu(false)} className={`${!isShowMenu ? 'border-fuchsia-700 border-b-2' : 'border-fuchsia-400'} w-1/2  py-2 `}>show information</button>
     </div>
-    { businessOwnerId && <GetDiscountFromUser businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount}/>}
+    { businessOwnerId && <GetDiscountFromUser isAdmin={isAdmin} isBusinessOwner={isBusinessOwner} businessOwnerId={businessOwnerId} isGetDiscount={isGetDiscount} setIsGetDiscount={setIsGetDiscount}/>}
     </>
   )
 }

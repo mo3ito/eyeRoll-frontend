@@ -1,5 +1,5 @@
 'use client'
-import React, { useState , useEffect , useCallback , ChangeEvent } from 'react';
+import React, { useState , useEffect , useContext , ChangeEvent } from 'react';
 import { Socket } from 'socket.io-client';
 import { useQuery} from "@tanstack/react-query";
 import getterWithAuthId from '@/services/getterWithAuthId';
@@ -16,6 +16,7 @@ import SwiperOnlineMenu from '@/components/online-menu/swiperOnlineMenu';
 import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage';
 import { BUSINESS_OWNER_ONLINE_MENU_GET_INFO } from '@/routeApi/endpoints';
 import useSeenPage from '@/hooks/useSeenPage';
+import { AuthContext } from '@/context/authContext';
 
 
 export default function Page({ params }: { params: { menuId: string } }) {
@@ -38,6 +39,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [isShowFilterClick , setIsShowFilterClick]=useState<boolean>(false)
   const [showFilterCondition , setShowFilterCondition]=useState<string>("no filter")
   useSeenPage(businessOwnerId , setOnlineMenuSocket , "http://localhost:5001" )
+  const {infos} = useContext(AuthContext)
 
   useEffect(()=>{
     if(params){
@@ -224,6 +226,8 @@ useEffect(() => {
           defaultHandler={defaultHandler}
           informationBusiness={informationBusiness}
           businessOwnerId={businessOwnerId}
+          isAdmin={infos?.is_admin}
+          isBusinessOwner={infos?.is_businessOwner}
            />
 
         <div className='container mx-auto px-3 '>

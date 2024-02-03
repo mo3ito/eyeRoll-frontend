@@ -84,6 +84,8 @@ export interface HeaderOnlineMenuPageProps{
   isShowMenu: boolean;
   defaultHandler:()=>void;
   informationBusiness: InformationBusinessType | null;
+  isBusinessOwner: boolean | undefined ;
+  isAdmin: boolean | undefined
 }
 
 export interface SwiperOnlineMenuProps{

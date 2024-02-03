@@ -14,6 +14,7 @@ import { io, Socket } from "socket.io-client";
 import senderWithAuthId from "@/services/senderWithAuthId";
 import { allRequestType } from "@/types/onlineMenuBo/productsType";
 import { REMOVE_REQUEST_BY_BUSINESSOWNER , REGISTERATION_DISCOUNT_TAKEN } from "@/routeApi/endpoints";
+import { BASE_URL_API } from "@/routeApi/baseUrlNextApi";
 
 const OnlineMenu = () => {
   const [isShowModalCalculator, setIsShowModalCalculator] =
@@ -37,7 +38,7 @@ const OnlineMenu = () => {
   console.log(singleIdForDelete);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5003");
+    const newSocket = io(BASE_URL_API ? BASE_URL_API : "");
     setSocket(newSocket)
     return () => {
       if (newSocket) {

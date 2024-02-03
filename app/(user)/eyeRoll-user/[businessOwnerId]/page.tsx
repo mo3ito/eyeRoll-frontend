@@ -14,6 +14,7 @@ import RollSvg from '@/components/svg/rollSvg';
 import OnlineMenuSvg from '@/components/svg/onlineMenuSvg';
 import useSeenPage from '@/hooks/useSeenPage';
 import { AuthContext } from '@/context/authContext';
+import { BASE_URL_API } from '@/routeApi/baseUrlNextApi';
 
 export default function page({params}:{params : {businessOwnerId : string}; searchParams: { search: string }}) {
 
@@ -36,7 +37,7 @@ export default function page({params}:{params : {businessOwnerId : string}; sear
 		  }
 		  return null
 	})
-	useSeenPage(businessOwnerId , setEyeRollPageSocket , "http://localhost:5002" )
+	useSeenPage(businessOwnerId , setEyeRollPageSocket , BASE_URL_API ? BASE_URL_API : "" , "join_pageEyRollSocket"  )
 
 	if(!businessOwnerInfos && isLoading ){
 		return <LoadingPage/>

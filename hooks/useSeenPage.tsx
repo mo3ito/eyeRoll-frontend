@@ -4,10 +4,21 @@ import { io, Socket } from "socket.io-client";
 const useSeenPage = (
   businessOwnerId: string,
   setSocket: Dispatch<SetStateAction<Socket | null>>,
-  pathPort: string
+  pathPort: string,
+  nameEvent:string
 ) => {
   useEffect(() => {
+    console.log('pathPort => ', pathPort)
     const newSocket = io(pathPort);
+
+    newSocket.on('connection',()=>{
+      console.log('socket connected ')
+    })
+
+
+    newSocket.on('error',(err)=>{
+      console.log('socket errored ', err)
+    })
     const currentTime = new Date();
     const seenData = {
       businessOwnerId,
@@ -15,12 +26,12 @@ const useSeenPage = (
       seenDate: currentTime.toISOString(),
     };
 
-    newSocket.emit("join", seenData);
+    newSocket.emit(nameEvent, seenData);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
     };
-  }, [businessOwnerId]);
+  }, [businessOwnerId , nameEvent]);
 };
 
 export default useSeenPage;

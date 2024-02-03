@@ -17,7 +17,7 @@ import HeaderOnlineMenuPage from '@/components/online-menu/headerOnlineMenuPage'
 import { BUSINESS_OWNER_ONLINE_MENU_GET_INFO } from '@/routeApi/endpoints';
 import useSeenPage from '@/hooks/useSeenPage';
 import { AuthContext } from '@/context/authContext';
-
+import { BASE_URL_API } from '@/routeApi/baseUrlNextApi';
 
 export default function Page({ params }: { params: { menuId: string } }) {
   console.log(params);
@@ -38,7 +38,7 @@ export default function Page({ params }: { params: { menuId: string } }) {
   const [productDetails , setProductDetails]=useState<ProductDetailsType | null>(null)
   const [isShowFilterClick , setIsShowFilterClick]=useState<boolean>(false)
   const [showFilterCondition , setShowFilterCondition]=useState<string>("no filter")
-  useSeenPage(businessOwnerId , setOnlineMenuSocket , "http://localhost:5001" )
+  useSeenPage(businessOwnerId , setOnlineMenuSocket , BASE_URL_API ? BASE_URL_API : "" , "join_online_menu_socket" )
   const {infos} = useContext(AuthContext)
 
   useEffect(()=>{

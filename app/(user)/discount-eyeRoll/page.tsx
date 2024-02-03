@@ -13,6 +13,7 @@ import senderWithAuthId from "@/services/senderWithAuthId";
 import { toast } from "react-toastify";
 import { GET_REQUEST_FOR_DISCOUNT } from "@/routeApi/endpoints";
 import {io , Socket} from "socket.io-client"
+import { BASE_URL_API } from "@/routeApi/baseUrlNextApi";
 
 export default function DiscountEyeRoll() {
   const { infos } = useContext(AuthContext);
@@ -30,7 +31,7 @@ export default function DiscountEyeRoll() {
   }, [infos, infos?.discounts_eyeRoll]);
 
   useEffect(()=>{
-    const newSocket = io("http://localhost:5003");
+    const newSocket = io(BASE_URL_API ? BASE_URL_API : "" );
     setSocket(newSocket)
 
     return ()=>{

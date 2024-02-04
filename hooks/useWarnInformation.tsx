@@ -23,7 +23,7 @@ const useWarnInformation = (infos: InfosType) => {
     intervalTime = setInterval(() => {
       warn();
       hasWarnedIsCompleteInformationRef.current = false; 
-    }, 40000);
+    }, 60000);
 
     warn();
 

@@ -16,7 +16,6 @@ export default function QRCodeLinkShower({QRCodePath , content}:{QRCodePath:stri
     useEffect(() => {
       if(businessOwnerId && QRCodePath){
         const path = QRCodePath
-        // `${process.env.NEXT_PUBLIC_BASE_URL}/online-menu/${businessOwnerId}`
         setQRCodeData(path);
       }
     }, [businessOwnerId , QRCodePath]);

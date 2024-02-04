@@ -1,13 +1,6 @@
 "use client";
-import React, { useEffect, useState, useContext } from "react";
-import Modal from "@/components/modal/modal";
-import DiscountCalculator from "@/components/discountCalculator/discountCalculator";
-import ModalDefault from "@/components/modal/modalDefault";
-import Timer from "@/components/timer/timer";
+import React, {useContext} from "react";
 import { AuthContext } from "@/context/authContext";
-import { toast } from "react-toastify";
-import EYEROLL_TOKEN from "@/help/tokenName";
-import Cookies from "js-cookie";
 import useWarnInformation from "@/hooks/useWarnInformation";
 import { useRouter } from "next/navigation";
 import LoadingPage from "@/components/loading/loadingPage";
@@ -24,7 +17,7 @@ const DiscountSetting = () => {
   }
   
   return (
-   <div className="mt-28 container  mx-auto px-4">
+   <div className="mt-28 container  mx-auto px-4 mb-20">
     <p className="text-center text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-10">dashboard</p>
     <div className="w-full h-max bg-sky-50 flex flex-col divide-fuchsia-400 border border-fuchsia-400 divide-y-2 sm:divide-y-0 sm:flex-row sm:divide-x-2 mx-auto text-sm sm:tex-base md:text-lg">
       <div className="w-full py-2 px-2">

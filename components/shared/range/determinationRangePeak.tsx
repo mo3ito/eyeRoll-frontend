@@ -82,24 +82,30 @@ export default function DeterminationRangePeak({
           <div className=" sm:h-max sm:pb-6  md:pb-0 md:h-full  flex justify-center gap-x-3  pl-10 sm:pl-0 ">
             <div className="flex items-center flex-col md:flex-row">
             <span className=" px-1">min</span>
+            <div className=" border border-fuchsia-300 rounded-lg shadow-md">
           <input
             disabled={!isChecked}
-            className=" shadow-md pl-2 max-xs:text-sm h-8 w-16 bg-transparent border outline-none border-fuchsia-300 rounded-lg sm:h-10"
+            className="  pl-2 max-xs:text-sm h-8 w-12 sm:w-14 bg-transparent  outline-none  sm:h-10"
             onChange={minValueHandler}
             value={minValuePeak}
             type="number"
           />
+          <span className="pr-1">%</span>
+          </div>
             </div>
        
             <div className="flex items-center flex-col md:flex-row">
           <span className=" px-1">max</span>{" "}
+          <div className=" border border-fuchsia-300 rounded-lg shadow-md">
           <input
             disabled={!isChecked}
-            className=" shadow-md pl-2 max-xs:text-sm h-8 w-16 bg-transparent border outline-none border-fuchsia-300 rounded-lg sm:h-10"
+            className="  pl-2 max-xs:text-sm h-8 w-12 sm:w-14 bg-transparent  outline-none  sm:h-10"
             onChange={maxValueHandler}
             value={maxValuePeak}
             type="number"
           />
+           <span className="pr-1">%</span>
+          </div>
           </div>
        
           </div>

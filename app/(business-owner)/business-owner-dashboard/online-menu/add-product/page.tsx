@@ -105,7 +105,7 @@ export default function Facilities() {
     const body = {
       businessOwnerId,
       productAssortment,
-      productName,
+      productName: productName.toLowerCase(),
       productPrice ,
       productPricePetty,
       productDescription,

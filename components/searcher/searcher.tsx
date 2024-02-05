@@ -22,7 +22,7 @@ export default function Searcher({items , setAllItems }: SearcherProps) {
        }
        useEffect(()=>{
         if(inputSearchValue && items){
-         const searchedValue = items?.data.filter((product : ProductsType)=> product.productName.startsWith(inputSearchValue.toLocaleLowerCase()))
+         const searchedValue = items?.data.filter((product : ProductsType)=> product.productName.startsWith(inputSearchValue.toLowerCase()))
           setAllItems(searchedValue)
         }
         if(inputSearchValue === ""){

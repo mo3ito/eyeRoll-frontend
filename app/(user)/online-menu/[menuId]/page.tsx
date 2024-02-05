@@ -163,7 +163,7 @@ const inputSearchValueHandler =(event : ChangeEvent<HTMLInputElement>)=>{
 useEffect(() => {
   if (inputSearchValue && data && !isGroupActive) {
     const searchedValue = data?.data?.products.filter((product : ProductType) =>
-      product.productName.startsWith(inputSearchValue)
+      product.productName.startsWith(inputSearchValue.toLowerCase())
     );
     setAllProducts(searchedValue);
     setIsFilteredSearch(true)

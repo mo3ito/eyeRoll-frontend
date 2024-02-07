@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, Dispatch, SetStateAction } from 'react';
 import ModalDefault from '../modal/modalDefault';
-import { Wheel } from 'react-custom-roulette';
+// import { Wheel } from 'react-custom-roulette';
 import useGetUserId from '@/hooks/useGetUserId';
 import { AuthContext } from '@/context/authContext';
 import { InfosProps } from '@/types/authentication';
@@ -12,6 +12,10 @@ import updaterWithId from '@/services/updaterWithId';
 import { toast } from 'react-toastify';
 import { USERS_GET_DISCOUNT_EYEROLL , GET_ROLL_USER } from '@/routeApi/endpoints';
 import { DeterminationRollProps , dataArrayType , InformationDiscountType  } from '@/types/rollType/determinationRoll';
+let Wheel : any;
+if (window) {
+  Wheel = require('react-custom-roulette').Wheel;
+}
 
 
 

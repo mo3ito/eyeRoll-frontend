@@ -34,5 +34,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 # discount-project
 
-It is a startup application in the field of discounts, advertising and online menu that gives every business an identity card.
-I developed it with typescript language and next.js framework and the libraries I used are tailwindcss, JWT, axios, react-datepicker, react-query, react-toastify, recharts socket.io, swiper, moment

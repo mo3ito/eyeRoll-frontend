@@ -1,10 +1,10 @@
 import "../globals.css";
-import { ToastContainer } from "@/components/clients/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
 import HomePageHeader from "@/components/Header/homePageHeader";
+import ToastifyContainer from "@/components/clients/providers/toastifyContainer";
 
 export const metadata: Metadata = {
   title: "EyeRoll account",
@@ -23,18 +23,7 @@ export default function RootLayout({
           <ReactQueryProvider>
             <HomePageHeader />
             {children}
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
+            <ToastifyContainer />
           </ReactQueryProvider>
         </AuthContextProvider>
       </body>

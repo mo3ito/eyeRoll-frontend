@@ -1,10 +1,10 @@
 import "../globals.css";
-import { ToastContainer } from "@/components/clients/nextToast/toastContainer";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/authContext";
 import ReactQueryProvider from "@/components/clients/providers/reactQueryProvider";
 import LayouAdmintDashboard from "@/components/Header/admin/layoutAdminDashboard";
+import ToastifyContainer from "@/components/clients/providers/toastifyContainer";
 
 export const metadata: Metadata = {
   title: "admin",
@@ -21,20 +21,9 @@ export default function RootLayout({
       <body className="overflow-x-hidden min-h-screen h-max inset-0 bg-sky-100">
         <AuthContextProvider>
           <ReactQueryProvider>
-          <LayouAdmintDashboard/>
+            <LayouAdmintDashboard />
             {children}
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
+            <ToastifyContainer />
           </ReactQueryProvider>
         </AuthContextProvider>
       </body>
